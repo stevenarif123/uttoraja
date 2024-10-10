@@ -1,0 +1,467 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.eot?m31ns');
+  src: url('../fonts/icomoon.eot?m31ns#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?m31ns') format('truetype'),
+    url('../fonts/icomoon.woff?m31ns') format('woff'),
+    url('../fonts/icomoon.svg?m31ns#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+
+
+
+
+.icon-plugin-development:before {
+  content: "\e900";
+}
+
+.icon-phone-call:before {
+  content: "\e901";
+}
+
+.icon-email:before {
+  content: "\e902";
+}
+
+.icon-facebook:before {
+  content: "\e903";
+}
+
+.icon-twitter:before {
+  content: "\e904";
+}
+
+.icon-linkedin:before {
+  content: "\e905";
+}
+
+.icon-vimeo:before {
+  content: "\e906";
+}
+
+.icon-down-arrow:before {
+  content: "\e907";
+}
+
+.icon-prev:before {
+  content: "\e908";
+}
+
+.icon-next:before {
+  content: "\e909";
+}
+
+.icon-plus-symbol-button:before {
+  content: "\e90a";
+}
+
+.icon-user:before {
+  content: "\e90b";
+}
+
+.icon-calendar:before {
+  content: "\e90c";
+}
+
+.icon-up-right-arrow:before {
+  content: "\e90d";
+}
+
+.icon-right-arrow-angle:before {
+  content: "\e90e";
+}
+
+.icon-left-arrow:before {
+  content: "\e90f";
+}
+
+.icon-mail-inbox-app:before {
+  content: "\e910";
+}
+
+.icon-telephone:before {
+  content: "\e911";
+}
+
+.icon-instagram-symbol:before {
+  content: "\e912";
+}
+
+.icon-pin:before {
+  content: "\e913";
+}
+
+.icon-check:before {
+  content: "\e914";
+}
+
+.icon-star:before {
+  content: "\e915";
+}
+
+.icon-plus:before {
+  content: "\e916";
+}
+
+.icon-time:before {
+  content: "\e917";
+}
+
+.icon-bell:before {
+  content: "\e918";
+}
+
+.icon-play:before {
+  content: "\e919";
+}
+
+.icon-percentage:before {
+  content: "\e91a";
+}
+
+.icon-right:before {
+  content: "\e91b";
+}
+
+.icon-comment:before {
+  content: "\e91c";
+}
+
+.icon-chat:before {
+  content: "\e91d";
+}
+
+.icon-search-interface-symbol:before {
+  content: "\e91e";
+}
+
+.icon-magnifying-glass:before {
+  content: "\e91f";
+}
+
+.icon-quote:before {
+  content: "\e920";
+}
+
+.icon-pdf-file:before {
+  content: "\e921";
+}
+
+.icon-document:before {
+  content: "\e922";
+}
+
+.icon-download:before {
+  content: "\e923";
+}
+
+.icon-close:before {
+  content: "\e924";
+}
+
+.icon-menus:before {
+  content: "\e925";
+}
+
+.icon-menu:before {
+  content: "\e926";
+}
+
+.icon-problem-analysis:before {
+  content: "\e927";
+}
+
+.icon-app-development:before {
+  content: "\e928";
+}
+
+.icon-build-develop:before {
+  content: "\e929";
+}
+
+.icon-cms--development:before {
+  content: "\e92a";
+}
+
+.icon-find-solutions:before {
+  content: "\e92b";
+}
+
+.icon-free-consultation:before {
+  content: "\e92c";
+}
+
+.icon-web-development1:before {
+  content: "\e92d";
+}
+
+.icon-business-strategy:before {
+  content: "\e92e";
+}
+
+.icon-completed-projects .path1:before {
+  content: "\e92f";
+  color: rgb(0, 0, 0);
+  opacity: 0.784;
+}
+
+.icon-completed-projects .path2:before {
+  content: "\e930";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+  opacity: 0.799;
+}
+
+.icon-completed-projects .path3:before {
+  content: "\e931";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+  opacity: 0.798;
+}
+
+.icon-cup-teas .path1:before {
+  content: "\e932";
+  color: rgb(0, 0, 0);
+  opacity: 0.918;
+}
+
+.icon-cup-teas .path2:before {
+  content: "\e933";
+  margin-left: -1.0166015625em;
+  color: rgb(0, 0, 0);
+  opacity: 0.76;
+}
+
+.icon-cup-teas .path3:before {
+  content: "\e934";
+  margin-left: -1.0166015625em;
+  color: rgb(0, 0, 0);
+  opacity: 0.761;
+}
+
+.icon-cup-teas .path4:before {
+  content: "\e935";
+  margin-left: -1.0166015625em;
+  color: rgb(0, 0, 0);
+  opacity: 0.918;
+}
+
+.icon-design-strategy .path1:before {
+  content: "\e936";
+  color: rgb(20, 20, 20);
+  opacity: 0.793;
+}
+
+.icon-design-strategy .path2:before {
+  content: "\e937";
+  margin-left: -1.06640625em;
+  color: rgb(20, 20, 20);
+  opacity: 0.829;
+}
+
+.icon-design-strategy .path3:before {
+  content: "\e938";
+  margin-left: -1.06640625em;
+  color: rgb(20, 20, 20);
+  opacity: 0.8030;
+}
+
+.icon-design-strategy .path4:before {
+  content: "\e939";
+  margin-left: -1.06640625em;
+  color: rgb(20, 20, 20);
+  opacity: 0.8050;
+}
+
+.icon-design-strategy1 .path1:before {
+  content: "\e93a";
+  color: rgb(0, 0, 0);
+  opacity: 0.897;
+}
+
+.icon-design-strategy1 .path2:before {
+  content: "\e93b";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+  opacity: 0.848;
+}
+
+.icon-digital-marketing .path1:before {
+  content: "\e93c";
+  color: rgb(0, 0, 0);
+  opacity: 0.8090;
+}
+
+.icon-digital-marketing .path2:before {
+  content: "\e93d";
+  margin-left: -0.9833984375em;
+  color: rgb(0, 0, 0);
+  opacity: 0.795;
+}
+
+.icon-digital-marketing .path3:before {
+  content: "\e93e";
+  margin-left: -0.9833984375em;
+  color: rgb(0, 0, 0);
+  opacity: 0.824;
+}
+
+.icon-email-marketing .path1:before {
+  content: "\e93f";
+  color: rgb(0, 0, 0);
+  opacity: 0.849;
+}
+
+.icon-email-marketing .path2:before {
+  content: "\e940";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+  opacity: 0.921;
+}
+
+.icon-happy-clients .path1:before {
+  content: "\e941";
+  color: rgb(0, 0, 0);
+  opacity: 0.8;
+}
+
+.icon-happy-clients .path2:before {
+  content: "\e942";
+  margin-left: -1.23046875em;
+  color: rgb(0, 0, 0);
+  opacity: 0.765;
+}
+
+.icon-happy-clients .path3:before {
+  content: "\e943";
+  margin-left: -1.23046875em;
+  color: rgb(0, 0, 0);
+  opacity: 0.857;
+}
+
+.icon-happy-clients .path4:before {
+  content: "\e944";
+  margin-left: -1.23046875em;
+  color: rgb(0, 0, 0);
+  opacity: 0.787;
+}
+
+.icon-product-development .path1:before {
+  content: "\e945";
+  color: rgb(0, 0, 0);
+  opacity: 0.849;
+}
+
+.icon-product-development .path2:before {
+  content: "\e946";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+  opacity: 0.8010;
+}
+
+.icon-product-development .path3:before {
+  content: "\e947";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+  opacity: 0.842;
+}
+
+.icon-web-development .path1:before {
+  content: "\e948";
+  color: rgb(20, 20, 20);
+  opacity: 0.9050;
+}
+
+.icon-web-development .path2:before {
+  content: "\e949";
+  margin-left: -1em;
+  color: rgb(20, 20, 20);
+  opacity: 0.885;
+}
+
+.icon-web-development2 .path1:before {
+  content: "\e94a";
+  color: rgb(20, 20, 20);
+  opacity: 0.859;
+}
+
+.icon-web-development2 .path2:before {
+  content: "\e94b";
+  margin-left: -1.1484375em;
+  color: rgb(20, 20, 20);
+  opacity: 0.827;
+}
+
+.icon-web-development2 .path3:before {
+  content: "\e94c";
+  margin-left: -1.1484375em;
+  color: rgb(20, 20, 20);
+  opacity: 0.867;
+}
+
+.icon-web-development2 .path4:before {
+  content: "\e94d";
+  margin-left: -1.1484375em;
+  color: rgb(20, 20, 20);
+  opacity: 0.838;
+}
+
+.icon-web-development2 .path5:before {
+  content: "\e94e";
+  margin-left: -1.1484375em;
+  color: rgb(20, 20, 20);
+  opacity: 0.838;
+}
+
+.icon-web-development2 .path6:before {
+  content: "\e94f";
+  margin-left: -1.1484375em;
+  color: rgb(20, 20, 20);
+  opacity: 0.847;
+}
+
+.icon-web-development2 .path7:before {
+  content: "\e950";
+  margin-left: -1.1484375em;
+  color: rgb(20, 20, 20);
+  opacity: 0.834;
+}
+
+.icon-website-design .path1:before {
+  content: "\e951";
+  color: rgb(20, 20, 20);
+  opacity: 0.8040;
+}
+
+.icon-website-design .path2:before {
+  content: "\e952";
+  margin-left: -1.06640625em;
+  color: rgb(20, 20, 20);
+  opacity: 0.772;
+}
+
+.icon-winning-award:before {
+  content: "\e953";
+}

@@ -1,0 +1,155 @@
+/*=============================
+	Fact Counter One Css
+===============================*/
+.fact-counter-one {
+    position: relative;
+    display: block;
+    background-color: var(--thm-white);
+    padding: 0px 0px 100px;
+    z-index: 10;
+}
+
+.single-fact-counter {
+    position: relative;
+    display: block;
+    border-radius: 6px;
+    border: 1px solid var(--thm-border-color);
+    background-color: transparent;
+    padding: 21px 25px 22px;
+    margin-bottom: 40px;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.single-fact-counter:hover {
+    border-color: var(--thm-white);
+    box-shadow: 0px 25px 65px 0px rgba(0, 0, 0, 0.10);
+}
+
+.single-fact-counter-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.single-fact-counter-icon {
+    position: relative;
+    display: block;
+    color: var(--thm-primary);
+    font-size: 50px;
+}
+
+.single-fact-counter-icon span::before {
+    position: relative;
+    display: inline-block;
+    color: var(--thm-primary) !important;
+    transition: all 500ms linear;
+    transition-delay: 0.1s;
+    transform: scale(1);
+}
+
+.single-fact-counter:hover .single-fact-counter-icon span::before {
+    transform: scale(0.9);
+}
+
+.single-fact-counter-inner .outer-box {
+    position: relative;
+    display: block;
+    margin-left: 20px;
+}
+
+.single-fact-counter-inner .outer-box .count-outer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.single-fact-counter-inner .outer-box .count-outer h2 {
+    font-size: 32px;
+    line-height: 1.2em;
+}
+
+.single-fact-counter-inner .outer-box .count-outer i {
+    color: var(--thm-black);
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--thm-body-font);
+    margin-left: 5px;
+}
+
+.single-fact-counter-inner .outer-box .title {
+    position: relative;
+    display: block;
+}
+
+.single-fact-counter-inner .outer-box .title p {
+    margin: 0;
+}
+
+
+/*=============================
+	Fact Counter Two Css
+===============================*/
+.fact-two {
+    position: relative;
+    display: block;
+    padding: 140px 0px 0px;
+    z-index: 10;
+}
+
+.fact-two__single {
+    position: relative;
+    display: block;
+}
+
+.fact-two__single .counter-box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 95px;
+    height: 95px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.fact-two__single .counter-box h2 {
+    color: var(--thm-secondary);
+    font-size: 32px;
+    line-height: 42px;
+    font-family: var(--thm-body-font);
+    font-weight: 700;
+}
+
+.fact-two__single .counter-box .m {
+    color: var(--thm-secondary);
+    font-size: 32px;
+    line-height: 42px;
+    font-family: var(--thm-body-font);
+    font-weight: 700;
+    margin-top: -5px;
+}
+
+.fact-two__single .counter-box i {
+    color: var(--thm-secondary);
+    font-size: 15px;
+    line-height: 42px;
+    font-family: var(--thm-body-font);
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.fact-two__single .text-box {
+    position: relative;
+    display: block;
+    padding-top: 33px;
+}
+
+.fact-two__single .text-box p {
+    color: rgb(255, 255, 255, 0.70);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+}
