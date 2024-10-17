@@ -576,7 +576,7 @@ border-radius: 0;
 
 .tomboljadwal {
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -595,7 +595,7 @@ border-radius: 0;
 }
 
 .jarakcontainer {
-  margin-top: 100px;
+  margin-top: 40px;
   margin-bottom: 50px;
 }
 
@@ -861,18 +861,18 @@ border-radius: 0;
   padding-right: 75px;
   background-image: -moz-linear-gradient(
     0deg,
-    rgb(237, 30, 36) 0%,
-    rgb(237, 80, 27) 100%
+    rgb(253, 238, 25) 0%,
+    rgb(252, 248, 10) 100%
   );
   background-image: -webkit-linear-gradient(
     0deg,
-    rgb(237, 30, 36) 0%,
-    rgb(237, 80, 27) 100%
+    rgb(250, 246, 44) 0%,
+    rgb(248, 252, 27) 100%
   );
   background-image: -ms-linear-gradient(
     0deg,
-    rgb(237, 30, 36) 0%,
-    rgb(237, 80, 27) 100%
+    rgb(192, 237, 30) 0%,
+    rgb(237, 233, 27) 100%
   );
   border-radius: 0;
   color: #fff;
