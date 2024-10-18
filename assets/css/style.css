@@ -75,15 +75,48 @@
     border: 2px solid #ed1e24;
     color: #fff;
 }
-.contact-field select {
-    width: 100%;
-    border: none;
-    background-color: rgb(255, 255, 255);
-    transition: .3s;
-    border-radius: 0;
-    border: 1px solid rgb(183, 183, 183);
-    height: calc(2.5em + .75rem + 2px);
+.contact-bg02 .contact-field textarea {
+  border-radius: 10px;
+  height: 100px;
+  border: 1px solid #777777;
 }
+.contact-bg02 .contact-field input {
+  border: 1px solid #777777;
+  border-radius: 10px;
+  height: calc(2.7em + 0.75rem + 2px);
+}
+
+.contact-field select {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  transition: .3s;
+  border-radius: 0;
+  border: 1px solid rgb(183, 183, 183);
+  height: calc(2.5em + .75rem + 2px);
+  padding-left: 15px; /* Add padding to the left */
+  appearance: none; /* Remove default arrow icon */
+}
+.contact-field select::after {
+  position: absolute;
+  font-family: "Font Awesome 5 Pro";
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+  right: 15px; /* Adjust position as needed */
+  top: 50%;
+  transform: translateY(-50%); /* Center the arrow vertically */
+  content: "\f107"; /* Font Awesome arrow down icon */
+  color: #ed1e24;
+}
+.contact-field select:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 .2rem rgb(225, 225, 225); /* Add focus effect */
+}
+
+.contact-field select::placeholder { /* Placeholder style */
+  color: #9e9e9e;
+}
+
 .contact-field .form-control:focus {
     color: #495057;
     background-color: #fff;
@@ -94,6 +127,60 @@
 .contact-field .form-control {
     color: #9e9e9e;
 }
+
+.contact-field label {
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	text-transform: uppercase;
+	color: #232323;
+	margin-bottom: 20px;
+	cursor: unset;
+}
+.contact-field {
+ padding-right: 0;
+}
+.contact-field input  {
+	width: 100%;
+border: none;
+padding-left: 15px;
+transition: .3s;
+border-radius: 0;
+    border: 1px solid rgb(183, 183, 183);
+    height: calc(2.5em + .75rem + 2px);
+}
+
+.contact-field.c-name::after{content: "\f007";}
+.contact-field::after {
+	position: absolute;
+	font-family: "Font Awesome 5 Pro";
+	display: inline-block;
+	font-size: 14px;
+	text-align: center;
+	right: 25px;
+	color: #ed1e24;
+	bottom: 22px;
+    display: none;
+}
+.contact-field.c-email::after{content: "\f0e0";}
+.contact-field.c-subject::after{content: "\f249";}
+.contact-field.c-message::after {
+	content: "\f303";
+	font-weight: 600;
+	top: 20px;
+	bottom: unset;
+}
+.contact-field input::placeholder,.contact-field textarea::placeholder{color: #9e9e9e;}
+.contact-field textarea {
+	width: 100%;
+	border: none;
+	padding: 15px;
+	transition: .3s;
+	  border-radius: 0;
+	height: 200px;
+    border: 1px solid rgb(183, 183, 183);
+}
+
 .contact-bg-an-01 {
     position: absolute;
     left: 9.8%;
@@ -172,59 +259,6 @@
 .contact-name {
 	position: relative;
 }
-.contact-field label {
-	display: block;
-	font-size: 16px;
-	font-weight: 500;
-	text-transform: uppercase;
-	color: #232323;
-	margin-bottom: 20px;
-	cursor: unset;
-}
-.contact-field {
- padding-right: 0;
-}
-.contact-field input  {
-	width: 100%;
-border: none;
-padding-left: 15px;
-transition: .3s;
-border-radius: 0;
-    border: 1px solid rgb(183, 183, 183);
-    height: calc(2.5em + .75rem + 2px);
-}
-
-.contact-field.c-name::after{content: "\f007";}
-.contact-field::after {
-	position: absolute;
-	font-family: "Font Awesome 5 Pro";
-	display: inline-block;
-	font-size: 14px;
-	text-align: center;
-	right: 25px;
-	color: #ed1e24;
-	bottom: 22px;
-    display: none;
-}
-.contact-field.c-email::after{content: "\f0e0";}
-.contact-field.c-subject::after{content: "\f249";}
-.contact-field.c-message::after {
-	content: "\f303";
-	font-weight: 600;
-	top: 20px;
-	bottom: unset;
-}
-.contact-field input::placeholder,.contact-field textarea::placeholder{color: #9e9e9e;}
-.contact-field textarea {
-	width: 100%;
-	border: none;
-	padding: 15px;
-	transition: .3s;
-	  border-radius: 0;
-	height: 200px;
-    border: 1px solid rgb(183, 183, 183);
-}
-
 
 .contact-bg {
 	background-size: cover;
@@ -957,16 +991,6 @@ border-radius: 0;
   background: #f6f8fa;
   padding: 80px;
   border-radius: 10px;
-}
-.contact-bg02 .contact-field textarea {
-  border-radius: 10px;
-  height: 100px;
-  border: 1px solid #777777;
-}
-.contact-bg02 .contact-field input {
-  border: 1px solid #777777;
-  border-radius: 10px;
-  height: calc(2.7em + 0.75rem + 2px);
 }
 
 body {
