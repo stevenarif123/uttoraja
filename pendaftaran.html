@@ -504,5 +504,71 @@
     <script src="assets/vendor/odometer/odometer.min.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <script>
+      // 1. Input Wrapping untuk Nomor HP
+const phoneInput = document.getElementById('phone');
+phoneInput.addEventListener('input', function() {
+  let phoneNumber = this.value.replace(/\D/g, ''); // Hapus karakter non-digit
+  if (phoneNumber.startsWith('08')) {
+      phoneNumber = '+62' + phoneNumber.substring(1);
+    if (phoneNumber.length > 15) {
+        phoneNumber = phoneNumber.substring(0, 15);
+    }
+  } else {
+    showError('phone', 'Nomor HP harus diawali dengan 08');
+  }
+  this.value = phoneNumber;
+    if(phoneNumber.length < 11 || phoneNumber.length > 15) {
+        showError('phone', 'Nomor HP harus 11-13 angka (08xxxxxxxxxx)');
+    } else {
+      clearError('phone');
+    }
+
+});
+
+
+// 2. Input NIK Hanya Angka dan 16 Digit
+const nikInput = document.getElementById('nik');
+nikInput.addEventListener('input', function() {
+  this.value = this.value.replace(/\D/g, '').substring(0, 16); // Hanya angka dan maksimal 16 digit
+  if (this.value.length !== 16) {
+    showError('nik', 'NIK harus 16 angka');
+  } else {
+    clearError('nik');
+  }
+});
+
+
+// Fungsi untuk menampilkan pesan error
+function showError(inputId, message) {
+  const errorSpan = document.getElementById(`${inputId}-error`);
+  if (!errorSpan) {
+    const inputDiv = document.getElementById(inputId).parentElement;
+    const newErrorSpan = document.createElement('span');
+    newErrorSpan.id = `${inputId}-error`;
+    newErrorSpan.style.color = 'red';
+    newErrorSpan.textContent = message;
+    inputDiv.appendChild(newErrorSpan);
+  } else {
+    errorSpan.textContent = message;
+  }
+    
+}
+
+
+// Fungsi untuk menghapus pesan error
+function clearError(inputId) {
+    const errorSpan = document.getElementById(`${inputId}-error`);
+    if (errorSpan) {
+        errorSpan.remove();
+    }
+}
+
+
+// uppercase for text input
+function toUpperCase(element) {
+  element.value = element.value.toUpperCase();
+}
+    </script>
   </body>
 </html>
