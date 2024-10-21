@@ -1,3 +1,22 @@
+<?php
+// Koneksi ke database (ganti dengan informasi koneksi Anda)
+require_once '../koneksi.php';
+
+// Ambil data jurusan dari database
+$sql = "SELECT nama_program_studi FROM prodi_admisi";
+$result = $conn->query($sql);
+
+// Simpan data jurusan dalam array
+$jurusanOptions = array();
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    $jurusanOptions[] = $row["nama_program_studi"];
+  }
+}
+
+// Tutup koneksi database
+$conn->close();
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
   <head>
@@ -368,9 +387,12 @@
                       <div class="contact-field position-relative c-name mb-4">
                         <select id="jurusan" name="jurusan" required>
                           <option value="">Pilih Jurusan*</option>
-                          <option value="jurusan1">Jurusan 1</option>
-                          <option value="jurusan2">Jurusan 2</option>
-                          <option value="jurusan3">Jurusan 3</option>
+                          <?php
+                          // Loop melalui array jurusanOptions dan tampilkan sebagai pilihan
+                          foreach ($jurusanOptions as $jurusan) {
+                            echo "<option value=\"$jurusan\">$jurusan</option>";
+                          }
+                          ?>
                         </select>
                       </div>
                     </div>

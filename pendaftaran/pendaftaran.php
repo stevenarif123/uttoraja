@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php'; // Include file koneksi database
+include '../koneksi.php'; // Include file koneksi database
 
 // Periksa apakah form telah disubmit
 if (isset($_POST['submit'])) {
