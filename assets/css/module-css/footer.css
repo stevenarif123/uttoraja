@@ -14,7 +14,7 @@
 .footer-main {
     position: relative;
     display: block;
-    padding: 140px 0px 83px;
+    padding: 10px 0px 83px;
     z-index: 1;
 }
 
@@ -939,7 +939,7 @@
 }
 
 .footer-main-three__inner {
-    padding: 131px 0px 127px;
+    padding: 100px 0px 100px;
 }
 
 .single-footer-widget-style2 .title h3 {

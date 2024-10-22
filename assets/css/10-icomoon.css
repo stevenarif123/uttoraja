@@ -32,6 +32,9 @@
 
 
 
+.icon-youtube:before { 
+  content: "\e694"; 
+}
 
 .icon-plugin-development:before {
   content: "\e900";

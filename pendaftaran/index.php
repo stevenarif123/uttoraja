@@ -49,10 +49,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/08-custom-animate.css" />
     <link rel="stylesheet" href="../assets/css/09-slick.css" />
     <link rel="stylesheet" href="../assets/css/10-icomoon.css" />
-    <link
-      rel="stylesheet"
-      href="../assets/vendor/custom-animate/custom-animate.css"
-    />
+    <link rel="stylesheet" href="../assets/vendor/custom-animate/custom-animate.css"/>
     <link rel="stylesheet" href="../assets/vendor/jarallax/jarallax.css" />
     <link rel="stylesheet" href="../assets/vendor/odometer/odometer.min.css" />
     <link rel="stylesheet" href="../assets/fonts/gilroy/stylesheet.css" />
@@ -60,6 +57,19 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/color1.css" />
     <link rel="stylesheet" href="../assets/css/responsive.css" />
+    <style>
+    .dropdown-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      pointer-events: none;
+
+    a {
+      color: black !important;
+    }
+    }
+    </style>
     <script>
       function toUpperCase(input) {
         input.value = input.value.toUpperCase();
@@ -127,7 +137,7 @@ $conn->close();
                     </li>
                     <li>
                       <a href="https://www.youtube.com/@SALUTTanaToraja">
-                        <i class="icon-vimeo"></i>
+                      <i class="icon.youtube"></i>
                       </a>
                     </li>
                   </ul>
@@ -158,9 +168,7 @@ $conn->close();
                       <nav class="menu-nav">
                         <div class="navbar-wrap main-menu">
                           <ul class="navigation">
-                            <li>
-                              <a href="../index.html">Home</a>
-                            </li>
+                            <li><a href="../index.html">Home</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Aplikasi UT</a>
                               <ul class="sub-menu">
@@ -192,27 +200,30 @@ $conn->close();
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li>
-                                  <a href="testimonials.html">Testimonials</a>
-                                </li>
-                                <li><a href="pricing.html">Pricing</a></li>
-                                <li><a href="team.html">Team</a></li>
+                                <li><a href="informasi.php">Informasi Akademik</a></li>
+                                <li><a href="./administrasi/">Administrasi Akademik</a></li>
+                                <li><a href="kegiatan.php">Kegiatan Akademik</a></li>
+                                <li><a href="./modul/">Pengambilan Modul</a></li>
                               </ul>
                             </li>
-                            <li><a href="galeri.html">Galeri</a></li>
-                            <li><a href="about.html">Tentang</a></li>
+                            <li><a href="./galeri/">Galeri</a></li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Tentang</a>
+                              <ul class="sub-menu">
+                                <li><a href="./tentang/tentangut.php">Universitas Terbuka</a></li>
+                                <li><a href="./tentang/tentangsalut.php/">SALUT</a></li>
+                                <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                                <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                              </ul>
+                            </li>
                           </ul>
                         </div>
                       </nav>
                     </div>
                   </div>
                 </div>
-
                 <div class="main-header-one__bottom-right">
                   <div class="header-btn-box-one">
-                    <a class="thm-btn" href="/pendaftaran">
-                      <span class="txt">Mendaftar Disini</span>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -384,29 +395,31 @@ $conn->close();
                       </div>
                     </div>
                     <div class="col-lg-12">
-                      <div class="contact-field position-relative c-name mb-4">
+                    <div class="contact-field position-relative c-name mb-4 select-container">
                         <select id="jurusan" name="jurusan" required>
-                          <option value="">Pilih Jurusan*</option>
+                          <option value="" disabled selected>Pilih Jurusan*</option>
                           <?php
-                          // Loop melalui array jurusanOptions dan tampilkan sebagai pilihan
                           foreach ($jurusanOptions as $jurusan) {
                             echo "<option value=\"$jurusan\">$jurusan</option>";
                           }
                           ?>
                         </select>
+                        <span class="dropdown-icon">&#9660;</span> 
                       </div>
                     </div>
+
                     <div class="col-lg-12">
-                      <div class="contact-field position-relative c-name mb-4">
+                      <div class="contact-field position-relative c-name mb-4 select-container">
                         <select id="agama" name="agama" required>
-                          <option value="">Pilih Agama*</option>
-                          <option value="islam">Islam</option>
-                          <option value="protestan">Protestan</option>
-                          <option value="katolik">Katolik</option>
-                          <option value="hindu">Hindu</option>
-                          <option value="buddha">Buddha</option>
-                          <option value="konghucu">Konghucu</option>
+                          <option value="" disabled selected>Pilih Agama*</option>
+                          <option value="Islam">ISLAM</option>
+                          <option value="Protestan">PROTESTAN</option>
+                          <option value="Katolik">KATOLIK</option>
+                          <option value="Hindu">HINDU</option>
+                          <option value="Buddha">BUDDHA</option>
+                          <option value="Konghucu">KONGHUCU</option>
                         </select>
+                        <span class="dropdown-icon">&#9660;</span> 
                       </div>
                     </div>
                     <div class="col-lg-12">
@@ -528,69 +541,69 @@ $conn->close();
     <script src="../assets/js/main.js"></script>
     <script>
       // 1. Input Wrapping untuk Nomor HP
-const phoneInput = document.getElementById('phone');
-phoneInput.addEventListener('input', function() {
-  let phoneNumber = this.value.replace(/\D/g, ''); // Hapus karakter non-digit
-  if (phoneNumber.startsWith('08')) {
-      phoneNumber = '+62' + phoneNumber.substring(1);
-    if (phoneNumber.length > 15) {
-        phoneNumber = phoneNumber.substring(0, 15);
-    }
-  } else {
-    showError('phone', 'Nomor HP harus diawali dengan 08');
-  }
-  this.value = phoneNumber;
-    if(phoneNumber.length < 11 || phoneNumber.length > 15) {
-        showError('phone', 'Nomor HP harus 11-13 angka (08xxxxxxxxxx)');
-    } else {
-      clearError('phone');
-    }
+      const phoneInput = document.getElementById('phone');
+      phoneInput.addEventListener('input', function() {
+        let phoneNumber = this.value.replace(/\D/g, ''); // Hapus karakter non-digit
+        if (phoneNumber.startsWith('08')) {
+            phoneNumber = '+62' + phoneNumber.substring(1);
+          if (phoneNumber.length > 15) {
+              phoneNumber = phoneNumber.substring(0, 15);
+          }
+        } else {
+          showError('phone', 'Nomor HP harus diawali dengan 08');
+        }
+        this.value = phoneNumber;
+          if(phoneNumber.length < 11 || phoneNumber.length > 15) {
+              showError('phone', 'Nomor HP harus 11-13 angka (08xxxxxxxxxx)');
+          } else {
+            clearError('phone');
+          }
 
-});
-
-
-// 2. Input NIK Hanya Angka dan 16 Digit
-const nikInput = document.getElementById('nik');
-nikInput.addEventListener('input', function() {
-  this.value = this.value.replace(/\D/g, '').substring(0, 16); // Hanya angka dan maksimal 16 digit
-  if (this.value.length !== 16) {
-    showError('nik', 'NIK harus 16 angka');
-  } else {
-    clearError('nik');
-  }
-});
+      });
 
 
-// Fungsi untuk menampilkan pesan error
-function showError(inputId, message) {
-  const errorSpan = document.getElementById(`${inputId}-error`);
-  if (!errorSpan) {
-    const inputDiv = document.getElementById(inputId).parentElement;
-    const newErrorSpan = document.createElement('span');
-    newErrorSpan.id = `${inputId}-error`;
-    newErrorSpan.style.color = 'red';
-    newErrorSpan.textContent = message;
-    inputDiv.appendChild(newErrorSpan);
-  } else {
-    errorSpan.textContent = message;
-  }
-    
-}
+      // 2. Input NIK Hanya Angka dan 16 Digit
+      const nikInput = document.getElementById('nik');
+      nikInput.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '').substring(0, 16); // Hanya angka dan maksimal 16 digit
+        if (this.value.length !== 16) {
+          showError('nik', 'NIK harus 16 angka');
+        } else {
+          clearError('nik');
+        }
+      });
 
 
-// Fungsi untuk menghapus pesan error
-function clearError(inputId) {
-    const errorSpan = document.getElementById(`${inputId}-error`);
-    if (errorSpan) {
-        errorSpan.remove();
-    }
-}
+      // Fungsi untuk menampilkan pesan error
+      function showError(inputId, message) {
+        const errorSpan = document.getElementById(`${inputId}-error`);
+        if (!errorSpan) {
+          const inputDiv = document.getElementById(inputId).parentElement;
+          const newErrorSpan = document.createElement('span');
+          newErrorSpan.id = `${inputId}-error`;
+          newErrorSpan.style.color = 'red';
+          newErrorSpan.textContent = message;
+          inputDiv.appendChild(newErrorSpan);
+        } else {
+          errorSpan.textContent = message;
+        }
+          
+      }
 
 
-// uppercase for text input
-function toUpperCase(element) {
-  element.value = element.value.toUpperCase();
-}
+      // Fungsi untuk menghapus pesan error
+      function clearError(inputId) {
+          const errorSpan = document.getElementById(`${inputId}-error`);
+          if (errorSpan) {
+              errorSpan.remove();
+          }
+      }
+
+
+      // uppercase for text input
+      function toUpperCase(element) {
+        element.value = element.value.toUpperCase();
+      }
     </script>
   </body>
 </html>
