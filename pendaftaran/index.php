@@ -516,7 +516,7 @@ $conn->close();
                 <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2 ml55">
                     <div class="title">
-                      <h3>Quick Links</h3>
+                      <h3>Link Cepat</h3>
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
                       <ul class="clearfix">
@@ -542,7 +542,7 @@ $conn->close();
                 <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2 ml50">
                     <div class="title">
-                      <h3>Our Services</h3>
+                      <h3>Layanan Kami</h3>
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
                       <ul class="clearfix">
@@ -573,7 +573,7 @@ $conn->close();
                         </li>
                         <li>
                           <p>
-                            <a href="../slegalisir">Legalisir Ijazah</a>
+                            <a href="../legalisir">Legalisir Ijazah</a>
                           </p>
                         </li>
                       </ul>
@@ -594,7 +594,7 @@ $conn->close();
               >
                 <div class="copyright-text text-center">
                   <p>
-                    Copyright © 2024 Diligent by
+                    Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
                     <a href="https://themeforest.net/user/thememx">Thememx.</a>
                     All Rights Reserved
                   </p>
