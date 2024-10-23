@@ -200,20 +200,22 @@ $conn->close();
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li><a href="informasi.php">Informasi Akademik</a></li>
-                                <li><a href="./administrasi/">Administrasi Akademik</a></li>
-                                <li><a href="kegiatan.php">Kegiatan Akademik</a></li>
-                                <li><a href="./modul/">Pengambilan Modul</a></li>
+                                <li><a href="../informasi.php">Informasi Akademik</a></li>
+                                <li><a href="../administrasi/">Administrasi Akademik</a></li>
+                                <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
+                                <li><a href="../modul/">Pengambilan Modul</a></li>
+                                <li><a href="../legalisir/">Legalisir Ijazah</a></li>
+                                <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
                             <li><a href="./galeri/">Galeri</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
-                                <li><a href="./tentang/tentangut.php">Universitas Terbuka</a></li>
-                                <li><a href="./tentang/tentangsalut.php/">SALUT</a></li>
-                                <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                                <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                                <li><a href="../tentang/tentangut.php">Universitas Terbuka</a></li>
+                                <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
+                                <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                                <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
                           </ul>
@@ -468,7 +470,118 @@ $conn->close();
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
-              
+            <div class="row">
+                <!--Start Single Footer Widget-->
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                  <div class="single-footer-widget single-footer-widget-style2">
+                    <div class="title">
+                      <h3>Bantuan &amp; Dukungan</h3>
+                    </div>
+                    <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
+                      <div class="text">
+                        <p>
+                          Butuh bantuan dan dukungan dalam perkuliahan di UT?
+                        </p>
+                      </div>
+                      <ul class="clearfix">
+                        <li>
+                          <div class="icon">
+                            <span class="icon-pin"></span>
+                          </div>
+                          <p>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <span class="icon-mail-inbox-app"></span>
+                          </div>
+                          <p>
+                            <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
+                          </p>
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <span class="icon-phone-call"></span>
+                          </div>
+                          <p>
+                            <a href="tel:6281355619225">+62 813-5561-9225</a>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--End Single Footer Widget-->
+
+                <!--Start Single Footer Widget-->
+                <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                  <div class="single-footer-widget single-footer-widget-style2 ml55">
+                    <div class="title">
+                      <h3>Quick Links</h3>
+                    </div>
+                    <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                      <ul class="clearfix">
+                        <li>
+                          <p><a href="../tentang/tentangut.php">Tentang UT</a></p>
+                        </li>
+                        <li>
+                          <p><a href="../layanan/informasi.php">Informasi Akademik</a></p>
+                        </li>
+                        <li>
+                          <p><a href="../administrasi/">Administrasi</a></p>
+                        </li>
+                        <li>
+                          <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--End Single Footer Widget-->
+
+                <!--Start Single Footer Widget-->
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                  <div class="single-footer-widget single-footer-widget-style2 ml50">
+                    <div class="title">
+                      <h3>Our Services</h3>
+                    </div>
+                    <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                      <ul class="clearfix">
+                        <li>
+                          <p>
+                            <a href="../informasi.php">Informasi Akademik</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="../administrasi">Administrasi Akademik</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="../kegiatan.php">Kegiatan</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="../modul/">Pengambilan Modul</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="../suratketerangan">Surat Keterangan</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="../slegalisir">Legalisir Ijazah</a>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--End Single Footer Widget-->
+              </div>
             </div>
           </div>
           <!-- End Footer Main -->

@@ -3,6 +3,39 @@
     Footer One Css
 =============================================
 ***/
+
+footer {
+    background-color: #333; /* Warna latar belakang footer */
+    color: #fff; /* Warna teks footer */
+    width: 100%; /* Memenuhi lebar penuh */
+    padding: 20px 0; /* Jarak atas dan bawah */
+}
+
+.footer-container {
+    max-width: 1200px; /* Lebar maksimum konten footer */
+    margin: 0 auto; /* Tengah-kan konten */
+    padding: 0 20px; /* Jarak kanan kiri */
+    display: flex; /* Gunakan flexbox untuk tata letak */
+    justify-content: space-between; /* Spasi setara di antara elemen */
+    flex-wrap: wrap; /* Bungkus apabila elemen terlalu panjang */
+}
+
+.footer-section {
+    flex: 1; /* Membuat setiap bagian melebihi ruang yang sama */
+    min-width: 200px; /* Lebar minimum untuk responsif */
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
 .footer-one {
     position: relative;
     display: block;
@@ -423,7 +456,6 @@
 .single-footer-widget-box {
     position: relative;
     display: block;
-    padding-top: 25px;
 }
 
 .single-footer-widget-box .text {
@@ -446,7 +478,7 @@
 .single-footer-widget__about ul {
     position: relative;
     display: block;
-    padding-top: 25px;
+    /* padding-top: 25px; */
 }
 
 .single-footer-widget__about ul li {
@@ -456,7 +488,7 @@
 }
 
 .single-footer-widget__about ul li+li {
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .single-footer-widget__about ul li .icon {
@@ -514,7 +546,7 @@
 }
 
 .single-footer-widget__links ul li+li {
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .single-footer-widget__links ul li a {
@@ -939,7 +971,7 @@
 }
 
 .footer-main-three__inner {
-    padding: 100px 0px 100px;
+    padding: 20px 0px 20px;
 }
 
 .single-footer-widget-style2 .title h3 {
