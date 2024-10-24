@@ -1,5 +1,9 @@
 <?php
-include '../koneksi.php'; // Include the database connection file
+require_once '../koneksi.php';
+
+// Initialize variables for the success and error messages
+$showSuccessModal = false;
+$showErrorModal = false;
 
 // Check if the form has been submitted
 if (isset($_POST['submit'])) {
@@ -21,61 +25,27 @@ if (isset($_POST['submit'])) {
 
     // Execute the statement
     if ($stmt->execute()) {
-        // Success modal
-        echo '<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="successModalLabel">Pendaftaran Berhasil!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Data pendaftaran berhasil disimpan.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <a href="index.php" class="btn btn-primary">OK</a>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <script>
-                  document.addEventListener("DOMContentLoaded", function() {
-                      var successModal = new bootstrap.Modal(document.getElementById("successModal"));
-                      successModal.show();
-                  });
-              </script>';
+        $showSuccessModal = true; // Show success modal
     } else {
-        // Error modal
-        echo '<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="errorModalLabel">Pendaftaran Gagal!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Terjadi kesalahan saat menyimpan data pendaftaran.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <script>
-                  document.addEventListener("DOMContentLoaded", function() {
-                      var errorModal = new bootstrap.Modal(document.getElementById("errorModal"));
-                      errorModal.show();
-                  });
-              </script>';
+        $showErrorModal = true; // Show error modal
     }
 
-    // Close statement
+    // Close statement and connection
     $stmt->close();
+    $conn->close();
 }
-// Close connection
-$conn->close();
+
+// Redirect back to the form with success/error state
+session_start();
+if ($showSuccessModal) {
+    $_SESSION['form_status'] = 'success';
+} else if ($showErrorModal) {
+    $_SESSION['form_status'] = 'error';
+}
+
+// Redirecting to the form page
+header("Location: index.php");
+exit();
 ?>
 
 
