@@ -67,6 +67,13 @@
     position: relative;
     z-index: 1;
 }
+
+.containercta{
+  position: relative;
+  z-index: 1;
+  padding-bottom: 20px;
+}
+
 .contact-bg02 .slider-btn {
     width: 100%;
 }
@@ -1587,7 +1594,6 @@ h6 a {
   line-height: 1.2em;
   font-family: var(--thm-heading-font);
   font-weight: 700;
-  text-transform: capitalize;
 }
 
 /*=======================
@@ -3495,6 +3501,7 @@ label {
   border-radius: 4px;
   background-color: var(--thm-primary);
   padding: 88px 110px 90px;
+  margin-bottom: 20px;
 }
 
 .cta-one__shape1 {
