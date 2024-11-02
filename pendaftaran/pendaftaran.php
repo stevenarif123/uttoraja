@@ -47,22 +47,3 @@ if ($showSuccessModal) {
 header("Location: index.php");
 exit();
 ?>
-
-
-// Perintah SQL untuk membuat tabel pendaftar:
-/*
-CREATE TABLE pendaftar (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    nama_lengkap VARCHAR(255) NOT NULL,
-    nomor_hp VARCHAR(20) NOT NULL,
-    tempat_lahir VARCHAR(255) NOT NULL,
-    tanggal_lahir DATE NOT NULL,
-    ibu_kandung VARCHAR(255) NOT NULL,
-    nik VARCHAR(50) NOT NULL,
-    jurusan VARCHAR(255) NOT NULL,
-    agama VARCHAR(50) NOT NULL,
-    jenis_kelamin VARCHAR(10) NOT NULL,
-    pertanyaan TEXT
-);
-*/
-// Tutup koneksi
