@@ -1,3 +1,22 @@
+<?php
+// Koneksi ke database (ganti dengan informasi koneksi Anda)
+require_once '../koneksi.php';
+
+// Ambil data jurusan dari database
+$sql = "SELECT nama_program_studi FROM prodi_admisi";
+$result = $conn->query($sql);
+
+// Simpan data jurusan dalam array
+$jurusanOptions = array();
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    $jurusanOptions[] = $row["nama_program_studi"];
+  }
+}
+
+// Tutup koneksi database
+$conn->close();
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
   <head>
@@ -14,9 +33,10 @@
     />
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- CSS here -->
     <link rel="stylesheet" href="../assets/css/01-bootstrap.min.css" />
@@ -37,6 +57,24 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/color1.css" />
     <link rel="stylesheet" href="../assets/css/responsive.css" />
+    <style>
+    .dropdown-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      pointer-events: none;
+
+    a {
+      color: black !important;
+    }
+    }
+    </style>
+    <script>
+      function toUpperCase(input) {
+        input.value = input.value.toUpperCase();
+      }
+    </script>
   </head>
 
   <body class="body-gray-bg">
@@ -64,15 +102,15 @@
                       <div class="icon">
                         <span class="icon-phone-call"></span>
                       </div>
-                      <p><a href="tel:6281355619225">+6281355619225</a></p>
+                      <p><a href="tel:1378902167">+6281355619225</a></p>
                     </li>
                     <li>
                       <div class="icon">
                         <span class="icon-email"></span>
                       </div>
                       <p>
-                        <a href="mailto:info@saluttoraja.com"
-                          >info@saluttoraja.com</a
+                        <a href="mailto:info@uttoraja.com"
+                          >info@uttoraja.com</a
                         >
                       </p>
                     </li>
@@ -274,6 +312,148 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="contact-bg02">
+                <div class="section-title center-align">
+                  <h3 style="margin-bottom: 20px;">Formulir Pendaftaran</h3>
+                </div>
+
+                <form
+                  action="pendaftaran.php"
+                  method="post"
+                  class="contact-form mt-30"
+                >
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="firstn"
+                          name="firstn"
+                          placeholder="Nama Lengkap*"
+                          required
+                          oninput="toUpperCase(this)"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="phone"
+                          name="phone"
+                          placeholder="Nomor HP*"
+                          required
+                          oninput="toUpperCase(this)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="tempat_lahir"
+                          name="tempat_lahir"
+                          placeholder="Tempat Lahir*"
+                          required
+                          oninput="toUpperCase(this)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="date"
+                          id="tanggal_lahir"
+                          name="tanggal_lahir"
+                          placeholder="Tanggal Lahir*"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="ibu_kandung"
+                          name="ibu_kandung"
+                          placeholder="Nama Ibu Kandung*"
+                          required
+                          oninput="toUpperCase(this)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="nik"
+                          name="nik"
+                          placeholder="Nomor Induk Kependudukan*"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4 select-container">
+                        <select id="jurusan" name="jurusan" required>
+                          <option value="" disabled selected>Pilih Jurusan*</option>
+                          <?php
+                          foreach ($jurusanOptions as $jurusan) {
+                            echo "<option value=\"$jurusan\">$jurusan</option>";
+                          }
+                          ?>
+                        </select>
+                        <span class="dropdown-icon">&#9660;</span> 
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4 select-container">
+                        <select id="agama" name="agama" required>
+                          <option value="" disabled selected>Pilih Agama*</option>
+                          <option value="Islam">ISLAM</option>
+                          <option value="Protestan">PROTESTAN</option>
+                          <option value="Katolik">KATOLIK</option>
+                          <option value="Hindu">HINDU</option>
+                          <option value="Buddha">BUDDHA</option>
+                          <option value="Konghucu">KONGHUCU</option>
+                        </select>
+                        <span class="dropdown-icon">&#9660;</span> 
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field radio-group mb-4">
+                        <label for="laki-laki">Laki-laki</label>
+                        <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" required>
+
+                        <label for="perempuan">Perempuan</label>
+                        <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <textarea
+                          name="pertanyaan"
+                          id="pertanyaan"
+                          cols="30"
+                          rows="10"
+                          placeholder="Pertanyaan"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="slider-btn">
+                        <button type="submit" name="submit" class="pnd-btn" data-animation="fadeInRight" data-delay=".8s">Daftar</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!--End Contact Page-->
@@ -472,5 +652,71 @@
     <script src="../assets/vendor/odometer/odometer.min.js"></script>
 
     <script src="../assets/js/main.js"></script>
+    <script>
+      // 1. Input Wrapping untuk Nomor HP
+      const phoneInput = document.getElementById('phone');
+      phoneInput.addEventListener('input', function() {
+        let phoneNumber = this.value.replace(/\D/g, ''); // Hapus karakter non-digit
+        if (phoneNumber.startsWith('08')) {
+            phoneNumber = '+62' + phoneNumber.substring(1);
+          if (phoneNumber.length > 15) {
+              phoneNumber = phoneNumber.substring(0, 15);
+          }
+        } else {
+          showError('phone', 'Nomor HP harus diawali dengan 08');
+        }
+        this.value = phoneNumber;
+          if(phoneNumber.length < 11 || phoneNumber.length > 15) {
+              showError('phone', 'Nomor HP harus 11-13 angka (08xxxxxxxxxx)');
+          } else {
+            clearError('phone');
+          }
+
+      });
+
+
+      // 2. Input NIK Hanya Angka dan 16 Digit
+      const nikInput = document.getElementById('nik');
+      nikInput.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '').substring(0, 16); // Hanya angka dan maksimal 16 digit
+        if (this.value.length !== 16) {
+          showError('nik', 'NIK harus 16 angka');
+        } else {
+          clearError('nik');
+        }
+      });
+
+
+      // Fungsi untuk menampilkan pesan error
+      function showError(inputId, message) {
+        const errorSpan = document.getElementById(`${inputId}-error`);
+        if (!errorSpan) {
+          const inputDiv = document.getElementById(inputId).parentElement;
+          const newErrorSpan = document.createElement('span');
+          newErrorSpan.id = `${inputId}-error`;
+          newErrorSpan.style.color = 'red';
+          newErrorSpan.textContent = message;
+          inputDiv.appendChild(newErrorSpan);
+        } else {
+          errorSpan.textContent = message;
+        }
+          
+      }
+
+
+      // Fungsi untuk menghapus pesan error
+      function clearError(inputId) {
+          const errorSpan = document.getElementById(`${inputId}-error`);
+          if (errorSpan) {
+              errorSpan.remove();
+          }
+      }
+
+
+      // uppercase for text input
+      function toUpperCase(element) {
+        element.value = element.value.toUpperCase();
+      }
+    </script>
   </body>
 </html>
