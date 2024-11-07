@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>AKADEMIK AKADEMIK</title>
+    <title>PENGAJUAN SURAT KETERANGAN</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -256,13 +256,13 @@
         </div>
         <div class="container">
           <div class="page-header__inner">
-            <h2>ADMINISTRASI AKADEMIK</h2>
+            <h2>PENGAJUAN SURAT KETERANGAN</h2>
             <ul class="thm-breadcrumb">
               <li>
                 <a href="index.html"><span class="fa fa-home"></span> Home</a>
               </li>
               <li><i class="icon-right-arrow-angle"></i></li>
-              <li class="color-base">Administrasi Akademik</li>
+              <li class="color-base"> Pengajuan Surat Keterangan</li>
             </ul>
           </div>
         </div>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>GALERI SALUT TANA TORAJA</title>
+  <title>KEGIATAN AKADEMIK</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -246,13 +246,13 @@
       </div>
       <div class="container">
         <div class="page-header__inner">
-          <h2>GALERI KEGIATAN</h2>
+          <h2>KEGIATAN AKADEMIK</h2>
           <ul class="thm-breadcrumb">
             <li>
               <a href="index.php"><span class="fa fa-home"></span> Home</a>
             </li>
             <li><i class="icon-right-arrow-angle"></i></li>
-            <li class="color-base"> Galeri</li>
+            <li class="color-base"> Kegiatan Akademik</li>
           </ul>
         </div>
       </div>
@@ -268,208 +268,9 @@
         <img src="assets/img/shape/banner-one__shape3.png" alt="#" />
       </div>
       <div class="container">
-        <div>
-
-        </div>
-        <!-- Tabel Jadwal Akademik -->
-        <div>
-          <div class="">
-            <h2 style="text-align: center; margin-bottom: 1rem;">Jadwal Akademik Universitas Terbuka Sarjana</h2>
+        <div class="banner-one__inner">
+          <div class="banner-one__content wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
           </div>
-          <table style="margin-left: auto; margin-right: auto; margin-bottom: 2rem" border="2" cellspacing="2" cellpadding="2">
-            <tbody>
-              <tr>
-                <td style="text-align: center;" width="290">SEMESTER 2024/2025 GANJIL (2024 GANJIL)</td>
-                <td style="text-align: center;" width="303">KEGIATAN</td>
-                <td style="text-align: center;" width="248">SEMESTER 2024/2025 GENAP (2024 GENAP)</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Pendaftaran Mahasiswa Baru</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 26 Agustus 2024</td>
-                <td width="303">– Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                <td width="248">17 Oktober 2024 – 12 Februari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 19 Agustus 2024</td>
-                <td width="303">-Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit</td>
-                <td width="248">18 November 2024 – 22 Januari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Pembayaran LIP Admisi Mahasiswa Baru</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 27 Agustus 2024</td>
-                <td width="303">– Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                <td width="248">17 Oktober 2024 – 19 Februari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 20 Agustus 2024</td>
-                <td width="303">– Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit</td>
-                <td width="248">18 November 2024 – 30 Januari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Unggah Berkas Mahasiswa Baru</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 29 Agustus 2024</td>
-                <td width="303">– Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                <td width="248">17 Oktober 2024 – 26 Februari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 21 Agustus 2024</td>
-                <td width="303">– Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit</td>
-                <td width="248">18 November 2024 – 26 Februari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 5 September 2024</td>
-                <td width="303">Registrasi Mata Kuliah</td>
-                <td width="248">17 Oktober 2024 – 26 Februari 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Pembayaran Uang Kuliah</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 11 September 2024</td>
-                <td width="303">Pembayaran Uang Kuliah Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                <td width="248">17 Oktober 2024 – 5 Maret 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Pembayaran Uang Kuliah&nbsp;Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit dan On Going</td>
-                <td width="248">18 November 2024 – 5 Maret 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 18 September 2024</td>
-                <td width="303">Registrasi TTM Atas Permintaan Mahasiswa</td>
-                <td width="248">17 Oktober 2024 – 12 Maret 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>6 Mei – 20 September 2024</td>
-                <td width="303">Pembayaran TTM Atas Permintaan Mahasiswa</td>
-                <td width="248">17 Oktober 2024 – 15 Maret 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>4 September 2024</td>
-                <td width="303">Dies Natalis Universitas Terbuka</td>
-                <td width="248">4 September 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>7 Mei – 23 September 2024</td>
-                <td width="303">Aktivasi dan Pengisian Form Kesediaan&nbsp; Mengikuti Tutorial Online</td>
-                <td width="248">18 Oktober 2024 – 24 Maret 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Layanan Pendukung Kesuksesan Belajar Jarak Jauh Mahasiswa Baru</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>23 Juni – 22 September 2024</td>
-                <td width="303">– Orientasi Studi Mahasiswa Baru (OSMB) – Pelatihan Keterampilan Belajar Jarak Jauh (PKBJJ)</td>
-                <td width="248">21 Desember 2024 – 23 Maret 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Layanan Pendukung Kesuksesan Belajar Jarak Jauh</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>23 Juni – 27 Oktober 2024</td>
-                <td width="303">– Workshop Tugas – Klinik Ujian</td>
-                <td width="248">21 Desember 2024 – 27 April 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Pengumuman Lulusan</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>24 September 2024</td>
-                <td width="303">Tahap I</td>
-                <td width="248">2 April 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>15 Oktober 2024</td>
-                <td width="303">Tahap II</td>
-                <td width="248">30 April 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>5 Oktober – 8 Desember 2024</td>
-                <td width="303">Tutorial Tatap Muka (TTM)</td>
-                <td width="248">5 April – 8 Juni 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>14 Oktober – 8 Desember 2024</td>
-                <td width="303">Tutorial Online (Tuton)</td>
-                <td width="248">14 April – 8 Juni 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>&nbsp;</td>
-                <td width="303">Tugas Mata Kuliah</td>
-                <td width="248">&nbsp;</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>28 Oktober – 3 November 2024</td>
-                <td width="303">– Tugas Mata Kuliah 1</td>
-                <td width="248">28 April – 4 Mei 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>11 – 17 November 2024</td>
-                <td width="303">– Tugas Mata Kuliah 2</td>
-                <td width="248">12 – 18 Mei 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>25 November – 1 Desember 2024</td>
-                <td width="303">– Tugas Mata Kuliah 3</td>
-                <td width="248">26 Mei – 1 Juni 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>14 Oktober – 22 Desember 2024</td>
-                <td width="303">Bimbingan dan Unggah Karya Ilmiah</td>
-                <td width="248">7 April – 23 Juni 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td width="290">11 – 12 November 2024 (Wisuda Periode I Wilayah I Tahun Akademik 2024/2025) 18 – 19 November 2024 (Wisuda Periode I Wilayah II Tahun Akademik 2024/2025)</td>
-                <td width="303">Wisuda</td>
-                <td width="248">14 – 15 Juli 2025 (Wisuda Periode II Wilayah I Tahun Akademik 2024/2025) 28 – 29 Juli 2025 (Wisuda Periode II Wilayah II Tahun Akademik 2024/2025)</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>11 November 2024 – 25 Januari 2025</td>
-                <td width="303">Pencetakan KTPU melalui Laman <a href="https://myut.ut.ac.id">https://myut.ut.ac.id</a></td>
-                <td width="248">12 Mei – 26 Juli 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>22 Desember 2024</td>
-                <td width="303">Batas Akhir Mengunggah Laporan Praktik/Praktikum ke Laman <a href="https://praktik.ut.ac.id">https://praktik.ut.ac.id</a></td>
-                <td width="248">23 Juni 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>14 dan 15 Desember 2024</td>
-                <td width="303">Ujian Akhir Semester (Tatap Muka)</td>
-                <td width="248">14 dan 15 Juni 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>10 Desember 2024 – 26 Januari 2025</td>
-                <td width="303">Ujian Akhir Semester (Ujian Online)</td>
-                <td width="248">10 Juni – 27 Juli 2025</td>
-              </tr>
-              <tr style="text-align: center;">
-                <td>5 Februari 2025</td>
-                <td width="303">Pengumuman Nilai Akhir Mata Kuliah</td>
-                <td width="248">6 Agustus 2025</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </section>

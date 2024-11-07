@@ -45,6 +45,25 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Universitas Terbuka",
+        "url": "https://www.ut.ac.id/",
+        "sameAs": [
+          "https://www.youtube.com/user/UniversitasTerbuka",
+          "https://www.instagram.com/universitasterbuka",
+          "https://www.linkedin.com/school/universitas-terbuka/"
+        ],
+        "description": "Pendaftaran Mahasiswa Baru. Search Search. Youtube Instagram Linkedin. Profil. Prof. Ojat Darojat, M.Bus., Ph.D. Rektor Universitas Terbuka.",
+        "founder": {
+          "@type": "Person",
+          "name": "Prof. Ojat Darojat, M.Bus., Ph.D."
+        }
+      }
+    </script>
+
   </head>
 
   <body class="body-gray-bg">
@@ -72,7 +91,7 @@
                       <div class="icon">
                         <span class="icon-phone-call"></span>
                       </div>
-                      <p><a href="tel:1378902167">+6281355619225</a></p>
+                      <p><a href="tel:6281355619225">+6281355619225</a></p>
                     </li>
                     <li>
                       <div class="icon">
@@ -177,7 +196,7 @@
                                 <li><a href="./suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
-                            <li><a href="./galeri/">Galeri</a></li>
+                            <li><a href="../galeri/">Galeri</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">

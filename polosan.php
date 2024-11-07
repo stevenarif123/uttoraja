@@ -69,7 +69,7 @@
                     <div class="icon">
                       <span class="icon-phone-call"></span>
                     </div>
-                    <p><a href="tel:1378902167">+6281355619225</a></p>
+                    <p><a href="tel:6281355619225">+6281355619225</a></p>
                   </li>
                   <li>
                     <div class="icon">
@@ -132,7 +132,7 @@
                     <nav class="menu-nav">
                       <div class="navbar-wrap main-menu">
                         <ul class="navigation">
-                          <li><a href="../index.html">Home</a></li>
+                          <li><a href="./index.php">Home</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Aplikasi UT</a>
                             <ul class="sub-menu">
@@ -156,22 +156,22 @@
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="../informasi.php">Informasi Akademik</a></li>
-                              <li><a href="../administrasi/">Administrasi Akademik</a></li>
-                              <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
-                              <li><a href="../modul/">Pengambilan Modul</a></li>
-                              <li><a href="../legalisir/">Legalisir Ijazah</a></li>
-                              <li><a href="../suratketerangan/">Surat Keterangan</a></li>
+                              <li><a href="./informasi.php">Informasi Akademik</a></li>
+                              <li><a href="./administrasi/">Administrasi Akademik</a></li>
+                              <li><a href="./kegiatan.php">Kegiatan Akademik</a></li>
+                              <li><a href="./modul/">Pengambilan Modul</a></li>
+                              <li><a href="./legalisir/">Legalisir Ijazah</a></li>
+                              <li><a href="./suratketerangan/">Surat Keterangan</a></li>
                             </ul>
                           </li>
-                          <li><a href="./galeri/">Galeri</a></li>
+                          <li><a href="../galeri/">Galeri</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
-                              <li><a href="../tentang/tentangut.php">Universitas Terbuka</a></li>
-                              <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
-                              <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                              <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                              <li><a href="./tentang/tentangut.php">Universitas Terbuka</a></li>
+                              <li><a href="./tentang/tentangsalut.php/">SALUT</a></li>
+                              <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                              <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
                         </ul>
@@ -339,16 +339,16 @@
                   <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
                     <ul class="clearfix">
                       <li>
-                        <p><a href="../tentang/tentangut.php">Tentang UT</a></p>
+                        <p><a href="./tentang/tentangut.php">Tentang UT</a></p>
                       </li>
                       <li>
-                        <p><a href="../layanan/informasi.php">Informasi Akademik</a></p>
+                        <p><a href="./layanan/informasi.php">Informasi Akademik</a></p>
                       </li>
                       <li>
-                        <p><a href="../administrasi/">Administrasi</a></p>
+                        <p><a href="./administrasi/">Administrasi</a></p>
                       </li>
                       <li>
-                        <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                        <p><a href="./tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
                       </li>
                     </ul>
                   </div>
@@ -366,32 +366,32 @@
                     <ul class="clearfix">
                       <li>
                         <p>
-                          <a href="../informasi.php">Informasi Akademik</a>
+                          <a href="./informasi.php">Informasi Akademik</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="../administrasi">Administrasi Akademik</a>
+                          <a href="./administrasi">Administrasi Akademik</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="../kegiatan.php">Kegiatan</a>
+                          <a href="./kegiatan.php">Kegiatan</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="../modul/">Pengambilan Modul</a>
+                          <a href="./modul/">Pengambilan Modul</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="../suratketerangan">Surat Keterangan</a>
+                          <a href="./suratketerangan">Surat Keterangan</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="../legalisir">Legalisir Ijazah</a>
+                          <a href="./legalisir">Legalisir Ijazah</a>
                         </p>
                       </li>
                     </ul>

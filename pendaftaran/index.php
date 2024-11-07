@@ -170,7 +170,7 @@
                                 <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
-                            <li><a href="./galeri/">Galeri</a></li>
+                            <li><a href="../galeri/">Galeri</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
