@@ -40,6 +40,7 @@
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="stylesheet" href="assets/css/customstyles.css"/>
 
     <link
       rel="stylesheet"
@@ -507,135 +508,105 @@
 
       <!-- Start FAQ One -->
       <section>
-        <div class="container jarakcontainer">
-          <div class="faq-wrap">
-            <div class="sec-title-three text-center">
-                <h2>Frequently Asked Question (FAQ)</h2>
-              </div>
-            <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                  <button
-                    class="accordion-button faq-btn"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="true"
-                    aria-controls="collapseTwo"
-                  >
-                    Apa itu Universitas Terbuka (UT)?
-                  </button>
-                </h2>
-                <div
-                  id="collapseTwo"
-                  class="accordion-collapse collapse show"
-                  aria-labelledby="headingTwo"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    Universitas Terbuka (UT) adalah perguruan tinggi negeri di Indonesia yang menyelenggarakan pendidikan tinggi melalui sistem pendidikan jarak jauh (PJJ) dan terbuka. Ini berarti semua proses belajar mengajar dilakukan secara online atau jarak jauh.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button
-                    class="accordion-button collapsed faq-btn"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="false"
-                    aria-controls="collapseOne"
-                  >
-                    Bagaimana cara mendaftar di Universitas Terbuka?
-                  </button>
-                </h2>
-                <div
-                  id="collapseOne"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    Pendaftaran di Universitas Terbuka dapat dilakukan melalui situs web resmi Sentra Layanan Universitas Terbuka Tana Toraja dengan klik <a href="https://uttoraja.com/pendaftaran">link ini</a>. Calon mahasiswa harus mengisi formulir pendaftaran online, melampirkan dokumen yang diperlukan, dan membayar biaya pendaftaran melalui saluran pembayaran yang tersedia.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                  <button
-                    class="accordion-button collapsed faq-btn"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
-                  >
-                    Apa saja program studi yang ditawarkan oleh Universitas Terbuka?
-                  </button>
-                </h2>
-                <div
-                  id="collapseThree"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingThree"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    Universitas Terbuka menawarkan beragam program studi di tingkat diploma, sarjana, dan pascasarjana. Program studi meliputi bidang ilmu pendidikan, sains dan teknologi, sosial dan hukum, dan ekonomi.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFour">
-                  <button
-                    class="accordion-button collapsed faq-btn"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
-                  >
-                    Bagaimana sistem pembelajaran di Universitas Terbuka?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFour"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingFour"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    Sistem pembelajaran di Universitas Terbuka menggunakan metode pendidikan jarak jauh yang memanfaatkan teknologi informasi dan komunikasi. Mahasiswa belajar secara mandiri melalui bahan ajar yang disediakan secara online, dan dapat berinteraksi dengan dosen dan sesama mahasiswa melalui forum diskusi dan media lainnya.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFive">
-                  <button
-                    class="accordion-button collapsed faq-btn"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFive"
-                    aria-expanded="false"
-                    aria-controls="collapseFive"
-                  >
-                    Apakah ijazah dari Universitas Terbuka diakui?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFive"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingFive"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    Ya, ijazah dari Universitas Terbuka diakui oleh pemerintah dan memiliki legalitas yang sama dengan ijazah dari perguruan tinggi negeri lainnya. Lulusan UT memiliki kesempatan yang sama untuk melanjutkan pendidikan atau berkarir baik di dalam maupun luar negeri.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="container jarakcontainer mt-5">
+        <div class="sec-title-three text-center mb-4">
+            <h2>Frequently Asked Question (FAQ)</h2>
         </div>
+        <div class="faq-wrap">
+            <div class="accordion-section">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Apa itu Universitas Terbuka (UT)?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Universitas Terbuka (UT) adalah perguruan tinggi negeri di Indonesia yang menyelenggarakan
+                                pendidikan tinggi melalui sistem pendidikan jarak jauh (PJJ) dan terbuka. Ini berarti
+                                semua proses belajar mengajar dilakukan secara online atau jarak jauh.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Bagaimana cara mendaftar di Universitas Terbuka?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Pendaftaran di Universitas Terbuka dapat dilakukan melalui situs web resmi Sentra
+                                Layanan Universitas Terbuka Tana Toraja dengan klik <a
+                                    href="https://uttoraja.com/pendaftaran">link ini</a>. Calon mahasiswa harus
+                                mengisi formulir pendaftaran online, melampirkan dokumen yang diperlukan, dan
+                                membayar biaya pendaftaran melalui saluran pembayaran yang tersedia.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Apa saja program studi yang ditawarkan oleh Universitas Terbuka?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Universitas Terbuka menawarkan beragam program studi di tingkat diploma, sarjana, dan
+                                pascasarjana. Program studi meliputi bidang ilmu pendidikan, sains dan teknologi,
+                                sosial dan hukum, dan ekonomi.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Bagaimana sistem pembelajaran di Universitas Terbuka?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Sistem pembelajaran di Universitas Terbuka menggunakan metode pendidikan jarak jauh
+                                yang memanfaatkan teknologi informasi dan komunikasi. Mahasiswa belajar secara
+                                mandiri melalui bahan ajar yang disediakan secara online, dan dapat berinteraksi
+                                dengan dosen dan sesama mahasiswa melalui forum diskusi dan media lainnya.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Apakah ijazah dari Universitas Terbuka diakui?
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Ya, ijazah dari Universitas Terbuka diakui oleh pemerintah dan memiliki legalitas
+                                yang sama dengan ijazah dari perguruan tinggi negeri lainnya. Lulusan UT memiliki
+                                kesempatan yang sama untuk melanjutkan pendidikan atau berkarir baik di dalam
+                                maupun luar negeri.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="image-section">
+                <img src="assets/img/background/web.JPG" alt="Descriptive Alt Text" class="fixed-size-image">
+            </div>
+        </div>
+    </div>
+
       </section>
       <!-- End FAQ One -->
 
@@ -643,6 +614,9 @@
        <section>
         <div class="container jarakcontainer">
             <div class="row align-items-center">
+            <div class="about-title second-atitle pb-25 mb-4">
+                    <h2 class="text-center">Kami Membantu Mahasiswa UT</h2>
+                  </div>
               <div class="col-lg-6 col-md-12 col-sm-12">
                 <div
                   class="s-about-img2 p-relative wow fadeInLeft animated"
@@ -658,10 +632,6 @@
                   data-animation="fadeInRight"
                   data-delay=".4s"
                 >
-                  <div class="about-title second-atitle pb-25">
-                    <h2>Kami Membantu Mahasiswa UT</h2>
-                  </div>
-  
                   <p>
                     Universitas Terbuka (UT) adalah perguruan tinggi negeri dengan sistem belajar jarak jauh berbasis ICT, memungkinkan mahasiswa mengakses layanan akademik dan administrasi tanpa tatap muka.
                   </p>

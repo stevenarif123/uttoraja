@@ -1,0 +1,34 @@
+.fixed-size-image {
+    width: 550px; /* Lebar tetap untuk gambar */
+    height: 400px; /* Tinggi tetap untuk gambar */
+    object-fit: cover; /* Memastikan gambar mengisi area tanpa mengubah proporsi */
+    margin-left: 10px; /* Jarak antara gambar dan akordeon */
+}
+
+.accordion-section {
+    max-width: 650px; /* Lebar maksimal akordeon agar teks lebih terkontrol */
+}
+
+.faq-wrap {
+    display: flex;
+    align-items: flex-start; /* Menyusun elemen akordeon dan gambar secara sejajar */
+}
+
+.image-section {
+    flex-shrink: 0; /* Menghindari penyusutan gambar */
+}
+
+@media (max-width: 900px) {
+    .fixed-size-image {
+        width: 200px; /* Lebar tetap untuk gambar */
+        height: 100px; /* Tinggi tetap untuk gambar */
+        object-fit: cover; /* Memastikan gambar mengisi area tanpa mengubah proporsi */
+        margin-left: 20px; /* Jarak antara gambar dan akordeon */
+    }
+}
+
+@media (max-width: 768px) {
+    .fixed-size-image {
+        display: none; /* Menyembunyikan gambar pada layar berukuran kecil */
+    }
+}
