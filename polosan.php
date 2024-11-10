@@ -118,7 +118,7 @@
             <div class="main-header-one__bottom-inner">
               <div class="main-header-one__bottom-left">
                 <div class="logo-box-one">
-                  <a href="index.html">
+                  <a href="./">
                     <img src="assets/img/resource/logo.png" alt="Logo" />
                   </a>
                 </div>
@@ -132,7 +132,7 @@
                     <nav class="menu-nav">
                       <div class="navbar-wrap main-menu">
                         <ul class="navigation">
-                          <li><a href="./index.php">Home</a></li>
+                          <li><a href="./">Home</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Aplikasi UT</a>
                             <ul class="sub-menu">
@@ -164,11 +164,11 @@
                               <li><a href="./suratketerangan/">Surat Keterangan</a></li>
                             </ul>
                           </li>
-                          <li><a href="../galeri/">Galeri</a></li>
+                          <li><a href="./galeri/">Galeri</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
-                              <li><a href="./tentang/tentangut.php">Universitas Terbuka</a></li>
+                              <li><a href="./tentang/">Universitas Terbuka</a></li>
                               <li><a href="./tentang/tentangsalut.php/">SALUT</a></li>
                               <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
                               <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
@@ -200,7 +200,7 @@
             <i class="fas fa-times"></i>
           </div>
           <div class="nav-logo">
-            <a href="index.html">
+            <a href="./">
               <img
                 src="assets/img/resource/mobile-menu-logo.png"
                 alt="Logo" />
@@ -211,7 +211,7 @@
           </div>
           <div class="contact-info">
             <div class="icon-box"><span class="icon-phone-call"></span></div>
-            <p><a href="tel:+6281355619225">+6281355619225</a></p>
+            <p><a href="tel:6281355619225">+6281355619225</a></p>
           </div>
           <div class="social-links">
             <ul class="clearfix list-wrap">
@@ -249,7 +249,7 @@
           <h2>GANTI INI</h2>
           <ul class="thm-breadcrumb">
             <li>
-              <a href="index.php"><span class="fa fa-home"></span> Home</a>
+              <a href="./"><span class="fa fa-home"></span> Home</a>
             </li>
             <li><i class="icon-right-arrow-angle"></i></li>
             <li class="color-base"> GANTI JUGA INI</li>
@@ -339,7 +339,7 @@
                   <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
                     <ul class="clearfix">
                       <li>
-                        <p><a href="./tentang/tentangut.php">Tentang UT</a></p>
+                        <p><a href="./tentang/">Tentang UT</a></p>
                       </li>
                       <li>
                         <p><a href="./layanan/informasi.php">Informasi Akademik</a></p>

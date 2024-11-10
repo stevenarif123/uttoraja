@@ -116,7 +116,7 @@
               <div class="main-header-one__bottom-inner">
                 <div class="main-header-one__bottom-left">
                   <div class="logo-box-one">
-                    <a href="../index.html">
+                    <a href="../">
                       <img src="../assets/img/resource/logo.png" alt="Logo" />
                     </a>
                   </div>
@@ -131,7 +131,7 @@
                       <nav class="menu-nav">
                         <div class="navbar-wrap main-menu">
                           <ul class="navigation">
-                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="../">Home</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Aplikasi UT</a>
                               <ul class="sub-menu">
@@ -203,7 +203,7 @@
               <i class="fas fa-times"></i>
             </div>
             <div class="nav-logo">
-              <a href="index.html">
+              <a href="../">
                 <img
                   src="assets/img/resource/mobile-menu-logo.png"
                   alt="Logo"
@@ -215,7 +215,7 @@
             </div>
             <div class="contact-info">
               <div class="icon-box"><span class="icon-phone-call"></span></div>
-              <p><a href="tel:+6281355619225">+6281355619225</a></p>
+              <p><a href="tel:6281355619225">+6281355619225</a></p>
             </div>
             <div class="social-links">
               <ul class="clearfix list-wrap">
@@ -259,7 +259,7 @@
             <h2>LEGALISIR IJAZAH</h2>
             <ul class="thm-breadcrumb">
               <li>
-                <a href="index.html"><span class="fa fa-home"></span> Home</a>
+                <a href="../"><span class="fa fa-home"></span> Home</a>
               </li>
               <li><i class="icon-right-arrow-angle"></i></li>
               <li class="color-base"> Legalisir Ijazah</li>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>PENDAFTARAN MAHASISWA BARU SALUT TANA TORAJA</title>
+    <title>PESAN KEPALA SALUT</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -20,7 +20,8 @@
 
     <!-- CSS here -->
     <link rel="stylesheet" href="../assets/css/01-bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/02-all.min.css" />
+    <link rel="styles
+    heet" href="../assets/css/02-all.min.css" />
     <link rel="stylesheet" href="../assets/css/03-jquery.magnific-popup.css" />
     <!-- <link rel="stylesheet" href="assets/css/04-nice-select.css" /> -->
     <link rel="stylesheet" href="../assets/css/05-odometer.css" />
@@ -71,8 +72,8 @@
                         <span class="icon-email"></span>
                       </div>
                       <p>
-                        <a href="mailto:info@saluttoraja.com"
-                          >info@saluttoraja.com</a
+                        <a href="mailto:info@uttoraja.com"
+                          >info@uttoraja.com</a
                         >
                       </p>
                     </li>
@@ -255,20 +256,20 @@
         </div>
         <div class="container">
           <div class="page-header__inner">
-            <h2>Pendaftaran Mahasiswa Baru</h2>
+            <h2>PESAN DARI KEPALA SALUT TANA TORAJA</h2>
             <ul class="thm-breadcrumb">
               <li>
                 <a href="../"><span class="fa fa-home"></span> Home</a>
               </li>
               <li><i class="icon-right-arrow-angle"></i></li>
-              <li class="color-base">Pendaftaran</li>
+              <li class="color-base"> Pesan Kepala Salut Tana Toraja</li>
             </ul>
           </div>
         </div>
       </section>
       <!--End Page Header-->
 
-      <!--Start Contact Page-->
+      <!--Start Contents Page-->
       <section
         id="contact"
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
@@ -276,7 +277,7 @@
         <div class="container jarakcontainer">
         </div>
       </section>
-      <!--End Contact Page-->
+      <!--End Contents Page-->
 
       <!--Start Footer Three-->
       <footer class="footer-three">
