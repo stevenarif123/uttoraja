@@ -199,7 +199,7 @@
             <div class="nav-logo">
               <a href="../">
                 <img
-                  src="assets/img/resource/mobile-menu-logo.png"
+                  src="../assets/img/resource/mobile-menu-logo.png"
                   alt="Logo"
                 />
               </a>
@@ -243,10 +243,10 @@
       <!--Start Page Header-->
       <section class="page-header">
         <div class="shape1 rotate-me">
-          <img src="assets/img/shape/page-header-shape1.png" alt="" />
+          <img src="../assets/img/shape/page-header-shape1.png" alt="" />
         </div>
         <div class="shape2 float-bob-x">
-          <img src="assets/img/shape/page-header-shape2.png" alt="" />
+          <img src="../assets/img/shape/page-header-shape2.png" alt="" />
         </div>
         <div class="container">
           <div class="page-header__inner">
@@ -278,10 +278,10 @@
         <!-- Start Footer Main -->
         <div class="footer-main footer-main__three">
           <div class="footer-three__shape1">
-            <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
+            <img src="../assets/img/shape/footer-three__shape1.png" alt="shapes" />
           </div>
           <div class="footer-three__shape2">
-            <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
+            <img src="../assets/img/shape/footer-three__shape2.png" alt="shapes" />
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">

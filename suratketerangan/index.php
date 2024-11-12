@@ -55,146 +55,139 @@
     <div class="page-wrapper">
       <!--Start Main Header One -->
       <header class="main-header main-header-one">
-        <div class="main-header-one__top">
-          <div class="container">
-            <div class="main-header-one__top-inner">
-              <div class="main-header-one__top-left">
-                <div class="header-contact-info-one">
-                  <ul>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-phone-call"></span>
-                      </div>
-                      <p><a href="tel:6281355619225">+6281355619225</a></p>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-email"></span>
-                      </div>
-                      <p>
-                        <a href="mailto:info@uttoraja.com"
-                          >info@uttoraja.com</a
-                        >
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="main-header-one__top-right">
-                <div class="header-social-link-one">
-                  <ul class="clearfix">
-                    <li>
-                      <a href="https://www.facebook.com/uttoraja">
-                        <i class="icon-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.instagram.com/uttoraja/">
-                        <i class="icon-instagram-symbol"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.youtube.com/@SALUTTanaToraja">
-                      <i class="icon.youtube"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+      <div class="main-header-one__top">
+        <div class="container">
+          <div class="main-header-one__top-inner">
+            <div class="main-header-one__top-left">
+              <div class="header-contact-info-one">
+                <ul>
+                  <li>
+                    <div class="icon">
+                      <span class="icon-phone-call"></span>
+                    </div>
+                    <p><a href="tel:6281355619225">+6281355619225</a></p>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <span class="icon-email"></span>
+                    </div>
+                    <p>
+                      <a href="mailto:info@uttoraja.com">info@uttoraja.com</a>
+                    </p>
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="main-header-one__bottom">
-          <div id="sticky-header" class="menu-area">
-            <div class="container">
-              <div class="main-header-one__bottom-inner">
-                <div class="main-header-one__bottom-left">
-                  <div class="logo-box-one">
-                    <a href="../">
-                      <img src="../assets/img/resource/logo.png" alt="Logo" />
+            <div class="main-header-one__top-right">
+              <div class="header-social-link-one">
+                <ul class="clearfix">
+                  <li>
+                    <a href="https://www.facebook.com/uttoraja">
+                      <i class="icon-facebook"></i>
                     </a>
-                  </div>
-                </div>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/uttoraja/">
+                      <i class="icon-instagram-symbol"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/@SALUTTanaToraja">
+                      <i class="icon-vimeo"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-                <div class="main-header-one__bottom-middle">
-                  <div class="menu-area__inner">
-                    <div class="mobile-nav-toggler">
-                      <i class="fas fa-bars"></i>
-                    </div>
-                    <div class="menu-wrap">
-                      <nav class="menu-nav">
-                        <div class="navbar-wrap main-menu">
-                          <ul class="navigation">
-                            <li><a href="../">Home</a></li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Aplikasi UT</a>
-                              <ul class="sub-menu">
-                                <li>
-                                  <a href="https://elearning.ut.ac.id"
-                                    >Elearning/Tuton</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://tmk.ut.ac.id"
-                                    >Tugas Mata Kuliah (TMK)</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://silayar.ut.ac.id"
-                                    >SILAYAR UT</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://the.ut.ac.id"
-                                    >Take Home Exam (THE)</a
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Layanan</a>
-                              <ul class="sub-menu">
-                                <li><a href="../informasi.php">Informasi Akademik</a></li>
-                                <li><a href="../administrasi/">Administrasi Akademik</a></li>
-                                <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
-                                <li><a href="../modul/">Pengambilan Modul</a></li>
-                                <li><a href="../legalisir/">Legalisir Ijazah</a></li>
-                                <li><a href="../suratketerangan/">Surat Keterangan</a></li>
-                              </ul>
-                            </li>
-                            <li><a href="../galeri/">Galeri</a></li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Tentang</a>
-                              <ul class="sub-menu">
-                                <li><a href="../tentang/">Universitas Terbuka</a></li>
-                                <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
-                                <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                                <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
-                    </div>
+      <div class="main-header-one__bottom">
+        <div id="sticky-header" class="menu-area">
+          <div class="container">
+            <div class="main-header-one__bottom-inner">
+              <div class="main-header-one__bottom-left">
+                <div class="logo-box-one">
+                  <a href="../">
+                    <img src="../assets/img/resource/logo.png" alt="Logo" />
+                  </a>
+                </div>
+              </div>
+              <div class="main-header-one__bottom-middle">
+                <div class="menu-area__inner">
+                  <div class="mobile-nav-toggler">
+                    <i class="fas fa-bars"></i>
+                  </div>
+                  <div class="menu-wrap">
+                    <nav class="menu-nav">
+                      <div class="navbar-wrap main-menu">
+                        <ul class="navigation">
+                          <li><a href="./">Home</a></li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Aplikasi UT</a>
+                            <ul class="sub-menu">
+                              <li>
+                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
+                              </li>
+                              <li>
+                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
+                              </li>
+                              <li>
+                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
+                              </li>
+                              <li>
+                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
+                              </li>
+                              <li>
+                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Layanan</a>
+                            <ul class="sub-menu">
+                              <li><a href="../informasi.php">Informasi Akademik</a></li>
+                              <li><a href="../administrasi/">Administrasi Akademik</a></li>
+                              <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
+                              <li><a href="../modul/">Pengambilan Modul</a></li>
+                              <li><a href="../legalisir/">Legalisir Ijazah</a></li>
+                              <li><a href="../suratketerangan/">Surat Keterangan</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="../galeri/">Galeri</a></li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Tentang</a>
+                            <ul class="sub-menu">
+                              <li><a href="../tentang/">Universitas Terbuka</a></li>
+                              <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
+                              <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                              <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
                   </div>
                 </div>
-                <div class="main-header-one__bottom-right">
-                  <div class="header-btn-box-one">
-                  </div>
+              </div>
+
+              <div class="main-header-one__bottom-right">
+                <div class="header-btn-box-one">
+                  <a class="thm-btn" href="..SSSS/pendaftaran/">
+                    <span class="txt">Mendaftar Disini</span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
         <!--Start Mobile Menu  -->
         <div class="mobile-menu">
@@ -205,7 +198,7 @@
             <div class="nav-logo">
               <a href="../">
                 <img
-                  src="assets/img/resource/mobile-menu-logo.png"
+                  src="../assets/img/resource/mobile-menu-logo.png"
                   alt="Logo"
                 />
               </a>
@@ -249,10 +242,10 @@
       <!--Start Page Header-->
       <section class="page-header">
         <div class="shape1 rotate-me">
-          <img src="assets/img/shape/page-header-shape1.png" alt="" />
+          <img src="../assets/img/shape/page-header-shape1.png" alt="" />
         </div>
         <div class="shape2 float-bob-x">
-          <img src="assets/img/shape/page-header-shape2.png" alt="" />
+          <img src="../assets/img/shape/page-header-shape2.png" alt="" />
         </div>
         <div class="container">
           <div class="page-header__inner">
@@ -284,10 +277,10 @@
         <!-- Start Footer Main -->
         <div class="footer-main footer-main__three">
           <div class="footer-three__shape1">
-            <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
+            <img src="../assets/img/shape/footer-three__shape1.png" alt="shapes" />
           </div>
           <div class="footer-three__shape2">
-            <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
+            <img src="../assets/img/shape/footer-three__shape2.png" alt="shapes" />
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">

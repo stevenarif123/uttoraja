@@ -205,7 +205,7 @@
             <div class="nav-logo">
               <a href="../">
                 <img
-                  src="assets/img/resource/mobile-menu-logo.png"
+                  src="../assets/img/resource/mobile-menu-logo.png"
                   alt="Logo"
                 />
               </a>
@@ -249,10 +249,10 @@
       <!--Start Page Header-->
       <section class="page-header">
         <div class="shape1 rotate-me">
-          <img src="assets/img/shape/page-header-shape1.png" alt="" />
+          <img src="../assets/img/shape/page-header-shape1.png" alt="" />
         </div>
         <div class="shape2 float-bob-x">
-          <img src="assets/img/shape/page-header-shape2.png" alt="" />
+          <img src="../assets/img/shape/page-header-shape2.png" alt="" />
         </div>
         <div class="container">
           <div class="page-header__inner">
@@ -269,25 +269,140 @@
       </section>
       <!--End Page Header-->
 
-      <!--Start Contents Page-->
-      <section
-        id="contact"
-        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
-      >
-        <div class="container jarakcontainer">
-        </div>
-      </section>
-      <!--End Contents Page-->
+        <!--Start About Three-->
+        <section class="about-three">
+            <div class="about-three__shape1 float-bob-y">
+                <img src="../assets/img/shape/about-three__shape1.png" alt="shapes">
+            </div>
+            <div class="about-three__shape2">
+                <img src="../assets/img/shape/about-three__shape2.png" alt="shapes">
+            </div>
+            <div class="about-three__shape3">
+                <img src="../assets/img/shape/about-three__shape3.png" alt="shapes">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="about-three__content">
+                            <div class="sec-title-four">
+                                <div class="sub-title">
+                                    <h4>Get To Know About Us</h4>
+                                </div>
+                                <h2>
+                                    We Are Here to Give You<br>Effective Ideas
+                                </h2>
+                            </div>
+                            <div class="text">
+                                <p>Creative design slogans can help people connect more to the<br>
+                                    scenario that the accounts for making available.</p>
+                            </div>
+                            <div class="about-three__fact-box">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                        <div class="about-three__fact-single">
+                                            <div class="count-outer count-box">
+                                                <h2 class="odometer" data-count="256">00</h2>
+                                                <i class="icon-plus-symbol-button"></i>
+                                            </div>
+                                            <div class="title">
+                                                <h3>Completed Projects</h3>
+                                            </div>
+                                            <div class="text">
+                                                <p>With 100% Satisfaction</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                        <div class="about-three__fact-single">
+                                            <div class="count-outer count-box">
+                                                <h2 class="odometer" data-count="8.9">00</h2>
+                                                <i class="icon-percentage"></i>
+                                            </div>
+                                            <div class="title">
+                                                <h3>Company Growth</h3>
+                                            </div>
+                                            <div class="text">
+                                                <p>Avg. Every Year</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="about-three__img">
+                                <div class="img-box">
+                                    <img src="../assets/img/about/about-three__img1.jpg" alt="image">
+                                </div>
+                                <div class="title-box">
+                                    <h3>We Are The Best Digital<br>Agencies In The City</h3>
+                                    <div class="btn-box">
+                                        <a class="thm-btn" href="#">
+                                            <span class="txt">Learn More</span>
+                                            <i class="icon-next"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="about-three__img-box">
+                            <ul>
+                                <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <!--Single About Three Img-->
+                                    <div class="single-about-three__img-box">
+                                        <img src="../assets/img/about/about-three__img2.jpg" alt="image">
+                                    </div>
+                                    <!--End About Three Img-->
+                                </li>
+
+                                <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <!--Single About Three Img-->
+                                    <div class="single-about-three__img-box">
+                                        <img src="../assets/img/about/about-three__img3.jpg" alt="image">
+                                    </div>
+                                    <!--End About Three Img-->
+                                </li>
+                            </ul>
+
+                            <div class="about-three__img-box-bottom wow fadeInLeft" data-wow-delay="0ms"
+                                data-wow-duration="1500ms">
+                                <!--Single About Three Img-->
+                                <div class="single-about-three__img-box">
+                                    <img src="../assets/img/about/about-three__img4.jpg" alt="image">
+                                </div>
+                                <!--End About Three Img-->
+                            </div>
+
+                            <div class="overlay-box text-center">
+                                <div class="outer-box">
+                                    <div class="count-outer count-box">
+                                        <h2 class="odometer" data-count="15">00</h2>
+                                        <i class="icon-plus-symbol-button"></i>
+                                    </div>
+                                    <div class="title">
+                                        <p>Years Of<br>Experiences</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End About Three-->
 
       <!--Start Footer Three-->
       <footer class="footer-three">
         <!-- Start Footer Main -->
         <div class="footer-main footer-main__three">
           <div class="footer-three__shape1">
-            <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
+            <img src="../assets/img/shape/footer-three__shape1.png" alt="shapes" />
           </div>
           <div class="footer-three__shape2">
-            <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
+            <img src="../assets/img/shape/footer-three__shape2.png" alt="shapes" />
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">

@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="assets/css/07-animate.min.css" />
     <link rel="stylesheet" href="assets/css/08-custom-animate.css" />
     <link rel="stylesheet" href="assets/css/09-slick.css" />
-    <link rel="stylesheet" href="assets/css/10-icomoon.css" />
+    <link rel="stylesheet" href="assets/css/10-icomoon.css">
     <link
       rel="stylesheet"
       href="assets/vendor/custom-animate/custom-animate.css"
@@ -288,7 +288,7 @@
               <div class="text">
                 <p>
                   Universitas Terbuka (UT), pionir pendidikan jarak jauh
-                  terakreditasi "B",<br />
+                  terakreditasi "A",<br />
                   menawarkan kuliah fleksibel, terbuka untuk semua usia, tanpa
                   ujian masuk, <br />
                   dan biaya sangat terjangkau. Daftar sekarang dan mulai jalur
@@ -449,6 +449,157 @@
         </div>
       </section>
       <!-- End Scedule One -->
+
+              <!--Start Testmonials Three-->
+              <section class="testimonials-three testimonials">
+            <div class="testimonials-three__shape1 rotate-me">
+                <img src="assets/img/shape/testimonials-three__shape1.png" alt="shapes">
+            </div>
+            <div class="testimonials-three__shape2 rotate-me">
+                <img src="assets/img/shape/testimonials-three__shape2.png" alt="shapes">
+            </div>
+            <div class="testimonials-three__shape3 rotate-me">
+                <img src="assets/img/shape/testimonials-three__shape3.png" alt="shapes">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="testimonials-three__img">
+                            <ul>
+                                <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <!--Single About Two Img-->
+                                    <div class="single-testimonials-three__img-box">
+                                        <div class="inner">
+                                            <img src="assets/img/testimonial/testimonials-three__img1.jpg" alt="image">
+                                        </div>
+                                    </div>
+                                    <!--End About Two Img-->
+                                    <!--Single About Two Img-->
+                                    <div class="single-testimonials-three__img-box">
+                                        <div class="inner">
+                                            <img src="assets/img/testimonial/testimonials-three__img2.jpg" alt="image">
+                                        </div>
+                                    </div>
+                                    <!--End About Two Img-->
+                                </li>
+                                <li class="wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <!--Single About Two Img-->
+                                    <div class="single-testimonials-three__img-box">
+                                        <img src="assets/img/testimonial/testimonials-three__img3.jpg" alt="image">
+                                    </div>
+                                    <!--End About Two Img-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-7">
+                        <div class="testimonials-three__content">
+                            <div class="sec-title-four">
+                                <div class="sub-title">
+                                    <h4>Customers Feedback</h4>
+                                </div>
+                                <h2>
+                                    What Says Our Client’s<br>About Diligent
+                                </h2>
+                            </div>
+
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-nav-style2 testimonials-three__swiper-nav-style">
+                                <div class="swiper-button-prev" id="testimonials-three__swiper-button-prev">
+                                    <i class="icon-left-arrow right"></i>
+                                </div>
+                                <div class="swiper-button-next" id="testimonials-three__swiper-button-next">
+                                    <i class="icon-right-arrow-angle left"></i>
+                                </div>
+                            </div>
+                            <div class="testimonials-three__content-inner">
+                                <div class="thm-swiper__slider swiper-container" data-swiper-options='{
+                                    "loop": true,
+                                    "pagination": {
+                                        "el": "#testimonials-three-pagination",
+                                        "type": "bullets",
+                                        "clickable": true
+                                        },
+                                    "navigation": {
+                                        "nextEl": "#testimonials-three__swiper-button-next",
+                                        "prevEl": "#testimonials-three__swiper-button-prev"
+                                    },
+                                    "autoplay": { "delay": 5000 },
+                                    "breakpoints": {
+                                        "0": {
+                                            "spaceBetween": 30,
+                                            "slidesPerView": 1
+                                        },
+                                        "375": {
+                                            "spaceBetween": 30,
+                                            "slidesPerView": 1
+                                        },
+                                        "575": {
+                                            "spaceBetween": 30,
+                                            "slidesPerView": 1
+                                        },
+                                        "768": {
+                                            "spaceBetween": 30,
+                                            "slidesPerView": 1
+                                        },
+                                        "992": {
+                                            "spaceBetween": 30,
+                                            "slidesPerView": 1
+                                        },
+                                        "1200": {
+                                            "spaceBetween": 30,
+                                            "slidesPerView": 1
+                                        }
+                                    }}'>
+
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="icon-box">
+                                                <span class="icon-quote"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>
+                                                    “ Concor delivers sectors concor delivers world class infrastructure
+                                                    the is a world class infrastructure solutions across a broad
+                                                    industry start and end of creativity to customers and the
+                                                    stakeholders across the world broad ...”
+                                                </p>
+                                            </div>
+                                            <div class="athor-box">
+                                                <h3>Alina Kolaminov</h3>
+                                                <p>Marketing Agent</p>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="icon-box">
+                                                <span class="icon-quote"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>
+                                                    “ Concor delivers sectors concor delivers world class infrastructure
+                                                    the is a world class infrastructure solutions across a broad
+                                                    industry start and end of creativity to customers and the
+                                                    stakeholders across the world broad ...”
+                                                </p>
+                                            </div>
+                                            <div class="athor-box">
+                                                <h3>Steven Arif</h3>
+                                                <p>Marketing Agent</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Testmonials Three-->
 
       <!-- Start Fakultas One -->
       <section" >
