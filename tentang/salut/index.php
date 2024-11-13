@@ -111,90 +111,85 @@
         </div>
 
         <div class="main-header-one__bottom">
-          <div id="sticky-header" class="menu-area">
-            <div class="container">
-              <div class="main-header-one__bottom-inner">
-                <div class="main-header-one__bottom-left">
-                  <div class="logo-box-one">
-                    <a href="../../">
-                      <img src="../../assets/img/resource/logo.png" alt="Logo" />
-                    </a>
+        <div id="sticky-header" class="menu-area">
+          <div class="container">
+            <div class="main-header-one__bottom-inner">
+              <div class="main-header-one__bottom-left">
+                <div class="logo-box-one">
+                  <a href="../../">
+                    <img src="../../assets/img/resource/logo.png" alt="Logo" />
+                  </a>
+                </div>
+              </div>
+              <div class="main-header-one__bottom-middle">
+                <div class="menu-area__inner">
+                  <div class="mobile-nav-toggler">
+                    <i class="fas fa-bars"></i>
+                  </div>
+                  <div class="menu-wrap">
+                    <nav class="menu-nav">
+                      <div class="navbar-wrap main-menu">
+                        <ul class="navigation">
+                          <li><a href="../">Home</a></li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Aplikasi UT</a>
+                            <ul class="sub-menu">
+                              <li>
+                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
+                              </li>
+                              <li>
+                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
+                              </li>
+                              <li>
+                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
+                              </li>
+                              <li>
+                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
+                              </li>
+                              <li>
+                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Layanan</a>
+                            <ul class="sub-menu">
+                              <li><a href="../../informasi.php">Informasi Akademik</a></li>
+                              <li><a href="../../administrasi/">Administrasi Akademik</a></li>
+                              <li><a href="../../kegiatan.php">Kegiatan Akademik</a></li>
+                              <li><a href="../../modul/">Pengambilan Modul</a></li>
+                              <li><a href="../../legalisir/">Legalisir Ijazah</a></li>
+                              <li><a href="../../suratketerangan/">Surat Keterangan</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="../galeri/">Galeri</a></li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Tentang</a>
+                            <ul class="sub-menu">
+                              <li><a href="../../tentang/">Universitas Terbuka</a></li>
+                              <li><a href="../../tentang/salut/">SALUT</a></li>
+                              <li><a href="../../tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                              <li><a href="../../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
                   </div>
                 </div>
+              </div>
 
-                <div class="main-header-one__bottom-middle">
-                  <div class="menu-area__inner">
-                    <div class="mobile-nav-toggler">
-                      <i class="fas fa-bars"></i>
-                    </div>
-                    <div class="menu-wrap">
-                      <nav class="menu-nav">
-                        <div class="navbar-wrap main-menu">
-                          <ul class="navigation">
-                            <li><a href="../../">Home</a></li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Aplikasi UT</a>
-                              <ul class="sub-menu">
-                                <li>
-                                  <a href="https://elearning.ut.ac.id"
-                                    >Elearning/Tuton</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://tmk.ut.ac.id"
-                                    >Tugas Mata Kuliah (TMK)</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://silayar.ut.ac.id"
-                                    >SILAYAR UT</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://the.ut.ac.id"
-                                    >Take Home Exam (THE)</a
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Layanan</a>
-                              <ul class="sub-menu">
-                                <li><a href="../../informasi.php">Informasi Akademik</a></li>
-                                <li><a href="../../administrasi/">Administrasi Akademik</a></li>
-                                <li><a href="../../kegiatan.php">Kegiatan Akademik</a></li>
-                                <li><a href="../../modul/">Pengambilan Modul</a></li>
-                                <li><a href="../../legalisir/">Legalisir Ijazah</a></li>
-                                <li><a href="../../suratketerangan/">Surat Keterangan</a></li>
-                              </ul>
-                            </li>
-                            <li><a href="../../galeri/">Galeri</a></li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Tentang</a>
-                              <ul class="sub-menu">
-                                <li><a href="../../tentang/">Universitas Terbuka</a></li>
-                                <li><a href="../../tentang/tentangsalut.php/">SALUT</a></li>
-                                <li><a href="../../tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                                <li><a href="../../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-                <div class="main-header-one__bottom-right">
-                  <div class="header-btn-box-one">
-                  </div>
+              <div class="main-header-one__bottom-right">
+                <div class="header-btn-box-one">
+                  <a class="thm-btn" href="../../pendaftaran/">
+                    <span class="txt">Mendaftar Disini</span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
         <!--Start Mobile Menu  -->
         <div class="mobile-menu">

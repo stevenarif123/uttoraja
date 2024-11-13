@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>GALERI SALUT TANA TORAJA</title>
+  <title>INFORMASI AKADEMIK</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -169,7 +169,7 @@
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
                               <li><a href="./tentang/">Universitas Terbuka</a></li>
-                              <li><a href="./tentang/tentangsalut.php/">SALUT</a></li>
+                              <li><a href="./tentang/salut/">SALUT</a></li>
                               <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
                               <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
@@ -246,13 +246,13 @@
       </div>
       <div class="container">
         <div class="page-header__inner">
-          <h2>GALERI KEGIATAN</h2>
+          <h2>INFORMASI AKADEMIK</h2>
           <ul class="thm-breadcrumb">
             <li>
               <a href="./"><span class="fa fa-home"></span> Home</a>
             </li>
             <li><i class="icon-right-arrow-angle"></i></li>
-            <li class="color-base"> Galeri</li>
+            <li class="color-base"> Informasi</li>
           </ul>
         </div>
       </div>

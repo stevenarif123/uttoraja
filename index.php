@@ -183,7 +183,7 @@
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
                                 <li><a href="./tentang/">Universitas Terbuka</a></li>
-                                <li><a href="./tentang/tentangsalut.php/">SALUT</a></li>
+                                <li><a href="./tentang/salut/">SALUT</a></li>
                                 <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
                                 <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                               </ul>
@@ -661,6 +661,9 @@
       <section>
       <div class="container jarakcontainer mt-5">
         <div class="sec-title-three text-center mb-4">
+        <div class="sub-title">
+              <h4>FAQ</h4>
+            </div>
             <h2>Frequently Asked Question (FAQ)</h2>
         </div>
         <div class="faq-wrap">

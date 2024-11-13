@@ -167,7 +167,7 @@
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
                               <li><a href="../tentang/">Universitas Terbuka</a></li>
-                              <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
+                              <li><a href="../tentang/salut/">SALUT</a></li>
                               <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
                               <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
@@ -270,6 +270,49 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+                  <!--Start Cta Pendas-->
+        <section class="cta-two testmonials">
+            <div class="container">
+                <div class="cta-two__inner">
+                    <div class="cta-two__inner-bg"
+                        style="background-image: url(assets/img/pattern/cta-two__parttern1.png);"></div>
+                    <div class="cta-two__content">
+                        <h2>Jurusan Pendas</h2>
+                        <p>Jurusan Pendidikan Dasar (PGSD-PAUD)</p>
+                        <p>Elza - 081354852018</p>
+                    </div>
+                    <div class="cta-two__btn">
+                        <a class="thm-btn" href="https:/wa.me/6281354852018">
+                            <span class="txt">Contact with Us</span>
+                            <i class="icon-next"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Cta Two-->
+
+                    <!--Start Cta Non-Pendas-->
+                    <section class="cta-two testmonials">
+            <div class="container">
+                <div class="cta-two__inner">
+                    <div class="cta-two__inner-bg"
+                        style="background-image: url(assets/img/pattern/cta-two__parttern1.png);"></div>
+                    <div class="cta-two__content">
+                        <h2>Have Any Discussion?</h2>
+                        <p>Gathered have greater made fruitful. Void to let to know
+                            about that you'll sixth upon day.</p>
+                    </div>
+                    <div class="cta-two__btn">
+                        <a class="thm-btn" href="#">
+                            <span class="txt">Contact with Us</span>
+                            <i class="icon-next"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Cta Two-->
         </div>
       </section>
       <!--End Contents Page-->

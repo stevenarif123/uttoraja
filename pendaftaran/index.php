@@ -175,7 +175,7 @@
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
                                 <li><a href="../tentang/">Universitas Terbuka</a></li>
-                                <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
+                                <li><a href="../tentang/salut/">SALUT</a></li>
                                 <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
                                 <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                               </ul>
