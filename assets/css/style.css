@@ -3621,6 +3621,18 @@ label {
   z-index: 1;
 }
 
+.cta-two__innertwo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: var(--thm-secondary);
+  padding: 20px 110px 30px;
+  z-index: 1;
+}
+
 .cta-two__inner-bg {
   position: absolute;
   top: 0;
@@ -4860,7 +4872,7 @@ Cta Two Testmonials Css
 .cta-two.testmonials {
   position: relative;
   display: block;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .cta-two.testmonials::before {

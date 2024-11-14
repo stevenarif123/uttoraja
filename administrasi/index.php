@@ -1,116 +1,114 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>AKADEMIK AKADEMIK</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../assets/img/favicon.png"
-    />
-    <!-- Place favicon.ico in the root directory -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>AKADEMIK AKADEMIK</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    rel="shortcut icon"
+    type="image/x-icon"
+    href="../assets/img/favicon.png" />
+  <!-- Place favicon.ico in the root directory -->
 
-    <!-- CSS here -->
-    <link rel="stylesheet" href="../assets/css/01-bootstrap.min.css" />
-    <link rel="styles
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- CSS here -->
+  <link rel="stylesheet" href="../assets/css/01-bootstrap.min.css" />
+  <link rel="styles
     heet" href="../assets/css/02-all.min.css" />
-    <link rel="stylesheet" href="../assets/css/03-jquery.magnific-popup.css" />
-    <!-- <link rel="stylesheet" href="assets/css/04-nice-select.css" /> -->
-    <link rel="stylesheet" href="../assets/css/05-odometer.css" />
-    <link rel="stylesheet" href="../assets/css/06-swiper.min.css" />
-    <link rel="stylesheet" href="../assets/css/07-animate.min.css" />
-    <link rel="stylesheet" href="../assets/css/08-custom-animate.css" />
-    <link rel="stylesheet" href="../assets/css/09-slick.css" />
-    <link rel="stylesheet" href="../assets/css/10-icomoon.css" />
-    <link rel="stylesheet" href="../assets/vendor/custom-animate/custom-animate.css"/>
-    <link rel="stylesheet" href="../assets/vendor/jarallax/jarallax.css" />
-    <link rel="stylesheet" href="../assets/vendor/odometer/odometer.min.css" />
-    <link rel="stylesheet" href="../assets/fonts/gilroy/stylesheet.css" />
+  <link rel="stylesheet" href="../assets/css/03-jquery.magnific-popup.css" />
+  <!-- <link rel="stylesheet" href="assets/css/04-nice-select.css" /> -->
+  <link rel="stylesheet" href="../assets/css/05-odometer.css" />
+  <link rel="stylesheet" href="../assets/css/06-swiper.min.css" />
+  <link rel="stylesheet" href="../assets/css/07-animate.min.css" />
+  <link rel="stylesheet" href="../assets/css/08-custom-animate.css" />
+  <link rel="stylesheet" href="../assets/css/09-slick.css" />
+  <link rel="stylesheet" href="../assets/css/10-icomoon.css" />
+  <link rel="stylesheet" href="../assets/vendor/custom-animate/custom-animate.css" />
+  <link rel="stylesheet" href="../assets/vendor/jarallax/jarallax.css" />
+  <link rel="stylesheet" href="../assets/vendor/odometer/odometer.min.css" />
+  <link rel="stylesheet" href="../assets/fonts/gilroy/stylesheet.css" />
 
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/color1.css" />
-    <link rel="stylesheet" href="../assets/css/responsive.css" />
-  </head>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/color1.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+</head>
 
-  <body class="body-gray-bg">
-    <!-- preloader -->
-    <div id="preloader">
-      <div id="loading-center">
-        <div class="loader">
-          <div class="loader-outter"></div>
-          <div class="loader-inner"></div>
-        </div>
+<body class="body-gray-bg">
+  <!-- preloader -->
+  <div id="preloader">
+    <div id="loading-center">
+      <div class="loader">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
       </div>
     </div>
-    <!-- preloader-end -->
+  </div>
+  <!-- preloader-end -->
 
-    <div class="page-wrapper">
-      <!--Start Main Header One -->
-      <header class="main-header main-header-one">
-        <div class="main-header-one__top">
-          <div class="container">
-            <div class="main-header-one__top-inner">
-              <div class="main-header-one__top-left">
-                <div class="header-contact-info-one">
-                  <ul>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-phone-call"></span>
-                      </div>
-                      <p><a href="tel:6281355619225">+6281355619225</a></p>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-email"></span>
-                      </div>
-                      <p>
-                        <a href="mailto:info@uttoraja.com"
-                          >info@uttoraja.com</a
-                        >
-                      </p>
-                    </li>
-                  </ul>
-                </div>
+  <div class="page-wrapper">
+    <!--Start Main Header One -->
+    <header class="main-header main-header-one">
+      <div class="main-header-one__top">
+        <div class="container">
+          <div class="main-header-one__top-inner">
+            <div class="main-header-one__top-left">
+              <div class="header-contact-info-one">
+                <ul>
+                  <li>
+                    <div class="icon">
+                      <span class="icon-phone-call"></span>
+                    </div>
+                    <p><a href="tel:6281355619225">+6281355619225</a></p>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <span class="icon-email"></span>
+                    </div>
+                    <p>
+                      <a href="mailto:info@uttoraja.com">info@uttoraja.com</a>
+                    </p>
+                  </li>
+                </ul>
               </div>
-              <div class="main-header-one__top-right">
-                <div class="header-social-link-one">
-                  <ul class="clearfix">
-                    <li>
-                      <a href="https://www.facebook.com/uttoraja">
-                        <i class="icon-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.instagram.com/uttoraja/">
-                        <i class="icon-instagram-symbol"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.youtube.com/@SALUTTanaToraja">
+            </div>
+            <div class="main-header-one__top-right">
+              <div class="header-social-link-one">
+                <ul class="clearfix">
+                  <li>
+                    <a href="https://www.facebook.com/uttoraja">
+                      <i class="icon-facebook"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/uttoraja/">
+                      <i class="icon-instagram-symbol"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/@SALUTTanaToraja">
                       <i class="icon.youtube"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="main-header-one__bottom">
+      <div class="main-header-one__bottom">
         <div id="sticky-header" class="menu-area">
           <div class="container">
             <div class="main-header-one__bottom-inner">
@@ -191,325 +189,322 @@
         </div>
       </div>
 
-        <!--Start Mobile Menu  -->
-        <div class="mobile-menu">
-          <nav class="menu-box">
-            <div class="close-btn">
-              <i class="fas fa-times"></i>
-            </div>
-            <div class="nav-logo">
-              <a href="../">
-                <img
-                  src="assets/img/resource/mobile-menu-logo.png"
-                  alt="Logo"
-                />
-              </a>
-            </div>
-            <div class="menu-outer">
-              <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-            </div>
-            <div class="contact-info">
-              <div class="icon-box"><span class="icon-phone-call"></span></div>
-              <p><a href="tel:6281355619225">+6281355619225</a></p>
-            </div>
-            <div class="social-links">
-              <ul class="clearfix list-wrap">
-                <li>
-                  <a href="https://www.facebook.com/uttoraja"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/uttoraja/"
-                    ><i class="fab fa-instagram"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="https://www.youtube.com/@SALUTTanaToraja"
-                    ><i class="fab fa-youtube"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <div class="menu-backdrop"></div>
-        <!-- End Mobile Menu -->
-      </header>
-      <!--End Main Header One -->
-
-      <!--Start Page Header-->
-      <section class="page-header">
-        <div class="shape1 rotate-me">
-          <img src="assets/img/shape/page-header-shape1.png" alt="" />
-        </div>
-        <div class="shape2 float-bob-x">
-          <img src="assets/img/shape/page-header-shape2.png" alt="" />
-        </div>
-        <div class="container">
-          <div class="page-header__inner">
-            <h2>ADMINISTRASI AKADEMIK</h2>
-            <ul class="thm-breadcrumb">
+      <!--Start Mobile Menu  -->
+      <div class="mobile-menu">
+        <nav class="menu-box">
+          <div class="close-btn">
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="nav-logo">
+            <a href="../">
+              <img
+                src="assets/img/resource/mobile-menu-logo.png"
+                alt="Logo" />
+            </a>
+          </div>
+          <div class="menu-outer">
+            <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+          </div>
+          <div class="contact-info">
+            <div class="icon-box"><span class="icon-phone-call"></span></div>
+            <p><a href="tel:6281355619225">+6281355619225</a></p>
+          </div>
+          <div class="social-links">
+            <ul class="clearfix list-wrap">
               <li>
-                <a href="../"><span class="fa fa-home"></span> Home</a>
+                <a href="https://www.facebook.com/uttoraja"><i class="fab fa-facebook-f"></i></a>
               </li>
-              <li><i class="icon-right-arrow-angle"></i></li>
-              <li class="color-base">Administrasi Akademik</li>
+              <li>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/uttoraja/"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@SALUTTanaToraja"><i class="fab fa-youtube"></i></a>
+              </li>
             </ul>
           </div>
-        </div>
-      </section>
-      <!--End Page Header-->
+        </nav>
+      </div>
+      <div class="menu-backdrop"></div>
+      <!-- End Mobile Menu -->
+    </header>
+    <!--End Main Header One -->
 
-      <!--Start Contents Page-->
-      <section
-        id="contact"
-        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
-      >
-        <div class="container jarakcontainer">
-                  <!--Start Cta Pendas-->
+    <!--Start Page Header-->
+    <section class="page-header">
+      <div class="shape1 rotate-me">
+        <img src="assets/img/shape/page-header-shape1.png" alt="" />
+      </div>
+      <div class="shape2 float-bob-x">
+        <img src="assets/img/shape/page-header-shape2.png" alt="" />
+      </div>
+      <div class="container">
+        <div class="page-header__inner">
+          <h2>ADMINISTRASI AKADEMIK</h2>
+          <ul class="thm-breadcrumb">
+            <li>
+              <a href="../"><span class="fa fa-home"></span> Home</a>
+            </li>
+            <li><i class="icon-right-arrow-angle"></i></li>
+            <li class="color-base">Administrasi Akademik</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!--End Page Header-->
+
+    <!--Start Contents Page-->
+    <section
+      id="contact"
+      class="contact-area contact-bg pt-120 pb-100 p-relative fix">
+      <div class="container jarakcontainer">
+      <div class="jarakcontainer">
+        <h3>Jika anda mengalami kebingungan dalam administrasi anda dapat menghubungi admin kami sesuai dengan jurusan anda.</h3>
+      </div>
+        <!--Start Cta Pendas-->
         <section class="cta-two testmonials">
-            <div class="container">
-                <div class="cta-two__inner">
-                    <div class="cta-two__inner-bg"
-                        style="background-image: url(assets/img/pattern/cta-two__parttern1.png);"></div>
-                    <div class="cta-two__content">
-                        <h2>Jurusan Pendas</h2>
-                        <p>Jurusan Pendidikan Dasar (PGSD-PAUD)</p>
-                        <p>Elza - 081354852018</p>
-                    </div>
-                    <div class="cta-two__btn">
-                        <a class="thm-btn" href="https:/wa.me/6281354852018">
-                            <span class="txt">Contact with Us</span>
-                            <i class="icon-next"></i>
-                        </a>
-                    </div>
-                </div>
+          <div class="container" style="margin-bottom:30px">
+            <div class="cta-two__innertwo">
+              <div class="cta-two__inner-bg"
+                style="background-image: url(../assets/img/pattern/cta-two__parttern1.png);"></div>
+              <div class="cta-two__content">
+                <h2>Pendidikan Dasar (PENDAS)</h2>
+                <p>PGSD-PAUD</p>
+                <p>Hubungi kami untuk bantuan Administrasi</p>
+                <p>Elza - 081354852018</p>
+              </div>
+              <div class="cta-two__btn">
+                <a class="thm-btn" href="https:/wa.me/6281354852018">
+                  <span class="txt">KONTAK WA</span>
+                  <i class="icon-next"></i>
+                </a>
+              </div>
             </div>
+          </div>
         </section>
         <!--End Cta Two-->
 
-                    <!--Start Cta Non-Pendas-->
-                    <section class="cta-two testmonials">
-            <div class="container">
-                <div class="cta-two__inner">
-                    <div class="cta-two__inner-bg"
-                        style="background-image: url(assets/img/pattern/cta-two__parttern1.png);"></div>
-                    <div class="cta-two__content">
-                        <h2>Have Any Discussion?</h2>
-                        <p>Gathered have greater made fruitful. Void to let to know
-                            about that you'll sixth upon day.</p>
-                    </div>
-                    <div class="cta-two__btn">
-                        <a class="thm-btn" href="#">
-                            <span class="txt">Contact with Us</span>
-                            <i class="icon-next"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End Cta Two-->
-        </div>
-      </section>
-      <!--End Contents Page-->
-
-      <!--Start Footer Three-->
-      <footer class="footer-three">
-        <!-- Start Footer Main -->
-        <div class="footer-main footer-main__three">
-          <div class="footer-three__shape1">
-            <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
-          </div>
-          <div class="footer-three__shape2">
-            <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
-          </div>
+        <!--Start Cta Non-Pendas-->
+        <section class="cta-two testmonials">
           <div class="container">
-            <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
+            <div class="cta-two__innertwo">
+              <div class="cta-two__inner-bg"
+                style="background-image: url(../assets/img/pattern/cta-two__parttern1.png);"></div>
+              <div class="cta-two__content">
+                <h2>Non Pendidikan Dasar (NON PENDAS)</h2>
+                <p>Semua Jurusan kecuali jurusan PENDAS</p>
+                <p>Hubungi kami untuk bantuan Administrasi</p>
+                <p>Eva - 085242460651</p>
+              </div>
+              <div class="cta-two__btn">
+                <a class="thm-btn" href="https:/wa.me/6285242460651">
+                  <span class="txt">KONTAK WA</span>
+                  <i class="icon-next"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!--End Cta Two-->
+      </div>
+    </section>
+    <!--End Contents Page-->
+
+    <!--Start Footer Three-->
+    <footer class="footer-three">
+      <!-- Start Footer Main -->
+      <div class="footer-main footer-main__three">
+        <div class="footer-three__shape1">
+          <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
+        </div>
+        <div class="footer-three__shape2">
+          <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
+        </div>
+        <div class="container">
+          <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
             <div class="row">
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-                  <div class="single-footer-widget single-footer-widget-style2">
-                    <div class="title">
-                      <h3>Bantuan &amp; Dukungan</h3>
+              <!--Start Single Footer Widget-->
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <div class="single-footer-widget single-footer-widget-style2">
+                  <div class="title">
+                    <h3>Bantuan &amp; Dukungan</h3>
+                  </div>
+                  <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
+                    <div class="text">
+                      <p>
+                        Butuh bantuan dan dukungan dalam perkuliahan di UT?
+                      </p>
                     </div>
-                    <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
-                      <div class="text">
+                    <ul class="clearfix">
+                      <li>
+                        <div class="icon">
+                          <span class="icon-pin"></span>
+                        </div>
+                        <p>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
+                      </li>
+                      <li>
+                        <div class="icon">
+                          <span class="icon-mail-inbox-app"></span>
+                        </div>
                         <p>
-                          Butuh bantuan dan dukungan dalam perkuliahan di UT?
+                          <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
                         </p>
-                      </div>
-                      <ul class="clearfix">
-                        <li>
-                          <div class="icon">
-                            <span class="icon-pin"></span>
-                          </div>
-                          <p>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
-                        </li>
-                        <li>
-                          <div class="icon">
-                            <span class="icon-mail-inbox-app"></span>
-                          </div>
-                          <p>
-                            <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
-                          </p>
-                        </li>
-                        <li>
-                          <div class="icon">
-                            <span class="icon-phone-call"></span>
-                          </div>
-                          <p>
-                            <a href="tel:6281355619225">+62 813-5561-9225</a>
-                          </p>
-                        </li>
-                      </ul>
-                    </div>
+                      </li>
+                      <li>
+                        <div class="icon">
+                          <span class="icon-phone-call"></span>
+                        </div>
+                        <p>
+                          <a href="tel:6281355619225">+62 813-5561-9225</a>
+                        </p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
+              </div>
+              <!--End Single Footer Widget-->
 
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                  <div class="single-footer-widget single-footer-widget-style2 ml55">
-                    <div class="title">
-                      <h3>Link Cepat</h3>
-                    </div>
-                    <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
-                      <ul class="clearfix">
-                        <li>
-                          <p><a href="../tentang/">Tentang UT</a></p>
-                        </li>
-                        <li>
-                          <p><a href="../layanan/informasi.php">Informasi Akademik</a></p>
-                        </li>
-                        <li>
-                          <p><a href="../administrasi/">Administrasi</a></p>
-                        </li>
-                        <li>
-                          <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
-                        </li>
-                      </ul>
-                    </div>
+              <!--Start Single Footer Widget-->
+              <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="single-footer-widget single-footer-widget-style2 ml55">
+                  <div class="title">
+                    <h3>Link Cepat</h3>
+                  </div>
+                  <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                    <ul class="clearfix">
+                      <li>
+                        <p><a href="../tentang/">Tentang UT</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../layanan/informasi.php">Informasi Akademik</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../administrasi/">Administrasi</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
+              </div>
+              <!--End Single Footer Widget-->
 
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                  <div class="single-footer-widget single-footer-widget-style2 ml50">
-                    <div class="title">
-                      <h3>Layanan Kami</h3>
-                    </div>
-                    <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
-                      <ul class="clearfix">
-                        <li>
-                          <p>
-                            <a href="../informasi.php">Informasi Akademik</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
-                            <a href="../administrasi">Administrasi Akademik</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
-                            <a href="../kegiatan.php">Kegiatan</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
-                            <a href="../modul/">Pengambilan Modul</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
-                            <a href="../suratketerangan">Surat Keterangan</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
-                            <a href="../legalisir">Legalisir Ijazah</a>
-                          </p>
-                        </li>
-                      </ul>
-                    </div>
+              <!--Start Single Footer Widget-->
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                <div class="single-footer-widget single-footer-widget-style2 ml50">
+                  <div class="title">
+                    <h3>Layanan Kami</h3>
+                  </div>
+                  <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                    <ul class="clearfix">
+                      <li>
+                        <p>
+                          <a href="../informasi.php">Informasi Akademik</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          <a href="../administrasi">Administrasi Akademik</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          <a href="../kegiatan.php">Kegiatan</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          <a href="../modul/">Pengambilan Modul</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          <a href="../suratketerangan">Surat Keterangan</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          <a href="../legalisir">Legalisir Ijazah</a>
+                        </p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
+              </div>
+              <!--End Single Footer Widget-->
+            </div>
+          </div>
+        </div>
+        <!-- End Footer Main -->
+
+        <!--Start Footer Bottom -->
+        <div class="footer-bottom footer-bottom-two footer-bottom-three">
+          <div class="container">
+            <div
+              class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
+              <div class="copyright-text text-center">
+                <p>
+                  Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
+                  <a href="https://themeforest.net/user/thememx">Thememx.</a>
+                  All Rights Reserved
+                </p>
               </div>
             </div>
           </div>
-          <!-- End Footer Main -->
-
-          <!--Start Footer Bottom -->
-          <div class="footer-bottom footer-bottom-two footer-bottom-three">
-            <div class="container">
-              <div
-                class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner"
-              >
-                <div class="copyright-text text-center">
-                  <p>
-                    Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
-                    <a href="https://themeforest.net/user/thememx">Thememx.</a>
-                    All Rights Reserved
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--End Footer Bottom -->
         </div>
-      </footer>
-      <!--End Footer Three-->
-    </div>
-
-    <!--Start Search Popup -->
-    <div class="search-popup">
-      <div class="search-popup__overlay search-toggler">
-        <div class="search-close-btn">
-          <i class="icon-plus"></i>
-        </div>
+        <!--End Footer Bottom -->
       </div>
-      <div class="search-popup__content">
-        <form action="#">
-          <label for="search" class="sr-only">search here</label>
-          <input type="search" id="search" placeholder="Search Here..." />
-          <button type="submit" aria-label="search submit" class="btn-one">
-            <i class="icon-search-interface-symbol"></i>
-          </button>
-        </form>
+    </footer>
+    <!--End Footer Three-->
+  </div>
+
+  <!--Start Search Popup -->
+  <div class="search-popup">
+    <div class="search-popup__overlay search-toggler">
+      <div class="search-close-btn">
+        <i class="icon-plus"></i>
       </div>
     </div>
-    <!--End Search Popup -->
+    <div class="search-popup__content">
+      <form action="#">
+        <label for="search" class="sr-only">search here</label>
+        <input type="search" id="search" placeholder="Search Here..." />
+        <button type="submit" aria-label="search submit" class="btn-one">
+          <i class="icon-search-interface-symbol"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--End Search Popup -->
 
-    <!-- Scroll-top -->
-    <button class="scroll-top scroll-to-target" data-target="html">
-      <i class="icon-down-arrow"></i>
-    </button>
-    <!-- Scroll-top-end-->
+  <!-- Scroll-top -->
+  <button class="scroll-top scroll-to-target" data-target="html">
+    <i class="icon-down-arrow"></i>
+  </button>
+  <!-- Scroll-top-end-->
 
-    <!-- JS here -->
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/01-ajax-form.js"></script>
-    <script src="../assets/js/02-bootstrap.min.js"></script>
-    <script src="../assets/js/03-jquery.appear.js"></script>
-    <script src="../assets/js/04-swiper.min.js"></script>
-    <script src="../assets/js/05-jquery.odometer.min.js"></script>
-    <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
-    <!-- <script src="assets/js/07-jquery.nice-select.min.js"></script> -->
-    <script src="../assets/js/08-slick.min.js"></script>
-    <script src="../assets/js/09-wow.min.js"></script>
-    <script src="../assets/js/10-jquery.circleType.js"></script>
-    <script src="../assets/js/11-jquery.lettering.min.js"></script>
-    <script src="../assets/js/12-TweenMax.min.js"></script>
-    <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
-    <script src="../assets/vendor/marquee/marquee.min.js"></script>
-    <script src="../assets/vendor/odometer/odometer.min.js"></script>
+  <!-- JS here -->
+  <script src="../assets/js/jquery-3.6.0.min.js"></script>
+  <script src="../assets/js/01-ajax-form.js"></script>
+  <script src="../assets/js/02-bootstrap.min.js"></script>
+  <script src="../assets/js/03-jquery.appear.js"></script>
+  <script src="../assets/js/04-swiper.min.js"></script>
+  <script src="../assets/js/05-jquery.odometer.min.js"></script>
+  <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
+  <!-- <script src="assets/js/07-jquery.nice-select.min.js"></script> -->
+  <script src="../assets/js/08-slick.min.js"></script>
+  <script src="../assets/js/09-wow.min.js"></script>
+  <script src="../assets/js/10-jquery.circleType.js"></script>
+  <script src="../assets/js/11-jquery.lettering.min.js"></script>
+  <script src="../assets/js/12-TweenMax.min.js"></script>
+  <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
+  <script src="../assets/vendor/marquee/marquee.min.js"></script>
+  <script src="../assets/vendor/odometer/odometer.min.js"></script>
 
-    <script src="../assets/js/main.js"></script>
-  </body>
+  <script src="../assets/js/main.js"></script>
+</body>
+
 </html>

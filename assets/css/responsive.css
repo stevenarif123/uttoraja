@@ -1474,6 +1474,12 @@
 		padding: 78px 30px 82px;
 	}
 
+	.cta-two__inner {
+		display: block;
+		text-align: center;
+		padding: 20px 30px 30px;
+	}
+
 	.cta-two__btn {
 		margin-top: 30px;
 	}
