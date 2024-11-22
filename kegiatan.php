@@ -270,6 +270,7 @@
       <div class="container">
         <div class="banner-one__inner">
           <div class="banner-one__content wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+            <p>TES</p>
           </div>
         </div>
       </div>
