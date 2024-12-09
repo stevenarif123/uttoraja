@@ -470,14 +470,14 @@
                                     <!--Single About Two Img-->
                                     <div class="single-testimonials-three__img-box">
                                         <div class="inner">
-                                            <img src="assets/img/testimonial/testimonials-three__img1.jpg" alt="image">
+                                            <img src="assets/img/testimonial/monika.jpg" alt="image">
                                         </div>
                                     </div>
                                     <!--End About Two Img-->
                                     <!--Single About Two Img-->
                                     <div class="single-testimonials-three__img-box">
                                         <div class="inner">
-                                            <img src="assets/img/testimonial/testimonials-three__img2.jpg" alt="image">
+                                            <img src="assets/img/testimonial/notavian.jpg" alt="image">
                                         </div>
                                     </div>
                                     <!--End About Two Img-->
@@ -485,7 +485,7 @@
                                 <li class="wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <!--Single About Two Img-->
                                     <div class="single-testimonials-three__img-box">
-                                        <img src="assets/img/testimonial/testimonials-three__img3.jpg" alt="image">
+                                        <img src="assets/img/testimonial/neny.jpg" alt="image">
                                     </div>
                                     <!--End About Two Img-->
                                 </li>
@@ -497,10 +497,10 @@
                         <div class="testimonials-three__content">
                             <div class="sec-title-four">
                                 <div class="sub-title">
-                                    <h4>Customers Feedback</h4>
+                                    <h4>Testimoni Mahasiswa</h4>
                                 </div>
                                 <h2>
-                                    What Says Our Client’s<br>About Diligent
+                                    Apa yang dikatakan oleh Mahasiswa<br>Universitas Terbuka?
                                 </h2>
                             </div>
 
@@ -560,15 +560,12 @@
                                             </div>
                                             <div class="text">
                                                 <p>
-                                                    “ Concor delivers sectors concor delivers world class infrastructure
-                                                    the is a world class infrastructure solutions across a broad
-                                                    industry start and end of creativity to customers and the
-                                                    stakeholders across the world broad ...”
+                                                    “ Testimoni saya tentang UT. Saya sangat bersyukur telah memilih Universitas Terbuka (UT) sebagai tempat untuk melanjutkan pendidikan tinggi. UT memberikan fleksibilitas dalam hal waktu dan tempat untuk belajar, Yang sangat membantu saya dalam menyeimbangkan antara study dan aktivitas sehari-hari. Meskipun saya belajar secara mandiri, dukungan dari dosen dan teman-teman melalui forum online tetap terasa, yang memotivasi saya untuk belajar. Saya merasa sangat puas dan bangga menjadi bagian dari Universitas Terbuka (UT). Trimakasih UT”
                                                 </p>
                                             </div>
                                             <div class="athor-box">
-                                                <h3>Alina Kolaminov</h3>
-                                                <p>Marketing Agent</p>
+                                                <h3>Neny Lasri Mallisa'</h3>
+                                                <p>Ilmu Administrasi Bisnis</p>
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
@@ -577,15 +574,26 @@
                                             </div>
                                             <div class="text">
                                                 <p>
-                                                    “ Concor delivers sectors concor delivers world class infrastructure
-                                                    the is a world class infrastructure solutions across a broad
-                                                    industry start and end of creativity to customers and the
-                                                    stakeholders across the world broad ...”
+                                                    “ Belajar di Universitas Terbuka memberikan fleksibilitas yang saya butuhkan untuk tetap aktif dalam kegiatan sehari-hari sambil mengejar pendidikan. Dukungan dari dosen dan kualitas materi benar-benar membantu saya memahami pelajaran dengan baik. ”
                                                 </p>
                                             </div>
                                             <div class="athor-box">
-                                                <h3>Steven Arif</h3>
-                                                <p>Marketing Agent</p>
+                                                <h3>Notavian Masuang</h3>
+                                                <p>Pendidikan Guru Sekolah Dasar</p>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="icon-box">
+                                                <span class="icon-quote"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>
+                                                    “ "Belajar di Universitas Terbuka itu pas banget buat saya yang kerja sambil kuliah. Jadwalnya fleksibel dan materi pembelajarannya juga gampang diikuti, jadi bisa tetap fokus di dua-duanya tanpa stres. ”
+                                                </p>
+                                            </div>
+                                            <div class="athor-box">
+                                                <h3>Monica Sarina Rianti Baan</h3>
+                                                <p>Pendidikan Guru Sekolah Dasar</p>
                                             </div>
                                         </div>
                                     </div>

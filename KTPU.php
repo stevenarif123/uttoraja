@@ -196,44 +196,8 @@ if (isset($_POST['email'])) {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Print KTPU - <?php echo htmlspecialchars($name); ?></title>
+            <title><?php echo htmlspecialchars($name); ?></title>
             <meta charset="UTF-8">
-            <style>
-                @page {
-                    size: A4;
-                    margin: 0;
-                }
-                @media print {
-                    html, body {
-                        width: 210mm;
-                        height: 297mm;
-                        margin: 0;
-                        padding: 0;
-                    }
-                    .page {
-                        page-break-after: always;
-                    }
-                }
-                body {
-                    margin: 0;
-                    padding: 0;
-                    font-family: Arial, sans-serif;
-                }
-                .page {
-                    width: 210mm;
-                    min-height: 297mm;
-                    margin: 0 auto;
-                    position: relative;
-                    overflow: hidden;
-                }
-                .content {
-                    padding: 20mm;
-                }
-                /* Ensure content overflows properly */
-                .content > * {
-                    page-break-inside: avoid;
-                }
-            </style>
         </head>
         <body onload="window.print();">
             <div class="page">
@@ -315,7 +279,7 @@ if (isset($_POST['email'])) {
                         $counter = 1;
                         while ($student = mysqli_fetch_assoc($result_students)) {
                             $email = htmlspecialchars($student['Email']);
-                            $name = htmlspecialchars($student['NamaLengkap']);
+                            $name = stripcslashes($student['NamaLengkap']);
                             echo '<tr>';
                             echo '<th scope="row">' . $counter . '</th>';
                             echo '<td>' . $email . '</td>';
