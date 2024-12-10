@@ -328,7 +328,7 @@
               data-wow-duration="1500ms"
             >
               <div class="inner">
-                <img src="assets/img/slider/ade.png" alt="banner" />
+                <img src="assets/img/slider/banner.png" alt="banner" />
               </div>
               <div class="banner-one__img-bg"></div>
             </div>
@@ -764,7 +764,7 @@
                 </div>
             </div>
             <div class="image-section">
-                <img src="assets/img/background/web.JPG" alt="Descriptive Alt Text" class="fixed-size-image">
+                <img src="assets/img/background/web2.png" alt="Descriptive Alt Text" class="fixed-size-image">
             </div>
         </div>
     </div>
