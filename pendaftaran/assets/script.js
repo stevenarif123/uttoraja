@@ -42,37 +42,62 @@ document.addEventListener("DOMContentLoaded", function() {
                 var nomor_hp = document.getElementById("nomor_hp").value;
 
                 if (!name.match(/^[a-zA-Z ]+$/)) {
+                    document.getElementById("name").classList.add("invalid");
                     document.getElementById("name-error").innerHTML = "Nama tidak boleh mengandung angka";
                     return;
                 } else {
+                    document.getElementById("name").classList.remove("invalid");
+                    document.getElementById("name").classList.add("valid");
                     document.getElementById("name-error").innerHTML = "";
                 }
 
+                if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+                    document.getElementById("email").classList.add("invalid");
+                    document.getElementById("email-error").innerHTML = "Email tidak valid";
+                    return;
+                } else {
+                    document.getElementById("email").classList.remove("invalid");
+                    document.getElementById("email").classList.add("valid");
+                    document.getElementById("email-error").innerHTML = "";
+                }
+
                 if (!nik.match(/^[0-9]+$/)) {
+                    document.getElementById("nik").classList.add("invalid");
                     document.getElementById("nik-error").innerHTML = "NIK tidak boleh mengandung huruf";
                     return;
                 } else {
+                    document.getElementById("nik").classList.remove("invalid");
+                    document.getElementById("nik").classList.add("valid");
                     document.getElementById("nik-error").innerHTML = "";
                 }
 
                 if (!nomor_hp.match(/^[0-9]+$/)) {
+                    document.getElementById("nomor_hp").classList.add("invalid");
                     document.getElementById("nomor_hp-error").innerHTML = "Nomor HP tidak boleh mengandung huruf";
                     return;
                 } else {
+                    document.getElementById("nomor_hp").classList.remove("invalid");
+                    document.getElementById("nomor_hp").classList.add("valid");
                     document.getElementById("nomor_hp-error").innerHTML = "";
                 }
 
                 if (nomor_hp.length < 10 || nomor_hp.length > 13) {
+                    document.getElementById("nomor_hp").classList.add("invalid");
                     document.getElementById("nomor_hp-error").innerHTML = "Nomor HP harus berisi 10-13 digit";
                     return;
                 } else {
+                    document.getElementById("nomor_hp").classList.remove("invalid");
+                    document.getElementById("nomor_hp").classList.add("valid");
                     document.getElementById("nomor_hp-error").innerHTML = "";
                 }
 
                 if (!nomor_hp.startsWith("08")) {
+                    document.getElementById("nomor_hp").classList.add("invalid");
                     document.getElementById("nomor_hp-error").innerHTML = "Nomor HP harus diawali dengan 08";
                     return;
                 } else {
+                    document.getElementById("nomor_hp").classList.remove("invalid");
+                    document.getElementById("nomor_hp").classList.add("valid");
                     document.getElementById("nomor_hp-error").innerHTML = "";
                 }
 

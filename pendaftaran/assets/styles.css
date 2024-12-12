@@ -55,6 +55,14 @@ input[type="date"]:focus {
     outline: none;
 }
 
+input.invalid {
+    border-color: #f00;
+}
+
+input.valid {
+    border-color: #0f0;
+}
+
 select {
     width: 100%;
     padding: 12px;
