@@ -1,4 +1,3 @@
-/* style.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -14,118 +13,87 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 400px;
+    width: 100%; /* Mengatur lebar container */
+    max-width: 800px; /* Maksimal lebar container */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .step {
-    display: none;
+    display: none; /* Sembunyikan semua langkah */
 }
 
 .step.active {
-    display: block;
+    display: block; /* Tampilkan langkah aktif */
 }
 
 .form-group {
     margin-bottom: 15px;
 }
 
+.form-group.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group.row .col {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.form-group.row .col:last-child {
+    margin-right: 0;
+}
+
 label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: #333;
 }
 
 input[type="text"],
 input[type="email"],
-input[type="number"],
 input[type="date"] {
-    width: 100%;
+    width: 100%; /* Memastikan input mengisi lebar kolom */
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar */
     transition: border-color 0.3s;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="number"]:focus,
 input[type="date"]:focus {
     border-color: #007bff;
     outline: none;
-}
-
-input.invalid {
-    border-color: #f00;
-}
-
-input.valid {
-    border-color: #0f0;
-}
-
-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-}
-
-.input-group-addon {
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    margin-right: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.navigation {
-    display: flex;
-    justify-content: space-between;
-}
-
-.navigation button {
-    width: 48%;
-}
-
-.confirmation {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #e9ecef;
-    border-radius: 4px;
 }
 
 .error {
     color: #f00;
     font-size: 12px;
     margin-top: 5px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

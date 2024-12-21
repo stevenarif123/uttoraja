@@ -14,7 +14,7 @@
             <div class="step active">
                 <h3>Step 1: Personal Information</h3>
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name">Nama:</label>
                     <input type="text" id="name" required>
                     <span class="error" id="name-error"></span>
                 </div>
@@ -23,26 +23,23 @@
                     <input type="email" id="email" required>
                     <span class="error" id="email-error"></span>
                 </div>
-                <div class="form-group">
-                    <label for="jurusan">Jurusan:</label>
-                    <select id="jurusan" required>
-                        <option value="">Pilih Jurusan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                    </select>
-                    <span class="error" id="jurusan-error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal:</label>
-                    <input type="date" id="tanggal" required>
-                    <span class="error" id="tanggal-error"></span>
+                <div class="form-group row">
+                    <div class="col">
+                        <label for="tempat_lahir">Tempat Lahir:</label>
+                        <input type="text" id="tempat_lahir" required>
+                        <span class="error" id="tempat_lahir-error"></span>
+                    </div>
+                    <div class="col">
+                        <label for="tanggal">Tanggal Lahir:</label>
+                        <input type="date" id="tanggal" required>
+                        <span class="error" id="tanggal-error"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="nik">NIK:</label>
-                    <input type="text" id="nik" maxlength="16" required>
+                    <input type="text" id="nik" required>
                     <span class="error" id="nik-error"></span>
-                </div>
+                </div>                
                 <div class="form-group">
                     <label for="nomor_hp">Nomor HP:</label>
                     <div class="input-group">
@@ -84,9 +81,12 @@
                     <span class="error" id="phone-error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="fax">Fax:</label>
-                    <input type="text" id="fax" required>
-                    <span class="error" id="fax-error"></span>
+                    <label for="nomor_hp">Nomor HP:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">+62</span>
+                        <input type="text" id="nomor_hp" maxlength="13" required>
+                    </div>
+                    <span class="error" id="nomor_hp-error"></span>
                 </div>
                 <div class="navigation">
                     <button type="button" class="prev">Previous</button>
@@ -97,6 +97,16 @@
             <!-- Step 4 -->
             <div class="step">
                 <h3>Step 4: Education Information</h3>
+                <div class="form-group">
+                    <label for="jurusan">Jurusan:</label>
+                    <select id="jurusan" required>
+                        <option value="">Pilih Jurusan</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Teknik Sipil">Teknik Sipil</option>
+                        <option value="Teknik Mesin">Teknik Mesin</option>
+                    </select>
+                    <span class="error" id="jurusan-error"></span>
+                </div>
                 <div class="form-group">
                     <label for="education">Education:</label>
                     <input type="text" id="education" required>
@@ -124,7 +134,6 @@
             </div>
         </form>
     </div>
-
     <script src="./assets/script.js"></script>
 </body>
 </html>
