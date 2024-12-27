@@ -8,20 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <h2>Multi-Step Registration Form</h2>
+        <h2>Registrasi Calon Mahasiswa Baru</h2>
         <form id="regForm">
             <!-- Step 1 -->
             <div class="step active">
-                <h3>Step 1: Personal Information</h3>
+                <h3>Langkah 1 dari 4 : Data Diri</h3>
                 <div class="form-group">
                     <label for="name">Nama:</label>
                     <input type="text" id="name" required>
                     <span class="error" id="name-error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
-                    <span class="error" id="email-error"></span>
                 </div>
                 <div class="form-group row">
                     <div class="col">
@@ -36,18 +31,40 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label>Jenis Kelamin:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="jenis_kelamin" value="Laki-laki" required>
+                            <span></span>
+                            Laki-laki
+                        </label>
+                        <label>
+                            <input type="radio" name="jenis_kelamin" value="Perempuan" required>
+                            <span></span>
+                            Perempuan
+                        </label>
+                    </div>
+                    <span class="error" id="jenis_kelamin-error"></span>
+                </div>
+                <div class="form-group">
                     <label for="nik">NIK:</label>
                     <input type="text" id="nik" required>
                     <span class="error" id="nik-error"></span>
-                </div>                
-                <div class="form-group">
-                    <label for="nomor_hp">Nomor HP:</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">+62</span>
-                        <input type="text" id="nomor_hp" maxlength="13" required>
-                    </div>
-                    <span class="error" id="nomor_hp-error"></span>
                 </div>
+                <div class="form-group">
+                    <label for="agama">Agama:</label>
+                    <select id="agama" required>
+                        <option value="">Pilih Agama</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Protestan">Protestan</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Buddha">Buddha</option>
+                        <option value="Khonghucu">Khonghucu</option>
+                    </select>
+                    <span class="error" id="agama-error"></span>
+                </div>
+                
                 <div class="navigation">
                     <button type="button" class="next">Next</button>
                 </div>
@@ -79,6 +96,19 @@
                     <label for="phone">Phone:</label>
                     <input type="text" id="phone" required>
                     <span class="error" id="phone-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="nomor_hp">Nomor HP:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">+62</span>
+                        <input type="text" id="nomor_hp" maxlength="13" required>
+                    </div>
+                    <span class="error" id="nomor_hp-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                    <span class="error" id="email-error"></span>
                 </div>
                 <div class="form-group">
                     <label for="nomor_hp">Nomor HP:</label>

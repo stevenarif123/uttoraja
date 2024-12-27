@@ -19,14 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var jurusan = document.getElementById("jurusan").value;
         var tanggal = document.getElementById("tanggal").value;
         var nik = document.getElementById("nik").value;
-        var nomor_hp = document.getElementById("nomor_hp").value;
         document.getElementById("confirmation").innerHTML = `
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Jurusan:</strong> ${jurusan}</p>
             <p><strong>Tanggal:</strong> ${tanggal}</p>
             <p><strong>NIK:</strong> ${nik}</p>
-            <p><strong>Nomor HP:</strong> ${nomor_hp}</p>
         `;
     }
 

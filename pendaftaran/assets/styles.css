@@ -57,20 +57,27 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="date"] {
-    width: 100%; /* Memastikan input mengisi lebar kolom */
-    padding: 12px;
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Memastikan padding tidak menambah lebar */
+    border-radius: 0.375rem;
     transition: border-color 0.3s;
+    appearance: none; /* Remove default arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar */
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="date"]:focus {
+input[type="date"]:focus,
+select:focus {
     border-color: #007bff;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .error {
@@ -96,4 +103,66 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+/* Radio Button Styling */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group input[type="radio"] + span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+.radio-group input[type="radio"]:checked + span::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+.radio-group input[type="radio"]:focus + span {
+    border-color: #007bff;
+}
+
+/* Dropdown Styling */
+select {
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    appearance: none; /* For modern browsers */
+    background-color: white;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L224 303.455l151.267-151.267c9.373-9.373 24.569-9.373 33.941 0l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.373-24.569 9.373-33.941 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+    padding-right: 30px; /* Make space for the arrow */
+}
+
+select:focus {
+    border-color: #007bff;
+    outline: none;
 }
