@@ -279,7 +279,7 @@ if (isset($_POST['email'])) {
                         $counter = 1;
                         while ($student = mysqli_fetch_assoc($result_students)) {
                             $email = htmlspecialchars($student['Email']);
-                            $name = stripcslashes($student['NamaLengkap']);
+                            $name = stripslashes($student['NamaLengkap']);
                             echo '<tr>';
                             echo '<th scope="row">' . $counter . '</th>';
                             echo '<td>' . $email . '</td>';

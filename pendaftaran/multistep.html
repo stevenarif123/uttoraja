@@ -31,61 +31,94 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Jenis Kelamin:</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="jenis_kelamin" value="Laki-laki" required>
-                            <span></span>
-                            Laki-laki
-                        </label>
-                        <label>
-                            <input type="radio" name="jenis_kelamin" value="Perempuan" required>
-                            <span></span>
-                            Perempuan
-                        </label>
-                    </div>
-                    <span class="error" id="jenis_kelamin-error"></span>
-                </div>
-                <div class="form-group">
                     <label for="nik">NIK:</label>
-                    <input type="text" id="nik" required>
+                    <input type="text" id="nik" required maxlength="16" pattern="\d{16}">
                     <span class="error" id="nik-error"></span>
                 </div>
                 <div class="form-group">
                     <label for="agama">Agama:</label>
                     <select id="agama" required>
                         <option value="">Pilih Agama</option>
-                        <option value="Islam">Islam</option>
-                        <option value="Katolik">Katolik</option>
-                        <option value="Protestan">Protestan</option>
-                        <option value="Hindu">Hindu</option>
-                        <option value="Buddha">Buddha</option>
-                        <option value="Khonghucu">Khonghucu</option>
+                        <option value="ISLAM">ISLAM</option>
+                        <option value="KATOLIK">KATOLIK</option>
+                        <option value="PROTESTAN">PROTESTAN</option>
+                        <option value="HINDU">HINDU</option>
+                        <option value="BUDDHA">BUDDHA</option>
+                        <option value="KHONGHUCU">KHONGHUCU</option>
                     </select>
                     <span class="error" id="agama-error"></span>
                 </div>
-                
+                <div class="form-group">
+                    <label>Jenis Kelamin:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="jenis_kelamin" value="Laki-laki" required>
+                            <span></span>
+                            LAKI-LAKI
+                        </label>
+                        <label>
+                            <input type="radio" name="jenis_kelamin" value="Perempuan" required>
+                            <span></span>
+                            PEREMPUAN
+                        </label>
+                    </div>
+                    <span class="error" id="jenis_kelamin-error"></span>
+                </div>
+                <div class="form-group">
+                    <label>Status Kawin:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="status_kawin" value="KAWIN" required>
+                            <span></span>
+                            KAWIN
+                        </label>
+                        <label>
+                            <input type="radio" name="status_kawin" value="BELUM KAWIN" required>
+                            <span></span>
+                            BELUM KAWIN
+                        </label>
+                    </div>
+                    <span class="error" id="status_kawin-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="nomor_hp">Nomor HP:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">+62</span>
+                        <input type="text" id="nomor_hp" maxlength="13" required>
+                    </div>
+                    <span class="error" id="nomor_hp-error"></span>
+                </div>
                 <div class="navigation">
-                    <button type="button" class="next">Next</button>
+                    <button type="button" class="next">Selanjutnya</button>
                 </div>
             </div>
 
             <!-- Step 2 -->
             <div class="step">
-                <h3>Step 2: Address Information</h3>
+                <h3>Langkah 2: Informasi Alamat dan Kontak</h3>
                 <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" required>
-                    <span class="error" id="address-error"></span>
+                    <label for="alamat">Alamat Lengkap:</label>
+                    <input type="text" id="alamat" required>
+                    <span class="error" id="alamat-error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="city">City:</label>
-                    <input type="text" id="city" required>
-                    <span class="error" id="city-error"></span>
+                    <label for="hpalternatif">Nomor HP Alternatif:</label>
+                    <input type="text" id="hpalternatif" required>
+                    <span class="error" id="hpalternatif-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="instansi">Instansi/Tempat Kerja:</label>
+                    <input type="text" id="instansi" required>
+                    <span class="error" id="instansi-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="instansi">Instansi/Tempat Kerja:</label>
+                    <input type="text" id="instansi" required>
+                    <span class="error" id="instansi-error"></span>
                 </div>
                 <div class="navigation">
-                    <button type="button" class="prev">Previous</button>
-                    <button type="button" class="next">Next</button>
+                    <button type="button" class="prev">Sebelumnya</button>
+                    <button type="button" class="next">Selanjutnya</button>
                 </div>
             </div>
 
@@ -98,14 +131,6 @@
                     <span class="error" id="phone-error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="nomor_hp">Nomor HP:</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">+62</span>
-                        <input type="text" id="nomor_hp" maxlength="13" required>
-                    </div>
-                    <span class="error" id="nomor_hp-error"></span>
-                </div>
-                <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" required>
                     <span class="error" id="email-error"></span>
@@ -114,13 +139,13 @@
                     <label for="nomor_hp">Nomor HP:</label>
                     <div class="input-group">
                         <span class="input-group-addon">+62</span>
-                        <input type="text" id="nomor_hp" maxlength="13" required>
+                        <input type="text" id="nomor_hp" maxlength="12" required>
                     </div>
                     <span class="error" id="nomor_hp-error"></span>
                 </div>
                 <div class="navigation">
-                    <button type="button" class="prev">Previous</button>
-                    <button type="button" class="next">Next</button>
+                    <button type="button" class="prev">Sebelumnya</button>
+                    <button type="button" class="next">Selanjutnya</button>
                 </div>
             </div>
 
@@ -148,8 +173,8 @@
                     <span class="error" id="institution-error"></span>
                 </div>
                 <div class="navigation">
-                    <button type="button" class="prev">Previous</button>
-                    <button type="button" class="next">Next</button>
+                    <button type="button" class="prev">Sebelumnya</button>
+                    <button type="button" class="next">Selanjutnya</button>
                 </div>
             </div>
 
@@ -158,8 +183,8 @@
                 <h3>Step 5: Confirmation</h3>
                 <div class="confirmation" id="confirmation"></div>
                 <div class="navigation">
-                    <button type="button" class="prev">Previous</button>
-                    <button type="submit">Submit</button>
+                    <button type="button" class="prev">Sebelumnya</button>
+                    <button class="button_primary" type="submit">Kirim</button>
                 </div>
             </div>
         </form>

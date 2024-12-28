@@ -2,6 +2,34 @@ document.addEventListener("DOMContentLoaded", function() {
     var currentStep = 0;
     showStep(currentStep);
 
+        // Mengonversi input ke huruf kapital
+    document.querySelectorAll('input[type="text"], input[type="date"], select').forEach(input => {
+        input.addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+    });
+
+    // Hanya izinkan angka untuk NIK
+    document.getElementById("nik").addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Hanya izinkan angka
+    });
+
+    document.getElementById("nomor_hp").addEventListener("input", function() {
+        // Hanya izinkan angka
+        this.value = this.value.replace(/[^0-9]/g, '');
+    
+        // Mengubah format dari 08xxx menjadi 8xxx
+        if (this.value.startsWith("08")) {
+            this.value = this.value.substring(1); // Menghapus angka 0 di depan
+        }
+    });
+
+    // Memperbarui konfirmasi saat agama dipilih
+    document.getElementById("agama").addEventListener("change", function() {
+        console.log("Agama dipilih:", this.value); // Log nilai agama yang dipilih
+        updateConfirmation(); // Memperbarui konfirmasi saat agama dipilih
+    });
+
     function showStep(n) {
         var steps = document.querySelectorAll(".step");
         steps.forEach((step, index) => {
@@ -15,16 +43,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateConfirmation() {
         var name = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
         var jurusan = document.getElementById("jurusan").value;
         var tanggal = document.getElementById("tanggal").value;
         var nik = document.getElementById("nik").value;
+        var agama = document.getElementById("agama").value;
         document.getElementById("confirmation").innerHTML = `
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Jurusan:</strong> ${jurusan}</p>
             <p><strong>Tanggal:</strong> ${tanggal}</p>
             <p><strong>NIK:</strong> ${nik}</p>
+            <p><strong>Agama:</strong> ${agama}</p>
         `;
     }
 
@@ -60,30 +89,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (step === 0) {
             var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
             var tempat_lahir = document.getElementById("tempat_lahir").value;
             var tanggal = document.getElementById("tanggal").value;
             var nik = document.getElementById("nik").value;
             var nomor_hp = document.getElementById("nomor_hp").value;
+            var agama = document.getElementById("agama").value;
 
-            if (!name.match(/^[a-zA-Z ]+$/)) {
+            
+            console.log("Validating Step 1");
+            console.log("Name:", name);
+            console.log("Tempat Lahir:", tempat_lahir);
+            console.log("Tanggal Lahir:", tanggal);
+            console.log("NIK:", nik);
+            console.log("Nomor HP:", nomor_hp);
+            console.log("Agama:", agama);
+
+            if (name.trim() === "") {
                 document.getElementById("name").classList.add("invalid");
-                document.getElementById("name-error").innerHTML = "Nama tidak boleh mengandung angka";
+                document.getElementById("name-error").innerHTML = "Nama tidak boleh kosong";
+                isValid = false;
+            } else if (!name.match(/^[a-zA-Z ]+$/)) {
+                document.getElementById("name").classList.add("invalid");
+                document.getElementById("name-error").innerHTML = "Nama tidak boleh mengandung angka atau karakter khusus";
                 isValid = false;
             } else {
                 document.getElementById("name").classList.remove("invalid");
                 document.getElementById("name").classList.add("valid");
                 document.getElementById("name-error").innerHTML = "";
-            }
-
-            if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-                document.getElementById("email").classList.add("invalid");
-                document.getElementById("email-error").innerHTML = "Email tidak valid";
-                isValid = false;
-            } else {
-                document.getElementById("email").classList.remove("invalid");
-                document.getElementById("email").classList.add("valid");
-                document.getElementById("email-error").innerHTML = "";
             }
 
             if (!tempat_lahir) {
@@ -109,6 +141,10 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!nik.match(/^[0-9]+$/)) {
                 document.getElementById("nik").classList.add("invalid");
                 document.getElementById("nik-error").innerHTML = "NIK tidak boleh mengandung huruf";
+                isValid = false;
+            } else if (nik.length !== 16) {
+                document.getElementById("nik").classList.add("invalid");
+                document.getElementById("nik-error").innerHTML = "NIK harus terdiri dari 16 digit";
                 isValid = false;
             } else {
                 document.getElementById("nik").classList.remove("invalid");
@@ -136,14 +172,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("nomor_hp-error").innerHTML = "";
             }
 
-            if (!nomor_hp.startsWith("08")) {
+            // Validasi Nomor HP
+            if (!nomor_hp.match(/^[0-9]+$/)) {
                 document.getElementById("nomor_hp").classList.add("invalid");
-                document.getElementById("nomor_hp-error").innerHTML = "Nomor HP harus diawali dengan 08";
+                document.getElementById("nomor_hp-error").innerHTML = "Nomor HP hanya boleh terdiri dari angka";
+                isValid = false;
+            } else if (nomor_hp.length < 10 || nomor_hp.length > 13) {
+                document.getElementById("nomor_hp").classList.add("invalid");
+                document.getElementById("nomor_hp-error").innerHTML = "Nomor HP harus berisi 10-13 digit";
+                isValid = false;
+            } else if (!nomor_hp.startsWith("8")) { // Memastikan nomor HP diawali dengan 8 setelah menghapus 0
+                document.getElementById("nomor_hp").classList.add("invalid");
+                document.getElementById("nomor_hp-error").innerHTML = "Nomor HP harus diawali dengan 8";
                 isValid = false;
             } else {
                 document.getElementById("nomor_hp").classList.remove("invalid");
                 document.getElementById("nomor_hp").classList.add("valid");
                 document.getElementById("nomor_hp-error").innerHTML = "";
+            }
+
+            if (agama === "") {
+                document.getElementById("agama").classList.add("invalid");
+                document.getElementById("agama-error").innerHTML = "Agama harus dipilih";
+                isValid = false;
+            } else {
+                document.getElementById("agama").classList.remove("invalid");
+                document.getElementById("agama-error").innerHTML = "";
             }
 
             // Simpan data ke cookie

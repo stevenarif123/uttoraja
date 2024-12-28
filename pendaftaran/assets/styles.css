@@ -1,12 +1,36 @@
+@font-face {
+    font-family: 'Interstate';
+    src: url('./Interstate-Regular.ttf') format('truetype'); /* Pastikan path sesuai */
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Interstate', sans-serif; /* Menggunakan Interstate sebagai font utama */
+    background-color: #f4f4f4; /* Contoh latar belakang */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
+
+/* Gaya untuk input, textarea, dan select */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+    font-family: 'Interstate', sans-serif; /* Menggunakan Interstate untuk input */
+    font-size: 16px; /* Ukuran font yang diinginkan */
+    padding: 10px; /* Padding untuk input */
+    border: 1px solid #ccc; /* Border untuk input */
+    border-radius: 0.375rem; /* Rounded corners */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar */
+}
+
+/* Tambahkan aturan CSS lainnya di sini */
 
 .container {
     background: white;
@@ -91,6 +115,17 @@ select:focus {
     justify-content: flex-end;
 }
 
+button_primary {
+    background-color: #fffb00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
 button {
     background-color: #007bff;
     color: white;
@@ -99,6 +134,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 10px;
 }
 
 button:hover {
@@ -106,16 +142,14 @@ button:hover {
 }
 /* Radio Button Styling */
 .radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex; /* Mengatur elemen dalam flexbox */
+    gap: 15px; /* Jarak antara opsi radio */
 }
 
 .radio-group label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-weight: normal;
+    display: flex; /* Mengatur label sebagai flex container */
+    align-items: center; /* Menyelaraskan item di tengah secara vertikal */
+    cursor: pointer; /* Menambahkan kursor pointer saat hover */
 }
 
 .radio-group input[type="radio"] {
@@ -165,4 +199,23 @@ select {
 select:focus {
     border-color: #007bff;
     outline: none;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-addon {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 0.375rem 0 0 0.375rem; /* Rounded corners */
+}
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px;
+    flex: 1; /* Make input take the remaining space */
 }
