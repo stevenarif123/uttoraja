@@ -269,6 +269,19 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+          <div class="row">
+            <?php
+              $dir = ".";
+              $files = glob($dir . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+              foreach($files as $file) {
+                echo '<div class="col-lg-3 col-md-4 col-sm-6 mb-4">';
+                echo '<a href="' . $file . '" data-toggle="lightbox" data-gallery="gallery">';
+                echo '<img src="' . $file . '" class="img-fluid rounded" alt="Gallery Image">';
+                echo '</a>';
+                echo '</div>';
+              }
+            ?>
+          </div>
         </div>
       </section>
       <!--End Contents Page-->

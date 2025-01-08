@@ -161,7 +161,7 @@
                             </ul>
                           </li>
                           <li><a href="../galeri/">Galeri</a></li>
-                          <li class="menu-item-has-children">
+                          <li class="menu-item-has-chil  dren">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
                               <li><a href="../tentang/">Universitas Terbuka</a></li>
@@ -179,7 +179,7 @@
 
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
-                  <a class="thm-btn" href="..SSSS/pendaftaran/">
+                  <a class="thm-btn" href=".. v b /pendaftaran/">
                     <span class="txt">Mendaftar Disini</span>
                   </a>
                 </div>

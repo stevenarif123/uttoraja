@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>KONTAK KAMI</title>
+    <title>TENTANG UNIVERSITAS TERBUKA</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -54,46 +54,90 @@
 
     <div class="page-wrapper">
       <!--Start Main Header One -->
-      <header class="main-header main-header-one">
-        <div class="main-header-one__top">
-          <div class="container">
-            <div class="main-header-one__top-inner">
-              <div class="main-header-one__top-left">
-                <div class="header-contact-info-one">
-                  <ul>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-phone-call"></span>
+      <!-- Bagian header sama seperti sebelumnya -->
+      <!--End Main Header One -->
+
+      <!--Start Page Header-->
+      <!-- Bagian Page Header sama seperti sebelumnya -->
+      <!--End Page Header-->
+
+      <!--Start Contents Page-->
+      <section
+        id="contact"
+        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
+      >
+        <div class="container jarakcontainer">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="contact-one__content">
+                <form action="kontak/index.php" method="post" class="contact-one__form">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <input type="text" name="nama" placeholder="Nama" required />
                       </div>
-                      <p><a href="tel:6281355619225">+6281355619225</a></p>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-email"></span>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <input type="email" name="email" placeholder="Email" required />
                       </div>
-                      <p>
-                        <a href="mailto:info@uttoraja.com"
-                          >info@uttoraja.com</a
-                        >
-                      </p>
-                    </li>
-                  </ul>
-                </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <textarea name="pesan" placeholder="Pesan" required></textarea>
+                      </div>
+                      <div class="input-box">
+                        <button type="submit" class="btn-one" name="submit">Kirim Pesan</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+<?php
+                if(isset($_POST['submit'])){
+                  $nama = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
+                  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+                  $pesan = filter_input(INPUT_POST, 'pesan', FILTER_SANITIZE_STRING);
+
+                  if(!empty($nama) && !empty($email) && !empty($pesan) && filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    // Koneksi database dummy (ganti dengan database asli)
+                    $koneksi = mysqli_connect("localhost", "root", "", "kontak_db");
+                    if (!$koneksi) {
+                      die("Koneksi database gagal: " . mysqli_connect_error());
+                    }
+
+                    // Query untuk menyimpan data ke database menggunakan prepared statement
+                    $query = "INSERT INTO kontak (nama, email, pesan) VALUES (?, ?, ?)";
+                    $stmt = mysqli_prepare($koneksi, $query);
+                    mysqli_stmt_bind_param($stmt, "sss", $nama, $email, $pesan);
+                    
+                    if (mysqli_stmt_execute($stmt)) {
+                      echo "<p style='color:green;'>Pesan berhasil dikirim! Terima kasih telah menghubungi kami.</p>";
+                    } else {
+                      echo "<p style='color:red;'>Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.</p>";
+                    }
+
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($koneksi);
+                  } else {
+                    echo "<p style='color:red;'>Mohon isi semua field dengan benar.</p>";
+                  }
+                }
+                ?>
               </div>
-              <div class="main-header-one__top-right">
-                <div class="header-social-link-one">
-                  <ul class="clearfix">
-                    <li>
-                      <a href="https://www.facebook.com/uttoraja">
-                        <i class="icon-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--End Contents Page-->
+
+      <!--Start Footer Three-->
+      <!-- Bagian footer sama seperti sebelumnya -->
+      <!--End Footer Three-->
+    </div>
+
+    <!-- Bagian script sama seperti sebelumnya -->
+  </body>
+</html>
                       <a href="https://www.instagram.com/uttoraja/">
                         <i class="icon-instagram-symbol"></i>
                       </a>
@@ -275,6 +319,57 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="contact-one__content">
+                <form action="kontak/index.php" method="post" class="contact-one__form">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <input type="text" name="nama" placeholder="Nama" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <input type="email" name="email" placeholder="Email" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <textarea name="pesan" placeholder="Pesan" required></textarea>
+                      </div>
+                      <div class="input-box">
+                        <button type="submit" class="btn-one" name="submit">Kirim Pesan</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <?php
+                if(isset($_POST['submit'])){
+                  $nama = $_POST['nama'];
+                  $email = $_POST['email'];
+                  $pesan = $_POST['pesan'];
+
+                  // Koneksi database dummy (ganti dengan database asli)
+                  $koneksi = mysqli_connect("localhost", "root", "", "kontak_db");
+                  if (!$koneksi) {
+                    die("Koneksi database gagal: " . mysqli_connect_error());
+                  }
+
+                  // Query untuk menyimpan data ke database
+                  $query = "INSERT INTO kontak (nama, email, pesan) VALUES ('$nama', '$email', '$pesan')";
+                  if (mysqli_query($koneksi, $query)) {
+                    echo "<p style='color:green;'>Pesan berhasil dikirim!</p>";
+                  } else {
+                    echo "<p style='color:red;'>Error: " . $query . "<br>" . mysqli_error($koneksi) . "</p>";
+                  }
+
+                  mysqli_close($koneksi);
+                }
+                ?>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!--End Contents Page-->
@@ -466,12 +561,4 @@
     <script src="../assets/js/08-slick.min.js"></script>
     <script src="../assets/js/09-wow.min.js"></script>
     <script src="../assets/js/10-jquery.circleType.js"></script>
-    <script src="../assets/js/11-jquery.lettering.min.js"></script>
-    <script src="../assets/js/12-TweenMax.min.js"></script>
-    <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
-    <script src="../assets/vendor/marquee/marquee.min.js"></script>
-    <script src="../assets/vendor/odometer/odometer.min.js"></script>
-
-    <script src="../assets/js/main.js"></script>
-  </body>
 </html>

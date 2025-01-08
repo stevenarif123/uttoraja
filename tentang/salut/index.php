@@ -270,6 +270,39 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="contact-area__content">
+                        <div class="sec-title-four">
+                            <div class="sub-title">
+                                <h4>Mengenal SALUT</h4>
+                            </div>
+                            <h2>
+                                Sentra Layanan Universitas Terbuka
+                            </h2>
+                        </div>
+                        <div class="text">
+                            <p>
+                                Sentra Layanan Universitas Terbuka (SALUT) adalah unit layanan yang dibentuk oleh Universitas Terbuka untuk memberikan layanan dan dukungan kepada mahasiswa UT di berbagai wilayah.
+                            </p>
+                            <p>
+                                SALUT hadir sebagai mitra UT untuk memfasilitasi mahasiswa dalam berbagai aspek perkuliahan, mulai dari pendaftaran, bimbingan belajar, akses internet, hingga informasi terkait ujian dan kelulusan.
+                            </p>
+                            <p>
+                                <div style="text-align: center;">
+                                    [Tempat untuk menyisipkan gambar SALUT]
+                                </div>
+                            </p>
+                            <p>
+                                Kami berkomitmen untuk memberikan pelayanan yang ramah, profesional, dan responsif terhadap kebutuhan mahasiswa UT. Kami juga terus berupaya untuk meningkatkan kualitas layanan dan fasilitas yang kami sediakan.
+                            </p>
+                            <p>
+                                Dengan adanya SALUT, diharapkan mahasiswa UT dapat belajar dengan lebih nyaman dan efektif, serta meraih kesuksesan dalam studi mereka.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </section>
       <!--End Contents Page-->
@@ -291,7 +324,7 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2">
                     <div class="title">
-                      <h3>Bantuan &amp; Dukungan</h3>
+                      <h3>Bantuan & Dukungan</h3>
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                       <div class="text">
@@ -470,3 +503,6 @@
     <script src="../../assets/js/main.js"></script>
   </body>
 </html>
+
+</file_content>
+</environment_details>

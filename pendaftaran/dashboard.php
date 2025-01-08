@@ -13,11 +13,11 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Dashboard Calon Mahasiswa Baru</title>
+    <title>Dashboard Calon Mahasiswa</title>
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">Data Calon Mahasiswa Baru</h2>
+    <h2 class="mb-4">Data Calon Mahasiswa</h2>
     
     <table class="table table-bordered">
         <thead>

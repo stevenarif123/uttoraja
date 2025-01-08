@@ -181,7 +181,7 @@
 
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
-                  <a class="thm-btn" href="..SSSS/pendaftaran/">
+                  <a class="thm-btn" href="../pendaftaran/">
                     <span class="txt">Mendaftar Disini</span>
                   </a>
                 </div>
@@ -288,57 +288,25 @@
                                 </h2>
                             </div>
                             <div class="text">
-                                <p>Creative design slogans can help people connect more to the<br>
-                                    scenario that the accounts for making available.</p>
-                            </div>
-                            <div class="about-three__fact-box">
-                                <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div class="about-three__fact-single">
-                                            <div class="count-outer count-box">
-                                                <h2 class="odometer" data-count="256">00</h2>
-                                                <i class="icon-plus-symbol-button"></i>
-                                            </div>
-                                            <div class="title">
-                                                <h3>Completed Projects</h3>
-                                            </div>
-                                            <div class="text">
-                                                <p>With 100% Satisfaction</p>
-                                            </div>
-                                        </div>
+                                <p>
+                                    Universitas Terbuka (UT) adalah perguruan tinggi negeri yang memberikan kesempatan pendidikan tinggi secara terbuka dan jarak jauh. UT hadir untuk memberikan akses pendidikan tinggi kepada semua lapisan masyarakat, tanpa batasan usia, lokasi, atau waktu.
+                                </p>
+                                <p>
+                                    Dengan sistem pembelajaran jarak jauh, UT memungkinkan mahasiswa untuk belajar secara fleksibel sesuai dengan ritme dan kesibukan masing-masing. UT menawarkan berbagai program studi dari berbagai disiplin ilmu, mulai dari jenjang diploma, sarjana, hingga pascasarjana.
+                                </p>
+                                <p>
+                                    <div style="text-align: center;">
+                                        [Tempat untuk menyisipkan gambar]
                                     </div>
-
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div class="about-three__fact-single">
-                                            <div class="count-outer count-box">
-                                                <h2 class="odometer" data-count="8.9">00</h2>
-                                                <i class="icon-percentage"></i>
-                                            </div>
-                                            <div class="title">
-                                                <h3>Company Growth</h3>
-                                            </div>
-                                            <div class="text">
-                                                <p>Avg. Every Year</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                </p>
+                                <p>
+                                    SALUT (Sentra Layanan Universitas Terbuka) Tana Toraja hadir sebagai mitra UT untuk memberikan layanan dan dukungan kepada mahasiswa UT di wilayah Tana Toraja dan sekitarnya. SALUT Tana Toraja menyediakan berbagai fasilitas dan layanan, seperti bimbingan belajar, akses internet, dan informasi terkait perkuliahan di UT.
+                                </p>
+                                <p>
+                                    Kami berkomitmen untuk memberikan pelayanan terbaik kepada mahasiswa UT dan membantu mereka meraih kesuksesan dalam studi mereka.
+                                </p>
                             </div>
-                            <div class="about-three__img">
-                                <div class="img-box">
-                                    <img src="../assets/img/about/about-three__img1.jpg" alt="image">
-                                </div>
-                                <div class="title-box">
-                                    <h3>We Are The Best Digital<br>Agencies In The City</h3>
-                                    <div class="btn-box">
-                                        <a class="thm-btn" href="#">
-                                            <span class="txt">Learn More</span>
-                                            <i class="icon-next"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -347,7 +315,7 @@
                                 <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <!--Single About Three Img-->
                                     <div class="single-about-three__img-box">
-                                        <img src="../assets/img/about/about-three__img2.jpg" alt="image">
+                                        <img src="../assets/img/about/about-three__img2.jpg" alt="image" style="opacity: 0.5;">
                                     </div>
                                     <!--End About Three Img-->
                                 </li>
@@ -355,7 +323,7 @@
                                 <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <!--Single About Three Img-->
                                     <div class="single-about-three__img-box">
-                                        <img src="../assets/img/about/about-three__img3.jpg" alt="image">
+                                        <img src="../assets/img/about/about-three__img3.jpg" alt="image" style="opacity: 0.5;">
                                     </div>
                                     <!--End About Three Img-->
                                 </li>
@@ -365,7 +333,7 @@
                                 data-wow-duration="1500ms">
                                 <!--Single About Three Img-->
                                 <div class="single-about-three__img-box">
-                                    <img src="../assets/img/about/about-three__img4.jpg" alt="image">
+                                    <img src="../assets/img/about/about-three__img4.jpg" alt="image" style="opacity: 0.5;">
                                 </div>
                                 <!--End About Three Img-->
                             </div>

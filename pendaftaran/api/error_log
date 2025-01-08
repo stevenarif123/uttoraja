@@ -1,0 +1,3 @@
+[02-Nov-2024 08:28:49 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/utte6738/public_html/pendaftaran/api/index.php on line 13
+[02-Nov-2024 08:28:49 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/utte6738/public_html/pendaftaran/api/index.php on line 16
+[02-Nov-2024 08:28:49 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/utte6738/public_html/pendaftaran/api/index.php on line 41

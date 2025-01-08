@@ -179,7 +179,7 @@
 
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
-                  <a class="thm-btn" href="..SSSS/pendaftaran/">
+                  <a class="thm-btn" href="../pendaftaran/">
                     <span class="txt">Mendaftar Disini</span>
                   </a>
                 </div>

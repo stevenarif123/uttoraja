@@ -181,7 +181,7 @@
 
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
-                  <a class="thm-btn" href="..SSSS/pendaftaran/">
+                  <a class="thm-btn" href="../pendaftaran/">
                     <span class="txt">Mendaftar Disini</span>
                   </a>
                 </div>
@@ -270,6 +270,51 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="contact-area__content">
+                        <div class="sec-title-four">
+                            <div class="sub-title">
+                                <h4>Pesan dari Kepala SALUT</h4>
+                            </div>
+                            <h2>
+                                Sambutan Hangat dari Kepala SALUT Tana Toraja
+                            </h2>
+                        </div>
+                        <div class="text">
+                            <p>
+                                Assalamualaikum Warahmatullahi Wabarakatuh,
+                            </p>
+                            <p>
+                                Salam sejahtera bagi kita semua,
+                            </p>
+                            <p>
+                                Saya selaku Kepala Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, mengucapkan selamat datang di website resmi kami. Kami hadir sebagai mitra Universitas Terbuka untuk memberikan layanan dan dukungan terbaik bagi mahasiswa UT di wilayah Tana Toraja dan sekitarnya.
+                            </p>
+                            <p>
+                                <div style="text-align: center;">
+                                    [Tempat untuk menyisipkan gambar Kepala SALUT]
+                                </div>
+                            </p>
+                            <p>
+                                Kami berkomitmen untuk terus meningkatkan kualitas layanan dan fasilitas yang kami sediakan, agar mahasiswa UT dapat belajar dengan nyaman dan meraih kesuksesan dalam studi mereka.
+                            </p>
+                            <p>
+                                Mari bersama-sama kita membangun masa depan yang lebih baik melalui pendidikan yang berkualitas.
+                            </p>
+                            <p>
+                                Wassalamualaikum Warahmatullahi Wabarakatuh.
+                            </p>
+                            <p>
+                                Hormat saya,
+                            </p>
+                            <p>
+                                [Nama Kepala SALUT]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </section>
       <!--End Contents Page-->

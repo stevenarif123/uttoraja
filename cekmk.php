@@ -207,8 +207,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
 
                     if (!$exists) {
-                        $_SESSION['pesanan'][] = $newItem;
-                        $_SESSION['total_sks'] = array_sum(array_column($_SESSION['pesanan'], 'sks'));
+                        // Calculate new total SKS
+                        $newTotalSks = array_sum(array_column($_SESSION['pesanan'], 'sks')) + $newItem['sks'];
+                        $maxSks = $_SESSION['max_sks'] ?? 20;
+                        
+                        if ($newTotalSks <= $maxSks) {
+                            $_SESSION['pesanan'][] = $newItem;
+                            $_SESSION['total_sks'] = $newTotalSks;
+                        } else {
+                            // Add error message to session
+                            $_SESSION['error_message'] = "Total SKS ({$newTotalSks}) melebihi batas maksimal {$maxSks} SKS";
+                        }
                     }
                 }
                 break;
@@ -535,10 +544,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <h1>Pesanan Mata Kuliah</h1>
 
-    <form method="POST">
-        <input type="text" name="kode_matakuliah" placeholder="Masukkan Kode Mata Kuliah" required>
+    <form id="searchForm" method="POST">
+        <input type="text" name="kode_matakuliah" id="kode_matakuliah" placeholder="Masukkan Kode Mata Kuliah" required>
         <input type="hidden" name="action" value="search">
-        <button type="submit">Cari</button>
     </form>
 
     <?php if (!empty($hasilPencarian)): ?>
@@ -583,6 +591,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Simpan</button>
     </form>
 
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div style="background-color: #ffebee; color: #c62828; padding: 10px; margin: 10px 0; border-radius: 4px;">
+            <?php 
+                echo htmlspecialchars($_SESSION['error_message']);
+                unset($_SESSION['error_message']);
+            ?>
+        </div>
+    <?php endif; ?>
+
     <h2>Daftar Pesanan</h2>
     <table>
         <thead>
@@ -625,12 +642,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </table>
 
     <?php if (!empty($_SESSION['pesanan'])): ?>
-        <button id="showModalBtn">Lihat Detail Pesanan</button>
-        <form method="POST" style="display:inline;">
-            <input type="hidden" name="action" value="proses_biaya">
-            <button type="submit">Proses Biaya</button>
-        </form>
+        <button id="showDetailBtn" onclick="showDetailWithLoading()">Lihat Detail & Proses Biaya</button>
     <?php endif; ?>
+
+    <!-- Loading spinner style -->
+    <style>
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2196F3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
     <!-- Debug Toggle Button -->
     <button class="debug-toggle" onclick="toggleDebug()">Toggle Debug</button>
@@ -718,6 +749,142 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
+        // Function to show modal with loading state
+        function showDetailWithLoading() {
+            const modal = document.getElementById("myModal");
+            const modalBody = modal.querySelector(".modal-body");
+            
+            // Show modal with loading state
+            modal.style.display = "block";
+            modal.offsetHeight; // Trigger reflow
+            modal.classList.add("show");
+            
+            // Show loading indicator
+            modalBody.innerHTML = '<div style="text-align: center; padding: 20px;"><div class="loading-spinner"></div><p>Memproses data...</p></div>';
+            
+            // Process biaya via AJAX
+            const formData = new FormData();
+            formData.append('action', 'proses_biaya');
+            
+            fetch('cekmk.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newModalBody = doc.querySelector('.modal-body');
+                if (newModalBody) {
+                    modalBody.innerHTML = newModalBody.innerHTML;
+                }
+            })
+            .catch(error => {
+                modalBody.innerHTML = '<div style="color: red; text-align: center;">Terjadi kesalahan saat memproses data</div>';
+            });
+        }
+
+        // Live search functionality
+        let searchTimeout;
+        document.getElementById('kode_matakuliah').addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            const searchValue = e.target.value.trim();
+            
+            if (searchValue.length > 0) {
+                searchTimeout = setTimeout(() => {
+                    const formData = new FormData();
+                    formData.append('action', 'search');
+                    formData.append('kode_matakuliah', searchValue);
+
+                    fetch('cekmk.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        // Find hasil pencarian section by looking for the h2 element
+                        const hasilPencarian = Array.from(doc.getElementsByTagName('h2'))
+                            .find(el => el.textContent === 'Hasil Pencarian');
+                            
+                        if (hasilPencarian) {
+                            const table = hasilPencarian.nextElementSibling;
+                            const existingTable = Array.from(document.getElementsByTagName('h2'))
+                                .find(el => el.textContent === 'Hasil Pencarian');
+                            
+                            // Add event listeners to new "Tambah ke Pesanan" buttons
+                            if (table) {
+                                const forms = table.querySelectorAll('form');
+                                forms.forEach(form => {
+                                    form.onsubmit = function(e) {
+                                        e.preventDefault();
+                                        const formData = new FormData(form);
+                                        
+                                        fetch('cekmk.php', {
+                                            method: 'POST',
+                                            body: formData
+                                        })
+                                        .then(response => response.text())
+                                        .then(html => {
+                                            const parser = new DOMParser();
+                                            const doc = parser.parseFromString(html, 'text/html');
+                                            
+                                            // Update pesanan table
+                                            const newPesananTable = Array.from(doc.getElementsByTagName('h2'))
+                                                .find(el => el.textContent === 'Daftar Pesanan')?.nextElementSibling;
+                                            const currentPesananTable = Array.from(document.getElementsByTagName('h2'))
+                                                .find(el => el.textContent === 'Daftar Pesanan')?.nextElementSibling;
+                                                
+                                            if (currentPesananTable && newPesananTable) {
+                                                currentPesananTable.replaceWith(newPesananTable.cloneNode(true));
+                                            }
+                                            
+                                            // Show error message if exists
+                                            const errorMessage = doc.querySelector('[style*="background-color: #ffebee"]');
+                                            const currentErrorMessage = document.querySelector('[style*="background-color: #ffebee"]');
+                                            if (errorMessage) {
+                                                if (currentErrorMessage) {
+                                                    currentErrorMessage.replaceWith(errorMessage.cloneNode(true));
+                                                } else {
+                                                    const pesananHeader = Array.from(document.getElementsByTagName('h2'))
+                                                        .find(el => el.textContent === 'Daftar Pesanan');
+                                                    if (pesananHeader) {
+                                                        pesananHeader.parentNode.insertBefore(errorMessage.cloneNode(true), pesananHeader);
+                                                    }
+                                                }
+                                            } else if (currentErrorMessage) {
+                                                currentErrorMessage.remove();
+                                            }
+                                            
+                                            // Update detail button visibility
+                                            const detailBtn = doc.getElementById('showDetailBtn');
+                                            const currentDetailBtn = document.getElementById('showDetailBtn');
+                                            if (detailBtn && !currentDetailBtn) {
+                                                const pesananTable = Array.from(document.getElementsByTagName('h2'))
+                                                    .find(el => el.textContent === 'Daftar Pesanan')?.nextElementSibling;
+                                                if (pesananTable) {
+                                                    pesananTable.insertAdjacentElement('afterend', detailBtn.cloneNode(true));
+                                                }
+                                            }
+                                        });
+                                    };
+                                });
+                            }
+                            
+                            if (existingTable) {
+                                existingTable.nextElementSibling.replaceWith(table.cloneNode(true));
+                            } else {
+                                document.getElementById('searchForm').insertAdjacentElement('afterend', hasilPencarian.cloneNode(true));
+                                hasilPencarian.nextElementSibling.insertAdjacentElement('afterend', table.cloneNode(true));
+                            }
+                        }
+                    });
+                }, 300);
+            }
+        });
+
         // Debug window toggle
         function toggleDebug() {
             const debugBox = document.querySelector('.debug-box');
@@ -728,17 +895,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Modal functionality with animations
         const modal = document.getElementById("myModal");
-        const btn = document.getElementById("showModalBtn");
         const closeBtn = document.querySelector(".close");
-
-        if (btn) {
-            btn.onclick = function() {
-                modal.style.display = "block";
-                // Trigger reflow
-                modal.offsetHeight;
-                modal.classList.add("show");
-            }
-        }
 
         if (closeBtn) {
             closeBtn.onclick = function() {
