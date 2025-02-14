@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /pendaftaran/api/
+
+# Handle query parameter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^pendaftar$ index.php [L,QSA]
+
+# Handle path parameter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^pendaftar/(.*)$ index.php?id=$1 [L,QSA]

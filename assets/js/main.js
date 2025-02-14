@@ -418,9 +418,6 @@
         thmSwiperInit();
         accordionActive();
 
-        // Nice Select
-        $("select").niceSelect();
-
         //Jquery Curved Circle
         if ($(".curved-circle").length) {
             $(".curved-circle").circleType({

@@ -1,17 +1,21 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>KEGIATAN AKADEMIK</title>
+  <title>PENDAFTARAN MAHASISWA BARU SALUT TANA TORAJA</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link
     rel="shortcut icon"
     type="image/x-icon"
-    href="assets/img/favicon.png" />
+    href="../assets/img/favicon.png" />
   <!-- Place favicon.ico in the root directory -->
 
   <link
@@ -19,34 +23,43 @@
     rel="stylesheet" />
 
   <!-- CSS here -->
-  <link rel="stylesheet" href="assets/css/01-bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/02-all.min.css" />
-  <link rel="stylesheet" href="assets/css/03-jquery.magnific-popup.css" />
-  <link rel="stylesheet" href="assets/css/04-nice-select.css" />
-  <link rel="stylesheet" href="assets/css/05-odometer.css" />
-  <link rel="stylesheet" href="assets/css/06-swiper.min.css" />
-  <link rel="stylesheet" href="assets/css/07-animate.min.css" />
-  <link rel="stylesheet" href="assets/css/08-custom-animate.css" />
-  <link rel="stylesheet" href="assets/css/09-slick.css" />
-  <link rel="stylesheet" href="assets/css/10-icomoon.css" />
-  <link
-    rel="stylesheet"
-    href="assets/vendor/custom-animate/custom-animate.css" />
-  <link rel="stylesheet" href="assets/vendor/jarallax/jarallax.css" />
-  <link rel="stylesheet" href="assets/vendor/odometer/odometer.min.css" />
-  <link rel="stylesheet" href="assets/fonts/gilroy/stylesheet.css" />
+  <link rel="stylesheet" href="../assets/css/01-bootstrap.min.css" />
+  <link rel="stylesheet" href="../assets/css/02-all.min.css" />
+  <link rel="stylesheet" href="../assets/css/03-jquery.magnific-popup.css" />
+  <!-- <link rel="stylesheet" href="assets/css/04-nice-select.css" /> -->
+  <link rel="stylesheet" href="../assets/css/05-odometer.css" />
+  <link rel="stylesheet" href="../assets/css/06-swiper.min.css" />
+  <link rel="stylesheet" href="../assets/css/07-animate.min.css" />
+  <link rel="stylesheet" href="../assets/css/08-custom-animate.css" />
+  <link rel="stylesheet" href="../assets/css/09-slick.css" />
+  <link rel="stylesheet" href="../assets/css/10-icomoon.css" />
+  <link rel="stylesheet" href="../assets/vendor/custom-animate/custom-animate.css" />
+  <link rel="stylesheet" href="../assets/vendor/jarallax/jarallax.css" />
+  <link rel="stylesheet" href="../assets/vendor/odometer/odometer.min.css" />
+  <link rel="stylesheet" href="../assets/fonts/gilroy/stylesheet.css" />
 
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/responsive.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/color1.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <style>
+    .dropdown-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+  </style>
+  <script>
+    function toUpperCase(input) {
+      input.value = input.value.toUpperCase();
+    }
+  </script>
 </head>
 
 <body class="body-gray-bg">
-  <!--Start Preloader -->
-  <div id="preloader" class="alt">
+  <!-- preloader -->
+  <div id="preloader">
     <div id="loading-center">
       <div class="loader">
         <div class="loader-outter"></div>
@@ -54,7 +67,7 @@
       </div>
     </div>
   </div>
-  <!--End Preloader-->
+  <!-- preloader-end -->
 
   <div class="page-wrapper">
     <!--Start Main Header One -->
@@ -69,14 +82,14 @@
                     <div class="icon">
                       <span class="icon-phone-call"></span>
                     </div>
-                    <p><a href="tel:6281355619225">+6281355619225</a></p>
+                    <p><a href="tel:+6281355619225">+6281355619225</a></p>
                   </li>
                   <li>
                     <div class="icon">
                       <span class="icon-email"></span>
                     </div>
                     <p>
-                      <a href="mailto:info@uttoraja.com">info@uttoraja.com</a>
+                      <a href="mailto:info@saluttoraja.com">info@saluttoraja.com</a>
                     </p>
                   </li>
                 </ul>
@@ -102,7 +115,7 @@
                   </li>
                   <li>
                     <a href="https://www.youtube.com/@SALUTTanaToraja">
-                      <i class="icon-vimeo"></i>
+                      <i class="icon.youtube"></i>
                     </a>
                   </li>
                 </ul>
@@ -118,11 +131,12 @@
             <div class="main-header-one__bottom-inner">
               <div class="main-header-one__bottom-left">
                 <div class="logo-box-one">
-                  <a href="./">
-                    <img src="assets/img/resource/logo.png" alt="Logo" />
+                  <a href="../index.html">
+                    <img src="../assets/img/resource/logo.png" alt="Logo" />
                   </a>
                 </div>
               </div>
+
               <div class="main-header-one__bottom-middle">
                 <div class="menu-area__inner">
                   <div class="mobile-nav-toggler">
@@ -132,7 +146,7 @@
                     <nav class="menu-nav">
                       <div class="navbar-wrap main-menu">
                         <ul class="navigation">
-                          <li><a href="./">Home</a></li>
+                          <li><a href="../index.html">Home</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Aplikasi UT</a>
                             <ul class="sub-menu">
@@ -156,22 +170,22 @@
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="./informasi.php">Informasi Akademik</a></li>
-                              <li><a href="./administrasi/">Administrasi Akademik</a></li>
-                              <li><a href="./kegiatan.php">Kegiatan Akademik</a></li>
-                              <li><a href="./modul/">Pengambilan Modul</a></li>
-                              <li><a href="./legalisir/">Legalisir Ijazah</a></li>
-                              <li><a href="./suratketerangan/">Surat Keterangan</a></li>
+                              <li><a href="../informasi.php">Informasi Akademik</a></li>
+                              <li><a href="../administrasi/">Administrasi Akademik</a></li>
+                              <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
+                              <li><a href="../modul/">Pengambilan Modul</a></li>
+                              <li><a href="../legalisir/">Legalisir Ijazah</a></li>
+                              <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                             </ul>
                           </li>
                           <li><a href="./galeri/">Galeri</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
-                              <li><a href="./tentang/">Universitas Terbuka</a></li>
-                              <li><a href="./tentang/salut/">SALUT</a></li>
-                              <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                              <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                              <li><a href="../tentang/tentangut.php">Universitas Terbuka</a></li>
+                              <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
+                              <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                              <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
                         </ul>
@@ -180,12 +194,8 @@
                   </div>
                 </div>
               </div>
-
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
-                  <a class="thm-btn" href="./pendaftaran/">
-                    <span class="txt">Mendaftar Disini</span>
-                  </a>
                 </div>
               </div>
             </div>
@@ -200,7 +210,7 @@
             <i class="fas fa-times"></i>
           </div>
           <div class="nav-logo">
-            <a href="./">
+            <a href="index.html">
               <img
                 src="assets/img/resource/mobile-menu-logo.png"
                 alt="Logo" />
@@ -211,7 +221,7 @@
           </div>
           <div class="contact-info">
             <div class="icon-box"><span class="icon-phone-call"></span></div>
-            <p><a href="tel:6281355619225">+6281355619225</a></p>
+            <p><a href="tel:+6281355619225">+6281355619225</a></p>
           </div>
           <div class="social-links">
             <ul class="clearfix list-wrap">
@@ -246,55 +256,39 @@
       </div>
       <div class="container">
         <div class="page-header__inner">
-          <h2>KEGIATAN AKADEMIK</h2>
+          <h2>Pendaftaran Mahasiswa Baru</h2>
           <ul class="thm-breadcrumb">
             <li>
-              <a href="./"><span class="fa fa-home"></span> Home</a>
+              <a href="index.html"><span class="fa fa-home"></span> Home</a>
             </li>
             <li><i class="icon-right-arrow-angle"></i></li>
-            <li class="color-base"> Kegiatan Akademik</li>
+            <li class="color-base">Pendaftaran</li>
           </ul>
         </div>
       </div>
     </section>
     <!--End Page Header-->
 
-    <!--Start Banner One-->
-    <section class="banner-one">
-      <div class="banner-one__shape1 float-bob-x">
-        <img src="assets/img/shape/banner-one__shape1.png" alt="#" />
-      </div>
-      <div class="banner-one__shape3 float-bob-y">
-        <img src="assets/img/shape/banner-one__shape3.png" alt="#" />
-      </div>
-      <div class="container">
-        <div class="banner-one__inner">
-          <div class="banner-one__content wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-            <p>TES</p>
+    <!--Start Contact Page-->
+    <section
+      id="contact"
+      class="contact-area contact-bg pt-120 pb-100 p-relative fix">
+      <div class="container jarakcontainer">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="contact-bg02">
+              <div class="section-title center-align">
+                <h3 style="margin-bottom: 20px;">Pendaftaran Berhasil</h3>
+              </div>
+              <div class="text-center">
+                <p>Terima kasih telah mendaftar. Data Anda telah berhasil kami terima.</p>
+                <a href="index.php" class="pnd-btn">Kembali ke Form Pendaftaran</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-    <!--End Banner One-->
-
-    <div class="container">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Kegiatan Akademik</th>
-                    <th>Tanggal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Seminar Nasional</td>
-                    <td>20/07/2024</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
     <!--Start Footer Three-->
     <footer class="footer-three">
@@ -313,7 +307,7 @@
               <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
                 <div class="single-footer-widget single-footer-widget-style2">
                   <div class="title">
-                    <h3>Bantuan &amp; Dukungan</h3>
+                    <h3>Bantuan & Dukungan</h3>
                   </div>
                   <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                     <div class="text">
@@ -341,7 +335,7 @@
                           <span class="icon-phone-call"></span>
                         </div>
                         <p>
-                          <a href="tel:6281355619225">+62 813-5561-9225</a>
+                          <a href="tel:+6281355619225">+62 813-5561-9225</a>
                         </p>
                       </li>
                     </ul>
@@ -359,16 +353,16 @@
                   <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
                     <ul class="clearfix">
                       <li>
-                        <p><a href="./tentang/">Tentang UT</a></p>
+                        <p><a href="../tentang/tentangut.php">Tentang UT</a></p>
                       </li>
                       <li>
-                        <p><a href="./layanan/informasi.php">Informasi Akademik</a></p>
+                        <p><a href="../layanan/informasi.php">Informasi Akademik</a></p>
                       </li>
                       <li>
-                        <p><a href="./administrasi/">Administrasi</a></p>
+                        <p><a href="../administrasi/">Administrasi</a></p>
                       </li>
                       <li>
-                        <p><a href="./tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                        <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
                       </li>
                     </ul>
                   </div>
@@ -386,32 +380,32 @@
                     <ul class="clearfix">
                       <li>
                         <p>
-                          <a href="./informasi.php">Informasi Akademik</a>
+                          <a href="../informasi.php">Informasi Akademik</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="./administrasi">Administrasi Akademik</a>
+                          <a href="../administrasi">Administrasi Akademik</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="./kegiatan.php">Kegiatan</a>
+                          <a href="../kegiatan.php">Kegiatan</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="./modul/">Pengambilan Modul</a>
+                          <a href="../modul/">Pengambilan Modul</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="./suratketerangan">Surat Keterangan</a>
+                          <a href="../suratketerangan">Surat Keterangan</a>
                         </p>
                       </li>
                       <li>
                         <p>
-                          <a href="./legalisir">Legalisir Ijazah</a>
+                          <a href="../legalisir">Legalisir Ijazah</a>
                         </p>
                       </li>
                     </ul>
@@ -442,14 +436,8 @@
         <!--End Footer Bottom -->
       </div>
     </footer>
-    <!--Start Footer One-->
+    <!--End Footer Three-->
   </div>
-
-  <!-- Scroll-top -->
-  <button class="scroll-top scroll-to-target" data-target="html">
-    <i class="icon-down-arrow"></i>
-  </button>
-  <!-- Scroll-top-end-->
 
   <!--Start Search Popup -->
   <div class="search-popup">
@@ -470,27 +458,31 @@
   </div>
   <!--End Search Popup -->
 
+  <!-- Scroll-top -->
+  <button class="scroll-top scroll-to-target" data-target="html">
+    <i class="icon-down-arrow"></i>
+  </button>
+  <!-- Scroll-top-end-->
+
   <!-- JS here -->
-  <script src="assets/js/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/01-ajax-form.js"></script>
-  <!-- <script src="assets/js/02-bootstrap.min.js"></script> -->
-  <script src="assets/js/03-jquery.appear.js"></script>
-  <script src="assets/js/04-swiper.min.js"></script>
-  <script src="assets/js/05-jquery.odometer.min.js"></script>
-  <script src="assets/js/06-jquery.magnific-popup.min.js"></script>
-  <script src="assets/js/07-jquery.nice-select.min.js"></script>
-  <script src="assets/js/08-slick.min.js"></script>
-  <script src="assets/js/09-wow.min.js"></script>
-  <script src="assets/js/10-jquery.circleType.js"></script>
-  <script src="assets/js/11-jquery.lettering.min.js"></script>
-  <script src="assets/js/12-TweenMax.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/vendor/jarallax/jarallax.min.js"></script>
-  <script src="assets/vendor/marquee/marquee.min.js"></script>
-  <script src="assets/vendor/odometer/odometer.min.js"></script>
-  <script src="assets/vendor/progress-bar/knob.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="../assets/js/jquery-3.6.0.min.js"></script>
+  <script src="../assets/js/01-ajax-form.js"></script>
+  <script src="../assets/js/02-bootstrap.min.js"></script>
+  <script src="../assets/js/03-jquery.appear.js"></script>
+  <script src="../assets/js/04-swiper.min.js"></script>
+  <script src="../assets/js/05-jquery.odometer.min.js"></script>
+  <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
+  <!-- <script src="assets/js/07-jquery.nice-select.min.js"></script> -->
+  <script src="../assets/js/08-slick.min.js"></script>
+  <script src="../assets/js/09-wow.min.js"></script>
+  <script src="../assets/js/10-jquery.circleType.js"></script>
+  <script src="../assets/js/11-jquery.lettering.min.js"></script>
+  <script src="../assets/js/12-TweenMax.min.js"></script>
+  <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
+  <script src="../assets/vendor/marquee/marquee.min.js"></script>
+  <script src="../assets/vendor/odometer/odometer.min.js"></script>
+
+  <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

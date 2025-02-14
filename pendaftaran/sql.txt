@@ -11,7 +11,12 @@ CREATE TABLE pendaftar (
     jurusan VARCHAR(255) NOT NULL,
     agama VARCHAR(50) NOT NULL,
     jenis_kelamin VARCHAR(10) NOT NULL,
-    pertanyaan TEXT
+    pertanyaan TEXT,
+    jalur_program VARCHAR(255),
+    alamat VARCHAR(255),
+    ukuran_baju VARCHAR(10),
+    bekerja VARCHAR(10),
+    tempat_kerja VARCHAR(255)
 );
 */
 // Tutup koneksi

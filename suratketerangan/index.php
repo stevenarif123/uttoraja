@@ -268,7 +268,31 @@
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
-        </div>
+        <div class="jarakcontainer">
+        <h3>Jika anda mengalami kebingungan dalam pengurusan surat keterangan anda dapat menghubungi admin kami.</h3>
+      </div>
+        <!--Start Cta Pendas-->
+        <section class="cta-two testmonials">
+          <div class="container" style="margin-bottom:30px">
+            <div class="cta-two__innertwo">
+              <div class="cta-two__inner-bg"
+                style="background-image: url(../assets/img/pattern/cta-two__parttern1.png);"></div>
+              <div class="cta-two__content">
+                <h2>Pengajuan Surat Keterangan</h2>
+                <p>Hubungi kami untuk bantuan Pengajuan Surat Keterangan</p>
+                 <p>Eva - 085242460651</p>
+              </div>
+              <div class="cta-two__btn">
+                <a class="thm-btn" href="https:/wa.me/6285242460651">
+                  <span class="txt">KONTAK WA</span>
+                  <i class="icon-next"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!--End Cta Two-->
+      </div>
       </section>
       <!--End Contents Page-->
 

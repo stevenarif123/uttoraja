@@ -1077,7 +1077,7 @@ border-radius: 0;
 }
 .contact-bg02 {
   background: #f6f8fa;
-  padding: 80px;
+  padding: 50px;
   border-radius: 10px;
 }
 
@@ -4958,4 +4958,13 @@ Cta Two Testmonials Css
   font-size: 16px;
   top: 1px;
   z-index: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .contact-bg02 {
+    background: #f6f8fa;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
 }

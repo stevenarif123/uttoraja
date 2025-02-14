@@ -20,10 +20,9 @@
 
     <!-- CSS here -->
     <link rel="stylesheet" href="../assets/css/01-bootstrap.min.css" />
-    <link rel="styles
-    heet" href="../assets/css/02-all.min.css" />
+    <link rel="stylesheet" href="../assets/css/02-all.min.css" />
     <link rel="stylesheet" href="../assets/css/03-jquery.magnific-popup.css" />
-    <!-- <link rel="stylesheet" href="assets/css/04-nice-select.css" /> -->
+    <link rel="stylesheet" href="../assets/css/04-nice-select.css" />
     <link rel="stylesheet" href="../assets/css/05-odometer.css" />
     <link rel="stylesheet" href="../assets/css/06-swiper.min.css" />
     <link rel="stylesheet" href="../assets/css/07-animate.min.css" />
@@ -52,6 +51,9 @@
     </div>
     <!-- preloader-end -->
 
+    <?php
+    require_once '../koneksi.php';
+    ?>
     <div class="page-wrapper">
       <!--Start Main Header One -->
       <header class="main-header main-header-one">
@@ -264,13 +266,117 @@
 
       <!--Start Contents Page-->
       <section
-        id="contact"
+        id="cek-modul"
         class="contact-area contact-bg pt-120 pb-100 p-relative fix"
       >
         <div class="container jarakcontainer">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="contact-bg02">
+                <div class="section-title center-align">
+                  <h3 style="margin-bottom: 20px;">Formulir Pengecekan Modul</h3>
+                </div>
+                <form class="contact-form mt-30" id="cekModulForm">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="nim"
+                          name="nim"
+                          placeholder="NIM Anda*"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="tanggal_lahir"
+                          name="tanggal_lahir"
+                          placeholder="Tanggal Lahir (YYYY-MM-DD)*"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="slider-btn">
+                        <button type="submit" class="pnd-btn" data-animation="fadeInRight" data-delay=".8s">Cek Modul</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div id="status-container" style="display: none;">
+                    <h1 id="status-text" style="text-align: center;"></h1>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="#" class="thm-btn" id="kembaliButton">
+                            <span class="txt">Kembali</span>
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!--End Contents Page-->
+      <script>
+        const nimInput = document.getElementById('nim');
+        nimInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length > 9) {
+                this.value = this.value.slice(0, 9);
+            }
+        });
+        nimInput.addEventListener('blur', function() {
+            if (this.value.length !== 9) {
+                alert('NIM harus terdiri dari 9 angka.');
+            }
+        });
+        const cekModulForm = document.getElementById('cekModulForm');
+        const statusContainer = document.getElementById('status-container');
+        const statusText = document.getElementById('status-text');
+        const kembaliButton = document.getElementById('kembaliButton');
+        cekModulForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('cek_modul.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data dari server:", data);
+                if (data.status === "1") {
+                    statusText.textContent = 'SUDAH TERSEDIA';
+                    statusText.style.color = 'green';
+                } else if (data.status === "0") {
+                    statusText.textContent = 'BELUM TERSEDIA';
+                    statusText.style.color = 'red';
+                } else {
+                    statusText.textContent = 'Data tidak ditemukan';
+                    statusText.style.color = 'black';
+                }
+                cekModulForm.style.display = 'none';
+                statusContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusText.textContent = 'Terjadi kesalahan';
+                statusText.style.color = 'black';
+                cekModulForm.style.display = 'none';
+                statusContainer.style.display = 'block';
+            });
+        });
+        kembaliButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            cekModulForm.reset();
+            cekModulForm.style.display = 'block';
+            statusContainer.style.display = 'none';
+        });
+    </script>
+    
 
       <!--Start Footer Three-->
       <footer class="footer-three">
@@ -289,7 +395,7 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2">
                     <div class="title">
-                      <h3>Bantuan &amp; Dukungan</h3>
+                      <h3>Bantuan & Dukungan</h3>
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                       <div class="text">
@@ -455,7 +561,7 @@
     <script src="../assets/js/04-swiper.min.js"></script>
     <script src="../assets/js/05-jquery.odometer.min.js"></script>
     <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
-    <!-- <script src="assets/js/07-jquery.nice-select.min.js"></script> -->
+    <script src="../assets/js/07-jquery.nice-select.min.js"></script>
     <script src="../assets/js/08-slick.min.js"></script>
     <script src="../assets/js/09-wow.min.js"></script>
     <script src="../assets/js/10-jquery.circleType.js"></script>
@@ -465,6 +571,18 @@
     <script src="../assets/vendor/marquee/marquee.min.js"></script>
     <script src="../assets/vendor/odometer/odometer.min.js"></script>
 
+    <script src="../assets/js/jquery-ui.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script>
+        $(function() {
+            $("#tanggal_lahir").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1950:2024"
+            });
+        });
+    </script>
   </body>
 </html>

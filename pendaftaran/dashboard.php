@@ -32,47 +32,52 @@ $result = mysqli_query($conn, $query);
         <tbody>
             <?php
             $no = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr>
-                        <td>$no</td>
-                        <td>{$row['nama_lengkap']}</td>
-                        <td>{$row['nomor_hp']}</td>
-                        <td>{$row['jurusan']}</td>
-                        <td>
-                            <button class='btn btn-info' data-toggle='modal' data-target='#detailModal{$row['id']}'>Detail</button>
-                        </td>
-                    </tr>";
-                // Modal untuk detail mahasiswa
-                echo "
-                    <div class='modal fade' id='detailModal{$row['id']}' tabindex='-1' aria-labelledby='detailModalLabel{$row['id']}' aria-hidden='true'>
-                        <div class='modal-dialog'>
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h5 class='modal-title' id='detailModalLabel{$row['id']}'>Detail Mahasiswa</h5>
-                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                        <span aria-hidden='true'>&times;</span>
-                                    </button>
-                                </div>
-                                <div class='modal-body'>
-                                    <p><strong>Nama Lengkap:</strong> {$row['nama_lengkap']}</p>
-                                    <p><strong>Nomor HP:</strong> {$row['nomor_hp']}</p>
-                                    <p><strong>Tempat Lahir:</strong> {$row['tempat_lahir']}</p>
-                                    <p><strong>Tanggal Lahir:</strong> {$row['tanggal_lahir']}</p>
-                                    <p><strong>Ibu Kandung:</strong> {$row['ibu_kandung']}</p>
-                                    <p><strong>NIK:</strong> {$row['nik']}</p>
-                                    <p><strong>Jurusan:</strong> {$row['jurusan']}</p>
-                                    <p><strong>Agama:</strong> {$row['agama']}</p>
-                                    <p><strong>Jenis Kelamin:</strong> {$row['jenis_kelamin']}</p>
-                                    <p><strong>Pertanyaan:</strong> {$row['pertanyaan']}</p>
-                                </div>
-                                <div class='modal-footer'>
-                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>
+                            <td>$no</td>
+                            <td>{$row['nama_lengkap']}</td>
+                            <td>{$row['nomor_hp']}</td>
+                            <td>{$row['jurusan']}</td>
+                            <td>
+                                <button class='btn btn-info' data-toggle='modal' data-target='#detailModal{$row['id']}'>Detail</button>
+                            </td>
+                        </tr>";
+                    // Modal untuk detail mahasiswa
+                    echo "
+                        <div class='modal fade' id='detailModal{$row['id']}' tabindex='-1' aria-labelledby='detailModalLabel{$row['id']}' aria-hidden='true'>
+                            <div class='modal-dialog'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h5 class='modal-title' id='detailModalLabel{$row['id']}'>Detail Mahasiswa</h5>
+                                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <p><strong>Nama Lengkap:</strong> {$row['nama_lengkap']}</p>
+                                        <p><strong>Nomor HP:</strong> {$row['nomor_hp']}</p>
+                                        <p><strong>Tempat Lahir:</strong> {$row['tempat_lahir']}</p>
+                                        <p><strong>Tanggal Lahir:</strong> {$row['tanggal_lahir']}</p>
+                                        <p><strong>Ibu Kandung:</strong> {$row['ibu_kandung']}</p>
+                                        <p><strong>NIK:</strong> {$row['nik']}</p>
+                                        <p><strong>Jurusan:</strong> {$row['jurusan']}</p>
+                                        <p><strong>Agama:</strong> {$row['agama']}</p>
+                                        <p><strong>Jenis Kelamin:</strong> {$row['jenis_kelamin']}</p>
+                                        <p><strong>Pertanyaan:</strong> {$row['pertanyaan']}</p>
+                                    </div>
+                                    <div class='modal-footer'>
+                                        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ";
-                $no++;
+                    ";
+                    $no++;
+                }
+            } else {
+                echo "<tr><td colspan='5'>Terjadi kesalahan saat mengambil data mahasiswa.</td></tr>";
+                error_log("Database error in dashboard.php: " . mysqli_error($conn) . "\n", 3, "error_log");
             }
             ?>
         </tbody>
