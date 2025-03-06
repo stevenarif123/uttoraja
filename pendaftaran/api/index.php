@@ -1,4 +1,19 @@
 <?php
+// Update CORS headers to be more permissive for development
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, X-API-KEY, Authorization');
+header('Access-Control-Max-Age: 86400');
+header('Access-Control-Allow-Credentials: true');
+
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+// Set JSON content type
+header('Content-Type: application/json');
 // Set header agar respon JSON    
 header('Content-Type: application/json');    
 
@@ -10,6 +25,7 @@ $VALID_API_KEY = 'pantanmandiri25';
 
 // Fungsi validasi API Key
 function validateApiKey($providedKey) {
+    
     global $VALID_API_KEY;
     return hash_equals($VALID_API_KEY, $providedKey);
 }

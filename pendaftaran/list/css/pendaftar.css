@@ -1,0 +1,162 @@
+/* Variables */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #3b82f6;
+    --accent-color: #f59e0b;
+    --background-color: #f8fafc;
+    --card-background: #ffffff;
+    --text-color: #0f172a;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal.show,
+.modal:not(.hidden) {
+    display: flex !important;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.modal-dialog {
+    background: white;
+    border-radius: 0.5rem;
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.modal-content {
+    padding: 1.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+/* Form Controls */
+.form-control {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200;
+}
+
+/* Grid Layout for Modal Content */
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.detail-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.detail-item:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500;
+}
+
+.btn-secondary {
+    @apply bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500;
+}
+
+.btn-danger {
+    @apply bg-red-500 text-white hover:bg-red-600 focus:ring-red-500;
+}
+
+/* Form Styles */
+.form-input {
+    @apply w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.form-label {
+    @apply block text-gray-700 font-bold mb-2;
+}
+
+/* Table Styles */
+.table-container {
+    @apply overflow-x-auto;
+}
+
+.data-table {
+    @apply min-w-full bg-white;
+}
+
+.table-header {
+    @apply bg-gray-100 text-gray-600 uppercase text-sm leading-normal;
+}
+
+.table-cell {
+    @apply py-3 px-6;
+}
+
+/* Action Buttons */
+.action-buttons {
+    @apply flex justify-center space-x-2;
+}
+
+.action-btn {
+    @apply text-white px-3 py-1 rounded-lg transition duration-200;
+}
+
+.view-btn {
+    @apply bg-blue-500 hover:bg-blue-600;
+}
+
+.edit-btn {
+    @apply bg-yellow-500 hover:bg-yellow-600;
+}
+
+.delete-btn {
+    @apply bg-red-500 hover:bg-red-600;
+}
+
+.whatsapp-btn {
+    @apply bg-green-500 hover:bg-green-600;
+}
