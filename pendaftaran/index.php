@@ -2,18 +2,48 @@
 session_start();
 require_once '../koneksi.php';
 
-// Ambil data jurusan dari tabel prodi_admisi
-$sql = "SELECT nama_program_studi FROM prodi_admisi";
-$result = $conn->query($sql);
+// Initialize error array
+$errors = [];
 
-$jurusanOptions = array();
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $jurusanOptions[] = $row["nama_program_studi"];
-  }
+try {
+    // Ambil data jurusan dari tabel prodi_admisi
+    $sql = "SELECT nama_program_studi FROM prodi_admisi";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        throw new Exception("Error executing query: " . $conn->error);
+    }
+
+    $jurusanOptions = array();
+    while ($row = $result->fetch_assoc()) {
+        $jurusanOptions[] = $row["nama_program_studi"];
+    }
+
+} catch (Exception $e) {
+    $errors[] = $e->getMessage();
 }
 
-$conn->close();
+// Close connection
+if (isset($conn)) {
+    $conn->close();
+}
+
+// Display errors if any
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='alert alert-danger'>$error</div>";
+    }
+}
+
+// Get any session messages
+if (isset($_SESSION['success'])) {
+    echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+    unset($_SESSION['success']);
+}
+if (isset($_SESSION['error'])) {
+    echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
+    unset($_SESSION['error']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,109 +82,9 @@ $conn->close();
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/color1.css" />
   <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="stylesheet" href="../assets/css/costumstyles.css" />
+  <link rel="stylesheet" href="pendaftaran.css" />
 
-  <style>
-    .dropdown-icon {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    /* Modal styling (custom) */
-    .modal {
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-      display: none;
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 600px;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-    }
-
-    .close-modal {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close-modal:hover,
-    .close-modal:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .modal-body {
-      padding: 10px 0;
-    }
-
-    .modal-footer {
-      border-top: 1px solid #eee;
-      padding-top: 10px;
-      text-align: right;
-    }
-
-    /* Container untuk alert */
-    #alert-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1050;
-      width: 300px; /* Agar alert tidak terlalu melebar, bisa disesuaikan */
-    }
-
-    /* Style pesan error di bawah input */
-    .error-message {
-      color: red;
-      font-size: 0.875rem;
-      margin-top: 5px;
-      display: block;
-    }
-  </style>
-
-  <script>
-    // Fungsi agar input di field tertentu menjadi uppercase
-    function toUpperCase(input) {
-      input.value = input.value.toUpperCase();
-    }
-
-    // Fungsi untuk format date -> DD/MM/YYYY
-    function formatDate(input) {
-      let value = input.value.replace(/\D/g, '');
-      if (value.length > 8) {
-        value = value.substring(0, 8);
-      }
-      let day = value.substring(0, 2);
-      let month = value.substring(2, 4);
-      let year = value.substring(4, 8);
-
-      input.value = `${day}${ day ? '/' : '' }${month}${ month ? '/' : '' }${year}`;
-    }
-  </script>
 </head>
 
 <body class="body-gray-bg">
@@ -270,9 +200,9 @@ $conn->close();
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="../informasi.php">Informasi Akademik</a></li>
+                              <li><a href="../informasi">Informasi Akademik</a></li>
                               <li><a href="../administrasi/">Administrasi Akademik</a></li>
-                              <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
+                              <li><a href="../kegiatan">Kegiatan Akademik</a></li>
                               <li><a href="../modul/">Pengambilan Modul</a></li>
                               <li><a href="../legalisir/">Legalisir Ijazah</a></li>
                               <li><a href="../suratketerangan/">Surat Keterangan</a></li>
@@ -282,10 +212,10 @@ $conn->close();
                           <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
-                              <li><a href="../tentang/tentangut.php">Universitas Terbuka</a></li>
-                              <li><a href="../tentang/tentangsalut.php/">SALUT</a></li>
-                              <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                              <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                              <li><a href="../tentang/tentangut">Universitas Terbuka</a></li>
+                              <li><a href="../tentang/tentangsalut/">SALUT</a></li>
+                              <li><a href="../tentang/saluttator">SALUT Tana Toraja</a></li>
+                              <li><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
                         </ul>
@@ -378,221 +308,247 @@ $conn->close();
           <div class="col-lg-8">
             <div class="contact-bg02">
               <div class="section-title center-align">
-                <h3 style="margin-bottom: 20px;">Formulir Pendaftaran</h3>
+                <h3 style="margin-bottom: 20px;">Formulir Pendaftaran Mahasiswa Baru</h3>
               </div>
 
               <!-- Form Start -->
               <form
                 id="pendaftaranForm"
                 method="post"
-                class="contact-form mt-30">
-                <!-- Input hidden agar server kenali "submit" -->
-                <input type="hidden" name="submit" value="yes" />
+                action="pendaftaran.php"
+                class="contact-form">
+                <div class="form-progress">
+                  <div class="progress-line"></div>
+                  <div class="progress-step active" data-step="1">1</div>
+                  <div class="progress-step" data-step="2">2</div>
+                  <div class="progress-step" data-step="3">3</div>
+                </div>
 
-                <div class="row"></div>
-                <div class="col-lg-12">
-                  <label for="jalur_program">Jalur Program</label><br>
-                  <div class="contact-field radio-group mb-4">
-                    <label for="reguler">Reguler/Biasa</label>
-                    <input type="radio" id="reguler" name="jalur_program" value="Reguler" required>
+                <!-- Step 1 -->
+                <div class="form-step active" data-step="1">
+                  <h4 class="mb-4">Informasi Dasar</h4>
+                  <div class="row"></div>
+                  <div class="col-lg-12">
+                    <label for="jalur_program">Jalur Program</label><br>
+                    <div class="contact-field radio-group mb-4">
+                      <label for="reguler">Reguler/Biasa</label>
+                      <input type="radio" id="reguler" name="jalur_program" value="Reguler" required>
 
-                    <label for="transfer">Transfer Nilai</label>
-                    <input type="radio" id="transfer" name="jalur_program" value="Transfer Nilai" required>
+                      <label for="transfer">Transfer Nilai</label>
+                      <input type="radio" id="transfer" name="jalur_program" value="Transfer Nilai" required>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <label for="jurusan">Pilih Jurusan</label>
+                    <div class="contact-field position-relative c-name mb-4 select-container">
+                      <select id="jurusan" name="jurusan" required>
+                        <option value="" disabled selected>Pilih Jurusan*</option>
+                        <?php
+                        foreach ($jurusanOptions as $jurusan) {
+                          echo "<option value=\"$jurusan\">$jurusan</option>";
+                        }
+                        ?>
+                      </select>
+                      <span class="dropdown-icon">&#9660;</span>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="firstn"
+                        name="firstn"
+                        placeholder="Nama Lengkap*"
+                        required
+                        oninput="toUpperCase(this)" />
+                    </div>
+                  </div>
+
+                  <div class="form-buttons">
+                    <button type="button" class="pnd-btn next-step">Lanjut</button>
                   </div>
                 </div>
 
-                <div class="col-lg-12">
-                  <label for="jurusan">Pilih Jurusan</label>
-                  <div class="contact-field position-relative c-name mb-4 select-container">
-                    <select id="jurusan" name="jurusan" required>
-                      <option value="" disabled selected>Pilih Jurusan*</option>
-                      <?php
-                      foreach ($jurusanOptions as $jurusan) {
-                        echo "<option value=\"$jurusan\">$jurusan</option>";
-                      }
-                      ?>
-                    </select>
-                    <span class="dropdown-icon">&#9660;</span>
+                <!-- Step 2 -->
+                <div class="form-step" data-step="2">
+                  <h4 class="mb-4">Data Pribadi</h4>
+                  <!-- Nomor HP -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        placeholder="Nomor HP*"
+                        required
+                        oninput="toUpperCase(this)" />
+                    </div>
+                  </div>
+
+                  <!-- Tempat Lahir -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="tempat_lahir"
+                        name="tempat_lahir"
+                        placeholder="Tempat Lahir*"
+                        required
+                        oninput="toUpperCase(this)" />
+                    </div>
+                  </div>
+
+                  <!-- Tanggal Lahir -->
+                  <div class="col-lg-12">
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <div class="contact-field position-relative c-name mb-4">
+                      <div class="date-picker-wrapper">
+                        <input
+                          type="date"
+                          id="tanggal_lahir"
+                          name="tanggal_lahir"
+                          required
+                          min="1940-01-01"
+                          max="<?php echo date('Y-m-d'); ?>"
+                        />
+                        <i class="fas fa-calendar-alt calendar-icon"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Jenis Kelamin -->
+                  <div class="col-lg-12">
+                    <label for="jenis_kelamin">Jenis Kelamin</label><br>
+                    <div class="contact-field radio-group mb-4">
+                      <label for="laki-laki">Laki-laki</label>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" required>
+
+                      <label for="perempuan">Perempuan</label>
+                      <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" required>
+                    </div>
+                  </div>
+
+                  <!-- Nama Ibu Kandung -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="ibu_kandung"
+                        name="ibu_kandung"
+                        placeholder="Nama Ibu Kandung*"
+                        required
+                        oninput="toUpperCase(this)" />
+                    </div>
+                  </div>
+
+                  <!-- NIK -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="nik"
+                        name="nik"
+                        placeholder="Nomor Induk Kependudukan (NIK)*"
+                        required />
+                    </div>
+                  </div>
+
+                  <div class="form-buttons">
+                    <button type="button" class="pnd-btn prev-step">Kembali</button>
+                    <button type="button" class="pnd-btn next-step">Lanjut</button>
                   </div>
                 </div>
 
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="firstn"
-                      name="firstn"
-                      placeholder="Nama Lengkap*"
-                      required
-                      oninput="toUpperCase(this)" />
+                <!-- Step 3 -->
+                <div class="form-step" data-step="3">
+                  <h4 class="mb-4">Informasi Tambahan</h4>
+                  <!-- Alamat -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="alamat"
+                        name="alamat"
+                        placeholder="Alamat*"
+                        required
+                        oninput="toUpperCase(this)" />
+                    </div>
                   </div>
-                </div>
 
-                <!-- Nomor HP -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="phone"
-                      name="phone"
-                      placeholder="Nomor HP*"
-                      required
-                      oninput="toUpperCase(this)" />
+                  <!-- Ukuran Baju -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4 select-container">
+                      <select id="ukuran_baju" name="ukuran_baju" required>
+                        <option value="" disabled selected>Pilih Ukuran Baju*</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XLL">XLL</option>
+                      </select>
+                      <span class="dropdown-icon">&#9660;</span>
+                    </div>
                   </div>
-                </div>
 
-                <!-- Tempat Lahir -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="tempat_lahir"
-                      name="tempat_lahir"
-                      placeholder="Tempat Lahir*"
-                      required
-                      oninput="toUpperCase(this)" />
+                  <!-- Sedang Bekerja? -->
+                  <div class="col-lg-12">
+                    <label for="bekerja">Sedang Bekerja?</label>
+                    <div class="contact-field radio-group mb-4">
+                      <label for="bekerja_ya">Ya</label>
+                      <input type="radio" id="bekerja_ya" name="bekerja" value="Ya">
+
+                      <label for="bekerja_tidak">Tidak</label>
+                      <input type="radio" id="bekerja_tidak" name="bekerja" value="Tidak" checked>
+                    </div>
                   </div>
-                </div>
 
-                <!-- Tanggal Lahir -->
-                <div class="col-lg-12">
-                  <label for="tanggal_lahir">Tanggal Lahir</label>
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="number"
-                      id="tanggal_lahir"
-                      name="tanggal_lahir"
-                      placeholder="Tanggal Lahir (DD/MM/YYYY)*"
-                      required
-                      oninput="formatDate(this)" />
+                  <!-- Tempat Kerja -->
+                  <div class="col-lg-12" id="tempat_kerja_container" style="display: none;">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="tempat_kerja"
+                        name="tempat_kerja"
+                        placeholder="Tuliskan nama tempat kerja"
+                        oninput="toUpperCase(this)" />
+                    </div>
                   </div>
-                </div>
 
-                <!-- Jenis Kelamin -->
-                <div class="col-lg-12">
-                  <label for="jenis_kelamin">Jenis Kelamin</label><br>
-                  <div class="contact-field radio-group mb-4">
-                    <label for="laki-laki">Laki-laki</label>
-                    <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" required>
-
-                    <label for="perempuan">Perempuan</label>
-                    <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" required>
+                  <!-- Agama -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <select id="agama" name="agama" required>
+                        <option value="" disabled selected>Pilih Agama*</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Protestan">Protestan</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Buddha">Buddha</option>
+                        <option value="Konghucu">Konghucu</option>
+                        <option value="Lainnya">Lainnya</option>
+                      </select>
+                      <span class="dropdown-icon">&#9660;</span>
+                    </div>
                   </div>
-                </div>
 
-                <!-- Nama Ibu Kandung -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="ibu_kandung"
-                      name="ibu_kandung"
-                      placeholder="Nama Ibu Kandung*"
-                      required
-                      oninput="toUpperCase(this)" />
+                  <!-- Pertanyaan -->
+                  <div class="col-lg-12">
+                    <div class="contact-field position-relative c-name mb-4">
+                      <textarea
+                        name="pertanyaan"
+                        id="pertanyaan"
+                        cols="30"
+                        rows="10"
+                        placeholder="Tuliskan pertanyaan jika ada"></textarea>
+                    </div>
                   </div>
-                </div>
 
-                <!-- NIK -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="nik"
-                      name="nik"
-                      placeholder="Nomor Induk Kependudukan (NIK)*"
-                      required />
+                  <div class="form-buttons">
+                    <button type="button" class="pnd-btn prev-step">Kembali</button>
+                    <button type="submit" class="pnd-btn">Daftar</button>
                   </div>
-                </div>
-
-                <!-- Alamat -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="alamat"
-                      name="alamat"
-                      placeholder="Alamat*"
-                      required
-                      oninput="toUpperCase(this)" />
-                  </div>
-                </div>
-
-                <!-- Ukuran Baju -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4 select-container">
-                    <select id="ukuran_baju" name="ukuran_baju" required>
-                      <option value="" disabled selected>Pilih Ukuran Baju*</option>
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
-                      <option value="XL">XL</option>
-                      <option value="XLL">XLL</option>
-                    </select>
-                    <span class="dropdown-icon">&#9660;</span>
-                  </div>
-                </div>
-
-                <!-- Sedang Bekerja? -->
-                <div class="col-lg-12">
-                  <label for="bekerja">Sedang Bekerja?</label>
-                  <div class="contact-field radio-group mb-4">
-                    <label for="bekerja_ya">Ya</label>
-                    <input type="radio" id="bekerja_ya" name="bekerja" value="Ya">
-
-                    <label for="bekerja_tidak">Tidak</label>
-                    <input type="radio" id="bekerja_tidak" name="bekerja" value="Tidak" checked>
-                  </div>
-                </div>
-
-                <!-- Tempat Kerja -->
-                <div class="col-lg-12" id="tempat_kerja_container" style="display: none;">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="tempat_kerja"
-                      name="tempat_kerja"
-                      placeholder="Tuliskan nama tempat kerja"
-                      oninput="toUpperCase(this)" />
-                  </div>
-                </div>
-
-                <!-- Agama -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <select id="agama" name="agama" required>
-                      <option value="" disabled selected>Pilih Agama*</option>
-                      <option value="Islam">Islam</option>
-                      <option value="Protestan">Protestan</option>
-                      <option value="Katolik">Katolik</option>
-                      <option value="Hindu">Hindu</option>
-                      <option value="Buddha">Buddha</option>
-                      <option value="Konghucu">Konghucu</option>
-                      <option value="Lainnya">Lainnya</option>
-                    </select>
-                    <span class="dropdown-icon">&#9660;</span>
-                  </div>
-                </div>
-
-                <!-- Pertanyaan -->
-                <div class="col-lg-12">
-                  <div class="contact-field position-relative c-name mb-4">
-                    <textarea
-                      name="pertanyaan"
-                      id="pertanyaan"
-                      cols="30"
-                      rows="10"
-                      placeholder="Tuliskan pertanyaan jika ada"></textarea>
-                  </div>
-                </div>
-
-                <div class="col-lg-12 d-flex justify-content-between align-items-center">
-                  <div class="slider-btn">
-                    <button type="submit" class="pnd-btn" data-animation="fadeInRight" data-delay=".8s">
-                      Daftar
-                    </button>
-                  </div>
-                  <button type="button" class="btn btn-sm btn-info" id="petunjukBtn">Petunjuk Pendaftaran</button>
                 </div>
               </form>
               <!-- Form End -->
@@ -627,177 +583,6 @@ $conn->close();
       </div>
     </div>
     <!-- /Modal Petunjuk -->
-
-    <!-- Alert Container (tempat pesan sukses/error) -->
-    <div id="alert-container"></div>
-
-    <!-- Validasi NIK dan HP serta Show/Hide Error -->
-    <script>
-      // 1. Validasi Nomor HP
-      const phoneInput = document.getElementById('phone');
-      phoneInput.addEventListener('input', function() {
-        let phoneNumber = this.value.replace(/\D/g, ''); // Hapus karakter non-digit
-
-        if (phoneNumber.startsWith('08')) {
-          // Ubah jadi +62
-          phoneNumber = '+62' + phoneNumber.substring(1);
-          if (phoneNumber.length > 15) {
-            phoneNumber = phoneNumber.substring(0, 15);
-          }
-        } else {
-          showError('phone', 'Nomor HP harus diawali dengan 08');
-        }
-
-        this.value = phoneNumber;
-
-        // Cek panjang nomor setelah diubah
-        if (phoneNumber.length < 11 || phoneNumber.length > 15) {
-          showError('phone', 'Nomor HP harus 11-13 angka (08xxxxxxxxxx)');
-        } else {
-          clearError('phone');
-        }
-      });
-
-      // 2. Validasi NIK (hanya angka, panjang 16 digit)
-      const nikInput = document.getElementById('nik');
-      nikInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '').substring(0, 16); // Hanya angka, max 16
-        if (this.value.length !== 16) {
-          showError('nik', 'NIK harus 16 angka');
-        } else {
-          clearError('nik');
-        }
-      });
-
-      // Fungsi untuk menampilkan pesan error
-      function showError(inputId, message) {
-        let errorSpan = document.getElementById(`${inputId}-error`);
-        if (!errorSpan) {
-          const inputField = document.getElementById(inputId);
-          errorSpan = document.createElement('span');
-          errorSpan.id = `${inputId}-error`;
-          errorSpan.classList.add('error-message');
-          inputField.parentElement.appendChild(errorSpan);
-        }
-        errorSpan.textContent = message;
-      }
-
-      // Fungsi untuk menghapus pesan error
-      function clearError(inputId) {
-        const errorSpan = document.getElementById(`${inputId}-error`);
-        if (errorSpan) {
-          errorSpan.remove();
-        }
-      }
-    </script>
-
-    <script>
-      // Script Modal Petunjuk
-      document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('petunjukModal');
-        const btn = document.getElementById('petunjukBtn');
-        const closeIcon = document.getElementById('closeModal');
-        const closeBtn = document.getElementById('closeModalBtn');
-
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-
-        closeIcon.onclick = function() {
-          modal.style.display = "none";
-        }
-
-        closeBtn.onclick = function() {
-          modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-      });
-
-      // Tampilkan/Hide input "tempat kerja" sesuai pilihan "bekerja"
-      document.addEventListener('DOMContentLoaded', function() {
-        const bekerjaYa = document.getElementById('bekerja_ya');
-        const bekerjaTidak = document.getElementById('bekerja_tidak');
-        const tempatKerjaContainer = document.getElementById('tempat_kerja_container');
-
-        bekerjaYa.addEventListener('change', function() {
-          if (this.checked) {
-            tempatKerjaContainer.style.display = 'block';
-          }
-        });
-        bekerjaTidak.addEventListener('change', function() {
-          if (this.checked) {
-            tempatKerjaContainer.style.display = 'none';
-          }
-        });
-      });
-    </script>
-
-    <!-- Ajax Submit Form dengan Fetch -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('pendaftaranForm');
-      const alertContainer = document.getElementById('alert-container');
-
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(form);
-
-        fetch('pendaftaran.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-          if (data.includes('alert alert-danger')) {
-            // Jika ada error dari server (validasi PHP)
-            alertContainer.innerHTML = `
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${data}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            `;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-          else if (data.trim() === 'success') {
-            // Berhasil
-            window.location.href = 'success.php';
-          } 
-          else {
-            // Respons tidak dikenal
-            alertContainer.innerHTML = `
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Respons tidak dikenal: ${data}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            `;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        })
-        .catch(error => {
-          console.error('There has been a problem with your fetch operation:', error);
-          alertContainer.innerHTML = `
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              Terjadi kesalahan saat mengirim data. Silakan coba lagi.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          `;
-        });
-      });
-    });
-    </script>
-
     <div class="modal fade" id="petunjukModal" tabindex="-1" role="dialog" aria-labelledby="petunjukModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -946,25 +731,27 @@ $conn->close();
     <i class="icon-down-arrow"></i>
   </button>
   <!-- Scroll-top-end-->
+    <!-- Alert Container (tempat pesan sukses/error) -->
+    <div id="alert-container"></div>
 
-  <!-- JS here -->
-  <script src="../assets/js/jquery-3.6.0.min.js"></script>
-  <script src="../assets/js/01-ajax-form.js"></script>
-  <script src="../assets/js/02-bootstrap.min.js"></script>
-  <script src="../assets/js/03-jquery.appear.js"></script>
-  <script src="../assets/js/04-swiper.min.js"></script>
-  <script src="../assets/js/05-jquery.odometer.min.js"></script>
-  <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
-  <!-- <script src="../assets/js/07-jquery.nice-select.min.js"></script> -->
-  <script src="../assets/js/08-slick.min.js"></script>
-  <script src="../assets/js/09-wow.min.js"></script>
-  <script src="../assets/js/10-jquery.circleType.js"></script>
-  <script src="../assets/js/11-jquery.lettering.min.js"></script>
-  <script src="../assets/js/12-TweenMax.min.js"></script>
-  <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
-  <script src="../assets/vendor/marquee/marquee.min.js"></script>
-  <script src="../assets/vendor/odometer/odometer.min.js"></script>
+    <!-- JS here -->
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/01-ajax-form.js"></script>
+    <script src="../assets/js/02-bootstrap.min.js"></script>
+    <script src="../assets/js/03-jquery.appear.js"></script>
+    <script src="../assets/js/04-swiper.min.js"></script>
+    <script src="../assets/js/05-jquery.odometer.min.js"></script>
+    <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
+    <script src="../assets/js/08-slick.min.js"></script>
+    <script src="../assets/js/09-wow.min.js"></script>
+    <script src="../assets/js/10-jquery.circleType.js"></script>
+    <script src="../assets/js/11-jquery.lettering.min.js"></script>
+    <script src="../assets/js/12-TweenMax.min.js"></script>
+    <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
+    <script src="../assets/vendor/marquee/marquee.min.js"></script>
+    <script src="../assets/vendor/odometer/odometer.min.js"></script>
 
-  <script src="../assets/js/main.js"></script>
-</body>
+    <script src="../assets/js/main.js"></script>
+    <script src="pendaftaran.js"></script>
+  </body>
 </html>

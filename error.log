@@ -1,0 +1,70 @@
+[07-Mar-2025 06:31:49 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 06:31:49 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 06:51:25 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 06:51:26 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 06:58:25 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 06:58:26 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:05:53 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:05:53 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:09:05 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:09:05 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:09:21 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:09:21 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:09:30 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 07:09:30 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:27:44 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:27:45 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:31:10 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:31:10 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:33:02 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:33:02 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:44:34 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:44:34 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:44:40 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:44:41 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:45:09 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:45:09 Europe/Berlin] Mulai validasi data
+[07-Mar-2025 09:45:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php:12
+Stack trace:
+#0 {main}
+
+Next Error: Call to a member function close() on bool in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php:96
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php on line 96
+[07-Mar-2025 09:45:09 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:45:09 Europe/Berlin] Mulai validasi data
+[07-Mar-2025 09:45:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php:12
+Stack trace:
+#0 {main}
+
+Next Error: Call to a member function close() on bool in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php:96
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php on line 96
+[07-Mar-2025 09:45:40 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:45:41 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:45:45 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:45:46 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:46:08 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:46:08 Europe/Berlin] Mulai validasi data
+[07-Mar-2025 09:46:08 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php:12
+Stack trace:
+#0 {main}
+
+Next Error: Call to a member function close() on bool in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php:96
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\process_pendaftaran.php on line 96
+[07-Mar-2025 09:48:01 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:48:01 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:48:47 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:48:48 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:50:07 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:50:08 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:55:07 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:55:08 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:58:28 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:58:28 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:58:37 Europe/Berlin] Koneksi database berhasil
+[07-Mar-2025 09:58:38 Europe/Berlin] Koneksi database berhasil

@@ -154,9 +154,9 @@
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="../informasi.php">Informasi Akademik</a></li>
+                              <li><a href="../informasi">Informasi Akademik</a></li>
                               <li><a href="../administrasi/">Administrasi Akademik</a></li>
-                              <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
+                              <li><a href="../kegiatan">Kegiatan Akademik</a></li>
                               <li><a href="../modul/">Pengambilan Modul</a></li>
                               <li><a href="../legalisir/">Legalisir Ijazah</a></li>
                               <li><a href="../suratketerangan/">Surat Keterangan</a></li>
@@ -168,8 +168,8 @@
                             <ul class="sub-menu">
                               <li><a href="../tentang/">Universitas Terbuka</a></li>
                               <li><a href="../tentang/salut/">SALUT</a></li>
-                              <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                              <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                              <li><a href="../tentang/saluttator">SALUT Tana Toraja</a></li>
+                              <li><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
                         </ul>
@@ -373,13 +373,13 @@
                           <p><a href="../tentang/">Tentang UT</a></p>
                         </li>
                         <li>
-                          <p><a href="../layanan/informasi.php">Informasi Akademik</a></p>
+                          <p><a href="../layanan/informasi">Informasi Akademik</a></p>
                         </li>
                         <li>
                           <p><a href="../administrasi/">Administrasi</a></p>
                         </li>
                         <li>
-                          <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                          <p><a href="../tentang/kepalasalut">Sapaan dari Kepala SALUT</a></p>
                         </li>
                       </ul>
                     </div>
@@ -397,7 +397,7 @@
                       <ul class="clearfix">
                         <li>
                           <p>
-                            <a href="../informasi.php">Informasi Akademik</a>
+                            <a href="../informasi">Informasi Akademik</a>
                           </p>
                         </li>
                         <li>
@@ -407,7 +407,7 @@
                         </li>
                         <li>
                           <p>
-                            <a href="../kegiatan.php">Kegiatan</a>
+                            <a href="../kegiatan">Kegiatan</a>
                           </p>
                         </li>
                         <li>

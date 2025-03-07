@@ -1,20 +1,26 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error.log');
 
-$servername = "localhost"; // Ganti dengan nama host database Anda
-$username = "root"; // Ganti dengan nama pengguna database Anda
-$password = ""; // Ganti dengan kata sandi database Anda
-$dbname = "datamahasiswa"; // Ganti dengan nama database Anda
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "datamahasiswa";
 
-// Membuat koneksi
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Memeriksa koneksi
-if ($conn->connect_error) {
-  error_log("Koneksi gagal: " . $conn->connect_error . "\n", 3, "../pendaftaran/error_log");
-  die("Koneksi gagal: " . $conn->connect_error);
-} else {
-    error_log("Koneksi database berhasil\n", 3, "../pendaftaran/error_log");
+try {
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    
+    if (!$conn) {
+        throw new Exception("Connection failed: " . mysqli_connect_error());
+    }
+    
+    mysqli_set_charset($conn, "utf8mb4");
+    error_log("Koneksi database berhasil");
+    
+} catch (Exception $e) {
+    error_log("Database connection error: " . $e->getMessage());
+    die("Sorry, there was a problem connecting to the database.");
 }
-// Menutup koneksi (opsional jika Anda tidak ingin menutup koneksi di sini)
-// $conn->close();
 ?>

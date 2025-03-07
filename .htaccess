@@ -1,0 +1,24 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Allow access to images and assets
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule \.(jpg|jpeg|png|gif|svg)$ - [L]
+
+# Block directory listing
+Options -Indexes
+
+# URL rewriting for PHP files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Handle 404 errors 
+ErrorDocument 404 /404.php
+
+# Basic security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

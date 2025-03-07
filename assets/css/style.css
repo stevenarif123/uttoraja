@@ -4968,3 +4968,139 @@ Cta Two Testmonials Css
   }
 
 }
+
+/* Enable hardware acceleration */
+.animated-element {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Success Message Styles */
+.success-area {
+    background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+    overflow: hidden;
+}
+
+.success-shapes .shape-1,
+.success-shapes .shape-2,
+.success-shapes .shape-3 {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.success-shapes .shape-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(var(--thm-secondary-rgb), 0.05);
+    top: -100px;
+    right: -100px;
+}
+
+.success-shapes .shape-2 {
+    width: 200px;
+    height: 200px;
+    background: rgba(var(--thm-primary-rgb), 0.05);
+    bottom: -50px;
+    left: -50px;
+}
+
+.success-shapes .shape-3 {
+    width: 100px;
+    height: 100px;
+    background: rgba(var(--thm-base-rgb), 0.05);
+    bottom: 10%;
+    right: 10%;
+}
+
+.success-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.success-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.success-icon {
+    font-size: 80px;
+    color: var(--thm-secondary);
+    margin-bottom: 30px;
+    animation: scale-up 0.5s ease;
+}
+
+.success-content h2 {
+    color: var(--thm-secondary);
+    font-size: 42px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.success-content h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: var(--thm-black);
+}
+
+.success-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--thm-gray);
+    margin-bottom: 30px;
+}
+
+.success-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.success-actions .pnd-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.success-actions .btn-outline {
+    background: transparent;
+    border: 2px solid var(--thm-secondary);
+    color: var(--thm-secondary);
+}
+
+.success-actions .btn-outline:hover {
+    background: var(--thm-secondary);
+    color: #fff;
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

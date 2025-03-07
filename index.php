@@ -10,7 +10,7 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="assets/img/favicon.png"
+      href="serve-image.php?img=assets/img/favicon.png"
     />
     <!-- Place favicon.ico in the root directory -->
 
@@ -125,7 +125,7 @@
                 <div class="main-header-one__bottom-left">
                   <div class="logo-box-one">
                     <a href="./">
-                      <img src="assets/img/resource/logo.png" alt="Logo" />
+                      <img src="serve-image?img=assets/img/resource/logo.png" alt="Logo" />
                     </a>
                   </div>
                 </div>
@@ -170,9 +170,9 @@
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li><a href="./informasi.php">Informasi Akademik</a></li>
+                                <li><a href="./informasi">Informasi Akademik</a></li>
                                 <li><a href="./administrasi/">Administrasi Akademik</a></li>
-                                <li><a href="./kegiatan.php">Kegiatan Akademik</a></li>
+                                <li><a href="./kegiatan">Kegiatan Akademik</a></li>
                                 <li><a href="./modul/">Pengambilan Modul</a></li>
                                 <li><a href="./legalisir/">Legalisir Ijazah</a></li>
                                 <li><a href="./suratketerangan/">Surat Keterangan</a></li>
@@ -184,8 +184,8 @@
                               <ul class="sub-menu">
                                 <li><a href="./tentang/">Universitas Terbuka</a></li>
                                 <li><a href="./tentang/salut/">SALUT</a></li>
-                                <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                                <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                                <li><a href="./tentang/saluttator">SALUT Tana Toraja</a></li>
+                                <li><a href="./tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
                           </ul>
@@ -216,7 +216,7 @@
             <div class="nav-logo">
               <a href="./">
                 <img
-                  src="assets/img/resource/mobile-menu-logo.png"
+                  src="serve-image.php?img=assets/img/resource/mobile-menu-logo.png"
                   alt="Logo"
                 />
               </a>
@@ -260,7 +260,7 @@
       <!--Start Banner One-->
       <section class="banner-one">
         <div class="banner-one__shape1 float-bob-x">
-          <img src="assets/img/shape/banner-one__shape1.png" alt="#" />
+          <img src="serve-image.php?img=assets/img/shape/banner-one__shape1.png" alt="#" />
         </div>
         <div class="banner-one__shape2 rotate-me">
           <img src="assets/img/shape/banner-one__shape2.png" alt="#" />
@@ -328,7 +328,7 @@
               data-wow-duration="1500ms"
             >
               <div class="inner">
-                <img src="assets/img/slider/banner.png" alt="banner" />
+                <img src="serve-image.php?img=assets/img/slider/banner.png" alt="banner" />
               </div>
               <div class="banner-one__img-bg"></div>
             </div>
@@ -340,7 +340,7 @@
       <!-- Start Schedule One -->
       <section class="service-three service">
         <div class="service-three__shape1 float-bob-x">
-          <img src="assets/img/shape/service-three__shape4.png" alt="shapes" />
+          <img src="serve-image.php?img=assets/img/shape/service-three__shape4.png" alt="shapes" />
         </div>
         <div class="service-three__shape2">
           <img src="assets/img/shape/service-three__shape2.png" alt="shapes" />
@@ -470,14 +470,14 @@
                                     <!--Single About Two Img-->
                                     <div class="single-testimonials-three__img-box">
                                         <div class="inner">
-                                            <img src="assets/img/testimonial/monika.jpg" alt="image">
+                                            <img src="serve-image.php?img=assets/img/testimonial/monika.jpg" alt="image">
                                         </div>
                                     </div>
                                     <!--End About Two Img-->
                                     <!--Single About Two Img-->
                                     <div class="single-testimonials-three__img-box">
                                         <div class="inner">
-                                            <img src="assets/img/testimonial/notavian.jpg" alt="image">
+                                            <img src="serve-image.php?img=assets/img/testimonial/notavian.jpg" alt="image">
                                         </div>
                                     </div>
                                     <!--End About Two Img-->
@@ -485,7 +485,7 @@
                                 <li class="wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <!--Single About Two Img-->
                                     <div class="single-testimonials-three__img-box">
-                                        <img src="assets/img/testimonial/neny.jpg" alt="image">
+                                        <img src="serve-image.php?img=assets/img/testimonial/neny.jpg" alt="image">
                                     </div>
                                     <!--End About Two Img-->
                                 </li>
@@ -764,7 +764,7 @@
                 </div>
             </div>
             <div class="image-section">
-                <img src="assets/img/background/web2.png" alt="Descriptive Alt Text" class="fixed-size-image">
+                <img src="serve-image.php?img=assets/img/background/web2.png" alt="Descriptive Alt Text" class="fixed-size-image">
             </div>
         </div>
     </div>
@@ -785,7 +785,7 @@
                   data-animation="fadeInLeft"
                   data-delay=".4s"
                 >
-                  <img src="assets/img/background/web.JPG" alt="img" />
+                  <img src="serve-image.php?img=assets/img/background/web.JPG" alt="img" />
                 </div>
               </div>
               <div class="col-lg-6 col-md-12 col-sm-12">
@@ -919,13 +919,13 @@
                           <p><a href="./tentang/">Tentang UT</a></p>
                         </li>
                         <li>
-                          <p><a href="./layanan/informasi.php">Informasi Akademik</a></p>
+                          <p><a href="./layanan/informasi">Informasi Akademik</a></p>
                         </li>
                         <li>
                           <p><a href="./administrasi/">Administrasi</a></p>
                         </li>
                         <li>
-                          <p><a href="./tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                          <p><a href="./tentang/kepalasalut">Sapaan dari Kepala SALUT</a></p>
                         </li>
                       </ul>
                     </div>
@@ -943,7 +943,7 @@
                       <ul class="clearfix">
                         <li>
                           <p>
-                            <a href="./informasi.php">Informasi Akademik</a>
+                            <a href="./informasi">Informasi Akademik</a>
                           </p>
                         </li>
                         <li>
@@ -953,7 +953,7 @@
                         </li>
                         <li>
                           <p>
-                            <a href="./kegiatan.php">Kegiatan</a>
+                            <a href="./kegiatan">Kegiatan</a>
                           </p>
                         </li>
                         <li>

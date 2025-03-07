@@ -41,6 +41,7 @@ session_start();
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/color1.css" />
   <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     .dropdown-icon {
       position: absolute;
@@ -270,19 +271,33 @@ session_start();
     <!--End Page Header-->
 
     <!--Start Contact Page-->
-    <section
-      id="contact"
-      class="contact-area contact-bg pt-120 pb-100 p-relative fix">
-      <div class="container jarakcontainer">
+    <section id="success" class="success-area pt-120 pb-100 p-relative fix">
+      <div class="success-shapes">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+        <div class="shape-3"></div>
+      </div>
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
-            <div class="contact-bg02">
-              <div class="section-title center-align">
-                <h3 style="margin-bottom: 20px;">Pendaftaran Berhasil</h3>
+            <div class="success-card">
+              <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
               </div>
-              <div class="text-center">
-                <p>Terima kasih telah mendaftar. Data Anda telah berhasil kami terima.</p>
-                <a href="index.php" class="pnd-btn">Kembali ke Form Pendaftaran</a>
+              <div class="success-content">
+                <h2>Selamat!</h2>
+                <h3>Pendaftaran Anda Berhasil</h3>
+                <p>Terima kasih telah mendaftar sebagai mahasiswa baru di SALUT Tana Toraja. Data Anda telah berhasil kami terima dan akan segera diproses.</p>
+                <div class="success-actions">
+                  <a href="index" class="pnd-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Kembali ke Form Pendaftaran
+                  </a>
+                  <a href="../index" class="pnd-btn btn-outline">
+                    <i class="fas fa-home"></i>
+                    Kembali ke Beranda
+                  </a>
+                </div>
               </div>
             </div>
           </div>
