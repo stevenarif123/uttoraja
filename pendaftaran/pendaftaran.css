@@ -1,9 +1,14 @@
 .dropdown-icon {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 15px;
   transform: translateY(-50%);
   pointer-events: none;
+  z-index: 1;
+  font-size: 14px;
+  color: #666;
+  line-height: 1;
+  margin-top: -1px; /* Fine-tune vertical alignment */
 }
 
 /* Modal styling (custom) */
@@ -75,10 +80,8 @@
 .error-message {
   color: #dc3545;
   font-size: 13px;
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  margin-top: 4px;
+  display: block;
 }
 
 .error-message:before {
@@ -92,10 +95,14 @@
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Consistent gap between sections */
 }
 
 .form-step {
   display: none;
+  padding: 20px 0;
 }
 
 .form-step.active {
@@ -185,11 +192,108 @@
   height: 18px;
 }
 
+/* Modern Radio Button Styling */
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+}
+
+.radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radio-checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    margin-right: 8px;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-option:hover input ~ .radio-checkmark {
+    border-color: #007bff;
+}
+
+.radio-option input:checked ~ .radio-checkmark {
+    border-color: #007bff;
+}
+
+.radio-checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+    width: 10px;
+    height: 10px;
+    background: #007bff;
+    border-radius: 50%;
+}
+
+.radio-option input:checked ~ .radio-checkmark:after {
+    display: block;
+}
+
+.radio-option-label {
+    font-size: 15px;
+    color: #444;
+    margin-left: 4px;
+    font-weight: 500;
+}
+
+/* Radio button group container */
+.radio-field {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+/* Error state for radio buttons */
+.radio-group.has-error .radio-checkmark {
+    border-color: #dc3545;
+}
+
+.radio-group.has-error .radio-option-label {
+    color: #dc3545;
+}
+
 /* Button styling */
 .form-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 40px;
+  padding-top: 20px;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
 }
 
 .pnd-btn {
@@ -260,4 +364,452 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: #666;
+  line-height: 1;
+  margin-top: -1px; /* Match dropdown icon alignment */
+}
+
+/* Date Picker Styling */
+.date-picker-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.date-picker-wrapper input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #444;
+    font-family: inherit;
+}
+
+.date-picker-wrapper input[type="date"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+    outline: none;
+}
+
+/* Style the calendar icon */
+.date-picker-wrapper .calendar-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+/* Custom calendar dropdown styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Calendar hover effect */
+.date-picker-wrapper:hover input[type="date"] {
+    border-color: #007bff;
+}
+
+/* Error state */
+.date-picker-wrapper.error input[type="date"] {
+    border-color: #dc3545;
+}
+
+.date-picker-wrapper .error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Dropdown icon positioning fix */
+.dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+    font-size: 14px;
+    color: #666;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 14px;
+    width: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Select container adjustments */
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+.select-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 32px;
+    width: 100%;
+}
+
+/* Form field container fixes */
+.contact-field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem; /* Consistent bottom margin */
+}
+
+/* Input wrapper to maintain icon position */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Icon positioning fixes */
+.dropdown-icon,
+.calendar-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+    font-size: 14px;
+    color: #666;
+    line-height: 1;
+    height: 14px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Select container fixes */
+.select-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.select-container select,
+.date-picker-wrapper input[type="date"] {
+    width: 100%;
+    padding-right: 35px; /* Make room for icon */
+    position: relative;
+    z-index: 1;
+}
+
+/* Form field structure and positioning fixes */
+.contact-field {
+    position: relative;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+}
+
+.field-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 48px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Input container */
+.field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Label Styling */
+.contact-field label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Input Field Base Styles */
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    padding: 0.75rem 1rem;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    transition: all 0.3s ease;
+}
+
+/* Input wrapper */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Icon positioning */
+.dropdown-icon,
+.calendar-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    background-color: transparent;
+}
+
+/* Input container positioning */
+.select-container,
+.date-picker-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Error message positioning */
+.error-message {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 12px;
+    color: #dc3545;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+
+/* Hide error message when input is valid */
+.contact-field:not(.has-error) .error-message {
+    display: none;
+}
+
+/* Form section spacing */
+.form-step {
+    display: none;
+    padding: 20px 0;
+    padding: 1.5rem 0;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Section headers */
+.form-step h4 {
+    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+/* Form field label spacing */
+.contact-field label {
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 500;
+}
+
+/* Responsive spacing adjustments */
+@media (max-width: 768px) {
+    .contact-field {
+        margin-bottom: 40px;
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-buttons {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Form Field Container */
+.field-container {
+    position: relative;
+    margin-bottom: 1.75rem;
+    padding: 0.5rem 0;
+}
+
+/* Input Group Wrapper */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Common Input Wrapper */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Label styling */
+.field-label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Error message */
+.error-message {
+    font-size: 0.75rem;
+    color: #dc3545;
+    margin-top: 0.25rem;
+}
+
+/* Input states */
+.field-container.has-error .input-wrapper input,
+.field-container.has-error .input-wrapper select {
+    border-color: #dc3545;
+}
+
+/* Form Field Containers - New unified styling */
+.field-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* Input Group - New component */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Label - Unified styling */
+.field-label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9375rem;
+}
+
+/* Input wrapper - Simplified */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Base input styles */
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    transition: border-color 0.2s ease;
+}
+
+/* Error message - Repositioned */
+.error-message {
+    font-size: 0.75rem;
+    color: #dc3545;
+    margin-top: 0.25rem;
+    order: 3;
+}
+
+/* Error states */
+.field-container.has-error input,
+.field-container.has-error select {
+    border-color: #dc3545;
+}
+
+/* Field Container - Revised Structure */
+.field-container {
+    position: relative;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.25rem;
+}
+
+/* Input Wrapper with Icon - Fixed Positioning */
+.input-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+/* Dropdown and Calendar Icon - Absolute Positioning */
+.dropdown-icon,
+.calendar-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #666;
+}
+
+/* Select Container - Revised */
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+.select-container select {
+    width: 100%;
+    padding-right: 32px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Error Message - Independent Positioning */
+.error-message {
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    font-size: 12px;
+    color: #dc3545;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Remove conflicting margin/padding */
+.contact-field {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
 }
