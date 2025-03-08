@@ -45,6 +45,49 @@ function clearError(inputId) {
 
 // Event handlers
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize popovers
+    $('[data-toggle="popover"]').popover({
+        placement: 'right',
+        html: true,
+        trigger: 'hover focus',
+        template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+    });
+    
+    // Keep popover open on hover
+    $('.help-icon').on('mouseover', function () {
+        $(this).popover('show');
+    }).on('mouseout', function () {
+        $(this).popover('hide');
+    });
+    
+    // Close popover when clicking outside
+    $(document).on('click', function (e) {
+        if ($(e.target).data('toggle') !== 'popover' 
+            && $(e.target).parents('.popover.show').length === 0) {
+            $('[data-toggle="popover"]').popover('hide');
+        }
+    });
+
+    // Jurusan and Fakultas handler
+    const jurusanSelect = document.getElementById('jurusan');
+    const fakultasInput = document.getElementById('fakultas');
+
+    if (jurusanSelect && fakultasInput) {
+        jurusanSelect.addEventListener('change', function() {
+            const selectedJurusan = this.value;
+            console.log('Selected Jurusan:', selectedJurusan); // Debug
+            console.log('Available data:', jurusanData); // Debug
+            
+            if (jurusanData[selectedJurusan]) {
+                fakultasInput.value = jurusanData[selectedJurusan];
+                fakultasInput.classList.add('filled');
+            } else {
+                fakultasInput.value = 'Fakultas tidak ditemukan';
+                fakultasInput.classList.remove('filled');
+            }
+        });
+    }
+    
     // Phone validation
     const phoneInput = document.getElementById('phone');
     if (phoneInput) {

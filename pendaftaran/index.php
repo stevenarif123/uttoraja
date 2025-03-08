@@ -6,18 +6,21 @@ require_once '../koneksi.php';
 $errors = [];
 
 try {
-    // Ambil data jurusan dari tabel prodi_admisi
-    $sql = "SELECT nama_program_studi FROM prodi_admisi";
+    // Ambil data jurusan dan fakultas dari tabel prodi_admisi
+    $sql = "SELECT nama_program_studi, nama_fakultas FROM prodi_admisi";
     $result = $conn->query($sql);
 
     if (!$result) {
         throw new Exception("Error executing query: " . $conn->error);
     }
 
-    $jurusanOptions = array();
+    $jurusanData = array();
     while ($row = $result->fetch_assoc()) {
+        $jurusanData[$row["nama_program_studi"]] = $row["nama_fakultas"];
         $jurusanOptions[] = $row["nama_program_studi"];
     }
+    // Encode jurusanData untuk digunakan di JavaScript
+    $jurusanDataJSON = json_encode($jurusanData);
 
 } catch (Exception $e) {
     $errors[] = $e->getMessage();
@@ -329,7 +332,14 @@ if (isset($_SESSION['error'])) {
                   <h4 class="mb-4">Informasi Dasar</h4>
                   <div class="row"></div>
                   <div class="col-lg-12">
-                    <label for="jalur_program">Jalur Program</label><br>
+                    <label for="jalur_program">
+                      Jalur Program 
+                      <button type="button" class="help-icon" data-toggle="popover" data-trigger="hover" 
+                              title="Reguler: Untuk lulusan SMA/SMK yang baru mendaftar.
+                                          Transfer Nilai: Untuk mahasiswa pindahan atau yang ingin melanjutkan kuliah." 
+                              data-content="Reguler: Untuk lulusan SMA/SMK yang baru mendaftar.
+                                          Transfer Nilai: Untuk mahasiswa pindahan atau yang ingin melanjutkan kuliah.">?</button>
+                    </label><br>
                     <div class="contact-field radio-group mb-4">
                       <label for="reguler">Reguler/Biasa</label>
                       <input type="radio" id="reguler" name="jalur_program" value="Reguler" required>
@@ -355,6 +365,14 @@ if (isset($_SESSION['error'])) {
                   </div>
 
                   <div class="col-lg-12">
+                    <label for="fakultas">Fakultas</label>
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input type="text" id="fakultas" name="fakultas" placeholder="Fakultas akan terisi otomatis" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                  <label for="jurusan">Nama Lengkap</label>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -734,6 +752,10 @@ if (isset($_SESSION['error'])) {
     <!-- Alert Container (tempat pesan sukses/error) -->
     <div id="alert-container"></div>
 
+    <script>
+        // Make jurusanData available to JavaScript
+        const jurusanData = <?php echo $jurusanDataJSON; ?>;
+    </script>
     <!-- JS here -->
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/01-ajax-form.js"></script>

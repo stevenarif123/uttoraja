@@ -166,6 +166,37 @@
   outline: none;
 }
 
+/* Fakultas input styling */
+#fakultas {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+#fakultas.filled {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: #495057;
+    font-weight: 500;
+}
+
+.contact-field input[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+/* Additional select container styling */
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+.select-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 30px;
+}
+
 /* Radio button styling */
 .radio-group {
   display: flex;
@@ -260,4 +291,54 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: #666;
+}
+
+/* Help icon button styling */
+.help-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    cursor: help;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+}
+
+.help-icon:hover {
+    background: #0056b3;
+}
+
+/* Popover customization */
+.popover {
+    max-width: 300px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.popover-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+    padding: 8px 12px;
+    color: #007bff;
+}
+
+.popover-body {
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.popover-body strong {
+    color: #495057;
+}
+
+.popover.show {
+    opacity: 1;
 }
