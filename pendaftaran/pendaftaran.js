@@ -25,21 +25,26 @@ function formatDate(input) {
 
 // Validation functions
 function showError(inputId, message) {
-    let errorSpan = document.getElementById(`${inputId}-error`);
+    const container = document.getElementById(inputId).closest('.field-container');
+    let errorSpan = container.querySelector('.error-message');
+    
     if (!errorSpan) {
-        const inputField = document.getElementById(inputId);
         errorSpan = document.createElement('span');
-        errorSpan.id = `${inputId}-error`;
-        errorSpan.classList.add('error-message');
-        inputField.parentElement.appendChild(errorSpan);
+        errorSpan.className = 'error-message';
+        container.appendChild(errorSpan);
     }
+    
     errorSpan.textContent = message;
+    container.classList.add('has-error');
 }
 
 function clearError(inputId) {
-    const errorSpan = document.getElementById(`${inputId}-error`);
+    const container = document.getElementById(inputId).closest('.field-container');
+    const errorSpan = container.querySelector('.error-message');
+    
     if (errorSpan) {
         errorSpan.remove();
+        container.classList.remove('has-error');
     }
 }
 
@@ -174,17 +179,63 @@ document.addEventListener('DOMContentLoaded', function() {
     // Date input handling
     const dateInput = document.getElementById('tanggal_lahir');
     if (dateInput) {
-        // Set max date to today
-        const today = new Date();
-        const maxDate = today.toISOString().split('T')[0];
-        dateInput.setAttribute('max', maxDate);
+        const maxDate = new Date();
+        maxDate.setFullYear(maxDate.getFullYear() - 15);
+        const maxDateString = maxDate.toISOString().split('T')[0];
         
-        // Set min date to 1940-01-01
+        dateInput.setAttribute('max', maxDateString);
         dateInput.setAttribute('min', '1940-01-01');
         
-        // Clear validation message when user starts typing
-        dateInput.addEventListener('input', function() {
-            this.setCustomValidity('');
+        // Prevent manual date entry and enforce picker
+        dateInput.addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
+
+        // Enhanced date validation
+        dateInput.addEventListener('change', function() {
+            const selectedDate = new Date(this.value);
+            const wrapper = this.closest('.date-picker-wrapper');
+            
+            // Clear previous states
+            wrapper.classList.remove('error');
+            clearError('tanggal_lahir');
+
+            // Validate year range
+            if (selectedDate.getFullYear() >= 2011) {
+                wrapper.classList.add('error');
+                this.value = '';
+                showError('tanggal_lahir', 'Pilih tahun sebelum 2011');
+                return false;
+            }
+
+            // Validate age requirement
+            if (selectedDate > maxDate) {
+                wrapper.classList.add('error');
+                this.value = '';
+                showError('tanggal_lahir', 'Usia minimal untuk mendaftar adalah 15 tahun');
+                return false;
+            }
+
+            // Validate minimum date
+            if (selectedDate < new Date('1940-01-01')) {
+                wrapper.classList.add('error');
+                this.value = '';
+                showError('tanggal_lahir', 'Tanggal lahir tidak valid (minimal tahun 1940)');
+                return false;
+            }
+        });
+
+        // Format display date on focus out
+        dateInput.addEventListener('blur', function() {
+            if (this.value) {
+                const date = new Date(this.value);
+                const formattedDate = date.toLocaleDateString('id-ID', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+                this.setAttribute('data-date', formattedDate);
+            }
         });
     }
 
@@ -267,15 +318,26 @@ async function handleFormSubmit(e) {
 // Helper functions for form steps
 function validateStep(step) {
     let isValid = true;
+    const containers = step.querySelectorAll('.field-container');
+    
+    // Reset all fields
+    containers.forEach(container => {
+        container.classList.remove('has-error');
+        const errorMessage = container.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+    });
+
+    // Validate required fields
     const inputs = step.querySelectorAll('input[required], select[required]');
     inputs.forEach(input => {
         if (!input.value) {
             isValid = false;
             showError(input.id, 'Field ini wajib diisi');
-        } else {
-            clearError(input.id);
         }
     });
+
     return isValid;
 }
 
@@ -334,4 +396,21 @@ function showAlert(type, message) {
         `;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+}
+
+function validateDateOfBirth(dateString) {
+    const today = new Date();
+    const minDate = new Date('1940-01-01');
+    const maxDate = new Date(today.getFullYear() - 15, today.getMonth(), today.getDate());
+    const inputDate = new Date(dateString);
+
+    if (inputDate < minDate) {
+        return "Tanggal lahir tidak valid (minimal tahun 1940)";
+    }
+    
+    if (inputDate > maxDate) {
+        return "Usia minimal untuk mendaftar adalah 15 tahun";
+    }
+
+    return "";
 }
