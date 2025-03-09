@@ -358,16 +358,17 @@ if (isset($_SESSION['error'])) {
                   </div>
 
                   <div class="col-lg-12">
+                  <label for="jurusan">Pilih Jurusan</label>
                     <div class="contact-field">
-                      <label for="jurusan">Pilih Jurusan</label>
                       <div class="field-container">
-                        <div class="input-wrapper select-container">
-                          <select id="jurusan" name="jurusan" required>
-                            <option value="" disabled selected>Pilih Jurusan*</option>
+                        <div class="searchable-dropdown">
+                          <input type="text" class="dropdown-search" placeholder="Cari jurusan..." autocomplete="off">
+                          <input type="hidden" id="jurusan" name="jurusan" required>
+                          <div class="dropdown-list">
                             <?php foreach ($jurusanOptions as $jurusan): ?>
-                                <option value="<?php echo $jurusan; ?>"><?php echo $jurusan; ?></option>
+                              <div class="dropdown-item" data-value="<?php echo $jurusan; ?>"><?php echo $jurusan; ?></div>
                             <?php endforeach; ?>
-                          </select>
+                          </div>
                           <span class="dropdown-icon">&#9660;</span>
                         </div>
                         <span class="input-description">Silahkan memilih jurusan yang sesuai dengan minat anda.</span>
@@ -526,6 +527,73 @@ if (isset($_SESSION['error'])) {
                         required
                         oninput="toUpperCase(this)" />
                       <span class="input-description">Tuliskan alamat lengkap termasuk nama jalan, RT/RW dan kode pos</span>
+                    </div>
+                  </div>
+
+                  <!-- Domisili Selection -->
+                  <div class="col-lg-12">
+                    <label for="domisili">Domisili Anda</label>
+                    <div class="radio-field">
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" id="toraja" name="domisili" value="toraja" required>
+                                <span class="radio-checkmark"></span>
+                                <span class="radio-option-label">Toraja (Tana Toraja/Toraja Utara)</span>
+                            </label>
+                            
+                            <label class="radio-option">
+                                <input type="radio" id="luar_toraja" name="domisili" value="luar_toraja" required>
+                                <span class="radio-checkmark"></span>
+                                <span class="radio-option-label">Di luar Toraja</span>
+                            </label>
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- Toraja Domicile Fields -->
+                  <div id="toraja_fields" style="display: none;">
+                    <div class="col-lg-12">
+                      <label for="kelurahan">Kelurahan/Lembang</label>
+                      <div class="contact-field">
+                        <div class="field-container">
+                          <div class="searchable-dropdown">
+                            <input type="text" class="dropdown-search" placeholder="Cari Kelurahan/Lembang..." autocomplete="off">
+                            <input type="hidden" id="kelurahan" name="kelurahan">
+                            <div class="dropdown-list"></div>
+                            <span class="dropdown-icon">&#9660;</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <label for="kecamatan">Kecamatan</label>
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input type="text" id="kecamatan" name="kecamatan" placeholder="Kecamatan" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <label for="kabupaten">Kabupaten</label>
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input type="text" id="kabupaten" name="kabupaten" placeholder="Kabupaten" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Non-Toraja Domicile Field -->
+                  <div id="luar_toraja_fields" style="display: none;">
+                    <div class="col-lg-12">
+                      <label for="domisili_manual">Domisili Lengkap</label>
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="domisili_manual"
+                          name="domisili_manual"
+                          placeholder="Masukkan domisili lengkap"
+                          oninput="toUpperCase(this)">
+                        <span class="input-description">Masukkan Kelurahan/Lembang/Desa, Kecamatan, Kabupaten, Provinsi domisili anda</span>
+                      </div>
                     </div>
                   </div>
 

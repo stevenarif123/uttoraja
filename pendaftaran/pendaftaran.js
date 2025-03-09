@@ -25,23 +25,27 @@ function formatDate(input) {
 
 // Validation functions
 function showError(inputId, message) {
-    const container = document.getElementById(inputId).closest('.field-container');
-    let errorSpan = container.querySelector('.error-message');
+    const container = document.getElementById(inputId)?.closest('.field-container') || 
+                     document.querySelector(`[name="${inputId}"]`)?.closest('.field-container') ||
+                     document.querySelector(`[name="${inputId}"]`)?.closest('.radio-field');
     
-    if (!errorSpan) {
-        errorSpan = document.createElement('span');
+    if (container) {
+        const errorSpan = document.createElement('span');
         errorSpan.className = 'error-message';
+        errorSpan.textContent = message;
         container.appendChild(errorSpan);
+        container.classList.add('has-error');
     }
-    
-    errorSpan.textContent = message;
-    container.classList.add('has-error');
 }
 
 function clearError(inputId) {
-    const container = document.getElementById(inputId).closest('.field-container');
-    const errorSpan = container.querySelector('.error-message');
+    const element = document.getElementById(inputId);
+    if (!element) return; // Exit if element not found
     
+    const container = element.closest('.field-container');
+    if (!container) return; // Exit if container not found
+    
+    const errorSpan = container.querySelector('.error-message');
     if (errorSpan) {
         errorSpan.remove();
         container.classList.remove('has-error');
@@ -50,14 +54,20 @@ function clearError(inputId) {
 
 // Event handlers
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize popovers
-    $('[data-toggle="popover"]').popover({
-        placement: 'right',
-        html: true,
-        trigger: 'hover focus',
-        template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
-    });
+    // Initialize all components
+    initializeDomicileHandlers();
+    initializeSearchableDropdowns();
+    initializeKelurahanDropdown();
     
+    // Initialize popovers if Bootstrap is loaded
+    if (typeof $ !== 'undefined') {
+        $('[data-toggle="popover"]').popover({
+            placement: 'right',
+            html: true,
+            trigger: 'hover focus'
+        });
+    }
+
     // Keep popover open on hover
     $('.help-icon').on('mouseover', function () {
         $(this).popover('show');
@@ -282,6 +292,331 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+    // Searchable Select Implementation
+    const searchInput = document.querySelector('.select-search');
+    const selectItems = document.querySelector('.select-items');
+    const hiddenInput = document.querySelector('#jurusan');
+    const dropdownIcon = document.querySelector('.searchable-select-container .dropdown-icon');
+    const options = selectItems.querySelectorAll('div');
+
+    // Show/hide dropdown on search input focus
+    searchInput.addEventListener('focus', function() {
+        selectItems.classList.remove('select-hide');
+    });
+
+    // Handle click outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.searchable-select-container')) {
+            selectItems.classList.add('select-hide');
+        }
+    });
+
+    // Handle search
+    searchInput.addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        options.forEach(option => {
+            const txtValue = option.textContent || option.innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        });
+    });
+
+    // Handle option selection
+    options.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            searchInput.value = this.textContent;
+            hiddenInput.value = value;
+            selectItems.classList.add('select-hide');
+            
+            // Trigger fakultas update
+            if (typeof updateFakultas === 'function') {
+                updateFakultas(value);
+            }
+        });
+    });
+
+    // Toggle dropdown on icon click
+    dropdownIcon.addEventListener('click', function() {
+        selectItems.classList.toggle('select-hide');
+        searchInput.focus();
+    });
+
+    // Initialize kelurahan dropdown immediately
+    initializeKelurahanDropdown();
+
+    // Fetch kelurahan data and populate dropdown
+    fetch('get_kelurahan.php')
+        .then(response => response.json())
+        .then(data => {
+            const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
+            const searchInput = document.querySelector('#toraja_fields .dropdown-search');
+            const hiddenInput = document.getElementById('kelurahan');
+            
+            function populateDropdown(items) {
+                dropdownList.innerHTML = '';
+                items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'dropdown-item';
+                    div.textContent = item.area_name;
+                    div.dataset.kecamatan = item.district_name;
+                    div.dataset.kabupaten = item.kabupaten_name;
+                    dropdownList.appendChild(div);
+                });
+            }
+
+            // Initial population
+            populateDropdown(data);
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filtered = data.filter(item => 
+                    item.area_name.toLowerCase().includes(searchTerm)
+                );
+                populateDropdown(filtered);
+            });
+
+            // Selection handling
+            dropdownList.addEventListener('click', function(e) {
+                if (e.target.classList.contains('dropdown-item')) {
+                    const selectedArea = e.target;
+                    hiddenInput.value = selectedArea.textContent;
+                    searchInput.value = selectedArea.textContent;
+                    document.getElementById('kecamatan').value = selectedArea.dataset.kecamatan;
+                    document.getElementById('kabupaten').value = selectedArea.dataset.kabupaten;
+                    dropdownList.style.display = 'none';
+                }
+            });
+
+            // Show/hide dropdown list
+            searchInput.addEventListener('focus', () => dropdownList.style.display = 'block');
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.searchable-dropdown')) {
+                    dropdownList.style.display = 'none';
+                }
+            });
+        });
+});
+
+// Add this new function outside DOMContentLoaded
+function initializeKelurahanDropdown() {
+    const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
+    if (!dropdownList) {
+        console.error('Kelurahan dropdown list not found');
+        return;
+    }
+
+    fetch('get_kelurahan.php')
+        .then(response => response.json())
+        .then(data => {
+            const searchInput = document.querySelector('#toraja_fields .dropdown-search');
+            const hiddenInput = document.getElementById('kelurahan');
+            
+            if (!searchInput || !hiddenInput) {
+                console.error('Required kelurahan elements not found');
+                return;
+            }
+
+            // Clear and populate dropdown
+            dropdownList.innerHTML = '';
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'dropdown-item';
+                div.textContent = `${item.area_name} (${item.area_type})`;
+                div.dataset.kecamatan = item.district_name;
+                div.dataset.kabupaten = item.kabupaten_name;
+                dropdownList.appendChild(div);
+            });
+
+            // Add event listeners
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const items = dropdownList.getElementsByClassName('dropdown-item');
+                
+                Array.from(items).forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(searchTerm) ? '' : 'none';
+                });
+                
+                dropdownList.style.display = searchTerm ? 'block' : 'none';
+            });
+
+            // Selection handling
+            dropdownList.addEventListener('click', function(e) {
+                if (e.target.classList.contains('dropdown-item')) {
+                    const selectedItem = e.target;
+                    searchInput.value = selectedItem.textContent;
+                    hiddenInput.value = selectedItem.textContent;
+                    
+                    // Update kecamatan and kabupaten
+                    const kecamatanInput = document.getElementById('kecamatan');
+                    const kabupatenInput = document.getElementById('kabupaten');
+                    if (kecamatanInput) kecamatanInput.value = selectedItem.dataset.kecamatan;
+                    if (kabupatenInput) kabupatenInput.value = selectedItem.dataset.kabupaten;
+                    
+                    dropdownList.style.display = 'none';
+                }
+            });
+
+            // Show/hide dropdown
+            searchInput.addEventListener('focus', () => {
+                dropdownList.style.display = 'block';
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.searchable-dropdown')) {
+                    dropdownList.style.display = 'none';
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching kelurahan data:', error);
+        });
+}
+
+// Move the Domicile radio button handlers outside of DOMContentLoaded
+function initializeDomicileHandlers() {
+    const torajaRadio = document.getElementById('toraja');
+    const luarTorajaRadio = document.getElementById('luar_toraja');
+    const torajaFields = document.getElementById('toraja_fields');
+    const luarTorajaFields = document.getElementById('luar_toraja_fields');
+
+    if (!torajaRadio || !luarTorajaRadio || !torajaFields || !luarTorajaFields) {
+        console.error('Domicile elements not found:', {
+            torajaRadio: !!torajaRadio,
+            luarTorajaRadio: !!luarTorajaRadio,
+            torajaFields: !!torajaFields,
+            luarTorajaFields: !!luarTorajaFields
+        });
+        return;
+    }
+
+    function toggleDomicileFields() {
+        console.log('Toggle called:', {
+            torajaChecked: torajaRadio.checked,
+            luarTorajaChecked: luarTorajaRadio.checked
+        });
+
+        if (torajaRadio.checked) {
+            torajaFields.style.display = 'block';
+            luarTorajaFields.style.display = 'none';
+            document.getElementById('kelurahan').setAttribute('required', 'required');
+            const domisiliManual = document.getElementById('domisili_manual');
+            if (domisiliManual) {
+                domisiliManual.removeAttribute('required');
+            }
+        } else if (luarTorajaRadio.checked) {
+            torajaFields.style.display = 'none';
+            luarTorajaFields.style.display = 'block';
+            const domisiliManual = document.getElementById('domisili_manual');
+            if (domisiliManual) {
+                domisiliManual.setAttribute('required', 'required');
+            }
+            document.getElementById('kelurahan').removeAttribute('required');
+        }
+    }
+
+    // Add change listeners
+    torajaRadio.addEventListener('change', toggleDomicileFields);
+    luarTorajaRadio.addEventListener('change', toggleDomicileFields);
+
+    // Initialize on page load
+    if (torajaRadio.checked || luarTorajaRadio.checked) {
+        toggleDomicileFields();
+    }
+}
+
+// Searchable Dropdown Implementation
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('.dropdown-search');
+    const dropdownList = document.querySelector('.dropdown-list');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    const hiddenInput = document.getElementById('jurusan');
+    const fakultasInput = document.getElementById('fakultas');
+
+    // Clear search input when clicking after a selection
+    searchInput.addEventListener('click', function() {
+        if (hiddenInput.value) { // Only clear if a value has been selected
+            this.value = '';
+            // Show all options again
+            dropdownItems.forEach(item => {
+                item.classList.remove('hidden');
+            });
+            dropdownList.classList.add('active');
+        }
+    });
+
+    // Show dropdown on input focus
+    searchInput.addEventListener('focus', function() {
+        dropdownList.classList.add('active');
+        // Clear input if there's a selected value
+        if (hiddenInput.value) {
+            this.value = '';
+            // Show all options again
+            dropdownItems.forEach(item => {
+                item.classList.remove('hidden');
+            });
+        }
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.searchable-dropdown')) {
+            dropdownList.classList.remove('active');
+        }
+    });
+
+    // Filter dropdown items
+    searchInput.addEventListener('input', function() {
+        const searchText = this.value.toLowerCase();
+        let hasMatch = false;
+
+        dropdownItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(searchText)) {
+                item.classList.remove('hidden');
+                hasMatch = true;
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+
+        // Show/hide dropdown based on matches
+        if (hasMatch) {
+            dropdownList.classList.add('active');
+        } else {
+            dropdownList.classList.remove('active');
+        }
+    });
+
+    // Handle item selection
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const value = this.dataset.value;
+            searchInput.value = this.textContent;
+            hiddenInput.value = value;
+            dropdownList.classList.remove('active');
+
+            // Update fakultas if jurusanData is available
+            if (typeof jurusanData !== 'undefined' && jurusanData[value]) {
+                fakultasInput.value = jurusanData[value];
+                fakultasInput.classList.add('filled');
+            }
+
+            // Remove selected class from all items
+            dropdownItems.forEach(di => di.classList.remove('selected'));
+            // Add selected class to clicked item
+            this.classList.add('selected');
+        });
+    });
+
+    // Initialize domicile handlers
+    initializeDomicileHandlers();
 });
 
 // Form submission handler
@@ -318,22 +653,56 @@ async function handleFormSubmit(e) {
 // Helper functions for form steps
 function validateStep(step) {
     let isValid = true;
-    const containers = step.querySelectorAll('.field-container');
+    const inputs = step.querySelectorAll('input[required], select[required], input[type="radio"][required]');
     
-    // Reset all fields
-    containers.forEach(container => {
-        container.classList.remove('has-error');
-        const errorMessage = container.querySelector('.error-message');
-        if (errorMessage) {
-            errorMessage.remove();
+    // Reset previous errors
+    step.querySelectorAll('.error-message').forEach(msg => msg.remove());
+    step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
+
+    // Special validation for step 1
+    if (step.dataset.step === '1') {
+        // Check jalur program radio
+        const jalurProgram = step.querySelector('input[name="jalur_program"]:checked');
+        if (!jalurProgram) {
+            isValid = false;
+            const container = step.querySelector('.radio-field');
+            container.classList.add('has-error');
+            showError('jalur_program', 'Pilih jalur program');
         }
-    });
+
+        // Check jurusan
+        const jurusan = document.getElementById('jurusan');
+        if (!jurusan.value) {
+            isValid = false;
+            const container = jurusan.closest('.field-container');
+            container.classList.add('has-error');
+            showError('jurusan', 'Pilih jurusan');
+        }
+
+        // Check nama lengkap
+        const nama = document.getElementById('firstn');
+        if (!nama.value.trim()) {
+            isValid = false;
+            const container = nama.closest('.field-container');
+            container.classList.add('has-error');
+            showError('firstn', 'Nama lengkap wajib diisi');
+        }
+    }
 
     // Validate required fields
-    const inputs = step.querySelectorAll('input[required], select[required]');
     inputs.forEach(input => {
-        if (!input.value) {
+        if (input.type === 'radio') {
+            const radioGroup = step.querySelector(`input[name="${input.name}"]:checked`);
+            if (!radioGroup) {
+                isValid = false;
+                const container = input.closest('.radio-field');
+                container.classList.add('has-error');
+                showError(input.name, 'Pilihan ini wajib diisi');
+            }
+        } else if (!input.value.trim()) {
             isValid = false;
+            const container = input.closest('.field-container');
+            container.classList.add('has-error');
             showError(input.id, 'Field ini wajib diisi');
         }
     });
