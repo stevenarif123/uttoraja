@@ -5104,3 +5104,9 @@ Cta Two Testmonials Css
         opacity: 1;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .navbar-wrap ul li a {
+        padding: 10px 0px 10px;
+    }
+  }

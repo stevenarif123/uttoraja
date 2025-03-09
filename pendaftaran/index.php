@@ -179,7 +179,7 @@ if (isset($_SESSION['error'])) {
                     <nav class="menu-nav">
                       <div class="navbar-wrap main-menu">
                         <ul class="navigation">
-                          <li><a href="../index.html">Home</a></li>
+                          <li><a href="../">Home</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Aplikasi UT</a>
                             <ul class="sub-menu">
@@ -211,7 +211,7 @@ if (isset($_SESSION['error'])) {
                               <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                             </ul>
                           </li>
-                          <li><a href="./galeri/">Galeri</a></li>
+                          <li><a href="../galeri/">Galeri</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
@@ -378,7 +378,7 @@ if (isset($_SESSION['error'])) {
                   <div class="col-lg-12">
                     <label for="fakultas">Fakultas</label>
                     <div class="contact-field position-relative c-name mb-4">
-                      <input type="text" id="fakultas" name="fakultas" placeholder="Fakultas akan terisi otomatis" readonly>
+                      <input type="text" id="fakultas" name="fakultas" placeholder="Pilih Fakultas" readonly>
                     </div>
                   </div>
 
@@ -514,6 +514,7 @@ if (isset($_SESSION['error'])) {
                 <div class="form-step" data-step="3">
                   <h4 class="mb-4">Informasi Tambahan</h4>
                   <!-- Alamat -->
+
                   <div class="col-lg-12">
                   <label for="alamat">Alamat Lengkap</label><br>
                     <div class="contact-field position-relative c-name mb-4">
@@ -524,7 +525,7 @@ if (isset($_SESSION['error'])) {
                         placeholder="Alamat*"
                         required
                         oninput="toUpperCase(this)" />
-                      <span class="input-description">Tuliskan alamat lengkap termasuk RT/RW dan kode pos</span>
+                      <span class="input-description">Tuliskan alamat lengkap termasuk nama jalan, RT/RW dan kode pos</span>
                     </div>
                   </div>
 

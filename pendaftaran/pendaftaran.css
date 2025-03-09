@@ -113,7 +113,6 @@
 .form-progress {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
   position: relative;
 }
 
@@ -229,7 +228,6 @@
     align-items: center;
     gap: 24px;
     flex-wrap: wrap;
-    margin: 8px 0;
 }
 
 .radio-option {
@@ -294,10 +292,9 @@
 
 /* Radio button group container */
 .radio-field {
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem 0;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0.5rem 0;
 }
 
 .radio-group {
@@ -500,13 +497,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Form field container fixes */
 .contact-field {
     position: relative;
-    display: flex;
-    flex-direction: column;
     gap: 4px;
-    margin-bottom: 32px;
-    padding-bottom: 20px;
     gap: 0.5rem;
-    margin-bottom: 1.5rem; /* Consistent bottom margin */
 }
 
 /* Input wrapper to maintain icon position */
@@ -539,7 +531,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .select-container {
     position: relative;
     width: 100%;
-    margin-bottom: 8px;
 }
 
 .select-container select,
@@ -553,8 +544,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Form field structure and positioning fixes */
 .contact-field {
     position: relative;
-    margin-bottom: 32px;
-    padding-bottom: 20px;
 }
 
 .field-container {
@@ -563,7 +552,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex-direction: column;
     gap: 8px;
     min-height: 48px;
-    margin-bottom: 8px;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -686,7 +674,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Form Field Container */
 .field-container {
     position: relative;
-    margin-bottom: 1.75rem;
     padding: 0.5rem 0;
 }
 
@@ -728,7 +715,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Form Field Containers - New unified styling */
 .field-container {
     position: relative;
-    margin-bottom: 2rem;
 }
 
 /* Input Group - New component */
@@ -782,7 +768,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Field Container - Revised Structure */
 .field-container {
     position: relative;
-    margin-bottom: 2.5rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: 0.25rem;
@@ -841,8 +826,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Remove conflicting margin/padding */
 .contact-field {
     position: relative;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0;
 }
 
 /* Help icon button styling */
@@ -893,4 +876,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .popover.show {
     opacity: 1;
+}
+
+/* Input description styling */
+.input-description {
+    display: block;
+    font-size: 10px;
+    color: #666;
+    margin-top: 1px;
+    line-height: 1.4;
+    font-style: italic;
+    padding-left: 2px;
+}
+
+.field-container.has-error .input-description {
+    color: #dc3545;
+}
+
+/* Ensure description appears below error messages */
+.contact-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-field .error-message {
+    order: 2;
+}
+
+.contact-field .input-description {
+    order: 3;
 }
