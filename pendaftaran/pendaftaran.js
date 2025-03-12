@@ -52,8 +52,69 @@ function clearError(inputId) {
     }
 }
 
+// Enhanced validation functions
+function validateStep(step) {
+    let isValid = true;
+    const errors = [];
+    console.log('Validating step:', step.dataset.step);
+
+    // Clear previous errors
+    clearErrors(step);
+
+    switch(step.dataset.step) {
+        case '1':
+            isValid = validateStepOne(step, errors);
+            break;
+        case '2':
+            isValid = validateStepTwo(step, errors);
+            break;
+        case '3':
+            isValid = validateStepThree(step, errors);
+            break;
+    }
+
+    // Display errors if any
+    if (errors.length > 0) {
+        errors.forEach(error => {
+            showError(error.field, error.message);
+        });
+    }
+
+    console.log('Validation result:', isValid, errors);
+    return isValid;
+}
+
+function validateStepOne(step, errors) {
+    let isValid = true;
+
+    // Validate jalur program
+    const jalurProgram = step.querySelector('input[name="jalur_program"]:checked');
+    if (!jalurProgram) {
+        errors.push({ field: 'jalur_program', message: 'Pilih jalur program' });
+        isValid = false;
+    }
+
+    // Validate jurusan
+    const jurusan = document.getElementById('jurusan');
+    if (!jurusan.value) {
+        errors.push({ field: 'jurusan', message: 'Pilih jurusan' });
+        isValid = false;
+    }
+
+    // Validate nama lengkap
+    const nama = document.getElementById('firstn');
+    if (!nama.value.trim()) {
+        errors.push({ field: 'firstn', message: 'Nama lengkap wajib diisi' });
+        isValid = false;
+    }
+
+    return isValid;
+}
+
 // Event handlers
 document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('pendaftaranForm');
+    
     // Initialize all components
     initializeDomicileHandlers();
     initializeSearchableDropdowns();
@@ -139,37 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Form multi-step handling
-    const form = document.getElementById('pendaftaranForm');
     if (form) {
-        const steps = form.querySelectorAll('.form-step');
-        const progressSteps = form.querySelectorAll('.progress-step');
-
-        // Next step handlers
-        form.querySelectorAll('.next-step').forEach(button => {
-            button.addEventListener('click', function() {
-                const currentStep = this.closest('.form-step');
-                const nextStep = currentStep.nextElementSibling;
-                if (validateStep(currentStep)) {
-                    currentStep.classList.remove('active');
-                    nextStep.classList.add('active');
-                    updateProgress('next', currentStep.dataset.step);
-                }
-            });
-        });
-
-        // Previous step handlers
-        form.querySelectorAll('.prev-step').forEach(button => {
-            button.addEventListener('click', function() {
-                const currentStep = this.closest('.form-step');
-                const prevStep = currentStep.previousElementSibling;
-                currentStep.classList.remove('active');
-                prevStep.classList.add('active');
-                updateProgress('prev', currentStep.dataset.step);
-            });
-        });
-
-        // Form submission handler
-        form.addEventListener('submit', handleFormSubmit);
+        initializeFormSteps(form);
+        initializeValidation(form);
+        initializeDropdowns();
     }
 
     // Work status handler
@@ -653,15 +687,14 @@ async function handleFormSubmit(e) {
 // Helper functions for form steps
 function validateStep(step) {
     let isValid = true;
-    const inputs = step.querySelectorAll('input[required], select[required], input[type="radio"][required]');
-    
-    // Reset previous errors
+    console.log('Validating step:', step.dataset.step); // Debug log
+
+    // Clear previous errors
     step.querySelectorAll('.error-message').forEach(msg => msg.remove());
     step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
 
-    // Special validation for step 1
     if (step.dataset.step === '1') {
-        // Check jalur program radio
+        // Validate jalur program
         const jalurProgram = step.querySelector('input[name="jalur_program"]:checked');
         if (!jalurProgram) {
             isValid = false;
@@ -670,7 +703,7 @@ function validateStep(step) {
             showError('jalur_program', 'Pilih jalur program');
         }
 
-        // Check jurusan
+        // Validate jurusan
         const jurusan = document.getElementById('jurusan');
         if (!jurusan.value) {
             isValid = false;
@@ -679,7 +712,7 @@ function validateStep(step) {
             showError('jurusan', 'Pilih jurusan');
         }
 
-        // Check nama lengkap
+        // Validate nama lengkap
         const nama = document.getElementById('firstn');
         if (!nama.value.trim()) {
             isValid = false;
@@ -687,28 +720,40 @@ function validateStep(step) {
             container.classList.add('has-error');
             showError('firstn', 'Nama lengkap wajib diisi');
         }
+
+        console.log('Step 1 validation result:', isValid); // Debug log
     }
 
-    // Validate required fields
-    inputs.forEach(input => {
-        if (input.type === 'radio') {
-            const radioGroup = step.querySelector(`input[name="${input.name}"]:checked`);
-            if (!radioGroup) {
-                isValid = false;
-                const container = input.closest('.radio-field');
-                container.classList.add('has-error');
-                showError(input.name, 'Pilihan ini wajib diisi');
-            }
-        } else if (!input.value.trim()) {
-            isValid = false;
-            const container = input.closest('.field-container');
-            container.classList.add('has-error');
-            showError(input.id, 'Field ini wajib diisi');
-        }
-    });
+    // Add validation for other steps here...
+    // ...existing code...
 
     return isValid;
 }
+
+// Update event listener for next step buttons
+document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+
+    // Next step handlers with debug logging
+    form.querySelectorAll('.next-step').forEach(button => {
+        button.addEventListener('click', function() {
+            const currentStep = this.closest('.form-step');
+            const nextStep = currentStep.nextElementSibling;
+            console.log('Current step:', currentStep.dataset.step); // Debug log
+            
+            if (validateStep(currentStep)) {
+                console.log('Validation passed, moving to next step'); // Debug log
+                currentStep.classList.remove('active');
+                nextStep.classList.add('active');
+                updateProgress('next', currentStep.dataset.step);
+            } else {
+                console.log('Validation failed'); // Debug log
+            }
+        });
+    });
+
+    // ...existing code...
+});
 
 function updateProgress(direction, stepNumber) {
     const step = parseInt(stepNumber);
@@ -783,3 +828,213 @@ function validateDateOfBirth(dateString) {
 
     return "";
 }
+
+// Enhanced form step handling
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('pendaftaranForm');
+    
+    if (form) {
+        initializeFormSteps(form);
+        initializeValidation(form);
+        initializeDropdowns();
+    }
+});
+
+function initializeFormSteps(form) {
+    if (!form) return;
+
+    // Next step handlers
+    form.querySelectorAll('.next-step').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentStep = this.closest('.form-step');
+            const nextStep = currentStep.nextElementSibling;
+            
+            console.log('Attempting to move to next step:', {
+                currentStep: currentStep.dataset.step,
+                nextStep: nextStep?.dataset.step
+            });
+
+            if (validateStep(currentStep)) {
+                moveToNextStep(currentStep, nextStep);
+            }
+        });
+    });
+
+    // Previous step handlers
+    form.querySelectorAll('.prev-step').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentStep = this.closest('.form-step');
+            const prevStep = currentStep.previousElementSibling;
+            moveToPrevStep(currentStep, prevStep);
+        });
+    });
+}
+
+function moveToNextStep(currentStep, nextStep) {
+    if (!nextStep) return;
+    
+    currentStep.classList.remove('active');
+    nextStep.classList.add('active');
+    updateProgress('next', currentStep.dataset.step);
+    
+    // Scroll to top of form
+    nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function moveToPrevStep(currentStep, prevStep) {
+    if (!prevStep) return;
+    
+    currentStep.classList.remove('active');
+    prevStep.classList.add('active');
+    updateProgress('prev', currentStep.dataset.step);
+    
+    // Scroll to top of form
+    prevStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Enhanced dropdown initialization
+function initializeDropdowns() {
+    const searchableDropdowns = document.querySelectorAll('.searchable-dropdown');
+    
+    searchableDropdowns.forEach(dropdown => {
+        const searchInput = dropdown.querySelector('.dropdown-search');
+        const dropdownList = dropdown.querySelector('.dropdown-list');
+        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+        
+        if (!searchInput || !dropdownList || !hiddenInput) return;
+        
+        setupDropdownHandlers(searchInput, dropdownList, hiddenInput);
+    });
+}
+
+function setupDropdownHandlers(searchInput, dropdownList, hiddenInput) {
+    // Show dropdown on focus
+    searchInput.addEventListener('focus', () => {
+        dropdownList.style.display = 'block';
+    });
+
+    // Filter items on input
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        filterDropdownItems(dropdownList, searchTerm);
+    });
+
+    // Handle selection
+    dropdownList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dropdown-item')) {
+            handleDropdownSelection(e.target, searchInput, hiddenInput, dropdownList);
+        }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.searchable-dropdown')) {
+            dropdownList.style.display = 'none';
+        }
+    });
+}
+
+// Add missing initialization functions
+function initializeSearchableDropdowns() {
+    const searchableDropdowns = document.querySelectorAll('.searchable-dropdown');
+    searchableDropdowns.forEach(dropdown => {
+        const searchInput = dropdown.querySelector('.dropdown-search');
+        const dropdownList = dropdown.querySelector('.dropdown-list');
+        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+        
+        if (searchInput && dropdownList && hiddenInput) {
+            setupDropdownHandlers(searchInput, dropdownList, hiddenInput);
+        }
+    });
+}
+
+function initializeValidation(form) {
+    // Add validation listeners to all required fields
+    const requiredFields = form.querySelectorAll('[required]');
+    requiredFields.forEach(field => {
+        field.addEventListener('blur', () => {
+            validateField(field);
+        });
+    });
+
+    // Add form submit validation
+    form.addEventListener('submit', handleFormSubmit);
+}
+
+function validateField(field) {
+    const container = field.closest('.field-container');
+    if (!container) return;
+
+    clearError(field.id);
+    if (!field.value.trim()) {
+        showError(field.id, `${field.placeholder || 'Field ini'} wajib diisi`);
+        return false;
+    }
+    return true;
+}
+
+// Add missing clearErrors function
+function clearErrors(step) {
+    if (!step) return;
+    step.querySelectorAll('.error-message').forEach(msg => msg.remove());
+    step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
+}
+
+// Add missing dropdown helper functions
+function filterDropdownItems(dropdownList, searchTerm) {
+    const items = dropdownList.getElementsByClassName('dropdown-item');
+    Array.from(items).forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(searchTerm) ? '' : 'none';
+    });
+}
+
+function handleDropdownSelection(selectedItem, searchInput, hiddenInput, dropdownList) {
+    searchInput.value = selectedItem.textContent;
+    hiddenInput.value = selectedItem.dataset.value || selectedItem.textContent;
+    dropdownList.style.display = 'none';
+}
+
+// Fix form reference in DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('pendaftaranForm');
+    
+    // Initialize form steps only if form exists
+    if (form) {
+        // Next step handlers
+        form.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.form-step');
+                const nextStep = currentStep.nextElementSibling;
+                
+                if (validateStep(currentStep)) {
+                    moveToNextStep(currentStep, nextStep);
+                }
+            });
+        });
+
+        // Previous step handlers
+        form.querySelectorAll('.prev-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.form-step');
+                const prevStep = currentStep.previousElementSibling;
+                moveToPrevStep(currentStep, prevStep);
+            });
+        });
+
+        // Initialize other form components
+        initializeValidation(form);
+        initializeDropdowns();
+    }
+
+    // Initialize other components that don't depend on form
+    initializeDomicileHandlers();
+    initializeSearchableDropdowns();
+    initializeKelurahanDropdown();
+    
+    // ...rest of existing DOMContentLoaded code...
+});
+
+// ...rest of existing code...
