@@ -1,4 +1,4 @@
-// Utility functions
+// Core utility functions
 function toUpperCase(input) {
     input.value = input.value.toUpperCase();
 }
@@ -23,7 +23,7 @@ function formatDate(input) {
     input.value = formattedValue;
 }
 
-// Validation functions
+// Error handling and validation
 function showError(inputId, message) {
     const container = document.getElementById(inputId)?.closest('.field-container') || 
                      document.querySelector(`[name="${inputId}"]`)?.closest('.field-container') ||
@@ -40,10 +40,10 @@ function showError(inputId, message) {
 
 function clearError(inputId) {
     const element = document.getElementById(inputId);
-    if (!element) return; // Exit if element not found
+    if (!element) return;
     
     const container = element.closest('.field-container');
-    if (!container) return; // Exit if container not found
+    if (!container) return;
     
     const errorSpan = container.querySelector('.error-message');
     if (errorSpan) {
@@ -52,13 +52,18 @@ function clearError(inputId) {
     }
 }
 
-// Enhanced validation functions
+function clearErrors(step) {
+    if (!step) return;
+    step.querySelectorAll('.error-message').forEach(msg => msg.remove());
+    step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
+}
+
+// Form validation functions
 function validateStep(step) {
     let isValid = true;
     const errors = [];
     console.log('Validating step:', step.dataset.step);
 
-    // Clear previous errors
     clearErrors(step);
 
     switch(step.dataset.step) {
@@ -73,43 +78,99 @@ function validateStep(step) {
             break;
     }
 
-    // Display errors if any
     if (errors.length > 0) {
         errors.forEach(error => {
             showError(error.field, error.message);
         });
+        isValid = false;
     }
 
-    console.log('Validation result:', isValid, errors);
     return isValid;
 }
 
-function validateStepOne(step, errors) {
-    let isValid = true;
+function validateStepOne(step) {
+    const errors = [];
 
-    // Validate jalur program
     const jalurProgram = step.querySelector('input[name="jalur_program"]:checked');
     if (!jalurProgram) {
         errors.push({ field: 'jalur_program', message: 'Pilih jalur program' });
-        isValid = false;
     }
 
-    // Validate jurusan
     const jurusan = document.getElementById('jurusan');
-    if (!jurusan.value) {
+    if (!jurusan || !jurusan.value) {
         errors.push({ field: 'jurusan', message: 'Pilih jurusan' });
-        isValid = false;
     }
 
-    // Validate nama lengkap
     const nama = document.getElementById('firstn');
-    if (!nama.value.trim()) {
+    if (!nama || !nama.value.trim()) {
         errors.push({ field: 'firstn', message: 'Nama lengkap wajib diisi' });
-        isValid = false;
     }
 
-    return isValid;
+    return errors.length === 0;
 }
+
+function validateStepTwo(step) {
+    // Implement step two validation logic
+    return true;
+}
+
+function validateStepThree(step) {
+    // Implement step three validation logic
+    return true;
+}
+
+// Form step navigation
+function moveToNextStep(currentStep, nextStep) {
+    if (!nextStep) return;
+    
+    currentStep.classList.remove('active');
+    nextStep.classList.add('active');
+    updateProgress('next', currentStep.dataset.step);
+    nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function moveToPrevStep(currentStep, prevStep) {
+    if (!prevStep) return;
+    
+    currentStep.classList.remove('active');
+    prevStep.classList.add('active');
+    updateProgress('prev', currentStep.dataset.step);
+    prevStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Progress tracking
+function updateProgress(direction, stepNumber) {
+    const step = parseInt(stepNumber);
+    const progressSteps = document.querySelectorAll('.progress-step');
+    
+    progressSteps.forEach(progressStep => {
+        const stepNum = parseInt(progressStep.dataset.step);
+        if (direction === 'next' && stepNum <= step + 1) {
+            progressStep.classList.add('active');
+            if (stepNum < step + 1) progressStep.classList.add('completed');
+        } else if (direction === 'prev' && stepNum > step - 1) {
+            progressStep.classList.remove('active', 'completed');
+        }
+    });
+}
+
+// Initialize all form components and event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('pendaftaranForm');
+    
+    if (form) {
+        initializeFormSteps(form);
+        initializeValidation(form);
+        initializeDropdowns();
+        form.addEventListener('submit', handleFormSubmit);
+    }
+
+    initializeDomicileHandlers();
+    initializeSearchableDropdowns();
+    initializeKelurahanDropdown();
+    setupDateValidation();
+    setupModalHandlers();
+});
 
 // Event handlers
 document.addEventListener('DOMContentLoaded', function() {
@@ -439,35 +500,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add this new function outside DOMContentLoaded
 function initializeKelurahanDropdown() {
+    const dropdownContainer = document.querySelector('#toraja_fields .searchable-dropdown');
     const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
-    if (!dropdownList) {
-        console.error('Kelurahan dropdown list not found');
+    const searchInput = document.querySelector('#toraja_fields .dropdown-search');
+    const hiddenInput = document.getElementById('kelurahan');
+    
+    if (!dropdownContainer || !dropdownList || !searchInput || !hiddenInput) {
+        console.error('Required kelurahan dropdown elements not found');
         return;
     }
 
+    // Show loading state
+    searchInput.placeholder = 'Loading data...';
+    searchInput.disabled = true;
+
     fetch('get_kelurahan.php')
-        .then(response => response.json())
-        .then(data => {
-            const searchInput = document.querySelector('#toraja_fields .dropdown-search');
-            const hiddenInput = document.getElementById('kelurahan');
-            
-            if (!searchInput || !hiddenInput) {
-                console.error('Required kelurahan elements not found');
-                return;
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            // Reset input state
+            searchInput.placeholder = 'Cari Kelurahan/Lembang...';
+            searchInput.disabled = false;
 
             // Clear and populate dropdown
             dropdownList.innerHTML = '';
+            
+            if (data.length === 0) {
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'dropdown-item';
+                emptyMessage.textContent = 'Tidak ada data tersedia';
+                dropdownList.appendChild(emptyMessage);
+                return;
+            }
+
             data.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'dropdown-item';
-                div.textContent = `${item.area_name} (${item.area_type})`;
+                div.textContent = item.display_name;
                 div.dataset.kecamatan = item.district_name;
                 div.dataset.kabupaten = item.kabupaten_name;
                 dropdownList.appendChild(div);
             });
 
-            // Add event listeners
+            // Update event listeners
+            searchInput.addEventListener('focus', () => {
+                dropdownList.style.display = 'block';
+            });
+
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
                 const items = dropdownList.getElementsByClassName('dropdown-item');
@@ -476,40 +563,45 @@ function initializeKelurahanDropdown() {
                     const text = item.textContent.toLowerCase();
                     item.style.display = text.includes(searchTerm) ? '' : 'none';
                 });
-                
-                dropdownList.style.display = searchTerm ? 'block' : 'none';
             });
 
-            // Selection handling
             dropdownList.addEventListener('click', function(e) {
-                if (e.target.classList.contains('dropdown-item')) {
-                    const selectedItem = e.target;
-                    searchInput.value = selectedItem.textContent;
-                    hiddenInput.value = selectedItem.textContent;
-                    
-                    // Update kecamatan and kabupaten
-                    const kecamatanInput = document.getElementById('kecamatan');
-                    const kabupatenInput = document.getElementById('kabupaten');
-                    if (kecamatanInput) kecamatanInput.value = selectedItem.dataset.kecamatan;
-                    if (kabupatenInput) kabupatenInput.value = selectedItem.dataset.kabupaten;
-                    
-                    dropdownList.style.display = 'none';
+                const item = e.target.closest('.dropdown-item');
+                if (!item) return;
+                
+                searchInput.value = item.textContent;
+                hiddenInput.value = item.textContent;
+                
+                // Update related fields
+                if (item.dataset.kecamatan) {
+                    document.getElementById('kecamatan').value = item.dataset.kecamatan;
                 }
+                if (item.dataset.kabupaten) {
+                    document.getElementById('kabupaten').value = item.dataset.kabupaten;
+                }
+                
+                dropdownList.style.display = 'none';
             });
 
-            // Show/hide dropdown
-            searchInput.addEventListener('focus', () => {
-                dropdownList.style.display = 'block';
-            });
-
+            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
-                if (!e.target.closest('.searchable-dropdown')) {
+                if (!dropdownContainer.contains(e.target)) {
                     dropdownList.style.display = 'none';
                 }
             });
+
         })
         .catch(error => {
-            console.error('Error fetching kelurahan data:', error);
+            console.error('Error:', error);
+            searchInput.placeholder = 'Error loading data';
+            searchInput.disabled = true;
+            
+            // Show error message in dropdown
+            dropdownList.innerHTML = `
+                <div class="dropdown-item error">
+                    Error: ${error.message}. Please refresh the page or contact support.
+                </div>
+            `;
         });
 }
 
@@ -725,7 +817,6 @@ function validateStep(step) {
     }
 
     // Add validation for other steps here...
-    // ...existing code...
 
     return isValid;
 }
@@ -843,20 +934,21 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeFormSteps(form) {
     if (!form) return;
 
-    // Next step handlers
     form.querySelectorAll('.next-step').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             const currentStep = this.closest('.form-step');
             const nextStep = currentStep.nextElementSibling;
             
-            console.log('Attempting to move to next step:', {
-                currentStep: currentStep.dataset.step,
-                nextStep: nextStep?.dataset.step
-            });
-
+            console.log('Attempting to move to next step');
+            
             if (validateStep(currentStep)) {
-                moveToNextStep(currentStep, nextStep);
+                console.log('Step validation passed');
+                currentStep.classList.remove('active');
+                nextStep.classList.add('active');
+                updateProgress('next', currentStep.dataset.step);
+            } else {
+                console.log('Step validation failed');
             }
         });
     });
@@ -1037,4 +1129,110 @@ document.addEventListener('DOMContentLoaded', function() {
     // ...rest of existing DOMContentLoaded code...
 });
 
-// ...rest of existing code...
+function initializeKelurahanDropdown() {
+    const dropdownContainer = document.querySelector('#toraja_fields .searchable-dropdown');
+    const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
+    const searchInput = document.querySelector('#toraja_fields .dropdown-search');
+    const hiddenInput = document.getElementById('kelurahan');
+    
+    if (!dropdownContainer || !dropdownList || !searchInput || !hiddenInput) {
+        console.error('Required kelurahan dropdown elements not found:', {
+            container: !!dropdownContainer,
+            list: !!dropdownList,
+            input: !!searchInput,
+            hidden: !!hiddenInput
+        });
+        return;
+    }
+
+    // Show loading state
+    searchInput.placeholder = 'Loading data...';
+    searchInput.disabled = true;
+    dropdownList.style.display = 'none';
+
+    fetch('get_kelurahan.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(response => {
+            if (response.error) {
+                throw new Error(response.message || 'Error loading data');
+            }
+
+            const data = response.data || response;
+            
+            if (!Array.isArray(data)) {
+                throw new Error('Invalid data format received');
+            }
+
+            // Reset input state
+            searchInput.placeholder = 'Cari Kelurahan/Lembang...';
+            searchInput.disabled = false;
+
+            // Clear and populate dropdown
+            dropdownList.innerHTML = '';
+            
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'dropdown-item';
+                div.textContent = item.display_name;
+                div.dataset.kecamatan = item.district_name;
+                div.dataset.kabupaten = item.kabupaten_name;
+                dropdownList.appendChild(div);
+            });
+
+            // Show dropdown on input focus
+            searchInput.addEventListener('focus', () => {
+                dropdownList.style.display = 'block';
+            });
+
+            // Filter items on input
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                dropdownList.style.display = 'block';
+                
+                Array.from(dropdownList.children).forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(searchTerm) ? '' : 'none';
+                });
+            });
+
+            // Handle item selection
+            dropdownList.addEventListener('click', function(e) {
+                const item = e.target.closest('.dropdown-item');
+                if (!item) return;
+                
+                searchInput.value = item.textContent;
+                hiddenInput.value = item.textContent;
+                
+                document.getElementById('kecamatan').value = item.dataset.kecamatan;
+                document.getElementById('kabupaten').value = item.dataset.kabupaten;
+                
+                dropdownList.style.display = 'none';
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dropdownContainer.contains(e.target)) {
+                    dropdownList.style.display = 'none';
+                }
+            });
+
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            searchInput.placeholder = 'Error loading data';
+            searchInput.disabled = true;
+            dropdownList.innerHTML = `
+                <div class="dropdown-item error">
+                    ${error.message}. Please refresh or contact support.
+                </div>
+            `;
+            dropdownList.style.display = 'block';
+        });
+}
+
+// ...existing code...

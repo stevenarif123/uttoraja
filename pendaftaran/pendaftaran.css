@@ -206,7 +206,6 @@
 /* Radio button styling */
 .radio-group {
   display: flex;
-  gap: 20px;
   align-items: center;
 }
 
@@ -294,13 +293,11 @@
 .radio-field {
     display: flex;
     gap: 1.5rem;
-    margin: 0.5rem 0;
 }
 
 .radio-group {
     display: flex;
     gap: 1.5rem;
-    margin: 0.5rem 0;
 }
 
 /* Error state for radio buttons */
@@ -883,7 +880,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: block;
     font-size: 10px;
     color: #666;
-    margin-top: 1px;
+    margin-top: -2px;
     line-height: 1.4;
     font-style: italic;
     padding-left: 2px;
@@ -903,9 +900,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     order: 2;
 }
 
-.contact-field .input-description {
+/* .contact-field .input-description {
     order: 3;
-}
+} */
 
 /* Searchable Select Styles */
 .searchable-select-container {
