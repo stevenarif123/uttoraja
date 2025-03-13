@@ -6,46 +6,45 @@ require_once '../koneksi.php';
 $errors = [];
 
 try {
-    // Ambil data jurusan dan fakultas dari tabel prodi_admisi
-    $sql = "SELECT nama_program_studi, nama_fakultas FROM prodi_admisi";
-    $result = $conn->query($sql);
+  // Ambil data jurusan dan fakultas dari tabel prodi_admisi
+  $sql = "SELECT nama_program_studi, nama_fakultas FROM prodi_admisi";
+  $result = $conn->query($sql);
 
-    if (!$result) {
-        throw new Exception("Error executing query: " . $conn->error);
-    }
+  if (!$result) {
+    throw new Exception("Error executing query: " . $conn->error);
+  }
 
-    $jurusanData = array();
-    while ($row = $result->fetch_assoc()) {
-        $jurusanData[$row["nama_program_studi"]] = $row["nama_fakultas"];
-        $jurusanOptions[] = $row["nama_program_studi"];
-    }
-    // Encode jurusanData untuk digunakan di JavaScript
-    $jurusanDataJSON = json_encode($jurusanData);
-
+  $jurusanData = array();
+  while ($row = $result->fetch_assoc()) {
+    $jurusanData[$row["nama_program_studi"]] = $row["nama_fakultas"];
+    $jurusanOptions[] = $row["nama_program_studi"];
+  }
+  // Encode jurusanData untuk digunakan di JavaScript
+  $jurusanDataJSON = json_encode($jurusanData);
 } catch (Exception $e) {
-    $errors[] = $e->getMessage();
+  $errors[] = $e->getMessage();
 }
 
 // Close connection
 if (isset($conn)) {
-    $conn->close();
+  $conn->close();
 }
 
 // Display errors if any
 if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo "<div class='alert alert-danger'>$error</div>";
-    }
+  foreach ($errors as $error) {
+    echo "<div class='alert alert-danger'>$error</div>";
+  }
 }
 
 // Get any session messages
 if (isset($_SESSION['success'])) {
-    echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
-    unset($_SESSION['success']);
+  echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+  unset($_SESSION['success']);
 }
 if (isset($_SESSION['error'])) {
-    echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
-    unset($_SESSION['error']);
+  echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
+  unset($_SESSION['error']);
 }
 ?>
 
@@ -333,41 +332,43 @@ if (isset($_SESSION['error'])) {
                   <div class="row"></div>
                   <div class="col-lg-12">
                     <label for="jalur_program">
-                      Jalur Program 
-                      <button type="button" class="help-icon" data-toggle="popover" data-trigger="hover" 
-                              title="Reguler: Untuk lulusan SMA/SMK yang baru mendaftar.
-                                          Transfer Nilai: Untuk mahasiswa pindahan atau yang ingin melanjutkan kuliah." 
-                              data-content="Reguler: Untuk lulusan SMA/SMK yang baru mendaftar.
+                      Jalur Program
+                      <button type="button" class="help-icon" data-toggle="popover" data-trigger="hover"
+                        title="Reguler: Untuk lulusan SMA/SMK yang baru mendaftar.
+                                          Transfer Nilai: Untuk mahasiswa pindahan atau yang ingin melanjutkan kuliah."
+                        data-content="Reguler: Untuk lulusan SMA/SMK yang baru mendaftar.
                                           Transfer Nilai: Untuk mahasiswa pindahan atau yang ingin melanjutkan kuliah.">?</button>
                     </label>
                     <div class="radio-field">
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" id="reguler" name="jalur_program" value="Reguler" required>
-                                <span class="radio-checkmark"></span>
-                                <span class="radio-option-label">Reguler/Biasa</span>
-                            </label>
-                            
-                            <label class="radio-option">
-                                <input type="radio" id="transfer" name="jalur_program" value="Transfer Nilai" required>
-                                <span class="radio-checkmark"></span>
-                                <span class="radio-option-label">Transfer Nilai</span>
-                            </label>
-                        </div>
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" id="reguler" name="jalur_program" value="Reguler" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Reguler/Biasa</span>
+                        </label>
+
+                        <label class="radio-option">
+                          <input type="radio" id="transfer" name="jalur_program" value="Transfer Nilai" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Transfer Nilai</span>
+                        </label>
+                      </div>
                     </div>
+                    <span class="input-description">Tekan tombol biru berbentuk bulat disamping tulisan Jalur Program untuk melihat perbedaan antara keduanya</span>
                   </div>
 
                   <div class="col-lg-12">
+                    <label for="jurusan">Pilih Jurusan</label>
                     <div class="contact-field">
-                      <label for="jurusan">Pilih Jurusan</label>
                       <div class="field-container">
-                        <div class="input-wrapper select-container">
-                          <select id="jurusan" name="jurusan" required>
-                            <option value="" disabled selected>Pilih Jurusan*</option>
+                        <div class="searchable-dropdown">
+                          <input type="text" class="dropdown-search" placeholder="Cari jurusan..." autocomplete="off">
+                          <input type="hidden" id="jurusan" name="jurusan" required>
+                          <div class="dropdown-list">
                             <?php foreach ($jurusanOptions as $jurusan): ?>
-                                <option value="<?php echo $jurusan; ?>"><?php echo $jurusan; ?></option>
+                              <div class="dropdown-item" data-value="<?php echo $jurusan; ?>"><?php echo $jurusan; ?></div>
                             <?php endforeach; ?>
-                          </select>
+                          </div>
                           <span class="dropdown-icon">&#9660;</span>
                         </div>
                         <span class="input-description">Silahkan memilih jurusan yang sesuai dengan minat anda.</span>
@@ -383,7 +384,7 @@ if (isset($_SESSION['error'])) {
                   </div>
 
                   <div class="col-lg-12">
-                  <label for="jurusan">Nama Lengkap</label>
+                    <label for="jurusan">Nama Lengkap</label>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -392,7 +393,7 @@ if (isset($_SESSION['error'])) {
                         placeholder="Nama Lengkap*"
                         required
                         oninput="toUpperCase(this)" />
-                        <span class="input-description">Isi nama lengkap anda sesuai dengan KTP.</span>
+                      <span class="input-description">Isi nama lengkap anda sesuai dengan KTP.</span>
                     </div>
                   </div>
 
@@ -406,7 +407,7 @@ if (isset($_SESSION['error'])) {
                   <h4 class="mb-4">Data Pribadi</h4>
                   <!-- Nomor HP -->
                   <div class="col-lg-12">
-                  <label for="phone">Nomor HP/WA</label><br>
+                    <label for="phone">Nomor HP/WA</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -421,7 +422,7 @@ if (isset($_SESSION['error'])) {
 
                   <!-- Tempat Lahir -->
                   <div class="col-lg-12">
-                  <label for="tempat_lahir">Tempat Lahir</label><br>
+                    <label for="tempat_lahir">Tempat Lahir</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -436,48 +437,47 @@ if (isset($_SESSION['error'])) {
 
                   <!-- Tanggal Lahir -->
                   <div class="col-lg-12">
-                  <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
                     <div class="contact-field">
-                        <div class="input-wrapper date-picker-wrapper">
-                            <input
-                              type="date"
-                              id="tanggal_lahir"
-                              name="tanggal_lahir"
-                              required
-                              class="form-control date-input"
-                              min="1940-01-01"
-                              max="<?php echo date('Y-m-d', strtotime('-15 years')); ?>"
-                              value=""
-                            />
-                            <i class="fas fa-calendar-alt calendar-icon"></i>
-                          <span class="input-description">Isi tanggal lahir anda sesuai dengan yang tertera di KTP</span>
-                        </div>
+                      <div class="input-wrapper date-picker-wrapper">
+                        <input
+                          type="date"
+                          id="tanggal_lahir"
+                          name="tanggal_lahir"
+                          required
+                          class="form-control date-input"
+                          min="1940-01-01"
+                          max="<?php echo date('Y-m-d', strtotime('-15 years')); ?>"
+                          value="" />
+                        <i class="fas fa-calendar-alt calendar-icon"></i>
+                        <span class="input-description">Isi tanggal lahir anda sesuai dengan yang tertera di KTP</span>
                       </div>
+                    </div>
                   </div>
 
                   <!-- Jenis Kelamin -->
                   <div class="col-lg-12">
                     <label for="jenis_kelamin">Jenis Kelamin</label>
                     <div class="radio-field">
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" required>
-                                <span class="radio-checkmark"></span>
-                                <span class="radio-option-label">Laki-laki</span>
-                            </label>
-                            
-                            <label class="radio-option">
-                                <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" required>
-                                <span class="radio-checkmark"></span>
-                                <span class="radio-option-label">Perempuan</span>
-                            </label>
-                        </div>
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Laki-laki</span>
+                        </label>
+
+                        <label class="radio-option">
+                          <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Perempuan</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
 
                   <!-- Nama Ibu Kandung -->
                   <div class="col-lg-12">
-                  <label for="ibu_kandung">Nama Ibu Kandung</label><br>
+                    <label for="ibu_kandung">Nama Ibu Kandung</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -486,13 +486,13 @@ if (isset($_SESSION['error'])) {
                         placeholder="Nama Ibu Kandung*"
                         required
                         oninput="toUpperCase(this)" />
-                        <span class="input-description">Isi nama lengkap ibu kandung anda.</span>
+                      <span class="input-description">Isi nama lengkap ibu kandung anda.</span>
                     </div>
                   </div>
 
                   <!-- NIK -->
                   <div class="col-lg-12">
-                  <label for="nik">Nomor Induk Kependudukan</label><br>
+                    <label for="nik">Nomor Induk Kependudukan</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -513,10 +513,30 @@ if (isset($_SESSION['error'])) {
                 <!-- Step 3 -->
                 <div class="form-step" data-step="3">
                   <h4 class="mb-4">Informasi Tambahan</h4>
+                  <!-- Kawin Selection -->
+                  <div class="col-lg-12">
+                    <label for="kawin">Status Perkawinan</label>
+                    <div class="radio-field">
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" id="kawin" name="kawin" value="kawin" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Kawin</span>
+                        </label>
+
+                        <label class="radio-option">
+                          <input type="radio" id="tidak_kawin" name="kawin" value="tidak kawin" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Belum Kawin</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- Alamat -->
 
                   <div class="col-lg-12">
-                  <label for="alamat">Alamat Lengkap</label><br>
+                    <label for="alamat">Alamat Lengkap</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -529,11 +549,79 @@ if (isset($_SESSION['error'])) {
                     </div>
                   </div>
 
+                  <!-- Domisili Selection -->
+                  <div class="col-lg-12">
+                    <label for="domisili">Dominsili</label>
+                    <div class="radio-field">
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" id="toraja" name="domisili" value="toraja" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Toraja (Tana Toraja/Toraja Utara)</span>
+                        </label>
+
+                        <label class="radio-option">
+                          <input type="radio" id="luar_toraja" name="domisili" value="luar_toraja" required>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Di luar Toraja</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Toraja Domicile Fields -->
+                  <div id="toraja_fields" style="display: none;">
+                    <div class="col-lg-12">
+                      <label for="kelurahan">Kelurahan/Lembang</label>
+                      <div class="contact-field">
+                        <div class="field-container">
+                          <div class="searchable-dropdown">
+                            <input type="text" class="dropdown-search" placeholder="Cari Kelurahan/Lembang..." autocomplete="off">
+                            <input type="hidden" id="kelurahan" name="kelurahan">
+                            <div class="dropdown-list"></div>
+                            <span class="dropdown-icon">&#9660;</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <label for="kecamatan">Kecamatan</label>
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input type="text" id="kecamatan" name="kecamatan" placeholder="Kecamatan" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <label for="kabupaten">Kabupaten</label>
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input type="text" id="kabupaten" name="kabupaten" placeholder="Kabupaten" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Non-Toraja Domicile Field -->
+                  <div id="luar_toraja_fields" style="display: none;">
+                    <div class="col-lg-12">
+                      <label for="domisili_manual">Domisili Lengkap</label>
+                      <div class="contact-field position-relative c-name mb-4">
+                        <input
+                          type="text"
+                          id="domisili_manual"
+                          name="domisili_manual"
+                          placeholder="Masukkan domisili lengkap"
+                          oninput="toUpperCase(this)">
+                        <span class="input-description">Masukkan Kelurahan/Lembang/Desa, Kecamatan, Kabupaten, Provinsi domisili anda</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- Ukuran Baju -->
                   <div class="col-lg-12">
-                  <label for="ukuran_baju">Ukuran Baju</label><br>
+                    <label for="ukuran_baju">Ukuran Baju</label><br>
                     <div class="contact-field position-relative c-name mb-4 select-container">
-                      <select id="ukuran_baju" name="ukuran_baju" required>
+                      <div class="field-container">
+                        <select id="ukuran_baju" name="ukuran_baju" required>
                         <option value="" disabled selected>Pilih Ukuran Baju*</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
@@ -543,34 +631,37 @@ if (isset($_SESSION['error'])) {
                       </select>
                       <span class="dropdown-icon">&#9660;</span>
                       <span class="input-description">Ukuran baju akan digunakan sebagai ukuran baju almamater yang anda pesan.</span>
-                    </div>
+                    
+
+                      </div>
+                      </div>
                   </div>
 
                   <!-- Sedang Bekerja? -->
                   <div class="col-lg-12">
                     <label for="bekerja">Sedang Bekerja?</label>
                     <div class="radio-field">
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" id="bekerja_ya" name="bekerja" value="Ya">
-                                <span class="radio-checkmark"></span>
-                                <span class="radio-option-label">Ya</span>
-                            </label>
-                            
-                            <label class="radio-option">
-                                <input type="radio" id="bekerja_tidak" name="bekerja" value="Tidak" checked>
-                                <span class="radio-checkmark"></span>
-                                <span class="radio-option-label">Tidak</span>
-                            </label>
-                        </div>
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" id="bekerja_ya" name="bekerja" value="Ya">
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Ya</span>
+                        </label>
+
+                        <label class="radio-option">
+                          <input type="radio" id="bekerja_tidak" name="bekerja" value="Tidak" checked>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Tidak</span>
+                        </label>
+                      </div>
                     </div>
                     <span class="input-description">Silahkan mengisi jika anda sdang atau tidak bekerja saat ini</span>
                   </div>
 
                   <!-- Tempat Kerja -->
-                  
+
                   <div class="col-lg-12" id="tempat_kerja_container" style="display: none;">
-                  <label for="tempat_kerja">Nama Tempat Bekerja</label><br>
+                    <label for="tempat_kerja">Nama Tempat Bekerja</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <input
                         type="text"
@@ -578,7 +669,7 @@ if (isset($_SESSION['error'])) {
                         name="tempat_kerja"
                         placeholder="Tuliskan nama tempat kerja"
                         oninput="toUpperCase(this)" />
-                        <span class="input-description">Isi nama tempat bekerja anda yang sesuai.</span>
+                      <span class="input-description">Isi nama tempat bekerja anda yang sesuai.</span>
                     </div>
                   </div>
 
@@ -603,7 +694,7 @@ if (isset($_SESSION['error'])) {
 
                   <!-- Pertanyaan -->
                   <div class="col-lg-12">
-                  <label for="pertanyaan">Pertanyaan</label><br>
+                    <label for="pertanyaan">Pertanyaan</label><br>
                     <div class="contact-field position-relative c-name mb-4">
                       <textarea
                         name="pertanyaan"
@@ -611,7 +702,7 @@ if (isset($_SESSION['error'])) {
                         cols="30"
                         rows="10"
                         placeholder="Tuliskan pertanyaan jika ada"></textarea>
-                        <span class="input-description">Isi jika ada pertanyaan atau pesan yang ingin diajukan.</span>
+                      <span class="input-description">Isi jika ada pertanyaan atau pesan yang ingin diajukan.</span>
                     </div>
                   </div>
 
@@ -760,10 +851,18 @@ if (isset($_SESSION['error'])) {
                   </div>
                   <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
                     <ul class="clearfix">
-                      <li><p><a href="../informasi.php">Informasi Akademik</a></p></li>
-                      <li><p><a href="../modul/">Pengambilan Modul</a></p></li>
-                      <li><p><a href="../legalisir/">Legalisir Ijazah</a></p></li>
-                      <li><p><a href="../suratketerangan/">Surat Keterangan</a></p></li>
+                      <li>
+                        <p><a href="../informasi.php">Informasi Akademik</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../modul/">Pengambilan Modul</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../legalisir/">Legalisir Ijazah</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../suratketerangan/">Surat Keterangan</a></p>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -777,36 +876,36 @@ if (isset($_SESSION['error'])) {
     </footer>
     <!--End Footer Three-->
 
-  <!--Start Search Popup -->
-  <div class="search-popup">
-    <div class="search-popup__overlay search-toggler">
-      <div class="search-close-btn">
-        <i class="icon-plus"></i>
+    <!--Start Search Popup -->
+    <div class="search-popup">
+      <div class="search-popup__overlay search-toggler">
+        <div class="search-close-btn">
+          <i class="icon-plus"></i>
+        </div>
+      </div>
+      <div class="search-popup__content">
+        <form action="#">
+          <label for="search" class="sr-only">search here</label>
+          <input type="search" id="search" placeholder="Search Here..." />
+          <button type="submit" aria-label="search submit" class="btn-one">
+            <i class="icon-search-interface-symbol"></i>
+          </button>
+        </form>
       </div>
     </div>
-    <div class="search-popup__content">
-      <form action="#">
-        <label for="search" class="sr-only">search here</label>
-        <input type="search" id="search" placeholder="Search Here..." />
-        <button type="submit" aria-label="search submit" class="btn-one">
-          <i class="icon-search-interface-symbol"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-  <!--End Search Popup -->
+    <!--End Search Popup -->
 
-  <!-- Scroll-top -->
-  <button class="scroll-top scroll-to-target" data-target="html">
-    <i class="icon-down-arrow"></i>
-  </button>
-  <!-- Scroll-top-end-->
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+      <i class="icon-down-arrow"></i>
+    </button>
+    <!-- Scroll-top-end-->
     <!-- Alert Container (tempat pesan sukses/error) -->
     <div id="alert-container"></div>
 
     <script>
-        // Make jurusanData available to JavaScript
-        const jurusanData = <?php echo $jurusanDataJSON; ?>;
+      // Make jurusanData available to JavaScript
+      const jurusanData = <?php echo $jurusanDataJSON; ?>;
     </script>
     <!-- JS here -->
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
@@ -827,5 +926,6 @@ if (isset($_SESSION['error'])) {
 
     <script src="../assets/js/main.js"></script>
     <script src="pendaftaran.js"></script>
-  </body>
+</body>
+
 </html>
