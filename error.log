@@ -196,3 +196,149 @@ Stack trace:
 [12-Mar-2025 17:47:41 Europe/Berlin] Koneksi database berhasil
 [12-Mar-2025 17:48:24 Europe/Berlin] Koneksi database berhasil
 [12-Mar-2025 17:50:19 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 14:11:59 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 14:15:11 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 14:15:36 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 14:16:03 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 14:16:50 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 14:18:07 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:20:58 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:21:44 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:24:16 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:36:00 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:36:07 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:17 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:17 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:20 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:20 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:22 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:22 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:22 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:22 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:22 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:22 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:30 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:30 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:34 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:34 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 15:40:56 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 15:40:56 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 16:35:07 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:35:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 16:35:08 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:35:08 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 16:35:16 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:35:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 16:57:53 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:57:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 16:58:11 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:58:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:585
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(585): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 585
+[13-Mar-2025 16:59:45 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:59:45 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:630
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(630): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 630
+[13-Mar-2025 16:59:48 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 16:59:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:630
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(630): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 630
+[13-Mar-2025 17:00:23 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:00:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:630
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(630): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 630
+[13-Mar-2025 17:04:14 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:04:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:630
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(630): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 630
+[13-Mar-2025 17:04:57 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:04:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:630
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(630): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 630
+[13-Mar-2025 17:07:26 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:07:26 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:663
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(663): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 663
+[13-Mar-2025 17:07:33 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:07:33 Europe/Berlin] PHP Fatal error:  Uncaught Error: mysqli object is already closed in C:\xampp\htdocs\uttoraja\pendaftaran\index.php:663
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(663): mysqli->query('SELECT area_nam...')
+#1 {main}
+  thrown in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 663
+[13-Mar-2025 17:25:31 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:25:48 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:25:50 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:28:21 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:28:55 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:34:31 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:34:43 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:34:48 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:34:53 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:35:01 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:35:07 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:35:12 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:35:17 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:35:22 Europe/Berlin] Koneksi database berhasil
+[13-Mar-2025 17:37:36 Europe/Berlin] Koneksi database berhasil
