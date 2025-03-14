@@ -984,12 +984,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: #555;
 }
 
-/* Searchable Dropdown Styles */
-.searchable-dropdown {
-    position: relative;
-    width: 100%;
-}
-
 .dropdown-search {
     width: 100%;
     padding: 12px 15px;
@@ -1075,17 +1069,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: block !important;
 }
 
-.searchable-dropdown {
-    position: relative;
-    width: 100%;
-}
-
 .dropdown-list {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     background: white;
     border: 1px solid #ddd;
@@ -1129,7 +1118,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .contact-field textarea,
 .searchable-dropdown {
     width: 100%;
-    padding: 10px 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background: #fff;
@@ -1149,6 +1137,80 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
     z-index: 1000;
     background: #fff;
+}
+
+/* Searchable dropdown refinements 🎨 */
+.searchable-dropdown {
+    position: relative;
+    width: 100%;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.searchable-dropdown .dropdown-search,
+.searchable-dropdown input[type="text"] {
+    width: 100%;
+    padding: 12px 15px !important; /* Consistent padding left and right */
+    border: none !important;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: transparent;
+    outline: none;
+    color: #444;
+    font-family: inherit;
+    text-align: left !important; /* Force left alignment */
+    padding-right: 35px !important; /* Make room for dropdown icon */
+    margin: 0 !important;
+    position: relative;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+/* Fix right-aligned text issue */
+.searchable-dropdown.has-value .dropdown-search {
+    text-align: left !important;
+    direction: ltr !important;
+    unicode-bidi: plaintext !important;
+}
+
+/* Grouped inputs for kelurahan section 🏘️ */
+.kelurahan-group {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    background: #fafafa;
+    margin-bottom: 20px;
+}
+
+.kelurahan-group .field-container {
+    margin-bottom: 12px;
+}
+
+.kelurahan-group .field-container:last-child {
+    margin-bottom: 0;
+}
+
+/* Disabled input styling enhancement 🔒 */
+.kelurahan-group input[readonly] {
+    background-color: #e9ecef !important;
+    border-color: #dee2e0;
+    color: #495057;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Group header styling ✨ */
+.kelurahan-group-header {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
 }
 
 .contact-bg02 {

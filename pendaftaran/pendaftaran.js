@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         jurusanSelect.addEventListener('change', function() {
             const selectedJurusan = this.value;
             console.log('Selected Jurusan:', selectedJurusan); // Debug
-            console.log('Available data:', jurusanData); // Debug
+            console.log('Available data:', jurusanData); // Desbug
             
             if (jurusanData[selectedJurusan]) {
                 fakultasInput.value = jurusanData[selectedJurusan];
@@ -1234,5 +1234,83 @@ function initializeKelurahanDropdown() {
             dropdownList.style.display = 'block';
         });
 }
+
+// ...existing code...
+
+// Replace searchable dropdown handler with select handler
+document.getElementById('jurusan').addEventListener('change', function() {
+    const selectedJurusan = this.value;
+    const fakultasInput = document.getElementById('fakultas');
+    
+    if (selectedJurusan && jurusanData[selectedJurusan]) {
+        fakultasInput.value = jurusanData[selectedJurusan];
+        fakultasInput.classList.add('filled');
+    } else {
+        fakultasInput.value = '';
+        fakultasInput.classList.remove('filled');
+    }
+});
+
+// Initialize jurusan searchable dropdown
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('.dropdown-search');
+    const dropdownList = document.querySelector('.dropdown-list');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    const hiddenInput = document.getElementById('jurusan');
+    const fakultasInput = document.getElementById('fakultas');
+
+    if (!searchInput || !dropdownList || !hiddenInput) return;
+
+    // Show dropdown on focus
+    searchInput.addEventListener('focus', function() {
+        dropdownList.style.display = 'block';
+        if (hiddenInput.value) {
+            this.value = '';
+            dropdownItems.forEach(item => item.style.display = '');
+        }
+    });
+
+    // Filter items while typing
+    searchInput.addEventListener('input', function() {
+        const searchText = this.value.toLowerCase();
+        dropdownItems.forEach(item => {
+            const matches = item.textContent.toLowerCase().includes(searchText);
+            item.style.display = matches ? '' : 'none';
+        });
+    });
+
+    // Handle item selection
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const value = this.dataset.value || this.textContent;
+            searchInput.value = this.textContent;
+            hiddenInput.value = value;
+            dropdownList.style.display = 'none';
+            
+            // Add class to container when value is selected
+            searchInput.closest('.searchable-dropdown').classList.add('has-value');
+            
+            // Update fakultas
+            if (jurusanData[value]) {
+                fakultasInput.value = jurusanData[value];
+                fakultasInput.classList.add('filled');
+            }
+        });
+    });
+
+    // Clear has-value class when clicking to search again
+    searchInput.addEventListener('focus', function() {
+        if (hiddenInput.value) {
+            this.closest('.searchable-dropdown').classList.remove('has-value');
+        }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.searchable-dropdown')) {
+            dropdownList.style.display = 'none';
+        }
+    });
+});
 
 // ...existing code...

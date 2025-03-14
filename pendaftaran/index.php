@@ -591,7 +591,8 @@ if (isset($_SESSION['error'])) {
                 <!-- Step 3 -->
                 <div class="form-step" data-step="3">
                   <h4 class="mb-4">Informasi Tambahan</h4>
-                  <!-- Kawin Selection -->
+                  
+                  <!-- Status Perkawinan -->
                   <div class="col-lg-12 spasi">
                     <label for="kawin">Status Perkawinan</label>
                     <div class="radio-field">
@@ -612,7 +613,6 @@ if (isset($_SESSION['error'])) {
                   </div>
 
                   <!-- Alamat -->
-
                   <div class="col-lg-12">
                     <label for="alamat">Alamat Lengkap</label><br>
                     <div class="contact-field position-relative c-name mb-4">
@@ -627,7 +627,7 @@ if (isset($_SESSION['error'])) {
                     </div>
                   </div>
 
-                  <!-- Domisili Selection -->
+                  <!-- Domisili -->
                   <div class="col-lg-12 spasi">
                     <label for="domisili">Dominsili</label>
                     <div class="radio-field">
@@ -647,368 +647,358 @@ if (isset($_SESSION['error'])) {
                     </div>
                   </div>
 
-                  <!-- Toraja Domicile Fields -->
+                  <!-- Toraja Fields -->
                   <div id="toraja_fields" style="display: none;">
-                    <div class="col-lg-12">
-                      <label for="kelurahan">Kelurahan/Lembang</label>
-                      <div class="contact-field">
-                        <div class="field-container">
-                          <div class="searchable-dropdown">
-                            <input type="text" class="dropdown-search" placeholder="Cari Kelurahan/Lembang..." autocomplete="off">
-                            <input type="hidden" id="kelurahan" name="kelurahan">
-                            <div class="dropdown-list">
-                              <?php if (!empty($kelurahanData)): ?>
-                                <?php foreach ($kelurahanData as $kelurahan): ?>
-                                  <div class="dropdown-item" data-value="<?php echo htmlspecialchars($kelurahan['area_name']); ?>">
-                                    <?php echo htmlspecialchars($kelurahan['area_name']); ?>
+                      <div class="kelurahan-group">
+                          <div class="kelurahan-group-header">Data Wilayah Toraja</div>
+                          
+                          <div class="field-container">
+                              <label for="kelurahan">Kelurahan/Lembang</label>
+                              <div class="searchable-dropdown">
+                                  <input type="text" class="dropdown-search" placeholder="Cari Kelurahan/Lembang..." autocomplete="off">
+                                  <input type="hidden" id="kelurahan" name="kelurahan">
+                                  <div class="dropdown-list">
+                                      <!-- Dropdown items will be populated by JavaScript -->
                                   </div>
-                                <?php endforeach; ?>
-                              <?php else: ?>
-                                <div class="dropdown-item">No areas available</div>
-                              <?php endif; ?>
-                            </div>
-                            <span class="dropdown-icon">&#9660;</span>
+                                  <span class="dropdown-icon">&#9660;</span>
+                              </div>
                           </div>
-                        </div>
+              
+                          <div class="field-container">
+                              <label for="kecamatan">Kecamatan</label>
+                              <input type="text" id="kecamatan" name="kecamatan" placeholder="Kecamatan" readonly>
+                          </div>
+              
+                          <div class="field-container">
+                              <label for="kabupaten">Kabupaten</label>
+                              <input type="text" id="kabupaten" name="kabupaten" placeholder="Kabupaten" readonly>
+                          </div>
                       </div>
-                    </div>
+                  </div>
+
+                  <!-- Non-Toraja Fields -->
+                  <div id="luar_toraja_fields" style="display: none;">
                     <div class="col-lg-12">
-                      <label for="kecamatan">Kecamatan</label>
+                      <label for="domisili_manual">Domisili Lengkap</label>
                       <div class="contact-field position-relative c-name mb-4">
-                        <input type="text" id="kecamatan" name="kecamatan" placeholder="Kecamatan" readonly>
+                        <input
+                          type="text"
+                          id="domisili_manual"
+                          name="domisili_manual"
+                          placeholder="Masukkan domisili lengkap"
+                          oninput="toUpperCase(this)">
+                        <span class="input-description">Masukkan Kelurahan/Lembang/Desa, Kecamatan, Kabupaten, Provinsi domisili anda</span>
                       </div>
                     </div>
+                  </div>
 
-                    <div class="col-lg-12">
-                      <label for="kabupaten">Kabupaten</label>
-                      <div class="contact-field position-relative c-name mb-4"></div>
-                      <input type="text" id="kabupaten" name="kabupaten" placeholder="Kabupaten" readonly>
+                  <!-- Ukuran Baju -->
+                  <div class="col-lg-12">
+                    <label for="ukuran_baju">Ukuran Baju</label><br>
+                    <div class="contact-field position-relative c-name mb-4 select-container">
+                      <div class="field-container">
+                        <select id="ukuran_baju" name="ukuran_baju" required>
+                          <option value="" disabled selected>Pilih Ukuran Baju*</option>
+                          <option value="S">S</option>
+                          <option value="M">M</option>
+                          <option value="L">L</option>
+                          <option value="XL">XL</option>
+                          <option value="XLL">XLL</option>
+                        </select>
+                        <span class="dropdown-icon">&#9660;</span>
+                        <span class="input-description">Ukuran baju akan digunakan sebagai ukuran baju almamater yang anda pesan.</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- Non-Toraja Domicile Field -->
-                <div id="luar_toraja_fields" style="display: none;">
-                  <div class="col-lg-12"></div>
-                  <label for="domisili_manual">Domisili Lengkap</label>
-                  <div class="contact-field position-relative c-name mb-4">
-                    <input
-                      type="text"
-                      id="domisili_manual"
-                      name="domisili_manual"
-                      placeholder="Masukkan domisili lengkap"
-                      oninput="toUpperCase(this)">
-                    <span class="input-description">Masukkan Kelurahan/Lembang/Desa, Kecamatan, Kabupaten, Provinsi domisili anda</span>
+                  <!-- Bekerja -->
+                  <div class="col-lg-12 spasi">
+                    <label for="bekerja">Sedang Bekerja?</label>
+                    <div class="radio-field">
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" id="bekerja_ya" name="bekerja" value="Ya">
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Ya</span>
+                        </label>
+
+                        <label class="radio-option">
+                          <input type="radio" id="bekerja_tidak" name="bekerja" value="Tidak" checked>
+                          <span class="radio-checkmark"></span>
+                          <span class="radio-option-label">Tidak</span>
+                        </label>
+                      </div>
+                    </div>
+                    <span class="input-description">Silahkan mengisi jika anda sdang atau tidak bekerja saat ini</span>
+                  </div>
+                  <!-- Tempat Kerja -->
+                  <div class="col-lg-12" id="tempat_kerja_container" style="display: none;">
+                    <label for="tempat_kerja">Nama Tempat Bekerja</label><br>
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="tempat_kerja"
+                        name="tempat_kerja"
+                        placeholder="Tuliskan nama tempat kerja"
+                        oninput="toUpperCase(this)" />
+                      <span class="input-description">Isi nama tempat bekerja anda yang sesuai.</span>
+                    </div>
+                  </div>
+
+                  <!-- Agama -->
+                  <div class="col-lg-12">
+                    <label for="agama">Agama</label><br>
+                    <div class="contact-field position-relative c-name mb-4">
+                    <div class="field-container">
+                      <select id="agama" name="agama" required>
+                        <option value="" disabled selected>Pilih Agama*</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Protestan">Protestan</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Buddha">Buddha</option>
+                        <option value="Konghucu">Konghucu</option>
+                      </select>
+                      <span class="dropdown-icon">&#9660;</span>
+                      <span class="input-description">Isi pilihan agama yang sesuai di KTP anda, jika telah pindah agama atau kesalahan cetak KTP maka dapat melampirkan surat keterangan pindah agama atau dapat mencetak ulang KTP.</span>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Pertanyaan -->
+                  <div class="col-lg-12">
+                    <label for="pertanyaan">Pertanyaan</label><br>
+                    <div class="contact-field position-relative c-name mb-4">
+                      <textarea
+                        name="pertanyaan"
+                        id="pertanyaan"
+                        cols="30"
+                        rows="10"
+                        placeholder="Tuliskan pertanyaan jika ada"></textarea>
+                      <span class="input-description">Isi jika ada pertanyaan atau pesan yang ingin diajukan.</span>
+                    </div>
+                  </div>
+
+                  <div class="form-buttons">
+                    <button type="button" class="pnd-btn prev-step">Kembali</button>
+                    <button type="submit" class="pnd-btn">Daftar</button>
                   </div>
                 </div>
-            </div>
-
-            <!-- Ukuran Baju -->
-            <div class="col-lg-12">
-              <label for="ukuran_baju">Ukuran Baju</label><br>
-              <div class="contact-field position-relative c-name mb-4 select-container">
-                <div class="field-container">
-                  <select id="ukuran_baju" name="ukuran_baju" required>
-                    <option value="" disabled selected>Pilih Ukuran Baju*</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="XLL">XLL</option>
-                  </select>
-                  <span class="dropdown-icon">&#9660;</span>
-                  <span class="input-description">Ukuran baju akan digunakan sebagai ukuran baju almamater yang anda pesan.</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Sedang Bekerja? -->
-            <div class="col-lg-12 spasi">
-              <label for="bekerja">Sedang Bekerja?</label>
-              <div class="radio-field">
-                <div class="radio-group">
-                  <label class="radio-option">
-                    <input type="radio" id="bekerja_ya" name="bekerja" value="Ya">
-                    <span class="radio-checkmark"></span>
-                    <span class="radio-option-label">Ya</span>
-                  </label>
-
-                  <label class="radio-option">
-                    <input type="radio" id="bekerja_tidak" name="bekerja" value="Tidak" checked>
-                    <span class="radio-checkmark"></span>
-                    <span class="radio-option-label">Tidak</span>
-                  </label>
-                </div>
-              </div>
-              <span class="input-description">Silahkan mengisi jika anda sdang atau tidak bekerja saat ini</span>
-            </div>
-            <!-- Tempat Kerja -->
-            <div class="col-lg-12" id="tempat_kerja_container" style="display: none;">
-              <label for="tempat_kerja">Nama Tempat Bekerja</label><br>
-              <div class="contact-field position-relative c-name mb-4">
-                <input
-                  type="text"
-                  id="tempat_kerja"
-                  name="tempat_kerja"
-                  placeholder="Tuliskan nama tempat kerja"
-                  oninput="toUpperCase(this)" />
-                <span class="input-description">Isi nama tempat bekerja anda yang sesuai.</span>
-              </div>
-            </div>
-
-            <!-- Agama -->
-            <div class="col-lg-12">
-              <label for="agama">Agama</label><br>
-              <div class="contact-field position-relative c-name mb-4">
-                <select id="agama" name="agama" required>
-                  <option value="" disabled selected>Pilih Agama*</option>
-                  <option value="Islam">Islam</option>
-                  <option value="Protestan">Protestan</option>
-                  <option value="Katolik">Katolik</option>
-                  <option value="Hindu">Hindu</option>
-                  <option value="Buddha">Buddha</option>
-                  <option value="Konghucu">Konghucu</option>
-                  <option value="Lainnya">Lainnya</option>
-                </select>
-                <span class="dropdown-icon">&#9660;</span>
-                <span class="input-description">Isi pilihan agama yang sesuai di KTP anda, jika telah pindah agama atau kesalahan cetak KTP maka dapat melampirkan surat keterangan pindah agama atau dapat mencetak ulang KTP.</span>
-              </div>
-            </div>
-
-            <!-- Pertanyaan -->
-            <div class="col-lg-12">
-              <label for="pertanyaan">Pertanyaan</label><br>
-              <div class="contact-field position-relative c-name mb-4">
-                <textarea
-                  name="pertanyaan"
-                  id="pertanyaan"
-                  cols="30"
-                  rows="10"
-                  placeholder="Tuliskan pertanyaan jika ada"></textarea>
-                <span class="input-description">Isi jika ada pertanyaan atau pesan yang ingin diajukan.</span>
-              </div>
-            </div>
-
-            <div class="form-buttons">
-              <button type="button" class="pnd-btn prev-step">Kembali</button>
-              <button type="submit" class="pnd-btn">Daftar</button>
+              </form>
+              <!-- Form End -->
             </div>
           </div>
-          </form>
-          <!-- Form End -->
         </div>
       </div>
-  </div>
-  </div>
-  </section>
+    </section>
 
-  <!-- Modal Petunjuk -->
-  <div id="petunjukModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Petunjuk Pendaftaran</h5>
-        <span class="close-modal" id="closeModal">&times;</span>
-      </div>
-      <div class="modal-body">
-        <p>Ini adalah petunjuk pendaftaran. Silakan ikuti langkah-langkah berikut:</p>
-        <ol>
-          <li>Isi semua kolom yang tersedia.</li>
-          <li>Pastikan data yang diisi benar.</li>
-          <li>Jalur Program:</li>
-          <li>1. Reguler/Umum merupakan pendaftaran mahasiswa secara umum menggunakan ijazah SMA</li>
-          <li>2. Transfer Nilai merupakan pilihan bagi yang ingin pindah Jurusan atau Transfer Nilai dari kampus sebelumnya</li>
-          <br>
-          <li>Klik tombol Daftar untuk menyelesaikan pendaftaran.</li>
-        </ol>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="closeModalBtn">Tutup</button>
-      </div>
-    </div>
-  </div>
-  <!-- /Modal Petunjuk -->
-  <div class="modal fade" id="petunjukModal" tabindex="-1" role="dialog" aria-labelledby="petunjukModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <!-- Modal Petunjuk -->
+    <div id="petunjukModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="petunjukModalLabel">Petunjuk Pendaftaran</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title">Petunjuk Pendaftaran</h5>
+          <span class="close-modal" id="closeModal">&times;</span>
         </div>
         <div class="modal-body">
-          xxxxxxx
+          <p>Ini adalah petunjuk pendaftaran. Silakan ikuti langkah-langkah berikut:</p>
+          <ol>
+            <li>Isi semua kolom yang tersedia.</li>
+            <li>Pastikan data yang diisi benar.</li>
+            <li>Jalur Program:</li>
+            <li>1. Reguler/Umum merupakan pendaftaran mahasiswa secara umum menggunakan ijazah SMA</li>
+            <li>2. Transfer Nilai merupakan pilihan bagi yang ingin pindah Jurusan atau Transfer Nilai dari kampus sebelumnya</li>
+            <br>
+            <li>Klik tombol Daftar untuk menyelesaikan pendaftaran.</li>
+          </ol>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-secondary" id="closeModalBtn">Tutup</button>
         </div>
       </div>
     </div>
-  </div>
-
-  <!--Start Footer Three-->
-  <footer class="footer-three">
-    <!-- Start Footer Main -->
-    <div class="footer-main footer-main__three">
-      <div class="footer-three__shape1">
-        <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
-      </div>
-      <div class="footer-three__shape2">
-        <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
-      </div>
-      <div class="container">
-        <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
-          <div class="row">
-            <!--Start Single Footer Widget-->
-            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-              <div class="single-footer-widget single-footer-widget-style2">
-                <div class="title">
-                  <h3>Bantuan & Dukungan</h3>
-                </div>
-                <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
-                  <div class="text">
-                    <p>
-                      Butuh bantuan dan dukungan dalam perkuliahan di UT?
-                    </p>
-                  </div>
-                  <ul class="clearfix">
-                    <li>
-                      <div class="icon">
-                        <span class="icon-pin"></span>
-                      </div>
-                      <p>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-mail-inbox-app"></span>
-                      </div>
-                      <p>
-                        <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
-                      </p>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-phone-call"></span>
-                      </div>
-                      <p>
-                        <a href="tel:+6281355619225">+62 813-5561-9225</a>
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!--End Single Footer Widget-->
-
-            <!--Start Single Footer Widget-->
-            <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-              <div class="single-footer-widget single-footer-widget-style2 ml55">
-                <div class="title">
-                  <h3>Link Cepat</h3>
-                </div>
-                <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
-                  <ul class="clearfix">
-                    <li>
-                      <p><a href="../tentang/tentangut.php">Tentang UT</a></p>
-                    </li>
-                    <li>
-                      <p><a href="../informasi.php">Informasi Akademik</a></p>
-                    </li>
-                    <li>
-                      <p><a href="../administrasi/">Administrasi</a></p>
-                    </li>
-                    <li>
-                      <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!--End Single Footer Widget-->
-
-            <!--Start Single Footer Widget-->
-            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-              <div class="single-footer-widget single-footer-widget-style2 ml50">
-                <div class="title">
-                  <h3>Layanan Kami</h3>
-                </div>
-                <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
-                  <ul class="clearfix">
-                    <li>
-                      <p><a href="../informasi.php">Informasi Akademik</a></p>
-                    </li>
-                    <li>
-                      <p><a href="../modul/">Pengambilan Modul</a></p>
-                    </li>
-                    <li>
-                      <p><a href="../legalisir/">Legalisir Ijazah</a></p>
-                    </li>
-                    <li>
-                      <p><a href="../suratketerangan/">Surat Keterangan</a></p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!--End Single Footer Widget-->
+    <!-- /Modal Petunjuk -->
+    <div class="modal fade" id="petunjukModal" tabindex="-1" role="dialog" aria-labelledby="petunjukModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="petunjukModalLabel">Petunjuk Pendaftaran</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            xxxxxxx
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- End Footer Main -->
-  </footer>
-  <!--End Footer Three-->
 
-  <!--Start Search Popup -->
-  <div class="search-popup">
-    <div class="search-popup__overlay search-toggler">
-      <div class="search-close-btn">
-        <i class="icon-plus"></i>
+    <!--Start Footer Three-->
+    <footer class="footer-three">
+      <!-- Start Footer Main -->
+      <div class="footer-main footer-main__three">
+        <div class="footer-three__shape1">
+          <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
+        </div>
+        <div class="footer-three__shape2">
+          <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
+        </div>
+        <div class="container">
+          <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
+            <div class="row">
+              <!--Start Single Footer Widget-->
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <div class="single-footer-widget single-footer-widget-style2">
+                  <div class="title">
+                    <h3>Bantuan & Dukungan</h3>
+                  </div>
+                  <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
+                    <div class="text">
+                      <p>
+                        Butuh bantuan dan dukungan dalam perkuliahan di UT?
+                      </p>
+                    </div>
+                    <ul class="clearfix">
+                      <li>
+                        <div class="icon">
+                          <span class="icon-pin"></span>
+                        </div>
+                        <p>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
+                      </li>
+                      <li>
+                        <div class="icon">
+                          <span class="icon-mail-inbox-app"></span>
+                        </div>
+                        <p>
+                          <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
+                        </p>
+                      </li>
+                      <li>
+                        <div class="icon">
+                          <span class="icon-phone-call"></span>
+                        </div>
+                        <p>
+                          <a href="tel:+6281355619225">+62 813-5561-9225</a>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--End Single Footer Widget-->
+
+              <!--Start Single Footer Widget-->
+              <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="single-footer-widget single-footer-widget-style2 ml55">
+                  <div class="title">
+                    <h3>Link Cepat</h3>
+                  </div>
+                  <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                    <ul class="clearfix">
+                      <li>
+                        <p><a href="../tentang/tentangut.php">Tentang UT</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../informasi.php">Informasi Akademik</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../administrasi/">Administrasi</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--End Single Footer Widget-->
+
+              <!--Start Single Footer Widget-->
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                <div class="single-footer-widget single-footer-widget-style2 ml50">
+                  <div class="title">
+                    <h3>Layanan Kami</h3>
+                  </div>
+                  <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                    <ul class="clearfix">
+                      <li>
+                        <p><a href="../informasi.php">Informasi Akademik</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../modul/">Pengambilan Modul</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../legalisir/">Legalisir Ijazah</a></p>
+                      </li>
+                      <li>
+                        <p><a href="../suratketerangan/">Surat Keterangan</a></p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--End Single Footer Widget-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Footer Main -->
+    </footer>
+    <!--End Footer Three-->
+
+    <!--Start Search Popup -->
+    <div class="search-popup">
+      <div class="search-popup__overlay search-toggler">
+        <div class="search-close-btn">
+          <i class="icon-plus"></i>
+        </div>
+      </div>
+      <div class="search-popup__content">
+        <form action="#">
+          <label for="search" class="sr-only">search here</label>
+          <input type="search" id="search" placeholder="Search Here..." />
+          <button type="submit" aria-label="search submit" class="btn-one">
+            <i class="icon-search-interface-symbol"></i>
+          </button>
+        </form>
       </div>
     </div>
-    <div class="search-popup__content">
-      <form action="#">
-        <label for="search" class="sr-only">search here</label>
-        <input type="search" id="search" placeholder="Search Here..." />
-        <button type="submit" aria-label="search submit" class="btn-one">
-          <i class="icon-search-interface-symbol"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-  <!--End Search Popup -->
+    <!--End Search Popup -->
 
-  <!-- Scroll-top -->
-  <button class="scroll-top scroll-to-target" data-target="html">
-    <i class="icon-down-arrow"></i>
-  </button>
-  <!-- Scroll-top-end-->
-  <!-- Alert Container (tempat pesan sukses/error) -->
-  <div id="alert-container"></div>
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+      <i class="icon-down-arrow"></i>
+    </button>
+    <!-- Scroll-top-end-->
+    <!-- Alert Container (tempat pesan sukses/error) -->
+    <div id="alert-container"></div>
 
-  <script>
-    // Make jurusanData available to JavaScript
-    const jurusanData = <?php echo $jurusanDataJSON; ?>;
-  </script>
-  <!-- JS here -->
-  <script src="../assets/js/jquery-3.6.0.min.js"></script>
-  <script src="../assets/js/01-ajax-form.js"></script>
-  <script src="../assets/js/02-bootstrap.min.js"></script>
-  <script src="../assets/js/03-jquery.appear.js"></script>
-  <script src="../assets/js/04-swiper.min.js"></script>
-  <script src="../assets/js/05-jquery.odometer.min.js"></script>
-  <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
-  <script src="../assets/js/08-slick.min.js"></script>
-  <script src="../assets/js/09-wow.min.js"></script>
-  <script src="../assets/js/10-jquery.circleType.js"></script>
-  <script src="../assets/js/11-jquery.lettering.min.js"></script>
-  <script src="../assets/js/12-TweenMax.min.js"></script>
-  <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
-  <script src="../assets/vendor/marquee/marquee.min.js"></script>
-  <script src="../assets/vendor/odometer/odometer.min.js"></script>
+    <script>
+      // Make jurusanData available to JavaScript
+      const jurusanData = <?php echo $jurusanDataJSON; ?>;
+    </script>
+    <!-- JS here -->
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/01-ajax-form.js"></script>
+    <script src="../assets/js/02-bootstrap.min.js"></script>
+    <script src="../assets/js/03-jquery.appear.js"></script>
+    <script src="../assets/js/04-swiper.min.js"></script>
+    <script src="../assets/js/05-jquery.odometer.min.js"></script>
+    <script src="../assets/js/06-jquery.magnific-popup.min.js"></script>
+    <script src="../assets/js/08-slick.min.js"></script>
+    <script src="../assets/js/09-wow.min.js"></script>
+    <script src="../assets/js/10-jquery.circleType.js"></script>
+    <script src="../assets/js/11-jquery.lettering.min.js"></script>
+    <script src="../assets/js/12-TweenMax.min.js"></script>
+    <script src="../assets/vendor/jarallax/jarallax.min.js"></script>
+    <script src="../assets/vendor/marquee/marquee.min.js"></script>
+    <script src="../assets/vendor/odometer/odometer.min.js"></script>
 
-  <script src="../assets/js/main.js"></script>
-  <script src="pendaftaran.js"></script>
-</body>
+    <script src="../assets/js/main.js"></script>
+    <script src="pendaftaran.js"></script>
+  </body>
 
-</html>
+  </html>

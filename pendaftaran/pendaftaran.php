@@ -34,19 +34,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Set the appropriate domicile information
     if ($domisili === 'toraja') {
-        // Get the actual kemendagri_code from the selected kelurahan using data_daerah connection
-        $getCodeStmt = $conn_daerah->prepare("SELECT kemendagri_code FROM kelurahan_lembang WHERE area_name = ?");
-        $selectedKelurahan = $_POST['kelurahan'];
-        $getCodeStmt->bind_param("s", $selectedKelurahan);
-        $getCodeStmt->execute();
-        $result = $getCodeStmt->get_result();
+        // Modified query to use LEFT JOIN and better error handling 🔄
+        $getCodeStmt = $conn_daerah->prepare("
+            SELECT 
+                kl.kemendagri_code,
+                kl.area_name,
+                kc.district_name,
+                kb.name as kabupaten_name
+            FROM kelurahan_lembang kl
+            LEFT JOIN kecamatan kc ON kl.kemendagri_code = kc.kemendagri_code
+            LEFT JOIN kabupaten kb ON kc.kabupaten_id = kb.id
+            WHERE kl.area_name = ?
+            LIMIT 1
+        ");
         
-        if ($row = $result->fetch_assoc()) {
-            $kemendagri_code = $row['kemendagri_code'];
-        } else {
-            echo '<div class="alert alert-danger">Kode wilayah tidak ditemukan.</div>';
+        if (!$getCodeStmt) {
+            echo json_encode(['error' => true, 'message' => 'Database error: ' . $conn_daerah->error]);
             exit();
         }
+        
+        $selectedKelurahan = trim($_POST['kelurahan']);
+        $getCodeStmt->bind_param("s", $selectedKelurahan);
+        
+        if (!$getCodeStmt->execute()) {
+            echo json_encode(['error' => true, 'message' => 'Query error: ' . $getCodeStmt->error]);
+            exit();
+        }
+        
+        $result = $getCodeStmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            echo json_encode(['error' => true, 'message' => 'Kelurahan/Lembang tidak ditemukan. Silakan pilih dari daftar yang tersedia.']);
+            exit();
+        }
+        
+        $row = $result->fetch_assoc();
+        $kemendagri_code = $row['kemendagri_code'];
         $getCodeStmt->close();
     } else {
         $domisili_manual = isset($_POST['domisili_manual']) ? strtoupper(trim($_POST['domisili_manual'])) : null;

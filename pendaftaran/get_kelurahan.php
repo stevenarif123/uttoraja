@@ -1,74 +1,52 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "data_daerah";
+require_once '../koneksi_datadaerah.php';
 
 try {
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        throw new Exception("Connection failed: " . mysqli_connect_error());
-    }
-    
-    mysqli_set_charset($conn, "utf8mb4");
-    error_log("Koneksi database berhasil");
-    
-} catch (Exception $e) {
-    error_log("Database connection error: " . $e->getMessage());
-    die("Sorry, there was a problem connecting to the database.");
-}
-
-header('Content-Type: application/json');
-
-try {
-    // Check connection
-    if (!$conn) {
-        throw new Exception("Database connection failed");
-    }
-
-    // Use the correct query based on existing database structure
+    // Modified query to ensure proper joins and error handling 🔄
     $query = "SELECT 
         kl.area_name,
         kl.area_type,
-        k.district_name,
-        kb.name as kabupaten_name
+        kc.district_name as kecamatan,
+        kb.name as kabupaten
     FROM kelurahan_lembang kl
-    JOIN kecamatan k ON kl.kemendagri_code = k.kemendagri_code
-    JOIN kabupaten kb ON k.kabupaten_id = kb.id
+    LEFT JOIN kecamatan kc ON kl.kemendagri_code = kc.kemendagri_code
+    LEFT JOIN kabupaten kb ON kc.kabupaten_id = kb.id
     ORDER BY kl.area_name";
-    
-    $result = $conn->query($query);
+
+    $result = $conn_daerah->query($query);
     
     if (!$result) {
-        throw new Exception("Query error: " . $conn->error);
+        throw new Exception("Database query failed: " . $conn_daerah->error);
     }
-    
+
     $data = [];
     while ($row = $result->fetch_assoc()) {
-        $data[] = [
+        // Ensure all required data is present
+        if (!$row['area_name'] || !$row['kecamatan'] || !$row['kabupaten']) {
+            continue; // Skip incomplete records
+        }
+        $data[] = array(
             'area_name' => $row['area_name'],
             'area_type' => $row['area_type'],
-            'district_name' => $row['district_name'],
-            'kabupaten_name' => $row['kabupaten_name'],
-            'display_name' => $row['area_name'] . ' (' . $row['area_type'] . ')'
-        ];
+            'district_name' => $row['kecamatan'],
+            'kabupaten_name' => $row['kabupaten']
+        );
     }
-    
-    echo json_encode([
-        'success' => true,
-        'data' => $data
-    ]);
+
+    if (empty($data)) {
+        throw new Exception("No valid kelurahan data found");
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true, 'data' => $data]);
 
 } catch (Exception $e) {
+    header('Content-Type: application/json');
     http_response_code(500);
     echo json_encode([
-        'success' => false,
         'error' => true,
         'message' => $e->getMessage()
     ]);
-} finally {
-    if (isset($conn)) {
-        $conn->close();
-    }
 }
+
+$conn_daerah->close();
