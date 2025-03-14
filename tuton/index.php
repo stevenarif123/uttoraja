@@ -228,16 +228,26 @@ require_once "../../koneksi.php";
         $('#prosesModal').modal('show');
     });
 
-    // Event handler untuk submit Proses
+    // Enhanced error handling for proses button
     $(document).on('click', '.submit-proses', function(){
         var formData = $('#prosesForm').serialize();
+        
+        // Form validation
+        if(!$('#modalEmail').val()) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validasi Error',
+                text: 'Email harus diisi!'
+            });
+            return;
+        }
 
         $.ajax({
-            url: 'proses_pendaftaran.php',
+            url: 'proses_pendaftaran.php', // 🔄 Changed to relative path
             method: 'POST',
             data: formData,
             dataType: 'json',
-            beforeSend: function(){
+            beforeSend: function(xhr){
                 $('#prosesModal').modal('hide');
                 Swal.fire({
                     title: 'Memproses Pendaftaran',
@@ -247,14 +257,18 @@ require_once "../../koneksi.php";
                         Swal.showLoading()
                     }
                 });
+                // Add custom headers
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             },
             success: function(response){
                 Swal.close();
-                if(response.status == 'success'){
+                console.log('Server Response:', response); // 🔍 Debug log
+                
+                if(response && response.status === 'success'){
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil',
-                        html: response.message,
+                        html: response.message
                     }).then(() => {
                         location.reload();
                     });
@@ -262,18 +276,40 @@ require_once "../../koneksi.php";
                     Swal.fire({
                         icon: 'error',
                         title: 'Gagal',
-                        text: response.message,
+                        text: response.message || 'Terjadi kesalahan pada server',
+                        footer: '<small>Periksa console untuk detail error</small>'
                     });
                 }
             },
             error: function(xhr, status, error){
                 Swal.close();
-                console.error(error);
+                console.log('Raw Response:', xhr.responseText); // 🔍 Debug log
+                
+                let errorMessage = 'Terjadi kesalahan saat memproses data';
+                
+                try {
+                    // Try to extract JSON from possible HTML response
+                    const jsonStart = xhr.responseText.indexOf('{');
+                    const jsonEnd = xhr.responseText.lastIndexOf('}') + 1;
+                    if(jsonStart >= 0 && jsonEnd > 0) {
+                        const jsonStr = xhr.responseText.substring(jsonStart, jsonEnd);
+                        const response = JSON.parse(jsonStr);
+                        errorMessage = response.message || errorMessage;
+                    }
+                } catch(e) {
+                    console.warn('Response parsing error:', e);
+                }
+
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Terjadi kesalahan saat memproses data.',
+                    text: errorMessage,
+                    footer: '<small>Coba lagi dalam beberapa saat</small>'
                 });
+            },
+            complete: function() {
+                // Always log the form data for debugging
+                console.log('Form Data Sent:', formData);
             }
         });
     });
