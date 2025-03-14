@@ -342,3 +342,7 @@ Stack trace:
 [13-Mar-2025 17:35:17 Europe/Berlin] Koneksi database berhasil
 [13-Mar-2025 17:35:22 Europe/Berlin] Koneksi database berhasil
 [13-Mar-2025 17:37:36 Europe/Berlin] Koneksi database berhasil
+[14-Mar-2025 06:03:01 Europe/Berlin] Koneksi database berhasil
+[14-Mar-2025 06:03:01 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/1049): Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[14-Mar-2025 06:03:01 Europe/Berlin] Koneksi database berhasil
+[14-Mar-2025 06:03:01 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/1049): Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7

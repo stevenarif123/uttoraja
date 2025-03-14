@@ -1,39 +1,14 @@
-REQUEST:
-curl --path-as-is -i -s -k -X $'GET' \
-    -H $'Host: elearning.ut.ac.id' -H $'Accept-Language: en-GB,en;q=0.9' -H $'Upgrade-Insecure-Requests: 1' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' -H $'Sec-Fetch-Site: none' -H $'Sec-Fetch-Mode: navigate' -H $'Sec-Fetch-User: ?1' -H $'Sec-Fetch-Dest: document' -H $'Sec-Ch-Ua: \"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\"' -H $'Sec-Ch-Ua-Mobile: ?0' -H $'Sec-Ch-Ua-Platform: \"Windows\"' -H $'Accept-Encoding: gzip, deflate, br' -H $'Priority: u=0, i' -H $'Connection: keep-alive' \
-    -b $'_ga_R2XT9XL662=GS1.1.1719989017.3.1.1719990271.0.0.0; _ga_Q3NS1R2SYD=GS1.1.1721282973.2.0.1721282973.60.0.0; _ga=GA1.1.1312443426.1712375591; _ga_WNHP75XYCP=GS1.1.1721282976.3.0.1721282976.0.0.0; _ga_4FZX8RDTWT=GS1.1.1721282977.3.0.1721282977.0.0.0; _ga_E5M1DX274L=GS1.1.1721282985.2.1.1721282987.0.0.0; _ga_5B5HVHB1BJ=GS1.1.1727059192.6.1.1727059193.0.0.0; _ga_JWRPRER696=GS1.1.1738552752.32.0.1738552752.0.0.0; _ga_B7PETH9MJG=GS1.1.1738723397.4.1.1738723398.0.0.0' \
-    $'https://elearning.ut.ac.id/'
-
-
-
-    GET / HTTP/1.1
-Host: elearning.ut.ac.id
-Cookie: _ga_R2XT9XL662=GS1.1.1719989017.3.1.1719990271.0.0.0; _ga_Q3NS1R2SYD=GS1.1.1721282973.2.0.1721282973.60.0.0; _ga=GA1.1.1312443426.1712375591; _ga_WNHP75XYCP=GS1.1.1721282976.3.0.1721282976.0.0.0; _ga_4FZX8RDTWT=GS1.1.1721282977.3.0.1721282977.0.0.0; _ga_E5M1DX274L=GS1.1.1721282985.2.1.1721282987.0.0.0; _ga_JWRPRER696=GS1.1.1738552752.32.0.1738552752.0.0.0; _ga_B7PETH9MJG=GS1.1.1738723397.4.1.1738723398.0.0.0; _ga_5B5HVHB1BJ=GS1.1.1741855725.7.0.1741856302.0.0.0
-Sec-Ch-Ua: "Chromium";v="133", "Not(A:Brand";v="99"
-Sec-Ch-Ua-Mobile: ?0
-Sec-Ch-Ua-Platform: "Windows"
-Accept-Language: en-GB,en;q=0.9
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Sec-Fetch-Site: none
-Sec-Fetch-Mode: navigate
-Sec-Fetch-User: ?1
-Sec-Fetch-Dest: document
-Accept-Encoding: gzip, deflate, br
-Priority: u=0, i
-Connection: keep-alive
-
-
-RESPONSE:
-HTTP/2 403 Forbidden
-Date: Thu, 13 Mar 2025 08:48:31 GMT
+HTTP/1.1 403 Forbidden
+Date: Fri, 14 Mar 2025 08:53:12 GMT
 Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
 Vary: Accept-Encoding
 Server: nginx dap
 X-Powered-By: dap
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
+Content-Encoding: gzip
 
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -64,7 +39,7 @@ function hrefOnclickEvent() {
     <table class="main_t">
         <tr>
             <td class="info">
-                <h1>Kami telah mengaktifkan fitur keamanan untuk melindungi Anda saat menjelajah situs ini.IP anda <a href="http://cleantalk.org/blacklists/125.167.114.171" target="_new">125.167.114.171</a></h1>
+                <h1>Kami telah mengaktifkan fitur keamanan untuk melindungi Anda saat menjelajah situs ini.IP anda <a href="http://cleantalk.org/blacklists/103.16.198.171" target="_new">103.16.198.171</a></h1>
                 <div id="human_info" style="display: none">
                     <p>Anda hanya akan melihat pemberitahuan ini sekali. Setelah ini, Anda dapat melanjutkan browsing dengan aman.. Selanjutnya klik tombol dibawah untuk melanjutkan ke halaman elearning UT,</p>
                     <button onclick="hrefOnclickEvent()">Click</button>
@@ -104,8 +79,8 @@ function hrefOnclickEvent() {
         date.setTime(date.getTime() + (days * 24*60*60*1000));
 
         const ctSecure = location.protocol === "https:" ? "; secure" : "";
-        document.cookie = "ct_anti_ddos_key" + "=" + escape("96e97ca831154d8f42c25d87ee4440ba") + "; expires = " + date.toGMTString() + "; path=/; samesite=lax" + ctSecure;
-        document.cookie = 'ct_headless' + "=" + encodeURIComponent(btoa('96e97ca831154d8f42c25d87ee4440ba' +':'+ navigator.webdriver)) + "; " + 0 + "path=/; samesite=lax";
+        document.cookie = "ct_anti_ddos_key" + "=" + escape("e88ec681bcf8d22ab15a0e1ca4c7a169") + "; expires = " + date.toGMTString() + "; path=/; samesite=lax" + ctSecure;
+        document.cookie = 'ct_headless' + "=" + encodeURIComponent(btoa('e88ec681bcf8d22ab15a0e1ca4c7a169' +':'+ navigator.webdriver)) + "; " + 0 + "path=/; samesite=lax";
 
         setTimeout(function(){
            window.location.reload(1);
