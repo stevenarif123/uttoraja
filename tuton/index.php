@@ -6,151 +6,351 @@ require_once "../../koneksi.php";
 <head>
     <meta charset="UTF-8">
     <title>Data Mahasiswa</title>
-    <!-- Tambahkan Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- Tambahkan Font Awesome untuk ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <!-- Tambahkan SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <!-- Updated Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Updated Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
-        /* Optional: Style untuk tombol copy */
+        :root {
+            --bs-primary: #0d6efd;
+            --bs-secondary: #6c757d;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            border-radius: 15px;
+        }
+        .table {
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+        .table thead th {
+            border-top: none;
+            background-color: #f8f9fa;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 1rem;
+        }
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+        .btn-action {
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin: 0 0.2rem;
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
         .copy-btn {
-            margin-left: 5px;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
+            background: none;
+            border: none;
+            color: var(--bs-primary);
+            padding: 0.2rem 0.5rem;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            color: var(--bs-primary);
+            background-color: rgba(13, 110, 253, 0.1);
+            border-radius: 4px;
+        }
+        .search-box {
+            max-width: 300px;
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .search-box input {
+            padding-left: 2.5rem;
+            border-radius: 20px;
+        }
+        .badge {
+            font-size: 0.85rem;
+            padding: 0.5rem 0.8rem;
+        }
+        .table td {
+            white-space: nowrap;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .action-cell {
+            text-align: right;
+            min-width: 120px;
+        }
+        .copy-cell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        .copy-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .btn-group-action {
+            display: flex;
+            gap: 0.3rem;
+            justify-content: flex-end;
+        }
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .status-success {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
         }
     </style>
 </head>
-<body>
-<div class="container">
-    <h1 class="mt-5">Data Mahasiswa</h1>
-    <table class="table table-bordered mt-3">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>
-                    NIM 
-                    <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="NIM"><i class="fas fa-copy"></i></button>
-                </th>
-                <th>
-                    Nama 
-                    <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="Nama"><i class="fas fa-copy"></i></button>
-                </th>
-                <th>Jurusan</th>
-                <th>
-                    Email 
-                    <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="Email"><i class="fas fa-copy"></i></button>
-                </th>
-                <th>
-                    Password 
-                    <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="Password"><i class="fas fa-copy"></i></button>
-                </th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $sql = "SELECT * FROM mahasiswa";
-            $result = mysqli_query($koneksi, $sql);
-            while($row = mysqli_fetch_assoc($result)) {
-                $nim = $row['NIM'];
+<body class="bg-light">
+<?php
+// Add WhatsApp message generator function
+function generateWhatsAppMessage($nim, $password) {
+    date_default_timezone_set('Asia/Jakarta');
+    $jam = date('H');
+    
+    // Determine greeting based on time
+    if($jam >= 1 && $jam < 10){
+        $salam = 'Selamat pagi';
+    } elseif($jam >= 10 && $jam < 14){
+        $salam = 'Selamat siang';
+    } elseif($jam >= 14 && $jam < 18){
+        $salam = 'Selamat sore';
+    } else {
+        $salam = 'Selamat malam';
+    }
 
-                // Cek apakah NIM ada di tabel tuton
-                $sql_check = "SELECT * FROM tuton WHERE NIM = ?";
-                $stmt_check = mysqli_prepare($koneksi, $sql_check);
-                mysqli_stmt_bind_param($stmt_check, "s", $nim);
-                mysqli_stmt_execute($stmt_check);
-                $result_check = mysqli_stmt_get_result($stmt_check);
-                $existing = mysqli_fetch_assoc($result_check);
+    // Construct message
+    $pesan = "$salam, saya kirimkan detail akun mahasiswa yang akan digunakan untuk Tutorial Online (TUTON).\n";
+    $pesan .= "Username : $nim\n";
+    $pesan .= "Password : $password\n\n";
+    $pesan .= "Silahkan melakukan login di alamat https://elearning.ut.ac.id/login/index.php dengan memasukkan username dan passwordnya. Sekian dan terima kasih.";
 
-                // Tentukan status
-                if($existing) {
-                    $status = 'Sukses';
-                    $password = $existing['Password']; // Mengambil password dari tabel tuton
-                } else {
-                    $status = 'Belum';
-                    $password = '';
-                }
+    return urlencode($pesan);
+}
+?>
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header bg-white py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="mb-0">Data Mahasiswa</h2>
+                <div class="form-inline">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Cari...">
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="50">No</th>
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-end">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Pagination configuration
+                        $limit = 10; // Items per page
+                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                        $start = ($page - 1) * $limit;
+                        
+                        // Get total records
+                        $total_records = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM mahasiswa")->fetch_assoc()['total'];
+                        $total_pages = ceil($total_records / $limit);
+                        
+                        // Modified query with LIMIT
+                        $sql = "SELECT * FROM mahasiswa LIMIT $start, $limit";
+                        $result = mysqli_query($koneksi, $sql);
+                        
+                        $number = $start + 1;
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $nim = $row['NIM'];
 
-                echo '<tr>';
-                echo '<td>'.$row['No'].'</td>';
-                echo '<td class="copy-nim">'.$row['NIM'].' <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$row['NIM'].'"><i class="fas fa-copy"></i></button></td>';
-                echo '<td class="copy-nama">'.stripslashes($row['NamaLengkap']).' <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.stripslashes($row['NamaLengkap']).'"><i class="fas fa-copy"></i></button></td>';
-                echo '<td>'.$row['Jurusan'].'</td>';
-                echo '<td class="copy-email">'.$row['Email'].' <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$row['Email'].'"><i class="fas fa-copy"></i></button></td>';
-                echo '<td class="copy-password">'.$password.' <button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$password.'"><i class="fas fa-copy"></i></button></td>';
-                echo '<td>'.$status.'</td>';
-                echo '<td>';
+                            // Cek apakah NIM ada di tabel tuton dan tentukan status
+                            $sql_check = "SELECT NIM, Password FROM tuton WHERE NIM = ?";
+                            $stmt_check = mysqli_prepare($koneksi, $sql_check);
+                            mysqli_stmt_bind_param($stmt_check, "s", $nim);
+                            mysqli_stmt_execute($stmt_check);
+                            $result_check = mysqli_stmt_get_result($stmt_check);
+                            $existing = mysqli_fetch_assoc($result_check);
 
-                // Tombol Proses
-                if($status != 'Sukses') {
-                    echo '<button class="btn btn-primary proses-pendaftaran" data-no="'.$row['No'].'" data-nim="'.$row['NIM'].'" data-nama="'.$row['NamaLengkap'].'" data-email="'.$row['Email'].'">Proses</button> ';
-                } else {
-                    echo '<button class="btn btn-secondary" disabled>Proses</button> ';
-                }
+                            // Determine status based on Password value
+                            if($existing) {
+                                if(!empty($existing['Password'])) {
+                                    $status = 'Sukses';
+                                    $statusClass = 'status-success';
+                                    $password = $existing['Password'];
+                                } else {
+                                    $status = 'Gagal';
+                                    $statusClass = 'status-failed';
+                                    $password = '';
+                                }
+                            } else {
+                                $status = 'Belum';
+                                $statusClass = 'status-pending';
+                                $password = '';
+                            }
 
-                // Tombol Migrasi
-                if($status != 'Sukses') {
-                    echo '<button class="btn btn-success migrasi-data" data-no="'.$row['No'].'" title="Migrasi"><i class="fas fa-exchange-alt"></i></button> ';
-                } else {
-                    echo '<button class="btn btn-secondary" disabled><i class="fas fa-exchange-alt"></i></button> ';
-                }
+                            // Add new status style
+                            echo '<style>
+                                .status-failed {
+                                    background-color: #f8d7da;
+                                    color: #721c24;
+                                }
+                            </style>';
 
-                // Tombol WhatsApp
-                if($status == 'Sukses') {
-                    $nomor_wa = $row['NomorHP'];
-                    if(!empty($nomor_wa)) {
-                        // Mengganti awalan '0' menjadi '62' jika nomor dimulai dengan '0'
-                        if(substr($nomor_wa, 0, 1) == '0') {
-                            $nomor_wa = '62' . substr($nomor_wa, 1);
+                            echo '<tr>';
+                            echo '<td class="text-center">'.$number.'</td>';
+                            echo '<td><div class="copy-cell"><span class="copy-text">'.$row['NIM'].'</span><button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$row['NIM'].'"><i class="fas fa-copy"></i></button></div></td>';
+                            echo '<td><div class="copy-cell"><span class="copy-text">'.stripslashes($row['NamaLengkap']).'</span><button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.stripslashes($row['NamaLengkap']).'"><i class="fas fa-copy"></i></button></div></td>';
+                            echo '<td>'.$row['Jurusan'].'</td>';
+                            echo '<td><div class="copy-cell"><span class="copy-text">'.$row['Email'].'</span><button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$row['Email'].'"><i class="fas fa-copy"></i></button></div></td>';
+                            echo '<td><div class="copy-cell"><span class="copy-text">'.$password.'</span>'.($password ? '<button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$password.'"><i class="fas fa-copy"></i></button>' : '').'</div></td>';
+                            echo '<td class="text-center"><span class="status-badge '.$statusClass.'">'.$status.'</span></td>';
+                            echo '<td class="action-cell">';
+                            echo '<div class="btn-group-action">';
+
+                            if($status != 'Sukses') {
+                                echo '<button class="btn btn-primary btn-action proses-pendaftaran" 
+                                    data-no="'.$row['No'].'" 
+                                    data-nim="'.$row['NIM'].'" 
+                                    data-nama="'.$row['NamaLengkap'].'" 
+                                    data-email="'.$row['Email'].'"
+                                    data-birthdate="'.$row['TanggalLahir'].'" 
+                                    data-phone="'.$row['NomorHP'].'"
+                                    title="'.($status == 'Gagal' ? 'Coba Lagi' : 'Proses').'">
+                                    <i class="fas '.($status == 'Gagal' ? 'fa-redo' : 'fa-play').'"></i>
+                                    </button>';
+                                    
+                                echo '<button class="btn btn-success btn-action migrasi-data" 
+                                    data-no="'.$row['No'].'" 
+                                    title="Migrasi">
+                                    <i class="fas fa-sync-alt"></i>
+                                    </button>';
+                            } else {
+                                echo '<button class="btn btn-secondary btn-action" disabled>
+                                    <i class="fas fa-check"></i>
+                                    </button>';
+                                    
+                                // WhatsApp button only if status is success and has phone number
+                                if(!empty($row['NomorHP'])) {
+                                    $nomor_wa = preg_replace('/^0/', '62', $row['NomorHP']);
+                                    $pesan_wa = generateWhatsAppMessage($row['NIM'], $password);
+                                    echo '<a href="https://wa.me/'.$nomor_wa.'?text='.$pesan_wa.'" 
+                                        class="btn btn-success btn-action" 
+                                        title="WhatsApp" 
+                                        target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        </a>';
+                                }
+                            }
+                            echo '</div></td>';
+                            echo '</tr>';
+                            $number++;
                         }
-
-                        // Mendapatkan waktu saat ini
-                        date_default_timezone_set('Asia/Jakarta');
-                        $jam = date('H');
-                        $salam = 'Selamat siang';
-
-                        if($jam >= 1 && $jam < 10){
-                            $salam = 'Selamat pagi';
-                        } elseif($jam >= 10 && $jam < 14){
-                            $salam = 'Selamat siang';
-                        } elseif($jam >= 14 && $jam < 18){
-                            $salam = 'Selamat sore';
-                        } else {
-                            $salam = 'Selamat malam';
-                        }
-
-                        // Isi pesan WhatsApp
-                        $pesan_wa = "$salam, saya kirimkan detail akun mahasiswa yang akan digunakan untuk Tutorial Online (TUTON).\n";
-                        $pesan_wa .= "Username : ".$row['NIM']."\n";
-                        $pesan_wa .= "Password : ".$password."\n\n";
-                        $pesan_wa .= "Silahkan melakukan login di alamat https://elearning.ut.ac.id/login/index.php dengan memasukkan username dan passwordnya. Sekian dan terima kasih.";
-
-                        $pesan_wa = urlencode($pesan_wa);
-                        echo '<a href="https://wa.me/'.$nomor_wa.'?text='.$pesan_wa.'" class="btn btn-success" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>';
-                    } else {
-                        echo '<button class="btn btn-secondary" disabled><i class="fab fa-whatsapp"></i></button>';
-                    }
-                } else {
-                    echo '<button class="btn btn-secondary" disabled><i class="fab fa-whatsapp"></i></button>';
-                }
-
-                echo '</td>';
-                echo '</tr>';
-            }
-            ?>
-        </tbody>
-    </table>
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+                        <a class="page-link" href="?page=<?php echo $page-1; ?>" tabindex="-1">Previous</a>
+                    </li>
+                    <?php 
+                    for($i = 1; $i <= $total_pages; $i++):
+                        $active = $i == $page ? 'active' : '';
+                    ?>
+                    <li class="page-item <?php echo $active; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                    <?php endfor; ?>
+                    <li class="page-item <?php if($page >= $total_pages){ echo 'disabled'; } ?>">
+                        <a class="page-link" href="?page=<?php echo $page+1; ?>">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>
 
-<!-- Modal untuk konfirmasi dan pengeditan email -->
+<!-- Modal Preview Data -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="previewModalLabel">Preview Data Pendaftaran 📋</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle"></i> Periksa data sebelum mengirim ke server.
+        </div>
+        <form id="previewForm">
+          <input type="hidden" name="no" id="previewNo">
+          <div class="form-group">
+            <label>NIM</label>
+            <input type="text" class="form-control" id="previewNIM" name="nim">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" id="previewEmail" name="email">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Lahir (YYYY-MM-DD)</label>
+            <input type="date" class="form-control" id="previewBirthDate" name="birthdate">
+          </div>
+          <div class="form-group">
+            <label>Nomor HP</label>
+            <input type="text" class="form-control" id="previewPhone" name="phone" placeholder="Contoh: 08123456789">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary" id="showProsesModal">Lanjut ke Proses ➡️</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Konfirmasi -->
 <div class="modal fade" id="prosesModal" tabindex="-1" aria-labelledby="prosesModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <form id="prosesForm">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="prosesModalLabel">Konfirmasi Data Mahasiswa</h5>
+          <h5 class="modal-title" id="prosesModalLabel">Konfirmasi Data ✅</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -158,35 +358,36 @@ require_once "../../koneksi.php";
         <div class="modal-body">
             <input type="hidden" name="no" id="modalNo">
             <div class="form-group">
-                <label for="modalNIM">NIM</label>
+                <label>NIM</label>
                 <input type="text" class="form-control" id="modalNIM" name="nim" readonly>
             </div>
             <div class="form-group">
-                <label for="modalNama">Nama</label>
-                <input type="text" class="form-control" id="modalNama" name="nama" readonly>
+                <label>Email</label>
+                <input type="email" class="form-control" id="modalEmail" name="email" readonly>
             </div>
             <div class="form-group">
-                <label for="modalEmail">Email</label>
-                <input type="email" class="form-control" id="modalEmail" name="email">
+                <label>Tanggal Lahir</label>
+                <input type="date" class="form-control" id="modalBirthDate" name="birthdate" readonly>
+            </div>
+            <div class="form-group">
+                <label>Nomor HP</label>
+                <input type="text" class="form-control" id="modalPhone" name="phone" readonly>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary submit-proses">Proses</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+          <button type="button" class="btn btn-primary submit-proses">Kirim Data 🚀</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<!-- Tambahkan jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!-- Tambahkan Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<!-- Tambahkan SweetAlert2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!-- Tambahkan ClipboardJS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+<!-- Updated script imports -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
 
 <script>
     // Inisialisasi ClipboardJS
@@ -211,20 +412,40 @@ require_once "../../koneksi.php";
         });
     });
 
-    // Event handler untuk tombol Proses
+    // Replace existing proses-pendaftaran click handler with this:
     $(document).on('click', '.proses-pendaftaran', function(){
         var no = $(this).data('no');
         var nim = $(this).data('nim');
         var nama = $(this).data('nama');
         var email = $(this).data('email');
 
-        // Isi data ke dalam modal
-        $('#modalNo').val(no);
-        $('#modalNIM').val(nim);
-        $('#modalNama').val(nama);
-        $('#modalEmail').val(email);
+        // Get additional data from the row
+        var row = $(this).closest('tr');
+        var birthdate = row.find('.birthdate').text() || '';
+        var phone = row.find('.phone').text() || '';
 
-        // Tampilkan modal
+        // Fill preview modal
+        $('#previewNo').val(no);
+        $('#previewNIM').val(nim);
+        $('#previewEmail').val(email);
+        $('#previewBirthDate').val(birthdate);
+        $('#previewPhone').val(phone);
+
+        // Show preview modal
+        $('#previewModal').modal('show');
+    });
+
+    // Add new handler for showing process modal
+    $('#showProsesModal').click(function() {
+        // Transfer edited values to process modal
+        $('#modalNo').val($('#previewNo').val());
+        $('#modalNIM').val($('#previewNIM').val());
+        $('#modalEmail').val($('#previewEmail').val());
+        $('#modalBirthDate').val($('#previewBirthDate').val());
+        $('#modalPhone').val($('#previewPhone').val());
+
+        // Hide preview modal and show process modal
+        $('#previewModal').modal('hide');
         $('#prosesModal').modal('show');
     });
 
@@ -360,6 +581,14 @@ require_once "../../koneksi.php";
                     text: 'Terjadi kesalahan saat memproses data.',
                 });
             }
+        });
+    });
+
+    // Add search functionality
+    $('#searchInput').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        $('tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
 </script>

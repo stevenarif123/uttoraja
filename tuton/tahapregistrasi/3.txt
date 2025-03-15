@@ -1,0 +1,378 @@
+cURL
+curl --path-as-is -i -s -k -X $'POST' \
+    -H $'Host: elearning.ut.ac.id' -H $'Content-Length: 185' -H $'Cache-Control: max-age=0' -H $'Sec-Ch-Ua: \"Chromium\";v=\"133\", \"Not(A:Brand\";v=\"99\"' -H $'Sec-Ch-Ua-Mobile: ?0' -H $'Sec-Ch-Ua-Platform: \"Windows\"' -H $'Accept-Language: en-GB,en;q=0.9' -H $'Origin: https://elearning.ut.ac.id' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Upgrade-Insecure-Requests: 1' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' -H $'Sec-Fetch-Site: same-origin' -H $'Sec-Fetch-Mode: navigate' -H $'Sec-Fetch-User: ?1' -H $'Sec-Fetch-Dest: document' -H $'Referer: https://elearning.ut.ac.id/apput/newuser/act.php' -H $'Accept-Encoding: gzip, deflate, br' -H $'Priority: u=0, i' \
+    -b $'_ga_R2XT9XL662=GS1.1.1719989017.3.1.1719990271.0.0.0; _ga_Q3NS1R2SYD=GS1.1.1721282973.2.0.1721282973.60.0.0; _ga=GA1.1.1312443426.1712375591; _ga_WNHP75XYCP=GS1.1.1721282976.3.0.1721282976.0.0.0; _ga_4FZX8RDTWT=GS1.1.1721282977.3.0.1721282977.0.0.0; _ga_E5M1DX274L=GS1.1.1721282985.2.1.1721282987.0.0.0; _ga_JWRPRER696=GS1.1.1738552752.32.0.1738552752.0.0.0; _ga_B7PETH9MJG=GS1.1.1738723397.4.1.1738723398.0.0.0; ct_anti_ddos_key=ae012f850eddd2d8d8afc2af9f733676; ct_headless=YWUwMTJmODUwZWRkZDJkOGQ4YWZjMmFmOWY3MzM2NzY6ZmFsc2U%3D; MoodleSession=okt41tr510lh92j3dq2ecimh5i; _ga_5B5HVHB1BJ=GS1.1.1742017801.9.1.1742018246.0.0.0' \
+    --data-binary $'action=newuser&sesskey=01NQlr69K1&_qf__newuseract_form=1&nim_user=859451051&dd=21&mm=05&yyyy=1995&email_user=f.ann.y.karl.i.nda.bnc%40gmail.com&nomor_hp=6285342722818&submitbutton=KIRIM' \
+    $'https://elearning.ut.ac.id/apput/newuser/act.php'
+
+Response
+HTTP/2 200 OK
+Date: Sat, 15 Mar 2025 05:57:26 GMT
+Content-Type: text/html; charset=utf-8
+Vary: Accept-Encoding
+Content-Language: en
+Content-Script-Type: text/javascript
+Content-Style-Type: text/css
+X-Ua-Compatible: IE=edge
+Cache-Control: private, pre-check=0, post-check=0, max-age=0, no-transform
+Pragma: no-cache
+Expires: 
+Server: nginx dap
+X-Powered-By: dap
+Strict-Transport-Security: max-age=31536000; includeSubdomains;
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+
+<style>
+	#mform1 #fitem_dd{
+		width: 40%;
+		display: inline-block;
+		text-align: right;
+    	float: left;
+	}
+	#mform1 #fitem_mm, #mform1 #fitem_yyyy{
+		width: 20%;
+		display: inline-block;
+	}
+
+	#mform1 #fitem_dd .fitemtitle{
+		width: 50%;
+	}
+
+	#mform1 #fitem_dd .felement{
+		width: 50%;
+	}
+
+	#mform1 #fitem_mm .fitemtitle, #mform1 #fitem_yyyy .fitemtitle{
+		width: 22%;
+		text-align: right;
+    	float: left;
+	}
+
+	#mform1 #fitem_mm .felement, #mform1 #fitem_yyyy .felement{
+		width: 77%;
+	}
+
+	.keteranganmform1{
+		padding-left: 10%; 
+		padding-right: 10%;
+	}
+
+	#mform1{
+		border: 1px solid black;
+		padding-left: 10%;
+		padding-bottom: 10%;
+	}
+
+	#id_submitbutton{
+		margin-left: 50%;
+	}
+
+	#mform1 input[type=text]{
+		border: 1px solid #669999;
+	}
+</style>
+
+
+
+<!DOCTYPE html>
+<html  dir="ltr" lang="en" xml:lang="en">
+<head>
+    <title>Aktivasi UT ONLINE | ElearningUT</title>
+   	<link rel="shortcut icon" href="//elearning.ut.ac.id/pluginfile.php/1/theme_mb2iq/favicon/1741679283/ut.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//fonts.googleapis.com/css?family=Nunito+Sans:400,600,700" rel="stylesheet">    	    <meta name="apple-itunes-app" content="app-id=6737981274, app-argument=https://elearning.ut.ac.id/apput/newuser/act6.php"/><link rel="manifest" href="https://elearning.ut.ac.id/admin/tool/mobile/mobile.webmanifest.php" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="moodle, Aktivasi UT ONLINE | ElearningUT" />
+<link rel="stylesheet" type="text/css" href="https://elearning.ut.ac.id/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.css" /><script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script><link rel="stylesheet" type="text/css" href="https://elearning.ut.ac.id/theme/styles.php/mb2iq/1741679283_1/all" />
+<link rel="stylesheet" type="text/css" href="https://elearning.ut.ac.id/course/format/onetopic/styles.php" />
+<link rel="stylesheet" type="text/css" href="https://elearning.ut.ac.id/theme/mb2iq/assets/bootstrap/css/glyphicons.min.css" />
+<link rel="stylesheet" type="text/css" href="https://elearning.ut.ac.id/theme/mb2iq/assets/OwlCarousel/assets/owl.carousel.min.css" />
+<script>
+//<![CDATA[
+var M = {}; M.yui = {};
+M.pageloadstarttime = new Date();
+M.cfg = {"wwwroot":"https:\/\/elearning.ut.ac.id","homeurl":{},"sesskey":"01NQlr69K1","sessiontimeout":"14400","sessiontimeoutwarning":"1200","themerev":"1741679283","slasharguments":1,"theme":"mb2iq","iconsystemmodule":"core\/icon_system_fontawesome","jsrev":"1741679283","admin":"admin","svgicons":true,"usertimezone":"Asia\/Jakarta","language":"en","courseId":1,"courseContextId":2,"contextid":1,"contextInstanceId":0,"langrev":1741679283,"templaterev":"1741679284"};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''}
+if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else{me.path=component+'/'+component+'.'+me.type}};
+YUI_config = {"debug":false,"base":"https:\/\/elearning.ut.ac.id\/lib\/yuilib\/3.17.2\/","comboBase":"https:\/\/elearning.ut.ac.id\/theme\/yui_combo.php?","combine":true,"filter":null,"insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/elearning.ut.ac.id\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/elearning.ut.ac.id\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/elearning.ut.ac.id\/theme\/yui_combo.php?m\/1741679283\/","combine":true,"comboBase":"https:\/\/elearning.ut.ac.id\/theme\/yui_combo.php?","ext":false,"root":"m\/1741679283\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":null,"modules":{"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-languninstallconfirm":{"requires":["base","node","moodle-core-notification-confirm","moodle-core-notification-alert"]},"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core-tooltip":{"requires":["base","node","io-base","moodle-core-notification-dialogue","json-parse","widget-position","widget-position-align","event-outside","cache-base"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-popuphelp":{"requires":["moodle-core-tooltip"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-formchangechecker":{"requires":["base","event-focus","moodle-core-event"]},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core_availability-form":{"requires":["base","node","event","event-delegate","panel","moodle-core-notification-dialogue","json"]},"moodle-backup-backupselectall":{"requires":["node","event","node-event-simulate","anim"]},"moodle-backup-confirmcancel":{"requires":["node","node-event-simulate","moodle-core-notification-confirm"]},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-form-passwordunmask":{"requires":[]},"moodle-form-shortforms":{"requires":["node","base","selector-css3","moodle-core-event"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-question-preview":{"requires":["base","dom","event-delegate","event-key","core_question_engine"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-qtype_musictheory-musictheoryqtype":{"requires":["base","node","datatype","node-event-simulate"]},"moodle-qtype_musictheory-musictheoryui":{"requires":["base","node","datatype","panel","dd-plugin"]},"moodle-qtype_musictheory-musictheorykeyboardui":{"requires":["base","node","datatype"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_attendance-groupfilter":{"requires":["base","node"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-util":{"requires":["node","moodle-core-actionmenu"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-filter_glossary-autolinker":{"requires":["base","node","io-base","json-parse","event-delegate","overlay","moodle-core-event","moodle-core-notification-alert","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-filter_mathjaxloader-loader":{"requires":["moodle-core-event"]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","node-event-simulate","yui-throttle","moodle-core-notification-dialogue","moodle-core-notification-confirm","moodle-editor_atto-rangy","handlebars","timers","querystring-stringify"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers","moodle-editor_atto-menu"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-qbank_editquestion-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-tool_capability-search":{"requires":["base","node"]},"moodle-tool_lp-dragdrop-reorder":{"requires":["moodle-core-dragdrop"]},"moodle-tool_monitor-dropdown":{"requires":["base","event","node"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","transition","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-alert","moodle-core-notification-warning","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emojipicker-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_h5p-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_html-button":{"requires":["promise","moodle-editor_atto-plugin","moodle-atto_html-beautify","moodle-atto_html-codemirror","event-valuechange"]},"moodle-atto_html-codemirror":{"requires":["moodle-atto_html-codemirror-skin"]},"moodle-atto_html-beautify":{},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_mb2shortcodes-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin","moodle-form-shortforms"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_recordrtc-recording":{"requires":["moodle-atto_recordrtc-button"]},"moodle-atto_recordrtc-button":{"requires":["moodle-editor_atto-plugin","moodle-atto_recordrtc-recording"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_teamsmeeting-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_wordimport-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-tinymce_mathslate-mathjaxeditor":{"requires":["moodle-tinymce_mathslate-snippeteditor","dd-drop"]},"moodle-tinymce_mathslate-snippeteditor":{"requires":["json"]},"moodle-tinymce_mathslate-dialogue":{"requires":["escape","moodle-local_mathslate-editor","moodle-tinymce_mathslate-editor"]},"moodle-tinymce_mathslate-editor":{"requires":["dd-drag","dd-proxy","dd-drop","event","tabview","io-base","json","moodle-tinymce_mathslate-textool","moodle-tinymce_mathslate-mathjaxeditor"]},"moodle-tinymce_mathslate-textool":{"requires":["dd-drag","dd-proxy","dd-drop","event","json"]}}},"gallery":{"name":"gallery","base":"https:\/\/elearning.ut.ac.id\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/elearning.ut.ac.id\/theme\/yui_combo.php?","ext":false,"root":"gallery\/1741679283\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/elearning.ut.ac.id\/lib\/javascript.php\/1741679283\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker","moodle-core-notification-dialogue"]},"core_comment":{"name":"core_comment","fullpath":"https:\/\/elearning.ut.ac.id\/lib\/javascript.php\/1741679283\/comment\/comment.js","requires":["base","io-base","node","json","yui2-animation","overlay","escape"]},"mathjax":{"name":"mathjax","fullpath":"https:\/\/cdn.jsdelivr.net\/npm\/mathjax@2.7.9\/MathJax.js?delayStartupUntil=configured"}}};
+M.yui.loader = {modules: {}};
+
+//]]>
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5B5HVHB1BJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5B5HVHB1BJ');
+</script><meta name="robots" content="noindex" />	</head>
+<body  id="page-apput-newuser-act6" class="format-site  path-apput path-apput-newuser chrome dir-ltr lang-en yui-skin-sam yui3-skin-sam elearning-ut-ac-id pagelayout-base course-1 context-1 notloggedin theme-lfw header-light nouser coursetheme- bookmarks-enabled nosidebar-case css_rbxt css_6wum">
+<div>
+    <a class="sr-only sr-only-focusable" href="#maincontent">Skip to main content</a>
+</div><script src="https://elearning.ut.ac.id/lib/javascript.php/1741679283/lib/polyfills/polyfill.js"></script>
+<script src="https://elearning.ut.ac.id/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.js"></script><script src="https://elearning.ut.ac.id/theme/jquery.php/core/jquery-3.6.1.min.js"></script>
+<script src="https://elearning.ut.ac.id/lib/javascript.php/1741679283/lib/javascript-static.js"></script>
+<script>
+//<![CDATA[
+document.body.className += ' jsenabled';
+//]]>
+</script>
+
+<div id="page-outer">
+<div id="page" data-mod_id="0" data-mod_sid="0" data-uparam_sid="0">
+<div id="page-a">
+			<div id="top-panel">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-md-12">
+	                    	                    	                        <ul class="social-list"><li>Follow Us: </li><li class="li-facebook"><a href="https://www.facebook.com/UnivTerbuka" title="Facebook" target="_balnk" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-facebook"></i></a></li><li class="li-instagram"><a href="https://www.instagram.com/univterbuka/" title="Instagram" target="_balnk" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-instagram"></i></a></li><li class="li-linkedin"><a href="https://www.linkedin.com/school/universitas-terbuka" title="Linkedin" target="_balnk" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-linkedin"></i></a></li><li class="li-twitter"><a href="https://twitter.com/UnivTerbuka" title="Twitter" target="_balnk" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-twitter"></i></a></li></ul>	                    						<div class="theme-usertools"><div class="theme-fontsizer"><span class="title">Font size:</span> <a class="fs1" href="#" data-size="1" title="Small font">A</a><a class="fs2" href="#" data-size="2" title="Medium font">A</a><a class="fs3" href="#" data-size="3" title="Big font">A</a></div></div>	        		</div>
+	 			</div>
+			</div>
+	    </div>
+	        <div id="main-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-logo" style="width:200px;margin-top:0;">
+	<a href="https://elearning.ut.ac.id" title="Elearning Universitas Terbuka">
+		<img src="//elearning.ut.ac.id/pluginfile.php/1/theme_mb2iq/logo/1741679283/logout.png" alt="UT">
+	</a>                    
+</div>
+<div class="menu-bar">
+	<a class="show-menu" href="#"><i class="fa fa-bars"></i></a>		
+</div>
+<div class="menu-clear clearfix"></div>                  	<div id="main-navigation">
+                   		<div class="main-navigation-inner">
+                       		<ul class="main-menu theme-ddmenu" data-animtype="2" data-animspeed="300" data-breakpoint="768"><li class=""><a class="" href="https://elearning.ut.ac.id/apput/newuser/"><button type="button" class="btn btn-success" style="border-radius:10px"><b><font color='white'><i class="fa fa-key"> </i>&nbsp;&nbsp;Aktivasi</font></b></button></a></li><li class=""><a class="" href="https://elearning.ut.ac.id/login/forgot_password.php"><button type="button" class="btn btn-warning" style="border-radius:10px"><b><font color='white'><i class="fa fa-refresh"> </i>&nbsp;&nbsp;Reset Password</font></b></button></a></li><li class=""><a class="" href="https://elearning.ut.ac.id/mod/folder/view.php?id=900"><button type="button" class="btn btn-danger" style="border-radius:10px"><b><font color='white'><i class="fa fa-file-text"> </i>&nbsp;&nbsp;Panduan</font></b></button></a></li><li class="lang-item dropdown"><a href="https://elearning.ut.ac.id/apput/newuser/act6.php?lang=en"><img src="https://elearning.ut.ac.id/theme/image.php/mb2iq/theme/1741679283/flags/48x32/EN" alt="English ‎(en)‎"> <span class="lang-shortname">en</span><span class="lang-fullname">English ‎(en)‎</span><span class="mobile-arrow"></span></a><ul><li><a href="https://elearning.ut.ac.id/apput/newuser/act6.php?lang=id"><img src="https://elearning.ut.ac.id/theme/image.php/mb2iq/theme/1741679283/flags/48x32/ID" alt="Bahasa Indonesia ‎(id)‎"> <span class="lang-shortname">id</span><span class="lang-fullname">Bahasa Indonesia ‎(id)‎</span></a></li></ul></li></ul>                     	</div>
+                 	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="mb2notices"></div>    <div class="sliding-panel dark1 closed">
+	<a href="#" class="close-panel">&times;</a>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 clearfix">
+				<div class="theme-searchform"><form id="theme-search" action="https://elearning.ut.ac.id/course/search.php" method="get"><input id="theme-coursesearchbox" type="text" value="" placeholder="Search courses" name="search"><button type="submit"><i class="fa fa-search"></i></button></form></div>                <div class="theme-loginform" style="display:none;"></div>                                <div class="header-tools"><div class="theme-plugins"></div><a href="#" class="panel-tool tool-search header-tool-js" title="Search courses"><i class="fa fa-search"></i><span class="text1">Search courses</span><span class="text2">Close</span></a><a href="https://elearning.ut.ac.id/login/index.php" class="panel-tool tool-login" title="Log in"><i class="fa fa-lock"></i><span class="text1">Log in</span><span class="text2">Close</span></a></div>			</div>
+		</div>
+	</div>
+</div>
+</div><!-- //end #page-a -->
+<div id="page-b">
+    <div id="subheader">
+		</div>
+<div id="page-header" class="nobutton">
+	<div class="inner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb">
+						<nav aria-label="Navigation bar">
+    <ol class="breadcrumb"></ol>
+</nav>					</div>
+					                </div>
+            </div>
+        </div>
+    </div>
+</div>
+	<div class="mb2notices"></div><div id="main-content">
+    <div class="container-fluid">
+        <div class="row">
+     		<div id="region-main" class="content-col col-md-12">
+            	<div id="page-content">
+										                	<span class="notifications" id="user-notifications"></span>					                	<div role="main"><span id="maincontent"></span>.
+
+<form autocomplete="off" action="https://elearning.ut.ac.id/apput/newuser/act.php" method="post" accept-charset="utf-8" id="mform1_aIt2BFcHVx8D929" class="mform">
+	<div style="display: none;"><input name="action" type="hidden" value="newuser" />
+<input name="sesskey" type="hidden" value="01NQlr69K1" />
+<input name="_qf__newuseract_form" type="hidden" value="1" />
+</div>
+
+<h3><center>.:| AKTIVASI DATA MAHASISWA |:.</h3><div id="fitem_nim_user" class="form-group row  fitem   " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+                <label id="nim_user_label" class="d-inline word-break " for="nim_user">
+                    NIM
+                </label>
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+                <div class="text-danger" title="Required">
+                <i class="icon fa fa-exclamation-circle text-danger fa-fw "  title="Required" role="img" aria-label="Required"></i>
+                </div>
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+        <input type="text"
+                class="form-control "
+                name="nim_user"
+                id="nim_user"
+                value="859451051"
+                size="9"
+                maxlength="9" style="width : 20%;" placeholder="masukan NIM" >
+        <div class="form-control-feedback invalid-feedback" id="nim_user" >
+            
+        </div>
+    </div>
+</div><div id="fitem_dd" class="form-group row has-danger fitem   " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+                <label id="dd_label" class="d-inline word-break " for="dd">
+                    Tanggal Lahir
+                </label>
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+                <div class="text-danger" title="Required">
+                <i class="icon fa fa-exclamation-circle text-danger fa-fw "  title="Required" role="img" aria-label="Required"></i>
+                </div>
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+        <input type="text"
+                class="form-control is-invalid"
+                name="dd"
+                id="dd"
+                value="21"
+                size="2"
+                    autofocus aria-describedby="dd"
+                minlength="2" maxlength="2" style="width : 20%;" placeholder="dd" >
+        <div class="form-control-feedback invalid-feedback" id="dd"  style="display: block;">
+            Maaf, tgl lahir tidak sesuai, cek TGL, BLN, TAHUN Lahir Anda
+        </div>
+    </div>
+</div><div id="fitem_mm" class="form-group row  fitem   " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+                <label id="mm_label" class="d-inline word-break " for="mm">
+                    Bulan Lahir
+                </label>
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+                <div class="text-danger" title="Required">
+                <i class="icon fa fa-exclamation-circle text-danger fa-fw "  title="Required" role="img" aria-label="Required"></i>
+                </div>
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+        <input type="text"
+                class="form-control "
+                name="mm"
+                id="mm"
+                value="05"
+                size="2"
+                minlength="2" maxlength="2" style="width : 20%;" placeholder="mm" >
+        <div class="form-control-feedback invalid-feedback" id="mm" >
+            
+        </div>
+    </div>
+</div><div id="fitem_yyyy" class="form-group row  fitem   " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+                <label id="yyyy_label" class="d-inline word-break " for="yyyy">
+                    Tahun Lahir
+                </label>
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+                <div class="text-danger" title="Required">
+                <i class="icon fa fa-exclamation-circle text-danger fa-fw "  title="Required" role="img" aria-label="Required"></i>
+                </div>
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+        <input type="text"
+                class="form-control "
+                name="yyyy"
+                id="yyyy"
+                value="1995"
+                size="4"
+                minlength="4" maxlength="4" style="width : 30%;" placeholder="yyyy" >
+        <div class="form-control-feedback invalid-feedback" id="yyyy" >
+            
+        </div>
+    </div>
+</div><div id="fitem_email_user" class="form-group row  fitem   " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+                <label id="email_user_label" class="d-inline word-break " for="email_user">
+                    Email (yang Aktif)
+                </label>
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+                <div class="text-danger" title="Required">
+                <i class="icon fa fa-exclamation-circle text-danger fa-fw "  title="Required" role="img" aria-label="Required"></i>
+                </div>
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+        <input type="text"
+                class="form-control "
+                name="email_user"
+                id="email_user"
+                value="f.ann.y.karl.i.nda.bnc@gmail.com"
+                size="40"
+                maxlength="100" placeholder="..........................@ecampus.ut.ac.id" >
+        <div class="form-control-feedback invalid-feedback" id="email_user" >
+            
+        </div>
+    </div>
+</div><div id="fitem_nomor_hp" class="form-group row  fitem   " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+                <label id="nomor_hp_label" class="d-inline word-break " for="nomor_hp">
+                    Nomor HP (WA)
+                </label>
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+        <input type="text"
+                class="form-control "
+                name="nomor_hp"
+                id="nomor_hp"
+                value="6285342722818"
+                size="40"
+                maxlength="20" placeholder="0815 xxxx xxxx" >
+        <div class="form-control-feedback invalid-feedback" id="nomor_hp" >
+            
+        </div>
+    </div>
+</div><p class='keteranganmform1'><b>Sebelum Aktivasi, pastikan <font color='green'>Mahasiswa Login Dahulu di Email Ecampusnya</font></b><br><b>Pastikan anda mengisikan <font color='green'>Alamat Email yg benar</font> dan anda dapat menggunakan alamat email itu utk mengirim email ke segala tujuan email jika tidak anda tidak akan bisa mengaktifkan keanggotaan UT Online.<br> <font color='red'>Jangan gunakan email Yahoo</font> untuk melakukan aktivasi !!</b></p><div id="fitem_id_submitbutton" class="form-group row  fitem femptylabel  " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="submit">
+            <input type="submit"
+                class="btn
+                        btn-primary
+                        
+                    
+                    
+                    "
+                name="submitbutton"
+                id="id_submitbutton"
+                value="KIRIM"
+                 >
+        <div class="form-control-feedback invalid-feedback" id="id_error_submitbutton" >
+            
+        </div>
+    </div>
+</div>
+		<div class="fdescription required"><i class="icon fa fa-exclamation-circle text-danger fa-fw "  title="Required field" role="img" aria-label="Required field"></i> Required</div>
+</form>
+<script>var skipClientValidation = false;</script></div>
