@@ -38,19 +38,15 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/color1.css" />
     <link rel="stylesheet" href="../assets/css/responsive.css" />
+
+    <!-- Add LightGallery CSS in head section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-zoom.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-thumbnail.min.css">
+    
   </head>
 
   <body class="body-gray-bg">
-    <!-- preloader -->
-    <div id="preloader">
-      <div id="loading-center">
-        <div class="loader">
-          <div class="loader-outter"></div>
-          <div class="loader-inner"></div>
-        </div>
-      </div>
-    </div>
-    <!-- preloader-end -->
 
     <div class="page-wrapper">
       <!--Start Main Header One -->
@@ -264,25 +260,563 @@
       <!--End Page Header-->
 
       <!--Start Contents Page-->
-      <section
-        id="contact"
-        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
-      >
-        <div class="container jarakcontainer">
-          <div class="row">
+      <section id="gallery" class="gallery-area gallery-bg pt-120 pb-100 p-relative fix">
+        <div class="container">
+          <!-- Gallery Header -->
+          <div class="gallery-header text-center mb-5">
+            <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Galeri Foto SALUT</h2>
+            <p class="section-subtitle wow fadeInUp" data-wow-delay="0.3s">
+              Dokumentasi kegiatan dan momen penting di SALUT Tana Toraja
+              <br>
+              <small class="text-muted mt-2 d-block">
+                Klik gambar untuk melihat detail lebih besar
+              </small>
+            </p>
+          </div>
+
+          <!-- Gallery Categories Legend -->
+          <div class="categories-legend text-center mb-4">
+            <span class="legend-item">
+              <i class="fas fa-graduation-cap"></i> Wisuda - Dokumentasi prosesi wisuda
+            </span>
+            <span class="legend-item">
+              <i class="fas fa-users"></i> Kegiatan - Aktivitas akademik & non-akademik
+            </span>
+            <span class="legend-item">
+              <i class="fas fa-university"></i> Kampus - Foto lingkungan kampus
+            </span>
+          </div>
+
+          <!-- Gallery Filter -->
+          <div class="gallery-filter text-center mb-4">
+            <button class="filter-btn active" data-filter="*">Semua</button>
+            <button class="filter-btn" data-filter=".kegiatan">Kegiatan</button>
+            <button class="filter-btn" data-filter=".wisuda">Wisuda</button>
+            <button class="filter-btn" data-filter=".kampus">Kampus</button>
+          </div>
+
+          <!-- Gallery Grid -->
+          <div class="gallery-grid" id="lightgallery">
             <?php
-              $dir = ".";
+              // Add PHP error reporting at the top
+              error_reporting(E_ALL);
+              ini_set('display_errors', 1);
+
+              // Function to safely check image type
+              function getImageMimeType($filepath) {
+                $mime = false;
+                // Try using fileinfo
+                if (function_exists('finfo_open')) {
+                  $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                  $mime = finfo_file($finfo, $filepath);
+                  finfo_close($finfo);
+                }
+                // Fallback to getimagesize
+                if (!$mime) {
+                  $imageinfo = @getimagesize($filepath);
+                  if ($imageinfo) {
+                    $mime = $imageinfo['mime'];
+                  }
+                }
+                return $mime;
+              }
+
+              // Show a more helpful message for GD library
+              if (!extension_loaded('gd')) {
+                echo '<div class="alert alert-info">
+                  <strong>Note:</strong> Using original images (no thumbnails). For better performance:
+                  <ol>
+                    <li>Locate php.ini file (usually in C:\xampp\php\)</li>
+                    <li>Search for "extension=gd"</li>
+                    <li>Remove semicolon if present to make it "extension=gd"</li>
+                    <li>Save and restart Apache</li>
+                    <li>If images disappear, check PHP error logs for specific issues</li>
+                  </ol>
+                </div>';
+              }
+
+              $dir = "images";
+              $thumb_dir = "images/thumbs";
+              
+              // Ensure directories exist
+              if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
+                echo '<div class="alert alert-warning">Images directory created. Please add images.</div>';
+              }
+              
+              if (!file_exists($thumb_dir)) {
+                mkdir($thumb_dir, 0777, true);
+              }
+              
+              // Get all image files
               $files = glob($dir . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+              
+              if (empty($files)) {
+                echo '<div class="alert alert-info">No images found in gallery. Add images to the "images" folder.</div>';
+              }
+
               foreach($files as $file) {
-                echo '<div class="col-lg-3 col-md-4 col-sm-6 mb-4">';
-                echo '<a href="' . $file . '" data-toggle="lightbox" data-gallery="gallery">';
-                echo '<img src="' . $file . '" class="img-fluid rounded" alt="Gallery Image">';
+                $filename = basename($file);
+                $thumbnail = $thumb_dir . "/thumb_" . $filename;
+                $image_to_use = $file; // Default to original
+                
+                // Check if file is actually an image
+                $mime = getImageMimeType($file);
+                if (!$mime || strpos($mime, 'image/') !== 0) {
+                  continue; // Skip non-image files
+                }
+
+                // Try to use/generate thumbnail if GD is available
+                if (extension_loaded('gd')) {
+                  try {
+                    if (!file_exists($thumbnail)) {
+                      $source = null;
+                      
+                      // Create image based on mime type
+                      switch($mime) {
+                        case 'image/jpeg':
+                          $source = @imagecreatefromjpeg($file);
+                          break;
+                        case 'image/png':
+                          $source = @imagecreatefrompng($file);
+                          break;
+                        case 'image/gif':
+                          $source = @imagecreatefromgif($file);
+                          break;
+                      }
+
+                      if ($source) {
+                        // Calculate dimensions
+                        $width = imagesx($source);
+                        $height = imagesy($source);
+                        $thumb_width = 300;
+                        $thumb_height = round($height * ($thumb_width / $width));
+
+                        // Create thumbnail
+                        $thumb = imagecreatetruecolor($thumb_width, $thumb_height);
+
+                        // Handle transparency
+                        if ($mime === 'image/png') {
+                          imagealphablending($thumb, false);
+                          imagesavealpha($thumb, true);
+                          $transparent = imagecolorallocatealpha($thumb, 255, 255, 255, 127);
+                          imagefilledrectangle($thumb, 0, 0, $thumb_width, $thumb_height, $transparent);
+                        }
+
+                        // Resize
+                        imagecopyresampled($thumb, $source, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height);
+
+                        // Save thumbnail
+                        switch($mime) {
+                          case 'image/jpeg':
+                            imagejpeg($thumb, $thumbnail, 85);
+                            break;
+                          case 'image/png':
+                            imagepng($thumb, $thumbnail, 6);
+                            break;
+                          case 'image/gif':
+                            imagegif($thumb, $thumbnail);
+                            break;
+                        }
+
+                        imagedestroy($thumb);
+                        imagedestroy($source);
+                        
+                        if (file_exists($thumbnail)) {
+                          $image_to_use = $thumbnail;
+                        }
+                      }
+                    } else {
+                      $image_to_use = $thumbnail;
+                    }
+                  } catch (Exception $e) {
+                    error_log("Error processing image $filename: " . $e->getMessage());
+                    // Fallback to original image
+                    $image_to_use = $file;
+                  }
+                }
+
+                // Get category from filename
+                $category = "other";
+                if (strpos(strtolower($filename), 'wisuda') === 0) $category = "wisuda";
+                elseif (strpos(strtolower($filename), 'kegiatan') === 0) $category = "kegiatan";
+                elseif (strpos(strtolower($filename), 'kampus') === 0) $category = "kampus";
+
+                // Output gallery item with error handling
+                echo '<div class="gallery-item ' . htmlspecialchars($category) . '" data-src="' . htmlspecialchars($file) . '">';
+                echo '<a href="javascript:void(0)" class="gallery-link">';
+                echo '<img src="' . htmlspecialchars($image_to_use) . '" alt="' . htmlspecialchars($filename) . '" 
+                      class="img-fluid gallery-image" loading="lazy" 
+                      onerror="this.onerror=null; this.src=\'../assets/img/placeholder.jpg\';">';
+                echo '<div class="gallery-overlay">';
+                echo '<div class="gallery-info">';
+                echo '<i class="fas fa-search-plus"></i>';
+                echo '<span class="category-label">' . ucfirst(htmlspecialchars($category)) . '</span>';
+                echo '</div>';
+                echo '</div>';
                 echo '</a>';
                 echo '</div>';
               }
             ?>
           </div>
+
+          <style>
+            /* Additional Gallery Styles */
+            .categories-legend {
+              margin: 30px 0;
+            }
+            
+            .legend-item {
+              display: inline-block;
+              margin: 0 15px;
+              color: #666;
+              font-size: 0.9rem;
+            }
+            
+            .legend-item i {
+              margin-right: 5px;
+              color: var(--thm-base);
+            }
+            
+            .gallery-info {
+              text-align: center;
+            }
+            
+            .gallery-info i {
+              font-size: 2rem;
+              margin-bottom: 10px;
+              color: var(--thm-base);
+            }
+            
+            .category-label {
+              color: #fff;
+              font-size: 1rem;
+              margin: 0;
+              font-weight: 500;
+            }
+
+            /* Magnific Popup Customization */
+            .mfp-title {
+              font-size: 14px;
+              padding: 10px;
+              background: rgba(0,0,0,0.8);
+            }
+            
+            .mfp-counter {
+              right: 10px;
+              top: 10px;
+            }
+
+            .mfp-fade.mfp-bg {
+              opacity: 0;
+              transition: opacity 0.3s ease-out;
+            }
+
+            .mfp-fade.mfp-bg.mfp-ready {
+              opacity: 0.8;
+            }
+
+            .mfp-fade.mfp-wrap .mfp-content {
+              opacity: 0;
+              transform: scale(0.8);
+              transition: all 0.3s ease-out;
+            }
+
+            .mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+              opacity: 1;
+              transform: scale(1);
+            }
+          </style>
+
+          <script>
+            $(document).ready(function() {
+              // Initialize Magnific Popup with additional options
+              $('.gallery-popup').magnificPopup({
+                type: 'image',
+                gallery: {
+                  enabled: true,
+                  navigateByImgClick: true,
+                  preload: [0,1],
+                  tPrev: 'Previous',
+                  tNext: 'Next'
+                },
+                image: {
+                  titleSrc: function(item) {
+                    return item.el.attr('title');
+                  },
+                  tError: 'Image could not be loaded.'
+                },
+                mainClass: 'mfp-fade',
+                removalDelay: 300,
+                callbacks: {
+                  beforeOpen: function() {
+                    this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                  }
+                }
+              });
+              
+              // Rest of initialization code...
+            });
+          </script>
         </div>
+
+        <style>
+          /* Update gallery styles */
+          .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 20px;
+          }
+
+          .gallery-item {
+            aspect-ratio: 4/3;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          }
+
+          .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+          }
+
+          .gallery-link {
+            display: block;
+            height: 100%;
+          }
+
+          /* LightGallery customization */
+          .lg-backdrop {
+            background-color: rgba(0, 0, 0, 0.85);
+          }
+
+          .lg-outer .lg-img-wrap {
+            padding: 0;
+          }
+
+          .lg-outer .lg-error-msg {
+            background: #222;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+          }
+
+          /* Loading indicator */
+          .gallery-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 4px;
+            z-index: 1000;
+          }
+        </style>
+
+        <script>
+          $(document).ready(function() {
+            const lgInstance = lightGallery(document.getElementById('lightgallery'), {
+              speed: 500,
+              plugins: [lgZoom, lgThumbnail],
+              thumbnail: true,
+              preload: 2,
+              download: false,
+              cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+              mode: 'lg-fade',
+              loadYoutubeThumbnail: false,
+              loadVimeoThumbnail: false,
+              addClass: 'lg-custom-gallery',
+              appendSubHtmlTo: '.lg-item',
+              slideDelay: 100,
+              errorTests: {
+                fileLoading: true,
+                fullscreenChange: true,
+              },
+              onBeforeOpen: () => {
+                $('body').addClass('lg-open');
+              },
+              onAfterOpen: () => {
+                $('.lg-backdrop').addClass('in');
+              },
+              onBeforeSlide: () => {
+                $('.lg-backdrop').addClass('in');
+              },
+              onAfterClose: () => {
+                $('body').removeClass('lg-open');
+              }
+            });
+
+            // Error handling
+            lgInstance.addEventListener('lgAfterAppendSlide', (event) => {
+              const { index } = event.detail;
+              const slide = lgInstance.getSlideItem(index);
+              const img = slide.querySelector('img.lg-image');
+              
+              if (img) {
+                img.onerror = function() {
+                  slide.innerHTML = `
+                    <div class="lg-error-msg">
+                      <h4>Image could not be loaded</h4>
+                      <p>Please try again later</p>
+                    </div>
+                  `;
+                };
+              }
+            });
+          });
+        </script>
+
+        <!-- Replace existing gallery script with this optimized version -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const galleryElement = document.getElementById('lightgallery');
+          
+          if (!galleryElement) {
+            console.error('Gallery element not found!');
+            return;
+          }
+
+          // Initialize lightGallery with optimized settings
+          const gallery = lightGallery(galleryElement, {
+            speed: 400,
+            plugins: [lgZoom, lgThumbnail],
+            selector: '.gallery-item',
+            download: false,
+            thumbnail: true,
+            animateThumb: false, // Disable thumbnail animations
+            showThumbByDefault: false, // Don't show thumbnail panel by default
+            thumbWidth: 60,
+            thumbHeight: 60,
+            loadYoutubeThumbnail: false,
+            loadVimeoThumbnail: false,
+            preload: 1, // Preload only 1 slide
+            backdropDuration: 300,
+            loop: false, // Disable loop to prevent memory issues
+            hideScrollbar: true,
+            closable: true,
+            escKey: true,
+            keyPress: true,
+            addClass: 'lg-custom-gallery',
+            startClass: 'lg-start-zoom',
+            enableDrag: false, // Disable drag for better performance
+            mode: 'lg-fade',
+            licenseKey: 'your-license-key', // Optional
+            errorTests: {
+              fileLoading: true,
+              fullscreenChange: true,
+            },
+            onBeforeOpen: () => {
+              document.body.style.overflow = 'hidden';
+            },
+            onAfterClose: () => {
+              document.body.style.overflow = '';
+            },
+            onBeforeSlide: () => {
+              // Show loading indicator
+              const loadingEl = document.querySelector('.lg-loading');
+              if (loadingEl) loadingEl.style.display = 'block';
+            },
+            onAfterSlide: () => {
+              // Hide loading indicator
+              const loadingEl = document.querySelector('.lg-loading');
+              if (loadingEl) loadingEl.style.display = 'none';
+            }
+          });
+
+          // Error handling
+          gallery.addEventListener('lgAfterAppendSlide', (event) => {
+            const { index } = event.detail;
+            const slide = gallery.getSlideItem(index);
+            const img = slide.querySelector('img.lg-image');
+            
+            if (img) {
+              img.onerror = () => {
+                slide.innerHTML = `
+                  <div class="lg-error-msg">
+                    <h4>Gambar tidak dapat dimuat</h4>
+                    <p>Silakan coba lagi nanti</p>
+                  </div>
+                `;
+              };
+              
+              // Add timeout to prevent infinite loading
+              const timeout = setTimeout(() => {
+                if (!img.complete) {
+                  img.onerror();
+                }
+              }, 10000); // 10 second timeout
+              
+              img.onload = () => clearTimeout(timeout);
+            }
+          });
+        });
+        </script>
+
+        <!-- Add these styles -->
+        <style>
+        .gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller thumbnails */
+          gap: 10px;
+          padding: 15px;
+        }
+
+        .gallery-item {
+          aspect-ratio: 3/2;
+          max-height: 200px; /* Control maximum height */
+          position: relative;
+          overflow: hidden;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+
+        .gallery-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        /* Loading styles */
+        .lg-loading {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(0,0,0,0.8);
+          color: white;
+          padding: 10px 20px;
+          border-radius: 4px;
+          z-index: 9999;
+        }
+
+        /* Error message styles */
+        .lg-error-msg {
+          text-align: center;
+          padding: 20px;
+          background: #222;
+          color: #fff;
+        }
+
+        /* Optimize performance */
+        .lg-backdrop {
+          will-change: opacity;
+        }
+
+        .lg-outer {
+          will-change: transform;
+        }
+
+        .lg-image {
+          will-change: transform, opacity;
+        }
+        </style>
       </section>
       <!--End Contents Page-->
 
@@ -480,5 +1014,64 @@
     <script src="../assets/vendor/odometer/odometer.min.js"></script>
 
     <script src="../assets/js/main.js"></script>
+
+    <!-- Add LightGallery JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+    <!-- Single gallery initialization script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Make sure any existing instances are destroyed
+      if (window.lgInstance) {
+        window.lgInstance.destroy();
+        window.lgInstance = null;
+      }
+
+      const galleryElement = document.getElementById('lightgallery');
+      if (!galleryElement) return;
+
+      // Remove any existing event listeners
+      galleryElement.querySelectorAll('.gallery-item').forEach(item => {
+        item.replaceWith(item.cloneNode(true));
+      });
+
+      // Initialize LightGallery with a single instance
+      window.lgInstance = lightGallery(galleryElement, {
+        speed: 400,
+        plugins: [lgZoom, lgThumbnail],
+        selector: '.gallery-item',
+        download: false,
+        thumbnail: true,
+        showThumbByDefault: false,
+        preload: 1,
+        backdropDuration: 200,
+        loop: false,
+        hideScrollbar: true,
+        closable: true,
+        escKey: true,
+        keyPress: true,
+        addClass: 'lg-custom-gallery',
+        // Disable any click events from bubbling
+        mode: 'lg-fade',
+        startClass: 'lg-start-fade',
+        licenseKey: 'your-license-key',
+        mobileSettings: {
+          controls: true,
+          showCloseIcon: true,
+          download: false
+        }
+      });
+
+      // Clean up function for page unload
+      window.addEventListener('unload', () => {
+        if (window.lgInstance) {
+          window.lgInstance.destroy();
+          window.lgInstance = null;
+        }
+      }, { once: true });
+    });
+    </script>
   </body>
 </html>

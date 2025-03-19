@@ -263,38 +263,83 @@
       <!--End Page Header-->
 
       <!--Start Contents Page-->
-      <section
-        id="contact"
-        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
-      >
-        <div class="container jarakcontainer">
-        <div class="jarakcontainer">
-        <h3>Jika anda mengalami kebingungan dalam pengurusan surat keterangan anda dapat menghubungi admin kami.</h3>
-      </div>
-        <!--Start Cta Pendas-->
-        <section class="cta-two testmonials">
-          <div class="container" style="margin-bottom:30px">
-            <div class="cta-two__innertwo">
-              <div class="cta-two__inner-bg"
-                style="background-image: url(../assets/img/pattern/cta-two__parttern1.png);"></div>
-              <div class="cta-two__content">
-                <h2>Pengajuan Surat Keterangan</h2>
-                <p>Hubungi kami untuk bantuan Pengajuan Surat Keterangan</p>
-                 <p>Eva - 085242460651</p>
-              </div>
-              <div class="cta-two__btn">
-                <a class="thm-btn" href="https:/wa.me/6285242460651">
-                  <span class="txt">KONTAK WA</span>
-                  <i class="icon-next"></i>
-                </a>
+      <section id="contact" class="contact-area contact-bg pt-120 pb-100 p-relative fix mb-80">
+        <div class="container">
+          <div class="section-intro text-center mb-5">
+            <h3 class="fw-bold">Bantuan Pengajuan Surat Keterangan</h3>
+            <p class="lead">Hubungi admin kami untuk bantuan pengajuan surat keterangan</p>
+          </div>
+
+          <div class="row justify-content-center">
+            <!-- Surat Keterangan Card -->
+            <div class="col-lg-6">
+              <div class="contact-card h-100 p-4 rounded-3 shadow-sm hover-shadow">
+                <div class="card-content text-center">
+                  <div class="icon-box mb-4">
+                    <span class="icon-education display-4 text-primary"></span>
+                  </div>
+                  <h4 class="card-title mb-3">Pengajuan Surat Keterangan</h4>
+                  <div class="card-info mb-4">
+                    <p class="mb-1">Layanan Pengajuan Surat Keterangan UT</p>
+                    <p class="mb-1">Admin: Eva</p>
+                    <p class="text-primary mb-3">085242460651</p>
+                  </div>
+                  <a class="thm-btn w-100" href="https://wa.me/6285242460651">
+                    <span class="txt">Hubungi via WhatsApp</span>
+                    <i class="fab fa-whatsapp ms-2"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-        <!--End Cta Two-->
-      </div>
+        </div>
+
+        <style>
+          .contact-card {
+            background: #fff;
+            transition: all 0.3s ease;
+          }
+          .hover-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+          }
+          .icon-box {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            background: rgba(var(--primary-rgb), 0.1);
+            margin: 0 auto;
+          }
+          .card-info {
+            color: #666;
+          }
+          .thm-btn {
+            border-radius: 5px;
+          }
+          .thm-btn:hover {
+            opacity: 0.9;
+          }
+          .contact-area {
+            margin-bottom: 120px !important;
+          }
+          .mb-5 {
+            margin-bottom: 2px !important;
+            margin-top: 15px
+          }
+        </style>
       </section>
       <!--End Contents Page-->
+
+      <!-- Spacer div for extra gap -->
+      <div class="spacer-section"></div>
+
+      <style>
+        .spacer-section {
+          height: 60px;
+          background: transparent;
+        }
+      </style>
 
       <!--Start Footer Three-->
       <footer class="footer-three">
