@@ -290,7 +290,7 @@
                             </p>
                             <p>
                                 <div style="text-align: center;">
-                                    [Tempat untuk menyisipkan gambar SALUT]
+                                    <img src="../aset/salut1.JPG" alt="" width="700" height="800">
                                 </div>
                             </p>
                             <p>
