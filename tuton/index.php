@@ -167,7 +167,6 @@ function generateWhatsAppMessage($nim, $password) {
                             <th>NIM</th>
                             <th>Nama</th>
                             <th>Jurusan</th>
-                            <th>Email</th>
                             <th>Password</th>
                             <th class="text-center">Status</th>
                             <th class="text-end">Aksi</th>
@@ -230,7 +229,6 @@ function generateWhatsAppMessage($nim, $password) {
                             echo '<td><div class="copy-cell"><span class="copy-text">'.$row['NIM'].'</span><button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$row['NIM'].'"><i class="fas fa-copy"></i></button></div></td>';
                             echo '<td><div class="copy-cell"><span class="copy-text">'.stripslashes($row['NamaLengkap']).'</span><button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.stripslashes($row['NamaLengkap']).'"><i class="fas fa-copy"></i></button></div></td>';
                             echo '<td>'.$row['Jurusan'].'</td>';
-                            echo '<td><div class="copy-cell"><span class="copy-text">'.$row['Email'].'</span><button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$row['Email'].'"><i class="fas fa-copy"></i></button></div></td>';
                             echo '<td><div class="copy-cell"><span class="copy-text">'.$password.'</span>'.($password ? '<button class="btn btn-sm btn-light copy-btn" data-clipboard-text="'.$password.'"><i class="fas fa-copy"></i></button>' : '').'</div></td>';
                             echo '<td class="text-center"><span class="status-badge '.$statusClass.'">'.$status.'</span></td>';
                             echo '<td class="action-cell">';
@@ -308,36 +306,46 @@ function generateWhatsAppMessage($nim, $password) {
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="previewModalLabel">Preview Data Pendaftaran 📋</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="alert alert-info">
-          <i class="fas fa-info-circle"></i> Periksa data sebelum mengirim ke server.
+          <i class="fas fa-info-circle"></i> Periksa dan edit data jika diperlukan sebelum mengirim ke server.
         </div>
         <form id="previewForm">
           <input type="hidden" name="no" id="previewNo">
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label>NIM</label>
-            <input type="text" class="form-control" id="previewNIM" name="nim">
+            <div class="input-group">
+              <input type="text" class="form-control" id="previewNIM" name="nim" readonly>
+              <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+            </div>
           </div>
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label>Email</label>
-            <input type="email" class="form-control" id="previewEmail" name="email">
+            <div class="input-group">
+              <input type="email" class="form-control" id="previewEmail" name="email">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Tanggal Lahir (YYYY-MM-DD)</label>
-            <input type="date" class="form-control" id="previewBirthDate" name="birthdate">
+          <div class="form-group mb-3">
+            <label>Tanggal Lahir</label>
+            <div class="input-group">
+              <input type="date" class="form-control" id="previewBirthDate" name="birthdate">
+              <span class="input-group-text" id="birthDateVerification"></span>
+            </div>
           </div>
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label>Nomor HP</label>
-            <input type="text" class="form-control" id="previewPhone" name="phone" placeholder="Contoh: 08123456789">
+            <div class="input-group">
+              <input type="text" class="form-control" id="previewPhone" name="phone">
+              <span class="input-group-text"><i class="fas fa-phone"></i></span>
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
         <button type="button" class="btn btn-primary" id="showProsesModal">Lanjut ke Proses ➡️</button>
       </div>
     </div>
@@ -351,31 +359,29 @@ function generateWhatsAppMessage($nim, $password) {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="prosesModalLabel">Konfirmasi Data ✅</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <input type="hidden" name="no" id="modalNo">
-            <div class="form-group">
-                <label>NIM</label>
-                <input type="text" class="form-control" id="modalNIM" name="nim" readonly>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" id="modalEmail" name="email" readonly>
-            </div>
-            <div class="form-group">
-                <label>Tanggal Lahir</label>
-                <input type="date" class="form-control" id="modalBirthDate" name="birthdate" readonly>
-            </div>
-            <div class="form-group">
-                <label>Nomor HP</label>
-                <input type="text" class="form-control" id="modalPhone" name="phone" readonly>
-            </div>
+          <input type="hidden" name="no" id="modalNo">
+          <div class="form-group mb-3">
+            <label>NIM</label>
+            <input type="text" class="form-control" id="modalNIM" name="nim" readonly>
+          </div>
+          <div class="form-group mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" id="modalEmail" name="email" readonly>
+          </div>
+          <div class="form-group mb-3">
+            <label>Tanggal Lahir</label>
+            <input type="date" class="form-control" id="modalBirthDate" name="birthdate" readonly>
+          </div>
+          <div class="form-group mb-3">
+            <label>Nomor HP</label>
+            <input type="text" class="form-control" id="modalPhone" name="phone" readonly>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
           <button type="button" class="btn btn-primary submit-proses">Kirim Data 🚀</button>
         </div>
       </div>
@@ -383,7 +389,7 @@ function generateWhatsAppMessage($nim, $password) {
   </div>
 </div>
 
-<!-- Updated script imports -->
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -414,35 +420,37 @@ function generateWhatsAppMessage($nim, $password) {
 
     // Replace existing proses-pendaftaran click handler with this:
     $(document).on('click', '.proses-pendaftaran', function(){
+        // Get data from button attributes
         var no = $(this).data('no');
         var nim = $(this).data('nim');
-        var nama = $(this).data('nama');
+        var birthdate = $(this).data('birthdate');
+        var phone = $(this).data('phone');
         var email = $(this).data('email');
-
-        // Get additional data from the row
-        var row = $(this).closest('tr');
-        var birthdate = row.find('.birthdate').text() || '';
-        var phone = row.find('.phone').text() || '';
-
-        // Fill preview modal
+        
+        // Fill preview modal directly with data
         $('#previewNo').val(no);
         $('#previewNIM').val(nim);
-        $('#previewEmail').val(email);
         $('#previewBirthDate').val(birthdate);
         $('#previewPhone').val(phone);
-
+        $('#previewEmail').val(email);
+        
+        // Add data verification badge for birthdate only
+        $('#birthDateVerification').html(validateBirthDate(birthdate) ? 
+            '<span class="badge bg-success">Valid ✓</span>' : 
+            '<span class="badge bg-danger">Invalid ✗</span>');
+        
         // Show preview modal
         $('#previewModal').modal('show');
     });
 
     // Add new handler for showing process modal
     $('#showProsesModal').click(function() {
-        // Transfer edited values to process modal
+        // Transfer values to process modal
         $('#modalNo').val($('#previewNo').val());
         $('#modalNIM').val($('#previewNIM').val());
-        $('#modalEmail').val($('#previewEmail').val());
         $('#modalBirthDate').val($('#previewBirthDate').val());
         $('#modalPhone').val($('#previewPhone').val());
+        $('#modalEmail').val($('#previewEmail').val());
 
         // Hide preview modal and show process modal
         $('#previewModal').modal('hide');
@@ -451,22 +459,32 @@ function generateWhatsAppMessage($nim, $password) {
 
     // Enhanced error handling for proses button
     $(document).on('click', '.submit-proses', function(){
-        var formData = $('#prosesForm').serialize();
-        
-        // Form validation
-        if(!$('#modalEmail').val()) {
+        var formData = new FormData($('#prosesForm')[0]);
+
+        // Log form data for debugging
+        console.log('Form data:', {
+            nim: formData.get('nim'),
+            birthdate: formData.get('birthdate'),
+            phone: formData.get('phone'),
+            email: formData.get('email')
+        });
+
+        // Additional validation
+        if(!formData.get('nim') || !formData.get('birthdate')) {
             Swal.fire({
                 icon: 'error',
                 title: 'Validasi Error',
-                text: 'Email harus diisi!'
+                text: 'NIM dan Tanggal Lahir harus diisi!',
             });
             return;
         }
 
         $.ajax({
-            url: 'proses_pendaftaran.php', // 🔄 Changed to relative path
+            url: 'proses_pendaftaran.php',
             method: 'POST',
             data: formData,
+            processData: false,
+            contentType: false,
             dataType: 'json',
             beforeSend: function(xhr){
                 $('#prosesModal').modal('hide');
@@ -478,14 +496,12 @@ function generateWhatsAppMessage($nim, $password) {
                         Swal.showLoading()
                     }
                 });
-                // Add custom headers
-                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             },
             success: function(response){
+                console.log('Server Response:', response);
                 Swal.close();
-                console.log('Server Response:', response); // 🔍 Debug log
                 
-                if(response && response.status === 'success'){
+                if(response.status === 'success'){
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil',
@@ -498,39 +514,28 @@ function generateWhatsAppMessage($nim, $password) {
                         icon: 'error',
                         title: 'Gagal',
                         text: response.message || 'Terjadi kesalahan pada server',
-                        footer: '<small>Periksa console untuk detail error</small>'
                     });
                 }
             },
             error: function(xhr, status, error){
+                console.error('AJAX Error:', {xhr, status, error});
+                console.log('Response Text:', xhr.responseText);
+                
                 Swal.close();
-                console.log('Raw Response:', xhr.responseText); // 🔍 Debug log
                 
                 let errorMessage = 'Terjadi kesalahan saat memproses data';
-                
                 try {
-                    // Try to extract JSON from possible HTML response
-                    const jsonStart = xhr.responseText.indexOf('{');
-                    const jsonEnd = xhr.responseText.lastIndexOf('}') + 1;
-                    if(jsonStart >= 0 && jsonEnd > 0) {
-                        const jsonStr = xhr.responseText.substring(jsonStart, jsonEnd);
-                        const response = JSON.parse(jsonStr);
-                        errorMessage = response.message || errorMessage;
-                    }
+                    const response = JSON.parse(xhr.responseText);
+                    errorMessage = response.message || errorMessage;
                 } catch(e) {
-                    console.warn('Response parsing error:', e);
+                    console.warn('Failed to parse error response:', e);
                 }
 
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: errorMessage,
-                    footer: '<small>Coba lagi dalam beberapa saat</small>'
                 });
-            },
-            complete: function() {
-                // Always log the form data for debugging
-                console.log('Form Data Sent:', formData);
             }
         });
     });
@@ -591,6 +596,12 @@ function generateWhatsAppMessage($nim, $password) {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
+    // Birthdate validation function
+    function validateBirthDate(date) {
+        var re = /^\d{4}-\d{2}-\d{2}$/;
+        return re.test(date);
+    }
 </script>
 </body>
 </html>

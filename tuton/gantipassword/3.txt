@@ -1,0 +1,80 @@
+curl --path-as-is -i -s -k -X $'POST' \
+    -H $'Host: elearning.ut.ac.id' -H $'Content-Length: 82' -H $'Cache-Control: max-age=0' -H $'Sec-Ch-Ua: \"Chromium\";v=\"133\", \"Not(A:Brand\";v=\"99\"' -H $'Sec-Ch-Ua-Mobile: ?0' -H $'Sec-Ch-Ua-Platform: \"Windows\"' -H $'Accept-Language: en-GB,en;q=0.9' -H $'Origin: https://elearning.ut.ac.id' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Upgrade-Insecure-Requests: 1' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' -H $'Sec-Fetch-Site: same-origin' -H $'Sec-Fetch-Mode: navigate' -H $'Sec-Fetch-User: ?1' -H $'Sec-Fetch-Dest: document' -H $'Referer: https://elearning.ut.ac.id/login/index.php' -H $'Accept-Encoding: gzip, deflate, br' -H $'Priority: u=0, i' \
+    -b $'ct_headless=NWVlZGE1N2MyMTYzZGQ0YjZmYWUwY2Q5NjJkMDNkYTc6ZmFsc2U%3D; ct_anti_ddos_key=5eeda57c2163dd4b6fae0cd962d03da7; _ga_R2XT9XL662=GS1.1.1719989017.3.1.1719990271.0.0.0; _ga_Q3NS1R2SYD=GS1.1.1721282973.2.0.1721282973.60.0.0; _ga=GA1.1.1312443426.1712375591; _ga_WNHP75XYCP=GS1.1.1721282976.3.0.1721282976.0.0.0; _ga_4FZX8RDTWT=GS1.1.1721282977.3.0.1721282977.0.0.0; _ga_E5M1DX274L=GS1.1.1721282985.2.1.1721282987.0.0.0; _ga_JWRPRER696=GS1.1.1738552752.32.0.1738552752.0.0.0; _ga_B7PETH9MJG=GS1.1.1738723397.4.1.1738723398.0.0.0; ct_anti_ddos_key=5eeda57c2163dd4b6fae0cd962d03da7; MoodleSession=0omvjjckv6qnkcie9fl9bma66e; _ga_5B5HVHB1BJ=GS1.1.1742281827.10.1.1742281849.0.0.0' \
+    --data-binary $'logintoken=ER1zJ7RljCv6KiRtXKlt2znxVhxgDaSs&username=055039357&password=82aSZK99Kq' \
+    $'https://elearning.ut.ac.id/login/index.php'
+
+RESPONSE
+HTTP/2 303 See Other
+Date: Tue, 18 Mar 2025 07:10:51 GMT
+Content-Type: text/html; charset=utf-8
+Location: https://elearning.ut.ac.id/login/index.php?testsession=956413
+Set-Cookie: ct_anti_ddos_key=5eeda57c2163dd4b6fae0cd962d03da7; secure; SameSite=Lax
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: MoodleSession=5km0tdjqfmdstr0d0hiuq1ernf; path=/; secure; SameSite=None
+Set-Cookie: MOODLEID1_=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; secure
+Set-Cookie: MOODLEID1_=%25A4%25B7V%257E%2529%2584%25BA%252C%25CD; expires=Sat, 17-May-2025 07:10:51 GMT; Max-Age=5184000; path=/; secure
+X-Redirect-By: Moodle
+Content-Language: en
+Server: nginx dap
+X-Powered-By: dap
+Strict-Transport-Security: max-age=31536000; includeSubdomains;
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: accelerometer=(), geolocation=(), gyroscope=(), magnetometer=(), payment=(), usb=()
+
+<!DOCTYPE html>
+<html  lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>Redirect</title>
+        <style>
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #343a40;
+    text-align: left;
+    background-color: #f2f2f2;
+}
+#page {
+    margin-top: 15px;
+    background: white;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+}
+#region-main {
+    margin: 0 auto;
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 1rem 1.25rem 1.25rem;
+    background-color: #fff;
+}
+h1 {
+    font-size: 2.34rem;
+    margin: 0 0 .5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.alert-danger {
+    color: #6e211e;
+    background-color: #f6d9d8;
+    border-color: #f3c9c8;
+    padding: .75rem 1.25rem;
+}
+    </style>
+    </head>
+    <body>
+        <div id="page">
+            <div id="region-main">
+                <h1>Redirect</h1>
+                <div style="margin-top: 3em; margin-left:auto; margin-right:auto; text-align:center;">This page should automatically redirect. If nothing is happening please use the continue link below.<br /><a href="https://elearning.ut.ac.id/login/index.php?testsession=956413">Continue</a></div>                            </div>
+        </div>
+    </body>
+</html>
