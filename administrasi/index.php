@@ -256,61 +256,104 @@
     <!--End Page Header-->
 
     <!--Start Contents Page-->
-    <section
-      id="contact"
-      class="contact-area contact-bg pt-120 pb-100 p-relative fix">
-      <div class="container jarakcontainer">
-      <div class="jarakcontainer">
-        <h3>Jika anda mengalami kebingungan dalam administrasi anda dapat menghubungi admin kami sesuai dengan jurusan anda.</h3>
-      </div>
-        <!--Start Cta Pendas-->
-        <section class="cta-two testmonials">
-          <div class="container" style="margin-bottom:30px">
-            <div class="cta-two__innertwo">
-              <div class="cta-two__inner-bg"
-                style="background-image: url(../assets/img/pattern/cta-two__parttern1.png);"></div>
-              <div class="cta-two__content">
-                <h2>Pendidikan Dasar (PENDAS)</h2>
-                <p>PGSD-PAUD</p>
-                <p>Hubungi kami untuk bantuan Administrasi</p>
-                <p>Elza - 081354852018</p>
-              </div>
-              <div class="cta-two__btn">
-                <a class="thm-btn" href="https:/wa.me/6281354852018">
-                  <span class="txt">KONTAK WA</span>
-                  <i class="icon-next"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!--End Cta Two-->
+    <section id="contact" class="contact-area contact-bg pt-120 pb-100 p-relative fix mb-80">
+      <div class="container">
+        <div class="section-intro text-center mb-5">
+          <h3 class="fw-bold">Bantuan Administrasi Akademik</h3>
+          <p class="lead">Hubungi admin kami sesuai dengan jurusan Anda untuk bantuan administrasi</p>
+        </div>
 
-        <!--Start Cta Non-Pendas-->
-        <section class="cta-two testmonials">
-          <div class="container">
-            <div class="cta-two__innertwo">
-              <div class="cta-two__inner-bg"
-                style="background-image: url(../assets/img/pattern/cta-two__parttern1.png);"></div>
-              <div class="cta-two__content">
-                <h2>Non Pendidikan Dasar (NON PENDAS)</h2>
-                <p>Semua Jurusan kecuali jurusan PENDAS</p>
-                <p>Hubungi kami untuk bantuan Administrasi</p>
-                <p>Eva - 085242460651</p>
-              </div>
-              <div class="cta-two__btn">
-                <a class="thm-btn" href="https:/wa.me/6285242460651">
-                  <span class="txt">KONTAK WA</span>
-                  <i class="icon-next"></i>
+        <div class="row g-4">
+          <!-- Pendas Card -->
+          <div class="col-lg-6">
+            <div class="contact-card h-100 p-4 rounded-3 shadow-sm hover-shadow">
+              <div class="card-content text-center">
+                <div class="icon-box mb-4">
+                  <span class="icon-graduation display-4 text-primary"></span>
+                </div>
+                <h4 class="card-title mb-3">Pendidikan Dasar (PENDAS)</h4>
+                <div class="card-info mb-4">
+                  <p class="mb-1">Program Studi PGSD & PAUD</p>
+                  <p class="mb-1">Admin: Elza</p>
+                  <p class="text-primary mb-3">081354852018</p>
+                </div>
+                <a class="thm-btn w-100" href="https://wa.me/6281354852018">
+                  <span class="txt">Hubungi via WhatsApp</span>
+                  <i class="fab fa-whatsapp ms-2"></i>
                 </a>
               </div>
             </div>
           </div>
-        </section>
-        <!--End Cta Two-->
+
+          <!-- Non-Pendas Card -->
+          <div class="col-lg-6">
+            <div class="contact-card h-100 p-4 rounded-3 shadow-sm hover-shadow">
+              <div class="card-content text-center">
+                <div class="icon-box mb-4">
+                  <span class="icon-education display-4 text-primary"></span>
+                </div>
+                <h4 class="card-title mb-3">Non Pendidikan Dasar (NON PENDAS)</h4>
+                <div class="card-info mb-4">
+                  <p class="mb-1">Semua Program Studi selain PENDAS</p>
+                  <p class="mb-1">Admin: Eva</p>
+                  <p class="text-primary mb-3">085242460651</p>
+                </div>
+                <a class="thm-btn w-100" href="https://wa.me/6285242460651">
+                  <span class="txt">Hubungi via WhatsApp</span>
+                  <i class="fab fa-whatsapp ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <style>
+        .contact-card {
+          background: #fff;
+          transition: all 0.3s ease;
+        }
+        .hover-shadow:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+        }
+        .icon-box {
+          width: 80px;
+          height: 80px;
+          line-height: 80px;
+          border-radius: 50%;
+          background: rgba(var(--primary-rgb), 0.1);
+          margin: 0 auto;
+        }
+        .card-info {
+          color: #666;
+        }
+        .thm-btn {
+          border-radius: 5px;
+        }
+        .thm-btn:hover {
+          opacity: 0.9;
+        }
+        .contact-area {
+          margin-bottom: 120px !important; /* Add extra bottom spacing */
+        }
+        .mb-5{
+          margin-bottom: 2px !important;
+          margin-top: 15px
+        }
+      </style>
     </section>
     <!--End Contents Page-->
+    
+    <!-- Spacer div for extra gap -->
+    <div class="spacer-section"></div>
+
+    <style>
+      .spacer-section {
+        height: 60px; /* Adjustable height for spacing */
+        background: transparent;
+      }
+    </style>
 
     <!--Start Footer Three-->
     <footer class="footer-three">

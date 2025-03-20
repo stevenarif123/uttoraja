@@ -261,40 +261,104 @@
 
     <!--Start Banner One-->
     <section class="banner-one">
-      <div class="banner-one__shape1 float-bob-x">
-        <img src="assets/img/shape/banner-one__shape1.png" alt="#" />
-      </div>
-      <div class="banner-one__shape3 float-bob-y">
-        <img src="assets/img/shape/banner-one__shape3.png" alt="#" />
-      </div>
       <div class="container">
-        <div class="banner-one__inner">
-          <div class="banner-one__content wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-            <p>TES</p>
+        <div class="section-intro text-center mb-5">
+          <h3 class="fw-bold">Jadwal Kegiatan Akademik</h3>
+          <p class="lead">Informasi lengkap mengenai jadwal kegiatan akademik di SALUT Tana Toraja</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Activity Cards Container -->
+          <div class="col-12">
+            <div class="activity-card rounded-3 shadow-sm hover-shadow p-4">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="bg-light">
+                    <tr>
+                      <th class="text-center" style="width: 80px">No</th>
+                      <th>Kegiatan Akademik</th>
+                      <th>Deskripsi</th>
+                      <th class="text-center">Tanggal</th>
+                      <th class="text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">1</td>
+                      <td>
+                        <h6 class="mb-1">Seminar Nasional</h6>
+                        <small class="text-muted">Aula SALUT Tana Toraja</small>
+                      </td>
+                      <td>Seminar tentang Pendidikan Jarak Jauh di Era Digital</td>
+                      <td class="text-center">20 Juli 2024</td>
+                      <td class="text-center">
+                        <span class="badge bg-success rounded-pill">Selesai</span>
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <td class="text-center">2</td>
+                      <td>
+                        <h6 class="mb-1">Workshop Tuton</h6>
+                        <small class="text-muted">Lab Komputer SALUT</small>
+                      </td>
+                      <td>Pelatihan penggunaan sistem Tutorial Online UT</td>
+                      <td class="text-center">25 Juli 2024</td>
+                      <td class="text-center">
+                        <span class="badge bg-warning rounded-pill">Selesai</span>
+                      </td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <style>
+        .activity-card {
+          background: #fff;
+          transition: all 0.3s ease;
+          margin-bottom: 80px;
+        }
+        .hover-shadow:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+        }
+        .table > :not(caption) > * > * {
+          padding: 1rem;
+        }
+        .badge {
+          padding: 0.5em 1em;
+          font-weight: 500;
+        }
+        .table-hover tbody tr:hover {
+          background-color: rgba(var(--primary-rgb), 0.05);
+        }
+        .section-intro {
+          margin-top: 30px;
+          margin-bottom: 40px !important;
+        }
+        .banner-one {
+          padding: 10px 0;
+        }
+        .banner-one__shape1,
+        .banner-one__shape3 {
+          display: none;
+        }
+      </style>
     </section>
     <!--End Banner One-->
+    
+    <!-- Add spacer before footer -->
+    <div class="spacer-section"></div>
 
-    <div class="container">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Kegiatan Akademik</th>
-                    <th>Tanggal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Seminar Nasional</td>
-                    <td>20/07/2024</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <style>
+      .spacer-section {
+        height: 60px;
+        background: transparent;
+      }
+    </style>
 
     <!--Start Footer Three-->
     <footer class="footer-three">

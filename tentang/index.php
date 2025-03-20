@@ -284,7 +284,7 @@
                                     <h4>Get To Know About Us</h4>
                                 </div>
                                 <h2>
-                                    We Are Here to Give You<br>Effective Ideas
+                                Making Higher Education <br>Open to All
                                 </h2>
                             </div>
                             <div class="text">
@@ -296,7 +296,7 @@
                                 </p>
                                 <p>
                                     <div style="text-align: center;">
-                                        [Tempat untuk menyisipkan gambar]
+                                        <img src="aset/ut1.jpg" alt="Halaman Universitas Terbuka">
                                     </div>
                                 </p>
                                 <p>
@@ -315,7 +315,7 @@
                                 <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <!--Single About Three Img-->
                                     <div class="single-about-three__img-box">
-                                        <img src="../assets/img/about/about-three__img2.jpg" alt="image" style="opacity: 0.5;">
+                                        <img src="aset/ut2.jpg" alt="image" style="opacity: 0.5;">
                                     </div>
                                     <!--End About Three Img-->
                                 </li>
@@ -323,7 +323,7 @@
                                 <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <!--Single About Three Img-->
                                     <div class="single-about-three__img-box">
-                                        <img src="../assets/img/about/about-three__img3.jpg" alt="image" style="opacity: 0.5;">
+                                        <img src="aset/ut3.jpg" alt="image" style="opacity: 0.5;">
                                     </div>
                                     <!--End About Three Img-->
                                 </li>
@@ -333,7 +333,7 @@
                                 data-wow-duration="1500ms">
                                 <!--Single About Three Img-->
                                 <div class="single-about-three__img-box">
-                                    <img src="../assets/img/about/about-three__img4.jpg" alt="image" style="opacity: 0.5;">
+                                    <img src="aset/ut4.JPG" alt="image" style="opacity: 0.5;">
                                 </div>
                                 <!--End About Three Img-->
                             </div>
@@ -341,11 +341,10 @@
                             <div class="overlay-box text-center">
                                 <div class="outer-box">
                                     <div class="count-outer count-box">
-                                        <h2 class="odometer" data-count="15">00</h2>
-                                        <i class="icon-plus-symbol-button"></i>
+                                        <h2 class="odometer" data-count="1984">00</h2>
                                     </div>
                                     <div class="title">
-                                        <p>Years Of<br>Experiences</p>
+                                        <p>Pioneering of <br>Open Learning.</p>
                                     </div>
                                 </div>
                             </div>

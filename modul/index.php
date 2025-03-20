@@ -37,6 +37,72 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/color1.css" />
     <link rel="stylesheet" href="../assets/css/responsive.css" />
+
+    <style>
+        .contact-field {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .contact-field input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e4e4e4;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-field input:focus {
+            border-color: #4b3da7;
+            box-shadow: 0 0 10px rgba(75, 61, 167, 0.1);
+        }
+        
+        .input-description {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .pnd-btn {
+            background: #4b3da7;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .pnd-btn:hover {
+            background: #3c308a;
+        }
+        
+        #status-container {
+            padding: 2rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        #status-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        #status-text.success {
+            color: #28a745;
+        }
+        
+        #status-text.error {
+            color: #dc3545;
+        }
+    </style>
   </head>
 
   <body class="body-gray-bg">
@@ -199,10 +265,7 @@
             </div>
             <div class="nav-logo">
               <a href="../">
-                <img
-                  src="../assets/img/resource/mobile-menu-logo.png"
-                  alt="Logo"
-                />
+                <img src="../assets/img/resource/mobile-menu-logo.png" alt="Logo" />
               </a>
             </div>
             <div class="menu-outer">
@@ -215,22 +278,16 @@
             <div class="social-links">
               <ul class="clearfix list-wrap">
                 <li>
-                  <a href="https://www.facebook.com/uttoraja"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
+                  <a href="https://www.facebook.com/uttoraja"><i class="fab fa-facebook-f"></i></a>
                 </li>
                 <li>
                   <a href="#"><i class="fab fa-twitter"></i></a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/uttoraja/"
-                    ><i class="fab fa-instagram"></i
-                  ></a>
+                  <a href="https://www.instagram.com/uttoraja/"><i class="fab fa-instagram"></i></a>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/@SALUTTanaToraja"
-                    ><i class="fab fa-youtube"></i
-                  ></a>
+                  <a href="https://www.youtube.com/@SALUTTanaToraja"><i class="fab fa-youtube"></i></a>
                 </li>
               </ul>
             </div>
@@ -265,10 +322,7 @@
       <!--End Page Header-->
 
       <!--Start Contents Page-->
-      <section
-        id="cek-modul"
-        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
-      >
+      <section id="cek-modul" class="contact-area contact-bg pt-120 pb-100 p-relative fix">
         <div class="container jarakcontainer">
           <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -277,43 +331,48 @@
                   <h3 style="margin-bottom: 20px;">Formulir Pengecekan Modul</h3>
                 </div>
                 <form class="contact-form mt-30" id="cekModulForm">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="contact-field position-relative c-name mb-4">
-                        <input
-                          type="text"
-                          id="nim"
-                          name="nim"
-                          placeholder="NIM Anda*"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="contact-field position-relative c-name mb-4">
-                        <input
-                          type="text"
-                          id="tanggal_lahir"
-                          name="tanggal_lahir"
-                          placeholder="Tanggal Lahir (YYYY-MM-DD)*"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="slider-btn">
-                        <button type="submit" class="pnd-btn" data-animation="fadeInRight" data-delay=".8s">Cek Modul</button>
-                      </div>
-                    </div>
+                  <div class="contact-field position-relative mb-4">
+                    <label for="nim">Nomor Induk Mahasiswa</label>
+                    <input 
+                      type="text" 
+                      id="nim" 
+                      name="nim" 
+                      placeholder="Masukkan NIM (9 digit)*" 
+                      required 
+                      maxlength="9"
+                      pattern="\d{9}"
+                    />
+                    <span class="input-description">NIM harus terdiri dari 9 angka.</span>
+                  </div>
+
+                  <div class="contact-field position-relative mb-4">
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <input 
+                        type="text" 
+                        id="tanggal_lahir" 
+                        name="tanggal_lahir" 
+                        placeholder="DD/MM/YYYY*" 
+                        required 
+                        pattern="^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$"
+                    />
+                    <span class="input-description">Format: DD/MM/YYYY (contoh: 31/12/1990)</span>
+                  </div>
+
+                  <div class="slider-btn text-center">
+                    <button type="submit" class="pnd-btn">
+                      <i class="fas fa-search mr-2"></i> Cek Modul
+                    </button>
                   </div>
                 </form>
-                <div id="status-container" style="display: none;">
-                    <h1 id="status-text" style="text-align: center;"></h1>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="#" class="thm-btn" id="kembaliButton">
-                            <span class="txt">Kembali</span>
-                        </a>
-                    </div>
+
+                <div id="status-container" style="display: none;" class="text-center mt-4">
+                  <div class="status-icon mb-3">
+                    <i class="fas fa-check-circle text-success" style="font-size: 48px;"></i>
+                  </div>
+                  <h3 id="status-text" class="mb-4"></h3>
+                  <button class="pnd-btn" id="kembaliButton">
+                    <i class="fas fa-arrow-left mr-2"></i> Kembali
+                  </button>
                 </div>
               </div>
             </div>
@@ -321,62 +380,122 @@
         </div>
       </section>
       <!--End Contents Page-->
+
       <script>
+        // Date validation and formatting
+        function isValidDate(dateString) {
+            const parts = dateString.split('/');
+            if (parts.length !== 3) return false;
+            
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+            
+            const date = new Date(year, month - 1, day);
+            return date.getDate() === day && 
+                   date.getMonth() === month - 1 && 
+                   date.getFullYear() === year &&
+                   year >= 1950 && 
+                   year <= new Date().getFullYear();
+        }
+
+        // Form validation and submission 
         const nimInput = document.getElementById('nim');
-        nimInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-            if (this.value.length > 9) {
-                this.value = this.value.slice(0, 9);
-            }
-        });
-        nimInput.addEventListener('blur', function() {
-            if (this.value.length !== 9) {
-                alert('NIM harus terdiri dari 9 angka.');
-            }
-        });
+        const tanggalInput = document.getElementById('tanggal_lahir');
         const cekModulForm = document.getElementById('cekModulForm');
         const statusContainer = document.getElementById('status-container');
         const statusText = document.getElementById('status-text');
         const kembaliButton = document.getElementById('kembaliButton');
+
+        // Date input handling
+        tanggalInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 8) {
+                value = value.substr(0, 8);
+            }
+            if (value.length >= 2) {
+                value = value.substr(0, 2) + (value.length > 2 ? '/' + value.substr(2) : '');
+            }
+            if (value.length >= 5) {
+                value = value.substr(0, 5) + (value.length > 5 ? '/' + value.substr(5) : '');
+            }
+            e.target.value = value;
+        });
+
+        // Form submission with date validation
         cekModulForm.addEventListener('submit', function(event) {
             event.preventDefault();
+            
+            if (nimInput.value.length !== 9) {
+                alert('NIM harus terdiri dari 9 angka.');
+                return;
+            }
+
+            if (!isValidDate(tanggalInput.value)) {
+                alert('Format tanggal tidak valid. Gunakan format DD/MM/YYYY');
+                return;
+            }
+
+            // Convert date format for server (DD/MM/YYYY to YYYY-MM-DD)
+            const parts = tanggalInput.value.split('/');
+            const serverDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+            
             const formData = new FormData(this);
+            formData.set('tanggal_lahir', serverDate);
+
+            // Show loading state
+            statusText.textContent = 'Memproses...';
+            statusContainer.style.display = 'block';
+            cekModulForm.style.display = 'none';
+
             fetch('cek_modul.php', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Data dari server:", data);
                 if (data.status === "1") {
-                    statusText.textContent = 'SUDAH TERSEDIA';
+                    statusText.innerHTML = '<i class="fas fa-check-circle text-success"></i> SUDAH TERSEDIA';
                     statusText.style.color = 'green';
                 } else if (data.status === "0") {
-                    statusText.textContent = 'BELUM TERSEDIA';
+                    statusText.innerHTML = '<i class="fas fa-times-circle text-danger"></i> BELUM TERSEDIA';
                     statusText.style.color = 'red';
                 } else {
-                    statusText.textContent = 'Data tidak ditemukan';
-                    statusText.style.color = 'black';
+                    statusText.innerHTML = '<i class="fas fa-exclamation-circle text-warning"></i> Data tidak ditemukan';
+                    statusText.style.color = '#856404';
                 }
-                cekModulForm.style.display = 'none';
-                statusContainer.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error:', error);
-                statusText.textContent = 'Terjadi kesalahan';
-                statusText.style.color = 'black';
-                cekModulForm.style.display = 'none';
-                statusContainer.style.display = 'block';
+                statusText.innerHTML = '<i class="fas fa-exclamation-triangle text-danger"></i> Terjadi kesalahan';
+                statusText.style.color = 'red';
             });
         });
+
+        // Reset form
         kembaliButton.addEventListener('click', function(event) {
             event.preventDefault();
             cekModulForm.reset();
             cekModulForm.style.display = 'block';
             statusContainer.style.display = 'none';
         });
-    </script>
-    
+
+        // Initialize datepicker with Indonesian format
+        $(function() {
+            $("#tanggal_lahir").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1950:2024",
+                maxDate: '0',
+                showAnim: 'fadeIn',
+                dayNames: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                dayNamesMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
+            });
+        });
+      </script>
 
       <!--Start Footer Three-->
       <footer class="footer-three">
@@ -390,7 +509,7 @@
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
-            <div class="row">
+              <div class="row">
                 <!--Start Single Footer Widget-->
                 <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2">
@@ -431,7 +550,6 @@
                   </div>
                 </div>
                 <!--End Single Footer Widget-->
-
                 <!--Start Single Footer Widget-->
                 <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2 ml55">
@@ -457,7 +575,6 @@
                   </div>
                 </div>
                 <!--End Single Footer Widget-->
-
                 <!--Start Single Footer Widget-->
                 <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                   <div class="single-footer-widget single-footer-widget-style2 ml50">
@@ -505,13 +622,10 @@
             </div>
           </div>
           <!-- End Footer Main -->
-
           <!--Start Footer Bottom -->
           <div class="footer-bottom footer-bottom-two footer-bottom-three">
             <div class="container">
-              <div
-                class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner"
-              >
+              <div class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
                 <div class="copyright-text text-center">
                   <p>
                     Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
@@ -577,10 +691,16 @@
     <script>
         $(function() {
             $("#tanggal_lahir").datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'dd/mm/yy',
                 changeMonth: true,
                 changeYear: true,
-                yearRange: "1950:2024"
+                yearRange: "1950:2024",
+                maxDate: '0',
+                showAnim: 'fadeIn',
+                dayNames: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                dayNamesMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
             });
         });
     </script>
