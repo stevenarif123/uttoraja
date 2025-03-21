@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Sentra Layanan Universitas Terbuka Tana Toraja</title>
-    <meta name="description" content="" />
+    <meta name="description" content="Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja - Kuliah online di PTN terbaik Indonesia" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
@@ -287,36 +287,27 @@
               </div>
               <div class="text">
                 <p>
-                  Universitas Terbuka (UT), pionir pendidikan jarak jauh
-                  terakreditasi "A",<br />
-                  menawarkan kuliah fleksibel, terbuka untuk semua usia, tanpa
-                  ujian masuk, <br />
-                  dan biaya sangat terjangkau. Daftar sekarang dan mulai jalur
-                  pendidikan <br />
-                  masa depan Anda!
+                    UT, perguruan tinggi negeri online dengan akreditasi "A" yang keren! 😊<br />
+                    Kuliah bisa kapan aja & di mana aja, terbuka untuk semua usia, <br />
+                    tanpa ribet ujian masuk, dan biayanya super terjangkau! 🎓✨<br />
+                    Yuk, daftar sekarang dan wujudkan impian pendidikanmu! 🚀
                 </p>
               </div>
-              <div style="margin-top: 20px">
-                <span class="icon-check"> Berkualitas</span>
-                <span class="icon-check" style="margin-left: 10px">
-                  Kampus Negeri</span
-                >
-                <span class="icon-check" style="margin-left: 10px">
-                  Fleksibel</span
-                >
-                <span class="icon-check" style="margin-left: 10px">
-                  Terjangkau</span
-                >
+              <div class="benefits-list">
+                <span class="icon-check">Berkualitas</span>
+                <span class="icon-check">Kampus Negeri</span>
+                <span class="icon-check">Fleksibel</span>
+                <span class="icon-check">Terjangkau</span>
               </div>
-              <div style="margin-top: 20px">
-                <a class="thm-btn" style="margin-right: 10px" href="./pendaftaran/">
+              <div class="banner-buttons">
+                <a class="thm-btn" href="./pendaftaran/">
                   <span class="txt">
                     Pendaftaran
                     <i class="icon-next"></i>
                   </span>
                 </a>
-                <a class="thm-btn2" style="margin-left: 10px" href="https://wa.me/6282293924242">
-                  <i class="bi bi-whatsapp"> </i>
+                <a class="thm-btn2" href="https://wa.me/6282293924242">
+                  <i class="bi bi-whatsapp"></i>
                   <span class="txt"> Konsultasi Pendaftaran</span>
                 </a>
               </div>
@@ -358,16 +349,11 @@
           <div class="row">
             <!--Start Single Service Three-->
             <div
-              class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft"
+              class="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft"
               data-wow-delay="0ms"
               data-wow-duration="1500ms"
             >
               <div class="service-three__single">
-                <div class="service-three__single-icon">
-                  <span class="">
-                    <span class="path1"></span><span class="path2"></span>
-                  </span>
-                </div>
                 <div class="service-three__single-content">
                   <div class="title">
                     <h3>
@@ -385,7 +371,7 @@
 
             <!--Start Single Service Three-->
             <div
-              class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft"
+              class="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft"
               data-wow-delay="100ms"
               data-wow-duration="1500ms"
             >
@@ -407,17 +393,11 @@
 
             <!--Start Single Service Three-->
             <div
-              class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft"
+              class="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft"
               data-wow-delay="200ms"
               data-wow-duration="1500ms"
             >
               <div class="service-three__single">
-                <div class="service-three__single-icon">
-                  <span class=""
-                    ><span class="path1"></span><span class="path2"></span
-                    ><span class="path3"></span>
-                  </span>
-                </div>
                 <div class="service-three__single-content">
                   <div class="title">
                     <h3><a href="#">Magister (S2)</a></h3>
@@ -433,385 +413,437 @@
           </div>
 
           <div class="tomboljadwal">
-            <div>
-              <a class="thm-btn" style="margin-right: 10px" href="./pendaftaran">
-                <span class="txt">
-                  Pendaftaran
-                  <i class="icon-next"></i>
-                </span>
-              </a>
-              <a class="thm-btn2" style="margin-left: 10px" href="https://wa.me/6282293924242">
-                <i class="bi bi-whatsapp"> </i>
-                <span class="txt"> Konsultasi </span>
-              </a>
-            </div>
+            <a class="thm-btn" href="./pendaftaran">
+              <span class="txt">
+                Pendaftaran
+                <i class="icon-next"></i>
+              </span>
+            </a>
+            <a class="thm-btn2" href="https://wa.me/6282293924242">
+              <i class="bi bi-whatsapp"></i>
+              <span class="txt"> Konsultasi </span>
+            </a>
           </div>
         </div>
       </section>
-      <!-- End Scedule One -->
+      <!-- End Schedule One -->
 
-              <!--Start Testmonials Three-->
-              <section class="testimonials-three testimonials">
-            <div class="testimonials-three__shape1 rotate-me">
-                <img src="assets/img/shape/testimonials-three__shape1.png" alt="shapes">
+      <!--Start Testimonials Three-->
+      <section class="testimonials-three testimonials">
+        <div class="testimonials-three__shape1 rotate-me">
+          <img src="assets/img/shape/testimonials-three__shape1.png" alt="shapes">
+        </div>
+        <div class="testimonials-three__shape2 rotate-me">
+          <img src="assets/img/shape/testimonials-three__shape2.png" alt="shapes">
+        </div>
+        <div class="testimonials-three__shape3 rotate-me">
+          <img src="assets/img/shape/testimonials-three__shape3.png" alt="shapes">
+        </div>
+        <div class="container">
+          <!-- Section Title -->
+          <div class="sec-title-three text-center mb-5">
+            <div class="sub-title">
+              <h4>Testimoni Mahasiswa</h4>
             </div>
-            <div class="testimonials-three__shape2 rotate-me">
-                <img src="assets/img/shape/testimonials-three__shape2.png" alt="shapes">
-            </div>
-            <div class="testimonials-three__shape3 rotate-me">
-                <img src="assets/img/shape/testimonials-three__shape3.png" alt="shapes">
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-5">
-                        <div class="testimonials-three__img">
-                            <ul>
-                                <li class="wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                    <!--Single About Two Img-->
-                                    <div class="single-testimonials-three__img-box">
-                                        <div class="inner">
-                                            <img src="serve-image.php?img=assets/img/testimonial/monika.jpg" alt="image">
-                                        </div>
-                                    </div>
-                                    <!--End About Two Img-->
-                                    <!--Single About Two Img-->
-                                    <div class="single-testimonials-three__img-box">
-                                        <div class="inner">
-                                            <img src="serve-image.php?img=assets/img/testimonial/notavian.jpg" alt="image">
-                                        </div>
-                                    </div>
-                                    <!--End About Two Img-->
-                                </li>
-                                <li class="wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                    <!--Single About Two Img-->
-                                    <div class="single-testimonials-three__img-box">
-                                        <img src="serve-image.php?img=assets/img/testimonial/neny.jpg" alt="image">
-                                    </div>
-                                    <!--End About Two Img-->
-                                </li>
-                            </ul>
-                        </div>
+            <h2>Apa yang dikatakan oleh Mahasiswa Universitas Terbuka?</h2>
+          </div>
+          
+          <div class="row">
+            <!-- Testimonial Images - Horizontal Layout -->
+            <div class="col-lg-10 col-md-12 mx-auto">
+              <div class="testimonials-three__img">
+                <ul>
+                  <li class="wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1000ms">
+                    <!--Single Testimonial Image-->
+                    <div class="single-testimonials-three__img-box">
+                      <div class="inner">
+                        <img src="serve-image.php?img=assets/img/testimonial/monika.jpg" alt="testimonial" />
+                      </div>
                     </div>
-
-                    <div class="col-xl-7">
-                        <div class="testimonials-three__content">
-                            <div class="sec-title-four">
-                                <div class="sub-title">
-                                    <h4>Testimoni Mahasiswa</h4>
-                                </div>
-                                <h2>
-                                    Apa yang dikatakan oleh Mahasiswa<br>Universitas Terbuka?
-                                </h2>
-                            </div>
-
-                            <!-- If we need navigation buttons -->
-                            <div class="swiper-nav-style2 testimonials-three__swiper-nav-style">
-                                <div class="swiper-button-prev" id="testimonials-three__swiper-button-prev">
-                                    <i class="icon-left-arrow right"></i>
-                                </div>
-                                <div class="swiper-button-next" id="testimonials-three__swiper-button-next">
-                                    <i class="icon-right-arrow-angle left"></i>
-                                </div>
-                            </div>
-                            <div class="testimonials-three__content-inner">
-                                <div class="thm-swiper__slider swiper-container" data-swiper-options='{
-                                    "loop": true,
-                                    "pagination": {
-                                        "el": "#testimonials-three-pagination",
-                                        "type": "bullets",
-                                        "clickable": true
-                                        },
-                                    "navigation": {
-                                        "nextEl": "#testimonials-three__swiper-button-next",
-                                        "prevEl": "#testimonials-three__swiper-button-prev"
-                                    },
-                                    "autoplay": { "delay": 5000 },
-                                    "breakpoints": {
-                                        "0": {
-                                            "spaceBetween": 30,
-                                            "slidesPerView": 1
-                                        },
-                                        "375": {
-                                            "spaceBetween": 30,
-                                            "slidesPerView": 1
-                                        },
-                                        "575": {
-                                            "spaceBetween": 30,
-                                            "slidesPerView": 1
-                                        },
-                                        "768": {
-                                            "spaceBetween": 30,
-                                            "slidesPerView": 1
-                                        },
-                                        "992": {
-                                            "spaceBetween": 30,
-                                            "slidesPerView": 1
-                                        },
-                                        "1200": {
-                                            "spaceBetween": 30,
-                                            "slidesPerView": 1
-                                        }
-                                    }}'>
-
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="icon-box">
-                                                <span class="icon-quote"></span>
-                                            </div>
-                                            <div class="text">
-                                                <p>
-                                                    “ Testimoni saya tentang UT. Saya sangat bersyukur telah memilih Universitas Terbuka (UT) sebagai tempat untuk melanjutkan pendidikan tinggi. UT memberikan fleksibilitas dalam hal waktu dan tempat untuk belajar, Yang sangat membantu saya dalam menyeimbangkan antara study dan aktivitas sehari-hari. Meskipun saya belajar secara mandiri, dukungan dari dosen dan teman-teman melalui forum online tetap terasa, yang memotivasi saya untuk belajar. Saya merasa sangat puas dan bangga menjadi bagian dari Universitas Terbuka (UT). Trimakasih UT”
-                                                </p>
-                                            </div>
-                                            <div class="athor-box">
-                                                <h3>Neny Lasri Mallisa'</h3>
-                                                <p>Ilmu Administrasi Bisnis</p>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="icon-box">
-                                                <span class="icon-quote"></span>
-                                            </div>
-                                            <div class="text">
-                                                <p>
-                                                    “ Belajar di Universitas Terbuka memberikan fleksibilitas yang saya butuhkan untuk tetap aktif dalam kegiatan sehari-hari sambil mengejar pendidikan. Dukungan dari dosen dan kualitas materi benar-benar membantu saya memahami pelajaran dengan baik. ”
-                                                </p>
-                                            </div>
-                                            <div class="athor-box">
-                                                <h3>Notavian Masuang</h3>
-                                                <p>Pendidikan Guru Sekolah Dasar</p>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="icon-box">
-                                                <span class="icon-quote"></span>
-                                            </div>
-                                            <div class="text">
-                                                <p>
-                                                    “ "Belajar di Universitas Terbuka itu pas banget buat saya yang kerja sambil kuliah. Jadwalnya fleksibel dan materi pembelajarannya juga gampang diikuti, jadi bisa tetap fokus di dua-duanya tanpa stres. ”
-                                                </p>
-                                            </div>
-                                            <div class="athor-box">
-                                                <h3>Monica Sarina Rianti Baan</h3>
-                                                <p>Pendidikan Guru Sekolah Dasar</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-                        </div>
+                  </li>
+                  <li class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1000ms">
+                    <!--Single Testimonial Image-->
+                    <div class="single-testimonials-three__img-box">
+                      <div class="inner">
+                        <img src="serve-image.php?img=assets/img/testimonial/neny.jpg" alt="testimonial" />
+                      </div>
                     </div>
+                  </li>
+                  <li class="wow fadeInRight" data-wow-delay="400ms" data-wow-duration="1000ms">
+                    <!--Single Testimonial Image-->
+                    <div class="single-testimonials-three__img-box">
+                      <div class="inner">
+                        <img src="serve-image.php?img=assets/img/testimonial/notavian.jpg" alt="testimonial" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row mt-4">
+            <!-- Testimonial Content - Full Width -->
+            <div class="col-lg-10 col-md-12 mx-auto">
+              <div class="testimonials-three__content">
+                <div class="testimonials-three__content-inner">
+                  <div class="thm-swiper__slider swiper-container" data-swiper-options='{
+                    "loop": true,
+                    "pagination": {
+                      "el": "#testimonials-three-pagination",
+                      "type": "bullets",
+                      "clickable": true
+                    },
+                    "navigation": {
+                      "nextEl": "#testimonials-three__swiper-button-next",
+                      "prevEl": "#testimonials-three__swiper-button-prev"
+                    },
+                    "autoplay": { "delay": 5000 },
+                    "spaceBetween": 0,
+                    "slidesPerView": 1
+                    }'>
+
+                    <div class="swiper-wrapper">
+                      <!-- Testimonial 1 -->
+                      <div class="swiper-slide">
+                        <div class="testimonial-card">
+                          <div class="icon-box">
+                            <span class="icon-quote"></span>
+                          </div>
+                          <div class="text">
+                            <p>
+                              "Saya sangat bersyukur telah memilih Universitas Terbuka sebagai tempat untuk melanjutkan pendidikan tinggi. UT memberikan fleksibilitas dalam hal waktu dan tempat untuk belajar, yang sangat membantu saya dalam menyeimbangkan antara study dan aktivitas sehari-hari."
+                            </p>
+                          </div>
+                          <div class="athor-box">
+                            <h3>Neny Lasri Mallisa'</h3>
+                            <p>Ilmu Administrasi Bisnis</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Testimonial 2 -->
+                      <div class="swiper-slide">
+                        <div class="testimonial-card">
+                          <div class="icon-box">
+                            <span class="icon-quote"></span>
+                          </div>
+                          <div class="text">
+                            <p>
+                              "Belajar di Universitas Terbuka memberikan fleksibilitas yang saya butuhkan untuk tetap aktif dalam kegiatan sehari-hari sambil mengejar pendidikan. Dukungan dari dosen dan kualitas materi benar-benar membantu saya memahami pelajaran dengan baik."
+                            </p>
+                          </div>
+                          <div class="athor-box">
+                            <h3>Notavian Masuang</h3>
+                            <p>Pendidikan Guru Sekolah Dasar</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Testimonial 3 -->
+                      <div class="swiper-slide">
+                        <div class="testimonial-card">
+                          <div class="icon-box">
+                            <span class="icon-quote"></span>
+                          </div>
+                          <div class="text">
+                            <p>
+                              "Belajar di Universitas Terbuka itu pas banget buat saya yang kerja sambil kuliah. Jadwalnya fleksibel dan materi pembelajarannya juga gampang diikuti, jadi bisa tetap fokus di dua-duanya tanpa stres."
+                            </p>
+                          </div>
+                          <div class="athor-box">
+                            <h3>Monica Sarina Rianti Baan</h3>
+                            <p>Pendidikan Guru Sekolah Dasar</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
-        <!--End Testmonials Three-->
+          </div>
+          
+          <!-- Navigation buttons at the bottom -->
+          <div class="testimonials-three__navigation">
+            <div class="testimonials-three__swiper-nav-style">
+              <div class="swiper-button-prev" id="testimonials-three__swiper-button-prev">
+                <i class="icon-left-arrow right"></i>
+              </div>
+              <div class="swiper-button-next" id="testimonials-three__swiper-button-next">
+                <i class="icon-right-arrow-angle left"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="swiper-pagination" id="testimonials-three-pagination"></div>
+        </div>
+      </section>
+      <!--End Testimonials Three-->
 
       <!-- Start Fakultas One -->
-      <section" >
-        <div class="container jarakcontainer">
-            <div class="sec-title-three text-center">
-                <div class="sub-title">
-                  <h4>Fakultas dan Jurusan</h4>
-                </div>
-                <h2>Kenali dan Pilih Jurusanmu!</h2>
-              </div>
-            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="pills-fkip-tab" data-bs-toggle="pill" data-bs-target="#pills-fkip" type="button" role="tab" aria-controls="pills-fkip" aria-selected="true">FKIP</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-fhisip-tab" data-bs-toggle="pill" data-bs-target="#pills-fhisip" type="button" role="tab" aria-controls="pills-fhisip" aria-selected="false">FHISIP</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-fst-tab" data-bs-toggle="pill" data-bs-target="#pills-fst" type="button" role="tab" aria-controls="pills-fst" aria-selected="false">FST</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-feb-tab" data-bs-toggle="pill" data-bs-target="#pills-feb" type="button" role="tab" aria-controls="pills-feb" aria-selected="false">FEB</button>
-                </li>
+      <section class="faculty-section jarakcontainer">
+        <div class="container">
+          <div class="sec-title-three text-center">
+            <div class="sub-title">
+              <h4>Fakultas dan Jurusan</h4>
+            </div>
+            <h2>Kenali dan Pilih Jurusanmu!</h2>
+          </div>
+          <div class="faculty-tabs">
+            <ul class="nav nav-pills nav-justified mb-4" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-fkip-tab" data-bs-toggle="pill" 
+                  data-bs-target="#pills-fkip" type="button" role="tab" 
+                  aria-controls="pills-fkip" aria-selected="true">FKIP</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-fhisip-tab" data-bs-toggle="pill" 
+                  data-bs-target="#pills-fhisip" type="button" role="tab" 
+                  aria-controls="pills-fhisip" aria-selected="false">FHISIP</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-fst-tab" data-bs-toggle="pill" 
+                  data-bs-target="#pills-fst" type="button" role="tab" 
+                  aria-controls="pills-fst" aria-selected="false">FST</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-feb-tab" data-bs-toggle="pill" 
+                  data-bs-target="#pills-feb" type="button" role="tab" 
+                  aria-controls="pills-feb" aria-selected="false">FEB</button>
+              </li>
             </ul>
-              <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-fkip" role="tabpanel" aria-labelledby="pills-fkip-tab">
-                  <div>
-                  <h4>Fakultas Keguruan dan Ilmu Pengetahuan</h4><br>
-                    Daftar Jurusan : <br>
-                    • Pendidikan Bahasa dan Sastra Indonesia (S1)<br> • Pendidikan Bahasa Inggris (S1)<br>• Pendidikan Biologi (S1)<br>• Pendidikan Fisika (S1)<br>• Pendidikan Kimia (S1)<br>• Pendidikan Matematika (S1)<br>• Pendidikan Ekonomi (S1)<br>• Pendidikan Pancasila dan Kewarganegaraan (S1)<br>• Teknologi Pendidikan (S1)<br>• Pendidikan Guru Sekolah Dasar (PGSD) (S1)<br>• Pendidikan Guru Pendidikan Anak Usia Dini (PGPAUD) (S1)<br>• Program Pendidikan Profesi Guru (PPG) (S1)<br>• Pendidikan Agama Islam (PAI) (S1)<br>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="pills-fhisip" role="tabpanel" aria-labelledby="pills-fhisip-tab">
-                  <div>
-                    <h4>Fakultas Hukum, Ilmu Sosial, dan Ilmu Politik</h4><br>
-                      Daftar Jurusan : <br>
-                      • Kearsipan (D4) <br>• Perpajakan (D3)<br> • Administrasi Publik (S1)<br> • Administrasi Bisnis (S1)<br>• Hukum (S1)<br> • Ilmu Pemerintahan (S1)<br> • Ilmu Komunikasi (S1)<br> • Ilmu Perpustakaan (S1)<br> • Sosiologi (S1)<br> • Sastra Inggris (S1)<br> • Perpajakan (S1)<br>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="pills-fst" role="tabpanel" aria-labelledby="pills-fst-tab">
-                  <div>
-                    <h4>Fakultas Sains dan Teknologi</h4><br>
-                      Daftar Jurusan : <br>
-                    • Statistika (S1)<br>• Matematika (S1)<br> • Biologi (S1)<br> • Teknologi Pangan (S1)<br> • Agribisnis (S1)<br> • Perencanaan Wilayah dan Kota (S1)<br> • Sistem Informasi (S1)<br> • Sains Data (S1)<br>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="pills-feb" role="tabpanel" aria-labelledby="pills-feb-tab">
-                  <div>
-                    <h4>Fakultas Ekonomi dan Bisnis</h4><br>
-                      Daftar Jurusan : <br>
-                    • Manajemen (S1)<br> • Ekonomi Pembangunan (S1)<br> • Ekonomi Syariah (S1)<br> • Akuntansi (S1)<br> • Akuntansi Keuangan Publik (S1)<br> • Pariwisata (S1)<br>
-                  </div>
+            <div class="tab-content" id="pills-tabContent">
+              <!-- FKIP Tab -->
+              <div class="tab-pane fade show active" id="pills-fkip" role="tabpanel" aria-labelledby="pills-fkip-tab">
+                <h4>Fakultas Keguruan dan Ilmu Pengetahuan</h4>
+                <div class="faculty-content">
+                  <p><strong>Daftar Jurusan:</strong></p>
+                  <ul class="faculty-list">
+                    <li>Pendidikan Bahasa dan Sastra Indonesia (S1)</li>
+                    <li>Pendidikan Bahasa Inggris (S1)</li>
+                    <li>Pendidikan Biologi (S1)</li>
+                    <li>Pendidikan Fisika (S1)</li>
+                    <li>Pendidikan Kimia (S1)</li>
+                    <li>Pendidikan Matematika (S1)</li>
+                    <li>Pendidikan Ekonomi (S1)</li>
+                    <li>Pendidikan Pancasila dan Kewarganegaraan (S1)</li>
+                    <li>Teknologi Pendidikan (S1)</li>
+                    <li>Pendidikan Guru Sekolah Dasar (PGSD) (S1)</li>
+                    <li>Pendidikan Guru Pendidikan Anak Usia Dini (PGPAUD) (S1)</li>
+                    <li>Program Pendidikan Profesi Guru (PPG) (S1)</li>
+                    <li>Pendidikan Agama Islam (PAI) (S1)</li>
+                  </ul>
                 </div>
               </div>
-        </div>
-      </section>
-
-      <!-- Start FAQ One -->
-      <section>
-      <div class="container jarakcontainer mt-5">
-        <div class="sec-title-three text-center mb-4">
-        <div class="sub-title">
-              <h4>FAQ</h4>
-            </div>
-            <h2>Frequently Asked Question (FAQ)</h2>
-        </div>
-        <div class="faq-wrap">
-            <div class="accordion-section">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                Apa itu Universitas Terbuka (UT)?
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Universitas Terbuka (UT) adalah perguruan tinggi negeri di Indonesia yang menyelenggarakan
-                                pendidikan tinggi melalui sistem pendidikan jarak jauh (PJJ) dan terbuka. Ini berarti
-                                semua proses belajar mengajar dilakukan secara online atau jarak jauh.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                Bagaimana cara mendaftar di Universitas Terbuka?
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Pendaftaran di Universitas Terbuka dapat dilakukan melalui situs web resmi Sentra
-                                Layanan Universitas Terbuka Tana Toraja dengan klik <a
-                                    href="https://uttoraja.com/pendaftaran">link ini</a>. Calon mahasiswa harus
-                                mengisi formulir pendaftaran online, melampirkan dokumen yang diperlukan, dan
-                                membayar biaya pendaftaran melalui saluran pembayaran yang tersedia.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Apa saja program studi yang ditawarkan oleh Universitas Terbuka?
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Universitas Terbuka menawarkan beragam program studi di tingkat diploma, sarjana, dan
-                                pascasarjana. Program studi meliputi bidang ilmu pendidikan, sains dan teknologi,
-                                sosial dan hukum, dan ekonomi.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFour">
-                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Bagaimana sistem pembelajaran di Universitas Terbuka?
-                            </button>
-                        </h2>
-                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Sistem pembelajaran di Universitas Terbuka menggunakan metode pendidikan jarak jauh
-                                yang memanfaatkan teknologi informasi dan komunikasi. Mahasiswa belajar secara
-                                mandiri melalui bahan ajar yang disediakan secara online, dan dapat berinteraksi
-                                dengan dosen dan sesama mahasiswa melalui forum diskusi dan media lainnya.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFive">
-                            <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                Apakah ijazah dari Universitas Terbuka diakui?
-                            </button>
-                        </h2>
-                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Ya, ijazah dari Universitas Terbuka diakui oleh pemerintah dan memiliki legalitas
-                                yang sama dengan ijazah dari perguruan tinggi negeri lainnya. Lulusan UT memiliki
-                                kesempatan yang sama untuk melanjutkan pendidikan atau berkarir baik di dalam
-                                maupun luar negeri.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="image-section">
-                <img src="serve-image.php?img=assets/img/background/web2.png" alt="Descriptive Alt Text" class="fixed-size-image">
-            </div>
-        </div>
-    </div>
-
-      </section>
-      <!-- End FAQ One -->
-
-      <!-- Start About One -->
-       <section>
-        <div class="container jarakcontainer">
-            <div class="row align-items-center">
-            <div class="about-title second-atitle pb-25 mb-4">
-                    <h2 class="text-center">Kami Membantu Mahasiswa UT</h2>
-                  </div>
-              <div class="col-lg-6 col-md-12 col-sm-12">
-                <div
-                  class="s-about-img2 p-relative wow fadeInLeft animated"
-                  data-animation="fadeInLeft"
-                  data-delay=".4s"
-                >
-                  <img src="serve-image.php?img=assets/img/background/web.JPG" alt="img" />
+              
+              <!-- FHISIP Tab -->
+              <div class="tab-pane fade" id="pills-fhisip" role="tabpanel" aria-labelledby="pills-fhisip-tab">
+                <h4>Fakultas Hukum, Ilmu Sosial, dan Ilmu Politik</h4>
+                <div class="faculty-content">
+                  <p><strong>Daftar Jurusan:</strong></p>
+                  <ul class="faculty-list">
+                    <li>Kearsipan (D4)</li>
+                    <li>Perpajakan (D3)</li>
+                    <li>Administrasi Publik (S1)</li>
+                    <li>Administrasi Bisnis (S1)</li>
+                    <li>Hukum (S1)</li>
+                    <li>Ilmu Pemerintahan (S1)</li>
+                    <li>Ilmu Komunikasi (S1)</li>
+                    <li>Ilmu Perpustakaan (S1)</li>
+                    <li>Sosiologi (S1)</li>
+                    <li>Sastra Inggris (S1)</li>
+                    <li>Perpajakan (S1)</li>
+                  </ul>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-12 col-sm-12">
-                <div
-                  class="about-content s-about-content wow fadeInRight animated"
-                  data-animation="fadeInRight"
-                  data-delay=".4s"
-                >
-                  <p>
-                    Universitas Terbuka (UT) adalah perguruan tinggi negeri dengan sistem belajar jarak jauh berbasis ICT, memungkinkan mahasiswa mengakses layanan akademik dan administrasi tanpa tatap muka.
-                  </p>
-                  <p>
-                    Untuk memenuhi kebutuhan interaksi langsung, UT mendirikan Sentra Layanan Universitas Terbuka (SALUT) di berbagai kabupaten/kota. SALUT mendekatkan layanan UT kepada mahasiswa dan pemangku kepentingan, mengenalkan UT ke masyarakat, dan merekrut calon mahasiswa, sehingga diharapkan meningkatkan partisipasi dan kualitas layanan UT.
-                  </p>
-  
-                  <a href="./tentang/" class="thm-btn">
-                    <span class="txt">Selengkapnya</span>
-                  </a>
+              
+              <!-- FST Tab -->
+              <div class="tab-pane fade" id="pills-fst" role="tabpanel" aria-labelledby="pills-fst-tab">
+                <h4>Fakultas Sains dan Teknologi</h4>
+                <div class="faculty-content">
+                  <p><strong>Daftar Jurusan:</strong></p>
+                  <ul class="faculty-list">
+                    <li>Statistika (S1)</li>
+                    <li>Matematika (S1)</li>
+                    <li>Biologi (S1)</li>
+                    <li>Teknologi Pangan (S1)</li>
+                    <li>Agribisnis (S1)</li>
+                    <li>Perencanaan Wilayah dan Kota (S1)</li>
+                    <li>Sistem Informasi (S1)</li>
+                    <li>Sains Data (S1)</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <!-- FEB Tab -->
+              <div class="tab-pane fade" id="pills-feb" role="tabpanel" aria-labelledby="pills-feb-tab">
+                <h4>Fakultas Ekonomi dan Bisnis</h4>
+                <div class="faculty-content">
+                  <p><strong>Daftar Jurusan:</strong></p>
+                  <ul class="faculty-list">
+                    <li>Manajemen (S1)</li>
+                    <li>Ekonomi Pembangunan (S1)</li>
+                    <li>Ekonomi Syariah (S1)</li>
+                    <li>Akuntansi (S1)</li>
+                    <li>Akuntansi Keuangan Publik (S1)</li>
+                    <li>Pariwisata (S1)</li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-       </section>
-      <!-- End About One -->
+        </div>
+      </section>
+
+      <!-- Start FAQ Section -->
+      <section class="faq-section jarakcontainer">
+        <div class="container">
+          <div class="sec-title-three text-center mb-4">
+            <div class="sub-title">
+              <h4>FAQ</h4>
+            </div>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-wrap">
+            <div class="accordion-section">
+              <div class="accordion" id="accordionExample">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                      Apa itu Universitas Terbuka (UT)?
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Universitas Terbuka (UT) adalah perguruan tinggi negeri di Indonesia yang menyelenggarakan
+                      pendidikan tinggi melalui sistem pendidikan jarak jauh (PJJ) dan terbuka. Ini berarti
+                      semua proses belajar mengajar dilakukan secara online atau jarak jauh.
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      Bagaimana cara mendaftar di Universitas Terbuka?
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Pendaftaran di Universitas Terbuka dapat dilakukan melalui situs web resmi Sentra
+                      Layanan Universitas Terbuka Tana Toraja dengan klik <a
+                        href="https://uttoraja.com/pendaftaran">link ini</a>. Calon mahasiswa harus
+                      mengisi formulir pendaftaran online, melampirkan dokumen yang diperlukan, dan
+                      membayar biaya pendaftaran melalui saluran pembayaran yang tersedia.
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Apa saja program studi yang ditawarkan oleh Universitas Terbuka?
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Universitas Terbuka menawarkan beragam program studi di tingkat diploma, sarjana, dan
+                      pascasarjana. Program studi meliputi bidang ilmu pendidikan, sains dan teknologi,
+                      sosial dan hukum, dan ekonomi.
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      Bagaimana sistem pembelajaran di Universitas Terbuka?
+                    </button>
+                  </h2>
+                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Sistem pembelajaran di Universitas Terbuka menggunakan metode pendidikan jarak jauh
+                      yang memanfaatkan teknologi informasi dan komunikasi. Mahasiswa belajar secara
+                      mandiri melalui bahan ajar yang disediakan secara online, dan dapat berinteraksi
+                      dengan dosen dan sesama mahasiswa melalui forum diskusi dan media lainnya.
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                      Apakah ijazah dari Universitas Terbuka diakui?
+                    </button>
+                  </h2>
+                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Ya, ijazah dari Universitas Terbuka diakui oleh pemerintah dan memiliki legalitas
+                      yang sama dengan ijazah dari perguruan tinggi negeri lainnya. Lulusan UT memiliki
+                      kesempatan yang sama untuk melanjutkan pendidikan atau berkarir baik di dalam
+                      maupun luar negeri.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="image-section">
+              <img src="serve-image.php?img=assets/img/background/web2.png" alt="FAQ Image" class="fixed-size-image">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Start About Section -->
+      <section class="about-section jarakcontainer">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="about-title text-center mb-4">
+              <h2>Kami Membantu Mahasiswa UT</h2>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="s-about-img2 p-relative wow fadeInLeft animated" 
+                data-animation="fadeInLeft" data-delay=".4s">
+                <img src="serve-image.php?img=assets/img/background/web.JPG" alt="Foto kampus" />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="about-content s-about-content wow fadeInRight animated" 
+                data-animation="fadeInRight" data-delay=".4s">
+                <p>
+                  Universitas Terbuka (UT) adalah perguruan tinggi negeri dengan sistem belajar jarak jauh berbasis ICT, memungkinkan mahasiswa mengakses layanan akademik dan administrasi tanpa tatap muka.
+                </p>
+                <p>
+                  Untuk memenuhi kebutuhan interaksi langsung, UT mendirikan Sentra Layanan Universitas Terbuka (SALUT) di berbagai kabupaten/kota. SALUT mendekatkan layanan UT kepada mahasiswa dan pemangku kepentingan, mengenalkan UT ke masyarakat, dan merekrut calon mahasiswa, sehingga diharapkan meningkatkan partisipasi dan kualitas layanan UT.
+                </p>
+
+                <a href="./tentang/" class="thm-btn">
+                  <span class="txt">Selengkapnya</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       
-      <!--Start Cta One-->
+      <!--Start CTA Section-->
       <section class="cta-one">
         <div class="container">
           <div class="cta-one__inner text-center">
@@ -851,7 +883,7 @@
           </div>
         </div>
       </section>
-      <!--End Cta One-->
+      <!--End CTA Section-->
 
       <!--Start Footer Three-->
       <footer class="footer-three">
@@ -865,9 +897,9 @@
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
-            <div class="row">
+              <div class="row">
                 <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s">
                   <div class="single-footer-widget single-footer-widget-style2">
                     <div class="title">
                       <h3>Bantuan &amp; Dukungan</h3>
@@ -908,7 +940,7 @@
                 <!--End Single Footer Widget-->
 
                 <!--Start Single Footer Widget-->
-                <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                   <div class="single-footer-widget single-footer-widget-style2 ml55">
                     <div class="title">
                       <h3>Link Cepat</h3>
@@ -934,7 +966,7 @@
                 <!--End Single Footer Widget-->
 
                 <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                   <div class="single-footer-widget single-footer-widget-style2 ml50">
                     <div class="title">
                       <h3>Layanan Kami</h3>
@@ -979,14 +1011,11 @@
               </div>
             </div>
           </div>
-          <!-- End Footer Main -->
-
+          
           <!--Start Footer Bottom -->
           <div class="footer-bottom footer-bottom-two footer-bottom-three">
             <div class="container">
-              <div
-                class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner"
-              >
+              <div class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
                 <div class="copyright-text text-center">
                   <p>
                     Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
@@ -1000,7 +1029,7 @@
           <!--End Footer Bottom -->
         </div>
       </footer>
-      <!--Start Footer One-->
+      <!--End Footer Three-->
     </div>
 
     <!-- Scroll-top -->

@@ -14,21 +14,21 @@
     position: absolute;
     top: 165px;
     left: 110px;
-    z-index: 1;
+    z-index: -1;
 }
 
 .banner-one__shape2 {
     position: absolute;
     left: 815px;
     bottom: 130px;
-    z-index: 1;
+    z-index: -1;
 }
 
 .banner-one__shape3 {
     position: absolute;
     top: 175px;
     right: 135px;
-    z-index: 1;
+    z-index: -1;
 }
 
 .banner-one__inner {

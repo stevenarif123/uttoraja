@@ -92,7 +92,6 @@
 .contact-form {
   background: #fff;
   border-radius: 15px;
-  padding: 30px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   margin-top: 0;
   display: flex;
@@ -1463,4 +1462,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .pnd-btn {
         width: 100%;
     }
+    /* Form styling */
+.contact-form {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Consistent gap between sections */
+  }
 }

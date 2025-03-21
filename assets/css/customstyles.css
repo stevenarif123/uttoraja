@@ -32,3 +32,934 @@
         display: none; /* Menyembunyikan gambar pada layar berukuran kecil */
     }
 }
+
+/* 🎨 Custom styling for UT Toraja website 🎨 */
+
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #ffb30b;
+  --dark-blue: #003c8f;
+  --light-blue: #e1f5fe;
+  --light-yellow: #fff8e1;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Global styles ✨ */
+body {
+  font-family: 'Inter Tight', sans-serif;
+  color: var(--text-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+a {
+  transition: var(--transition);
+}
+
+/* Section spacing 📏 */
+.jarakcontainer {
+  padding: 4rem 0;
+  position: relative;
+}
+
+/* Colors 🌈 */
+.warnabiru {
+  color: var(--primary-color) !important;
+}
+
+.warnakuning {
+  color: var(--secondary-color) !important;
+}
+
+/* Buttons 🔘 - Improved with consistent rounded borders and spacing */
+.thm-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px; /* 🔄 Updated to consistent rounded border */
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  border: 2px solid var(--primary-color);
+  margin: 8px; /* 📏 Added consistent spacing */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 🌟 Added subtle shadow for depth */
+}
+
+.thm-btn:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+  transform: translateY(-3px); /* ✨ Added subtle lift effect on hover */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.thm-btn .txt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.thm-btn2 {
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+  padding: 12px 30px;
+  border-radius: 30px; /* 🔄 Updated to consistent rounded border */
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  border: 2px solid var(--secondary-color);
+  margin: 8px; /* 📏 Added consistent spacing */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 🌟 Added subtle shadow for depth */
+}
+
+.thm-btn2:hover {
+  background-color: transparent;
+  color: var (--secondary-color);
+  transform: translateY(-3px); /* ✨ Added subtle lift effect on hover */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.thm-btn2 .txt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Banner section 🏞️ */
+.banner-one {
+  background-color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-one__inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.banner-one__content {
+  flex: 1;
+}
+
+.banner-one .big-title h2 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.banner-one .text p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+.banner-one__img {
+  flex: 1;
+  position: relative;
+}
+
+.banner-one__img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.benefits-list {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.banner-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* 📏 Increased gap between buttons */
+  margin: 15px 0; /* 📏 Added vertical spacing */
+}
+
+/* Service section 🔧 */
+.service-three {
+  padding: 5rem 0;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.service-three__single {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  height: 100%;
+  transition: var(--transition);
+  margin-bottom: 1.5rem;
+}
+
+.service-three__single:hover {
+  transform: translateY(-5px);
+}
+
+.service-three__single-content .title h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-three__single-content .text p {
+  margin-bottom: 0.5rem;
+}
+
+.tomboljadwal {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* 📏 Increased gap for better spacing */
+  margin-top: 3rem;
+}
+
+/* Testimonial section 💬 - Enhanced for mobile and improved readability */
+.testimonials-three {
+  background-color: #f8f9fa;
+  padding: 5rem 0;
+  position: relative;
+}
+
+/* Improved testimonial images for all screen sizes 🖼️ */
+.testimonials-three__img img {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  max-width: 100%;
+  height: auto;
+}
+
+.testimonials-three__img ul {
+  display: flex;
+  flex-direction: row; /* 🔄 Changed to horizontal row instead of wrapping */
+  justify-content: space-between; /* 📏 Distribute items evenly across the container */
+  gap: 20px; /* 📏 Consistent gap between images */
+  margin: 0;
+  padding: 0;
+}
+
+.testimonials-three__img li {
+  flex: 1; /* 📏 Each item takes equal space */
+  max-width: 32%; /* 📏 Limit width to create some spacing */
+}
+
+.single-testimonials-three__img-box {
+  margin-bottom: 0; /* 🧹 Removed bottom margin since we're displaying horizontally */
+  overflow: hidden; /* 🔍 Ensures images don't overflow their container */
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  height: 0;
+  padding-bottom: 75%; /* 📏 Maintains aspect ratio (3:4) */
+  position: relative;
+}
+
+.single-testimonials-three__img-box .inner,
+.single-testimonials-three__img-box > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover; /* 🖼️ Ensures the image covers the area properly */
+  transition: transform 0.4s ease; /* ✨ Smooth transition for hover effect */
+}
+
+.single-testimonials-three__img-box:hover .inner img,
+.single-testimonials-three__img-box:hover > img {
+  transform: scale(1.05); /* 🔄 Subtle zoom effect on hover */
+}
+
+/* Improved content layout for testimonials 📝 */
+.testimonials-three__content {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.testimonials-three__content-inner {
+  position: relative;
+  width: 100%;
+}
+
+/* Enhanced testimonial card styling 🎨 - Full width and better readability */
+.testimonial-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* 📏 Using full width available */
+  margin: 0 auto;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-card .icon-box {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-size: 2rem; /* 🔠 Increased icon size for better visibility */
+  text-align: center;
+}
+
+.testimonial-card .text {
+  flex: 1;
+  text-align: center; /* ✨ Centered text for better aesthetics */
+}
+
+.testimonial-card .text p {
+  font-style: italic;
+  line-height: 1.8;
+  font-size: 1.25rem; /* 🔠 Increased font size for better readability */
+  margin-bottom: 2rem;
+  position: relative;
+  color: var(--text-dark);
+}
+
+/* Styled quote marks for testimonials ✨ */
+.testimonial-card .text p::before {
+  content: '"';
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  opacity: 0.3;
+}
+
+.testimonial-card .text p::after {
+  content: '"';
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: absolute;
+  right: -15px;
+  bottom: -25px;
+  opacity: 0.3;
+}
+
+.testimonial-card .athor-box {
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+  margin-top: auto;
+  text-align: center;
+}
+
+.testimonial-card .athor-box h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.testimonial-card .athor-box p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* Navigation controls at the bottom of testimonials 🎮 */
+.testimonials-three__navigation {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.testimonials-three__swiper-nav-style {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.swiper-button-prev, 
+.swiper-button-next {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  margin: 0 !important;
+  width: 50px !important;
+  height: 50px !important;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  color: var(--primary-color) !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover, 
+.swiper-button-next:hover {
+  background-color: var(--primary-color);
+  color: white !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 20px !important;
+}
+
+/* Added pagination styling 🔢 */
+.swiper-pagination {
+  position: static !important;
+  margin-top: 1rem;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #ddd;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--primary-color);
+}
+
+/* Mobile responsive adjustments for testimonials 📱 */
+@media (max-width: 992px) {
+  .testimonial-card {
+    padding: 2rem;
+  }
+  
+  .testimonial-card .text p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-three {
+    padding: 3rem 0;
+  }
+  
+  .testimonials-three__img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .testimonials-three__img ul {
+    flex-direction: row; /* 📱 Keep row direction on tablets */
+    flex-wrap: wrap; /* 📱 Allow wrapping on smaller screens */
+    justify-content: center;
+  }
+  
+  .testimonials-three__img li {
+    flex: 0 0 45%; /* 📏 Two columns on tablet */
+    max-width: 45%;
+    margin-bottom: 15px;
+  }
+  
+  .testimonial-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .testimonial-card .text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  
+  .testimonial-card .text p::before,
+  .testimonial-card .text p::after {
+    font-size: 1.8rem;
+  }
+  
+  .sec-title-four h2 {
+    font-size: 1.75rem !important;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+  
+  .testimonial-card .icon-box {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+  
+  .testimonial-card .text p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .testimonial-card .athor-box h3 {
+    font-size: 1.1rem;
+  }
+  
+  .swiper-button-prev, 
+  .swiper-button-next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+/* Improved navigation controls for testimonials 🎮 */
+.testimonials-three__swiper-nav-style {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.swiper-button-prev, 
+.swiper-button-next {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  color: var(--primary-color) !important;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover, 
+.swiper-button-next:hover {
+  background-color: var(--primary-color);
+  color: white !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 18px !important;
+}
+
+/* Mobile responsive adjustments for testimonials 📱 */
+@media (max-width: 992px) {
+  .testimonials-three__content {
+    margin-top: 2rem;
+  }
+  
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-three {
+    padding: 3rem 0;
+  }
+  
+  .testimonials-three__img ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .testimonials-three__img li {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .single-testimonials-three__img-box {
+    margin-bottom: 0.8rem;
+  }
+  
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+  
+  .testimonial-card .text p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .testimonial-card .icon-box {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .testimonials-three__swiper-nav-style {
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  
+  .sec-title-four h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem;
+  }
+  
+  .sec-title-four .sub-title h4 {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonial-card {
+    padding: 1rem;
+  }
+  
+  .testimonial-card .text p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-card .athor-box h3 {
+    font-size: 1rem;
+  }
+  
+  .testimonial-card .athor-box p {
+    font-size: 0.8rem;
+  }
+  
+  .swiper-button-prev, 
+  .swiper-button-next {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .testimonials-three__img ul {
+    flex-direction: column; /* 📱 Stack vertically on mobile */
+  }
+  
+  .testimonials-three__img li {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .single-testimonials-three__img-box {
+    padding-bottom: 65%; /* 📏 Slightly lower aspect ratio on mobile */
+  }
+}
+
+/* Faculty tabs 🎓 */
+.faculty-section {
+  background-color: white;
+}
+
+.faculty-tabs {
+  margin-top: 2rem;
+}
+
+.nav-pills .nav-link {
+  color: var(--text-dark);
+  background-color: #f1f1f1;
+  margin: 0 0.5rem 0.5rem;
+  border-radius: 30px; /* 🔄 Updated to match button rounding */
+  padding: 0.75rem 1.5rem;
+  transition: var(--transition);
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.tab-content {
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 1rem;
+}
+
+.tab-content h4 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.faculty-content {
+  margin-top: 1rem;
+}
+
+.faculty-list {
+  list-style-type: none;
+  padding-left: 0;
+  column-count: 2;
+  column-gap: 2rem;
+}
+
+.faculty-list li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.faculty-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var (--primary-color);
+  font-weight: bold;
+}
+
+/* FAQ section ❓ */
+.faq-section {
+  background-color: #f8f9fa;
+}
+
+.faq-wrap {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.accordion-section {
+  flex: 1;
+  max-width: 650px;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixed-size-image {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.accordion-button {
+  background-color: white;
+  padding: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--light-blue);
+  color: var(--primary-color);
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-item {
+  margin-bottom: 0.5rem;
+  border-radius: var(--border-radius) !important;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* About section 📖 */
+.about-section {
+  background-color: white;
+}
+
+.about-title {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.s-about-img2 {
+  margin-bottom: 2rem;
+}
+
+.s-about-img2 img {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  height: auto;
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* CTA section 📣 */
+.cta-one {
+  background-color: var(--primary-color);
+  padding: 4rem 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-one__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-one__inner-title-box h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-one__inner-text-box p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.cta-one__inner-btn-box {
+  margin-top: 2.5rem; /* 📏 Added more space above the button */
+}
+
+.cta-one__inner-btn-box .thm-btn {
+  background-color: white;
+  color: var(--primary-color);
+  border-color: white;
+  border-radius: 30px; /* 🔄 Maintaining consistent border-radius */
+  padding: 14px 34px; /* 📏 Slightly larger padding for this button */
+}
+
+.cta-one__inner-btn-box .thm-btn:hover {
+  background-color: transparent;
+  color: white;
+}
+
+/* Footer section 👣 */
+.footer-three {
+  background-color: #1a1a1a;
+  color: #aaaaaa;
+}
+
+.footer-main__three {
+  padding-top: 5rem;
+  position: relative;
+}
+
+.single-footer-widget-style2 .title h3 {
+  color: white;
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.single-footer-widget-style2 .title h3:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--secondary-color);
+}
+
+.single-footer-widget__links-style2 ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.single-footer-widget__links-style2 ul li {
+  margin-bottom: 0.75rem;
+}
+
+.single-footer-widget__links-style2 ul li p a {
+  color: #aaaaaa;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.single-footer-widget__links-style2 ul li p a:hover {
+  color: var(--secondary-color);
+  padding-left: 5px;
+}
+
+.footer-bottom__three-inner {
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 3rem;
+}
+
+/* Icon styles 🔍 */
+.icon-check {
+  background-color: var(--light-blue);
+  color: var(--primary-color);
+  padding: 5px 15px;
+  border-radius: 30px; /* 🔄 Updated to match button rounding */
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 5px; /* 📏 Added margin for spacing */
+}
+
+/* Responsive fixes 📱 */
+@media (max-width: 992px) {
+  .banner-one__inner {
+    flex-direction: column;
+  }
+  
+  .banner-one .big-title h2 {
+    font-size: 2.5rem;
+  }
+  
+  .faq-wrap {
+    flex-direction: column;
+  }
+  
+  .faculty-list {
+    column-count: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-one .big-title h2 {
+    font-size: 2rem;
+  }
+  
+  .jarakcontainer {
+    padding: 3rem 0;
+  }
+  
+  .fixed-size-image {
+    display: none;
+  }
+  
+  .nav-pills .nav-link {
+    margin: 0 0.25rem 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .testimonial-card .text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-buttons, .tomboljadwal {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .banner-one .big-title h2 {
+    font-size: 1.8rem;
+  }
+  
+  .benefits-list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cta-one__inner-title-box h2 {
+    font-size: 2rem;
+  }
+  
+  .thm-btn, .thm-btn2 {
+    width: 100%; /* 📏 Full width on small screens */
+    text-align: center;
+    margin: 5px 0;
+  }
+}
