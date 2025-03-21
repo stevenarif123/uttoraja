@@ -1,0 +1,23 @@
+POST /login/change_password.php HTTP/2
+Host: elearning.ut.ac.id
+Cookie: ct_headless=NWVlZGE1N2MyMTYzZGQ0YjZmYWUwY2Q5NjJkMDNkYTc6ZmFsc2U%3D; ct_anti_ddos_key=5eeda57c2163dd4b6fae0cd962d03da7; _ga_R2XT9XL662=GS1.1.1719989017.3.1.1719990271.0.0.0; _ga_Q3NS1R2SYD=GS1.1.1721282973.2.0.1721282973.60.0.0; _ga=GA1.1.1312443426.1712375591; _ga_WNHP75XYCP=GS1.1.1721282976.3.0.1721282976.0.0.0; _ga_4FZX8RDTWT=GS1.1.1721282977.3.0.1721282977.0.0.0; _ga_E5M1DX274L=GS1.1.1721282985.2.1.1721282987.0.0.0; _ga_JWRPRER696=GS1.1.1738552752.32.0.1738552752.0.0.0; _ga_B7PETH9MJG=GS1.1.1738723397.4.1.1738723398.0.0.0; ct_anti_ddos_key=5eeda57c2163dd4b6fae0cd962d03da7; MoodleSession=5km0tdjqfmdstr0d0hiuq1ernf; MOODLEID1_=%25A4%25B7V%257E%2529%2584%25BA%252C%25CD; _ga_5B5HVHB1BJ=GS1.1.1742281827.10.1.1742282024.0.0.0
+Content-Length: 157
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Chromium";v="133", "Not(A:Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Accept-Language: en-GB,en;q=0.9
+Origin: https://elearning.ut.ac.id
+Content-Type: application/x-www-form-urlencoded
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://elearning.ut.ac.id/login/change_password.php
+Accept-Encoding: gzip, deflate, br
+Priority: u=0, i
+
+id=1&sesskey=xBqqT1IYka&_qf__login_change_password_form=1&password=82aSZK99Kq&newpassword1=%4029092002Ut&newpassword2=%4029092002Ut&submitbutton=Save+changes

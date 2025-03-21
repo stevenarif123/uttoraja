@@ -1,78 +1,101 @@
 <?php
-// 🔒 Security headers
-header('Content-Type: application/json');
-header('X-Content-Type-Options: nosniff');
-
 require_once "../../koneksi.php";
 
-// 🛡️ Enhanced input validation
-if(isset($_POST['no'])) {
-    $no = filter_var($_POST['no'], FILTER_VALIDATE_INT);
-    
-    if(!$no) {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid input']);
-        exit();
-    }
+// Initialize response array
+$response = array(
+    'status' => 'error',
+    'message' => 'An unknown error occurred.'
+);
 
-    try {
-        // 🔄 Transaction for data consistency
-        mysqli_begin_transaction($koneksi);
-
-        // Mengambil data mahasiswa dari database
-        $sql = "SELECT * FROM mahasiswa WHERE No = ?";
-        $stmt = mysqli_prepare($koneksi, $sql);
-        mysqli_stmt_bind_param($stmt, "i", $no);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $mahasiswa = mysqli_fetch_assoc($result);
-
-        if($mahasiswa) {
-            $nim = $mahasiswa['NIM'];
-            $nama = $mahasiswa['NamaLengkap'];
-            $jurusan = $mahasiswa['Jurusan'];
-            $email = $mahasiswa['Email'];
-            $password = $mahasiswa['Password']; // Atau isi sesuai kebutuhan
-
-            // 🎯 Enhanced duplicate checking
-            $sql_check = "SELECT COUNT(*) as count FROM tuton WHERE NIM = ?";
-            $stmt_check = mysqli_prepare($koneksi, $sql_check);
-            mysqli_stmt_bind_param($stmt_check, "s", $nim);
-            mysqli_stmt_execute($stmt_check);
-            $result_check = mysqli_stmt_get_result($stmt_check);
-            $count = mysqli_fetch_assoc($result_check)['count'];
-
-            if($count == 0) {
-                // 📝 Insert with error handling
-                $sql_insert = "INSERT INTO tuton (NIM, Nama, Jurusan, Email, Password) VALUES (?, ?, ?, ?, ?)";
-                $stmt_insert = mysqli_prepare($koneksi, $sql_insert);
+// Check if request method is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get POST data
+    if (isset($_POST['no'])) {
+        $no = $_POST['no'];
+        
+        // Validate no
+        if (!empty($no)) {
+            // Get mahasiswa data by NO
+            $sql_mahasiswa = "SELECT * FROM mahasiswa WHERE No = ?";
+            $stmt_mahasiswa = mysqli_prepare($koneksi, $sql_mahasiswa);
+            mysqli_stmt_bind_param($stmt_mahasiswa, "i", $no);
+            mysqli_stmt_execute($stmt_mahasiswa);
+            $result_mahasiswa = mysqli_stmt_get_result($stmt_mahasiswa);
+            
+            if ($row_mahasiswa = mysqli_fetch_assoc($result_mahasiswa)) {
+                $nim = $row_mahasiswa['NIM'];
+                $nama = $row_mahasiswa['NamaLengkap'];
+                $password = $row_mahasiswa['Password'];
                 
-                if(!$stmt_insert) {
-                    throw new Exception("Database preparation failed");
-                }
-
-                mysqli_stmt_bind_param($stmt_insert, "sssss", $nim, $nama, $jurusan, $email, $password);
+                // Check if NIM already exists in tuton table
+                $sql_check = "SELECT * FROM tuton WHERE NIM = ?";
+                $stmt_check = mysqli_prepare($koneksi, $sql_check);
+                mysqli_stmt_bind_param($stmt_check, "s", $nim);
+                mysqli_stmt_execute($stmt_check);
+                $result_check = mysqli_stmt_get_result($stmt_check);
                 
-                if(!mysqli_stmt_execute($stmt_insert)) {
-                    throw new Exception("Insert failed");
+                if (mysqli_num_rows($result_check) > 0) {
+                    // Update existing record
+                    $sql_update = "UPDATE tuton SET Password = ? WHERE NIM = ?";
+                    $stmt_update = mysqli_prepare($koneksi, $sql_update);
+                    mysqli_stmt_bind_param($stmt_update, "ss", $password, $nim);
+                    
+                    if (mysqli_stmt_execute($stmt_update)) {
+                        $response = array(
+                            'status' => 'success',
+                            'message' => "Data untuk NIM $nim (". stripslashes($nama) .") berhasil diperbarui dalam tabel tuton! ✅"
+                        );
+                    } else {
+                        $response = array(
+                            'status' => 'error',
+                            'message' => "Gagal memperbarui data di tabel tuton. " . mysqli_error($koneksi)
+                        );
+                    }
+                } else {
+                    // Insert new record
+                    $sql_insert = "INSERT INTO tuton (NIM, Password) VALUES (?, ?)";
+                    $stmt_insert = mysqli_prepare($koneksi, $sql_insert);
+                    mysqli_stmt_bind_param($stmt_insert, "ss", $nim, $password);
+                    
+                    if (mysqli_stmt_execute($stmt_insert)) {
+                        $response = array(
+                            'status' => 'success',
+                            'message' => "Data untuk NIM $nim (". stripslashes($nama) .") berhasil dimasukkan ke tabel tuton! ✅"
+                        );
+                    } else {
+                        $response = array(
+                            'status' => 'error',
+                            'message' => "Gagal memasukkan data ke tabel tuton. " . mysqli_error($koneksi)
+                        );
+                    }
                 }
-
-                mysqli_commit($koneksi);
-                echo json_encode(['status' => 'success', 'message' => 'Data migration successful']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Data already exists']);
+                $response = array(
+                    'status' => 'error',
+                    'message' => "Data mahasiswa dengan No $no tidak ditemukan."
+                );
             }
-
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Mahasiswa tidak ditemukan.']);
+            $response = array(
+                'status' => 'error',
+                'message' => "Parameter 'no' tidak valid."
+            );
         }
-
-    } catch (Exception $e) {
-        mysqli_rollback($koneksi);
-        error_log("Migration error: " . $e->getMessage());
-        echo json_encode(['status' => 'error', 'message' => 'Migration failed']);
+    } else {
+        $response = array(
+            'status' => 'error',
+            'message' => "Parameter 'no' tidak ditemukan."
+        );
     }
-
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Missing required data']);
+    $response = array(
+        'status' => 'error',
+        'message' => "Metode request tidak valid."
+    );
 }
+
+// Return JSON response
+header('Content-Type: application/json');
+echo json_encode($response);
+exit;
 ?>
