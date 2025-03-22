@@ -188,6 +188,15 @@
                                 <li><a href="./tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Program</a>
+                              <ul class="sub-menu">
+                                <li><a href="./rpl.php">RPL</a></li>
+                                <li><a href="./reguler.php">Reguler</a></li>
+                                <li><a href="./jurusan.php">Program Studi</a></li>
+                              </ul>
+                            </li>
+                            <li><a href="./biaya.php">Biaya Kuliah</a></li>
                           </ul>
                         </div>
                       </nav>
