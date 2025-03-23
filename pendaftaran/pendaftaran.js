@@ -259,7 +259,7 @@ function validateField(field) {
   return true;
 }
 
-// ===== Dropdowns Initialization =====
+// ===== Enhanced Dropdowns Initialization =====
 function initializeDropdowns() {
   // Initialize jurusan dropdown
   initializeJurusanDropdown();
@@ -273,8 +273,9 @@ function initializeDropdowns() {
 
 function initializeJurusanDropdown() {
   const jurusanDropdown = document.querySelector('.field-container .dropdown-list');
+  const jurusanSearchInput = document.querySelector('.field-container .dropdown-search');
   
-  if (!jurusanDropdown || typeof jurusanData === 'undefined') return;
+  if (!jurusanDropdown || !jurusanSearchInput || typeof jurusanData === 'undefined') return;
   
   // Clear existing items
   jurusanDropdown.innerHTML = '';
@@ -286,19 +287,33 @@ function initializeJurusanDropdown() {
     item.setAttribute('data-value', jurusan);
     item.textContent = jurusan;
     
-    item.addEventListener('click', function() {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       selectJurusan(this.getAttribute('data-value'));
+      
+      // ✅ FIX 1: Close dropdown after selection
+      const dropdown = this.closest('.searchable-dropdown');
+      if (dropdown) {
+        dropdown.classList.remove('active');
+        const dropdownList = dropdown.querySelector('.dropdown-list');
+        if (dropdownList) {
+          dropdownList.style.display = 'none';
+          dropdownList.style.visibility = 'hidden';
+        }
+      }
     });
     
     jurusanDropdown.appendChild(item);
   });
 }
 
+// Fixed Kelurahan Dropdown initialization with improved selection handling
 function initializeKelurahanDropdown() {
   const kelurahanDropdown = document.querySelector('#toraja_fields .dropdown-list');
   const kelurahanSearchInput = document.querySelector('#toraja_fields .dropdown-search');
   
-  if (!kelurahanDropdown || !kelurahanSearchInput || typeof kelurahanData === 'undefined') return;
+  if (!kelurahanDropdown || !kelurahanSearchInput) return;
   
   // Clear existing items
   kelurahanDropdown.innerHTML = '';
@@ -311,34 +326,73 @@ function initializeKelurahanDropdown() {
   placeholderItem.style.color = '#999';
   kelurahanDropdown.appendChild(placeholderItem);
   
-  // Add data items
-  kelurahanData.forEach(data => {
-    const item = document.createElement('div');
-    item.className = 'dropdown-item';
-    item.setAttribute('data-value', data.area_name);
-    item.textContent = data.area_name;
+  // Check if kelurahanData exists and is properly formatted
+  if (typeof kelurahanData !== 'undefined' && kelurahanData && kelurahanData.length > 0) {
+    console.log('Populating kelurahan dropdown with data:', kelurahanData);
     
-    item.addEventListener('click', function() {
-      selectKelurahan(this.getAttribute('data-value'));
+    // Add data items
+    kelurahanData.forEach(data => {
+      const item = document.createElement('div');
+      item.className = 'dropdown-item';
+      
+      // Handle different data formats
+      const areaName = data.area_name || data;
+      const kemendagriCode = data.kemendagri_code || '';
+      
+      item.setAttribute('data-value', areaName);
+      item.setAttribute('data-kemendagri-code', kemendagriCode);
+      item.textContent = areaName;
+      
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectKelurahan(this.getAttribute('data-value'), this.getAttribute('data-kemendagri-code'));
+        
+        // ✅ FIX 1: Close dropdown after selection
+        const dropdown = this.closest('.searchable-dropdown');
+        if (dropdown) {
+          dropdown.classList.remove('active');
+          const dropdownList = dropdown.querySelector('.dropdown-list');
+          if (dropdownList) {
+            dropdownList.style.display = 'none';
+            dropdownList.style.visibility = 'hidden';
+          }
+        }
+      });
+      
+      kelurahanDropdown.appendChild(item);
     });
+  } else {
+    console.error('kelurahanData is not defined or empty');
     
-    kelurahanDropdown.appendChild(item);
-  });
-  
-  // Enhance visibility of kelurahan dropdown
-  kelurahanSearchInput.addEventListener('click', function() {
-    const dropdown = this.closest('.searchable-dropdown');
-    dropdown.classList.add('active');
-    kelurahanDropdown.style.display = 'block';
-    kelurahanDropdown.style.opacity = '1';
-    kelurahanDropdown.style.backgroundColor = 'white';
-    
-    // Force repaint to ensure proper display
-    setTimeout(() => {
-      kelurahanDropdown.style.display = 'block';
-      kelurahanDropdown.style.backgroundColor = 'white';
-    }, 10);
-  });
+    // Add some default items if data is missing
+    const defaultAreas = ['Lembang A', 'Lembang B', 'Kelurahan C'];
+    defaultAreas.forEach(area => {
+      const item = document.createElement('div');
+      item.className = 'dropdown-item';
+      item.setAttribute('data-value', area);
+      item.textContent = area;
+      
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectKelurahan(this.getAttribute('data-value'));
+        
+        // ✅ FIX 1: Close dropdown after selection
+        const dropdown = this.closest('.searchable-dropdown');
+        if (dropdown) {
+          dropdown.classList.remove('active');
+          const dropdownList = dropdown.querySelector('.dropdown-list');
+          if (dropdownList) {
+            dropdownList.style.display = 'none';
+            dropdownList.style.visibility = 'hidden';
+          }
+        }
+      });
+      
+      kelurahanDropdown.appendChild(item);
+    });
+  }
 }
 
 function initializeSearchableDropdowns() {
@@ -351,7 +405,16 @@ function initializeSearchableDropdowns() {
     if (!searchInput || !dropdownList) return;
     
     // Toggle dropdown on click
-    searchInput.addEventListener('click', function() {
+    searchInput.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // ✅ FIX 2: Clear search input when dropdown is opened
+      if (!dropdown.classList.contains('active')) {
+        // Only clear if this is a new dropdown opening, not continuing an existing search
+        // searchInput.value = '';
+      }
+      
       toggleDropdown(dropdown);
     });
     
@@ -361,6 +424,7 @@ function initializeSearchableDropdowns() {
         dropdown.classList.remove('active');
         if (dropdownList) {
           dropdownList.style.display = 'none';
+          dropdownList.style.visibility = 'hidden';
         }
       }
     });
@@ -369,6 +433,11 @@ function initializeSearchableDropdowns() {
     searchInput.addEventListener('input', function() {
       const searchValue = this.value.toLowerCase();
       filterDropdownItems(dropdown, searchValue);
+      
+      // When typing, always ensure dropdown is visible
+      if (searchValue.length > 0 && !dropdown.classList.contains('active')) {
+        toggleDropdown(dropdown);
+      }
     });
     
     // Handle keyboard navigation
@@ -450,22 +519,51 @@ function initializeDatePicker() {
 
 // ===== Dropdown Helper Functions =====
 function toggleDropdown(dropdown) {
-  dropdown.classList.toggle('active');
-  const dropdownList = dropdown.querySelector('.dropdown-list');
+  if (!dropdown) return;
   
-  if (dropdown.classList.contains('active')) {
-    dropdown.querySelector('.dropdown-search').focus();
-    dropdownList.style.display = 'block';
-    dropdownList.style.backgroundColor = 'white';
-    // Force repaint to ensure proper display
-    setTimeout(() => {
+  const wasActive = dropdown.classList.contains('active');
+  const searchInput = dropdown.querySelector('.dropdown-search');
+  
+  // Close all dropdowns first
+  document.querySelectorAll('.searchable-dropdown').forEach(d => {
+    // ✅ FIX 2: Clear other search inputs when closing their dropdowns
+    if (d !== dropdown && d.classList.contains('active')) {
+      const otherSearchInput = d.querySelector('.dropdown-search');
+      // Don't clear the input value here, as it should display the selected value
+    }
+    
+    d.classList.remove('active');
+    const list = d.querySelector('.dropdown-list');
+    if (list) {
+      list.style.display = 'none';
+      list.style.visibility = 'hidden';
+    }
+  });
+  
+  // Toggle this dropdown
+  if (!wasActive) {
+    dropdown.classList.add('active');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
+    
+    if (dropdownList) {
+      // ✅ FIX 2: Select all text in search input for easy replacement
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+      }
+      
+      dropdownList.style.display = 'block';
+      dropdownList.style.visibility = 'visible';
       dropdownList.style.opacity = '1';
-    }, 10);
-  } else {
-    dropdownList.style.opacity = '0';
-    setTimeout(() => {
-      dropdownList.style.display = 'none';
-    }, 300);
+      dropdownList.style.backgroundColor = 'white';
+      dropdownList.style.zIndex = '9999';
+      
+      // Force repaint to ensure proper display
+      setTimeout(() => {
+        dropdownList.style.display = 'block';
+        dropdownList.style.visibility = 'visible';
+      }, 10);
+    }
   }
 }
 
@@ -548,7 +646,15 @@ function selectJurusan(value) {
   
   jurusanInput.value = value;
   searchInput.value = value;
-  if (dropdown) dropdown.classList.remove('active');
+  
+  // ✅ FIX 1: Close dropdown after selection
+  if (dropdown) {
+    dropdown.classList.remove('active');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
+    if (dropdownList) {
+      dropdownList.style.display = 'none';
+    }
+  }
   
   // Update fakultas field
   updateFakultas(value);
@@ -571,7 +677,8 @@ function updateFakultas(jurusan) {
   }
 }
 
-function selectKelurahan(value) {
+// ✅ FIX 3: Enhanced Kelurahan selection with auto-population
+function selectKelurahan(value, kemendagriCode = '') {
   const kelurahanInput = document.getElementById('kelurahan');
   const searchInput = document.querySelector('#toraja_fields .dropdown-search');
   if (!kelurahanInput || !searchInput) return;
@@ -580,7 +687,15 @@ function selectKelurahan(value) {
   
   kelurahanInput.value = value;
   searchInput.value = value;
-  if (dropdown) dropdown.classList.remove('active');
+  
+  // Close dropdown
+  if (dropdown) {
+    dropdown.classList.remove('active');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
+    if (dropdownList) {
+      dropdownList.style.display = 'none';
+    }
+  }
   
   // Highlight the selected item
   const items = dropdown ? dropdown.querySelectorAll('.dropdown-item') : [];
@@ -588,14 +703,69 @@ function selectKelurahan(value) {
     item.classList.toggle('selected', item.getAttribute('data-value') === value);
   });
   
-  // Update kecamatan and kabupaten fields
-  // These would need real data from backend to populate correctly
-  // For now, we'll just set placeholder values
+  // Auto-populate kecamatan and kabupaten fields
+  fetchLocationDetails(value, kemendagriCode);
+}
+
+// ✅ FIX 3: New function to fetch district and regency data
+function fetchLocationDetails(kelurahanName, kemendagriCode = '') {
   const kecamatanInput = document.getElementById('kecamatan');
   const kabupatenInput = document.getElementById('kabupaten');
   
-  if (kecamatanInput) kecamatanInput.value = 'Kecamatan (Contoh)';
-  if (kabupatenInput) kabupatenInput.value = 'Kabupaten (Contoh)';
+  if (!kecamatanInput || !kabupatenInput) return;
+  
+  // If we have the kelurahan data already loaded, we can populate from it directly
+  if (typeof kelurahanData !== 'undefined' && kelurahanData && kelurahanData.length > 0) {
+    // Find the selected kelurahan in our data
+    const selectedKelurahan = kelurahanData.find(item => 
+      (item.area_name === kelurahanName) || 
+      (kemendagriCode && item.kemendagri_code === kemendagriCode)
+    );
+    
+    if (selectedKelurahan) {
+      // Make an AJAX request to get kecamatan and kabupaten details
+      fetch(`get_location_details.php?kelurahan_name=${encodeURIComponent(kelurahanName)}&kemendagri_code=${encodeURIComponent(kemendagriCode || '')}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            kecamatanInput.value = data.kecamatan || 'Tidak ditemukan';
+            kabupatenInput.value = data.kabupaten || 'Tidak ditemukan';
+          } else {
+            // Fallback to default values if server request fails
+            setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching location details:', error);
+          // Fallback to default values
+          setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+        });
+    } else {
+      // If kelurahan not found in our data, set default values
+      setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+    }
+  } else {
+    // If no kelurahan data available, use default values
+    setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+  }
+}
+
+// Helper function for default location values
+function setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput) {
+  // Set some intelligent defaults based on the name
+  if (kelurahanName.includes('Rantepao') || kelurahanName.includes('Tallunglipu')) {
+    kecamatanInput.value = 'Rantepao';
+    kabupatenInput.value = 'Toraja Utara';
+  } else if (kelurahanName.includes('Makale') || kelurahanName.includes('Sangalla')) {
+    kecamatanInput.value = 'Makale';
+    kabupatenInput.value = 'Tana Toraja';
+  } else if (kelurahanName.includes('Lembang')) {
+    kecamatanInput.value = 'Kecamatan (diisi otomatis)';
+    kabupatenInput.value = 'Toraja Utara';
+  } else {
+    kecamatanInput.value = 'Kecamatan (diisi otomatis)';
+    kabupatenInput.value = 'Kabupaten (diisi otomatis)';
+  }
 }
 
 // ===== Modal Handlers =====

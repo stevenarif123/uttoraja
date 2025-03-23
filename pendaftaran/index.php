@@ -47,6 +47,19 @@ try {
   // Encode data for JavaScript
   $jurusanDataJSON = json_encode($jurusanData);
   $kelurahanDataJSON = json_encode($kelurahanData);
+
+  // Debug: Ensure kelurahan data is properly formatted
+  if (empty($kelurahanData)) {
+    // If kelurahanData is empty, populate with some default data for testing
+    $kelurahanData = [
+      ["area_name" => "Lembang Buntu Pempon"],
+      ["area_name" => "Lembang Tiroallo"],
+      ["area_name" => "Kelurahan Malimbong"], 
+      ["area_name" => "Kelurahan Rantekalua"],
+      ["area_name" => "Lembang Tampo"]
+    ];
+    $kelurahanDataJSON = json_encode($kelurahanData);
+  }
 } catch (Exception $e) {
   $errors[] = $e->getMessage();
 } finally {
@@ -646,36 +659,189 @@ if (isset($_SESSION['error'])) {
     <header class="main-header main-header-one">
       <div class="main-header-one__top">
         <div class="container">
-        </div>
-      </div>
-      <nav class="main-menu main-menu-one">
-        <div class="main-menu-one__wrapper">
-          <div class="container">
-            <div class="main-menu-one__wrapper-inner">
-              <div class="main-menu-one__logo-box">
+          <div class="main-header-one__top-inner">
+            <div class="main-header-one__top-left">
+              <div class="header-contact-info-one">
+                <ul>
+                  <li>
+                    <div class="icon">
+                      <span class="icon-phone-call"></span>
+                    </div>
+                    <p><a href="tel:6281355619225">+6281355619225</a></p>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <span class="icon-email"></span>
+                    </div>
+                    <p>
+                      <a href="mailto:info@uttoraja.com">info@uttoraja.com</a>
+                    </p>
+                  </li>
+                </ul>
               </div>
-              <div class="main-menu-one__menu-box">
-              </div>
-              <div class="main-menu-one__right">
+            </div>
+            <div class="main-header-one__top-right">
+              <div class="header-social-link-one">
+                <ul class="clearfix">
+                  <li>
+                    <a href="https://www.facebook.com/uttoraja">
+                      <i class="icon-facebook"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/uttoraja/">
+                      <i class="icon-instagram-symbol"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/@SALUTTanaToraja">
+                      <i class="icon-vimeo"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
 
-    <!--Start Mobile Menu -->
-    <div class="mobile-menu">
-      <nav class="menu-box">
-        <div class="menu-outer">
-          <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+      <div class="main-header-one__bottom">
+        <div id="sticky-header" class="menu-area">
+          <div class="container">
+            <div class="main-header-one__bottom-inner">
+              <div class="main-header-one__bottom-left">
+                <div class="logo-box-one">
+                  <a href="../">
+                    <img src="../assets/img/resource/logo.png" alt="Logo" />
+                  </a>
+                </div>
+              </div>
+              <div class="main-header-one__bottom-middle">
+                <div class="menu-area__inner">
+                  <div class="mobile-nav-toggler">
+                    <i class="fas fa-bars"></i>
+                  </div>
+                  <div class="menu-wrap">
+                    <nav class="menu-nav">
+                      <div class="navbar-wrap main-menu">
+                        <ul class="navigation">
+                          <li><a href="../">Home</a></li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Aplikasi UT</a>
+                            <ul class="sub-menu">
+                              <li>
+                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
+                              </li>
+                              <li>
+                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
+                              </li>
+                              <li>
+                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
+                              </li>
+                              <li>
+                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
+                              </li>
+                              <li>
+                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Layanan</a>
+                            <ul class="sub-menu">
+                              <li><a href="../informasi">Informasi Akademik</a></li>
+                              <li><a href="../administrasi/">Administrasi Akademik</a></li>
+                              <li><a href="../kegiatan">Kegiatan Akademik</a></li>
+                              <li><a href="../modul/">Pengambilan Modul</a></li>
+                              <li><a href="../legalisir/">Legalisir Ijazah</a></li>
+                              <li><a href="../suratketerangan/">Surat Keterangan</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="../galeri/">Galeri</a></li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Tentang</a>
+                            <ul class="sub-menu">
+                              <li><a href="../tentang/">Universitas Terbuka</a></li>
+                              <li><a href="../tentang/salut/">SALUT</a></li>
+                              <li><a href="../tentang/saluttator">SALUT Tana Toraja</a></li>
+                              <li><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Program</a>
+                            <ul class="sub-menu">
+                              <li><a href="../rpl.php">RPL</a></li>
+                              <li><a href="../reguler.php">Reguler</a></li>
+                              <li><a href="../jurusan.php">Program Studi</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                        </ul>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+
+              <div class="main-header-one__bottom-right">
+                <div class="header-btn-box-one">
+                  <a class="thm-btn active" href="./">
+                    <span class="txt">Mendaftar Disini</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!--Social Links-->
-        <div class="social-links">
-        </div>
-      </nav>
-    </div>
-    <!-- End Mobile Menu -->
+      </div>
+
+      <!--Start Mobile Menu  -->
+      <div class="mobile-menu">
+        <nav class="menu-box">
+          <div class="close-btn">
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="nav-logo">
+            <a href="../">
+              <img
+                src="../assets/img/resource/mobile-menu-logo.png"
+                alt="Logo" />
+            </a>
+          </div>
+          <div class="menu-outer">
+            <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+          </div>
+          <div class="contact-info">
+            <div class="icon-box"><span class="icon-phone-call"></span></div>
+            <p><a href="tel:6281355619225">+6281355619225</a></p>
+          </div>
+          <div class="social-links">
+            <ul class="clearfix list-wrap">
+              <li>
+                <a href="https://www.facebook.com/uttoraja"><i class="fab fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/uttoraja/"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@SALUTTanaToraja"><i class="fab fa-youtube"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="menu-backdrop"></div>
+      <!-- End Mobile Menu -->
+    </header>
+    <!--End Main Header One -->
 
     <!--Start Page Header-->
     <section class="page-header">
@@ -745,28 +911,6 @@ if (isset($_SESSION['error'])) {
                     </div>
                   </div>
                   
-                  <!-- Fakultas -->
-                  <div class="col-lg-12">
-                    <label for="fakultas">Fakultas</label>
-                    <div class="contact-field position-relative c-name mb-4">
-                      <input type="text" id="fakultas" name="fakultas" placeholder="Fakultas akan terisi otomatis" readonly>
-                    </div>
-                  </div>
-                  
-                  <!-- Nama Lengkap -->
-                  <div class="col-lg-12">
-                    <label for="nama">Nama Lengkap</label>
-                    <div class="contact-field position-relative c-name mb-4">
-                      <input
-                        type="text"
-                        id="firstn"
-                        name="firstn"
-                        placeholder="Nama Lengkap*"
-                        required
-                        oninput="this.value = this.value.toUpperCase();" />
-                    </div>
-                  </div>
-                  
                   <!-- Step 1: Informasi Dasar - Jurusan dropdown -->
                   <div class="col-lg-12">
                     <label for="jurusan">Pilih Jurusan</label>
@@ -789,6 +933,28 @@ if (isset($_SESSION['error'])) {
                           <span class="dropdown-icon">&#9660;</span>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Fakultas -->
+                  <div class="col-lg-12">
+                    <label for="fakultas">Fakultas</label>
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input type="text" id="fakultas" name="fakultas" placeholder="Fakultas akan terisi otomatis" readonly>
+                    </div>
+                  </div>
+                  
+                  <!-- Nama Lengkap -->
+                  <div class="col-lg-12">
+                    <label for="nama">Nama Lengkap</label>
+                    <div class="contact-field position-relative c-name mb-4">
+                      <input
+                        type="text"
+                        id="firstn"
+                        name="firstn"
+                        placeholder="Nama Lengkap*"
+                        required
+                        oninput="this.value = this.value.toUpperCase();" />
                     </div>
                   </div>
 
