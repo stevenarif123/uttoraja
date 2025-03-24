@@ -1,1316 +1,985 @@
-// Core utility functions
-function toUpperCase(input) {
-    input.value = input.value.toUpperCase();
-}
+/**
+ * 📝 Pendaftaran (Registration) Form JavaScript
+ * Clean version for SALUT Tana Toraja Registration
+ */
 
-function formatDate(input) {
-    let value = input.value.replace(/\D/g, '');
-    if (value.length > 8) {
-        value = value.substring(0, 8);
-    }
-    let formattedValue = '';
-    if (value.length >= 2) {
-        formattedValue += value.substring(0, 2) + '/';
-        if (value.length >= 4) {
-            formattedValue += value.substring(2, 4) + '/';
-            if (value.length >= 8) {
-                formattedValue += value.substring(4, 8);
-            }
-        }
-    } else {
-        formattedValue = value;
-    }
-    input.value = formattedValue;
-}
-
-// Error handling and validation
-function showError(inputId, message) {
-    const container = document.getElementById(inputId)?.closest('.field-container') || 
-                     document.querySelector(`[name="${inputId}"]`)?.closest('.field-container') ||
-                     document.querySelector(`[name="${inputId}"]`)?.closest('.radio-field');
-    
-    if (container) {
-        const errorSpan = document.createElement('span');
-        errorSpan.className = 'error-message';
-        errorSpan.textContent = message;
-        container.appendChild(errorSpan);
-        container.classList.add('has-error');
-    }
-}
-
-function clearError(inputId) {
-    const element = document.getElementById(inputId);
-    if (!element) return;
-    
-    const container = element.closest('.field-container');
-    if (!container) return;
-    
-    const errorSpan = container.querySelector('.error-message');
-    if (errorSpan) {
-        errorSpan.remove();
-        container.classList.remove('has-error');
-    }
-}
-
-function clearErrors(step) {
-    if (!step) return;
-    step.querySelectorAll('.error-message').forEach(msg => msg.remove());
-    step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
-}
-
-// Form validation functions
-function validateStep(step) {
-    let isValid = true;
-    const errors = [];
-    console.log('Validating step:', step.dataset.step);
-
-    clearErrors(step);
-
-    switch(step.dataset.step) {
-        case '1':
-            isValid = validateStepOne(step, errors);
-            break;
-        case '2':
-            isValid = validateStepTwo(step, errors);
-            break;
-        case '3':
-            isValid = validateStepThree(step, errors);
-            break;
-    }
-
-    if (errors.length > 0) {
-        errors.forEach(error => {
-            showError(error.field, error.message);
-        });
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function validateStepOne(step) {
-    const errors = [];
-
-    const jalurProgram = step.querySelector('input[name="jalur_program"]:checked');
-    if (!jalurProgram) {
-        errors.push({ field: 'jalur_program', message: 'Pilih jalur program' });
-    }
-
-    const jurusan = document.getElementById('jurusan');
-    if (!jurusan || !jurusan.value) {
-        errors.push({ field: 'jurusan', message: 'Pilih jurusan' });
-    }
-
-    const nama = document.getElementById('firstn');
-    if (!nama || !nama.value.trim()) {
-        errors.push({ field: 'firstn', message: 'Nama lengkap wajib diisi' });
-    }
-
-    return errors.length === 0;
-}
-
-function validateStepTwo(step) {
-    // Implement step two validation logic
-    return true;
-}
-
-function validateStepThree(step) {
-    // Implement step three validation logic
-    return true;
-}
-
-// Form step navigation
-function moveToNextStep(currentStep, nextStep) {
-    if (!nextStep) return;
-    
-    currentStep.classList.remove('active');
-    nextStep.classList.add('active');
-    updateProgress('next', currentStep.dataset.step);
-    nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function moveToPrevStep(currentStep, prevStep) {
-    if (!prevStep) return;
-    
-    currentStep.classList.remove('active');
-    prevStep.classList.add('active');
-    updateProgress('prev', currentStep.dataset.step);
-    prevStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Progress tracking
-function updateProgress(direction, stepNumber) {
-    const step = parseInt(stepNumber);
-    const progressSteps = document.querySelectorAll('.progress-step');
-    
-    progressSteps.forEach(progressStep => {
-        const stepNum = parseInt(progressStep.dataset.step);
-        if (direction === 'next' && stepNum <= step + 1) {
-            progressStep.classList.add('active');
-            if (stepNum < step + 1) progressStep.classList.add('completed');
-        } else if (direction === 'prev' && stepNum > step - 1) {
-            progressStep.classList.remove('active', 'completed');
-        }
-    });
-}
-
-// Initialize all form components and event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('pendaftaranForm');
-    
-    if (form) {
-        initializeFormSteps(form);
-        initializeValidation(form);
-        initializeDropdowns();
-        form.addEventListener('submit', handleFormSubmit);
-    }
-
-    initializeDomicileHandlers();
-    initializeSearchableDropdowns();
-    initializeKelurahanDropdown();
-    setupDateValidation();
-    setupModalHandlers();
+  // ===== Global Variables =====
+  let currentStep = 1;
+  
+  // ===== Initial Setup =====
+  initializePreloader();
+  initializeFormSteps();
+  initializeFormValidation();
+  initializeDropdowns();
+  initializeDomicileHandlers();
+  initializeWorkStatusHandler();
+  initializeDatePicker();
+  setupModalHandlers();
+  
+  // Show welcome message after a short delay
+  setTimeout(() => {
+    showAlert('Selamat datang di Formulir Pendaftaran Mahasiswa Baru! 🎓', 'success');
+  }, 1000);
 });
 
-// Event handlers
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('pendaftaranForm');
-    
-    // Initialize all components
-    initializeDomicileHandlers();
-    initializeSearchableDropdowns();
-    initializeKelurahanDropdown();
-    
-    // Initialize popovers if Bootstrap is loaded
-    if (typeof $ !== 'undefined') {
-        $('[data-toggle="popover"]').popover({
-            placement: 'right',
-            html: true,
-            trigger: 'hover focus'
-        });
-    }
-
-    // Keep popover open on hover
-    $('.help-icon').on('mouseover', function () {
-        $(this).popover('show');
-    }).on('mouseout', function () {
-        $(this).popover('hide');
-    });
-    
-    // Close popover when clicking outside
-    $(document).on('click', function (e) {
-        if ($(e.target).data('toggle') !== 'popover' 
-            && $(e.target).parents('.popover.show').length === 0) {
-            $('[data-toggle="popover"]').popover('hide');
-        }
-    });
-
-    // Jurusan and Fakultas handler
-    const jurusanSelect = document.getElementById('jurusan');
-    const fakultasInput = document.getElementById('fakultas');
-
-    if (jurusanSelect && fakultasInput) {
-        jurusanSelect.addEventListener('change', function() {
-            const selectedJurusan = this.value;
-            console.log('Selected Jurusan:', selectedJurusan); // Debug
-            console.log('Available data:', jurusanData); // Desbug
-            
-            if (jurusanData[selectedJurusan]) {
-                fakultasInput.value = jurusanData[selectedJurusan];
-                fakultasInput.classList.add('filled');
-            } else {
-                fakultasInput.value = 'Fakultas tidak ditemukan';
-                fakultasInput.classList.remove('filled');
-            }
-        });
-    }
-    
-    // Phone validation
-    const phoneInput = document.getElementById('phone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function() {
-            let phoneNumber = this.value.replace(/\D/g, '');
-            if (phoneNumber.startsWith('08')) {
-                phoneNumber = '+62' + phoneNumber.substring(1);
-                if (phoneNumber.length > 15) {
-                    phoneNumber = phoneNumber.substring(0, 15);
-                }
-            } else {
-                showError('phone', 'Nomor HP harus diawali dengan 08');
-            }
-            this.value = phoneNumber;
-            if (phoneNumber.length < 11 || phoneNumber.length > 15) {
-                showError('phone', 'Nomor HP harus 11-13 angka (08xxxxxxxxxx)');
-            } else {
-                clearError('phone');
-            }
-        });
-    }
-
-    // NIK validation
-    const nikInput = document.getElementById('nik');
-    if (nikInput) {
-        nikInput.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '').substring(0, 16);
-            if (this.value.length !== 16) {
-                showError('nik', 'NIK harus 16 angka');
-            } else {
-                clearError('nik');
-            }
-        });
-    }
-
-    // Form multi-step handling
-    if (form) {
-        initializeFormSteps(form);
-        initializeValidation(form);
-        initializeDropdowns();
-    }
-
-    // Work status handler
-    const bekerjaYa = document.getElementById('bekerja_ya');
-    const bekerjaTidak = document.getElementById('bekerja_tidak');
-    const tempatKerjaContainer = document.getElementById('tempat_kerja_container');
-
-    if (bekerjaYa && bekerjaTidak && tempatKerjaContainer) {
-        bekerjaYa.addEventListener('change', function() {
-            if (this.checked) tempatKerjaContainer.style.display = 'block';
-        });
-        bekerjaTidak.addEventListener('change', function() {
-            if (this.checked) tempatKerjaContainer.style.display = 'none';
-        });
-    }
-    
-    // Date input handling
-    const dateInput = document.getElementById('tanggal_lahir');
-    if (dateInput) {
-        const maxDate = new Date();
-        maxDate.setFullYear(maxDate.getFullYear() - 15);
-        const maxDateString = maxDate.toISOString().split('T')[0];
-        
-        dateInput.setAttribute('max', maxDateString);
-        dateInput.setAttribute('min', '1940-01-01');
-        
-        // Prevent manual date entry and enforce picker
-        dateInput.addEventListener('keydown', function(e) {
-            e.preventDefault();
-        });
-
-        // Enhanced date validation
-        dateInput.addEventListener('change', function() {
-            const selectedDate = new Date(this.value);
-            const wrapper = this.closest('.date-picker-wrapper');
-            
-            // Clear previous states
-            wrapper.classList.remove('error');
-            clearError('tanggal_lahir');
-
-            // Validate year range
-            if (selectedDate.getFullYear() >= 2011) {
-                wrapper.classList.add('error');
-                this.value = '';
-                showError('tanggal_lahir', 'Pilih tahun sebelum 2011');
-                return false;
-            }
-
-            // Validate age requirement
-            if (selectedDate > maxDate) {
-                wrapper.classList.add('error');
-                this.value = '';
-                showError('tanggal_lahir', 'Usia minimal untuk mendaftar adalah 15 tahun');
-                return false;
-            }
-
-            // Validate minimum date
-            if (selectedDate < new Date('1940-01-01')) {
-                wrapper.classList.add('error');
-                this.value = '';
-                showError('tanggal_lahir', 'Tanggal lahir tidak valid (minimal tahun 1940)');
-                return false;
-            }
-        });
-
-        // Format display date on focus out
-        dateInput.addEventListener('blur', function() {
-            if (this.value) {
-                const date = new Date(this.value);
-                const formattedDate = date.toLocaleDateString('id-ID', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric'
-                });
-                this.setAttribute('data-date', formattedDate);
-            }
-        });
-    }
-
-    // Format date on form submission
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const dateInput = document.getElementById('tanggal_lahir');
-            if (dateInput && dateInput.value) {
-                const date = new Date(dateInput.value);
-                const formattedDate = [
-                    String(date.getDate()).padStart(2, '0'),
-                    String(date.getMonth() + 1).padStart(2, '0'),
-                    date.getFullYear()
-                ].join('/');
-                
-                const hiddenInput = document.createElement('input');
-                hiddenInput.type = 'hidden';
-                hiddenInput.name = 'formatted_date';
-                hiddenInput.value = formattedDate;
-                this.appendChild(hiddenInput);
-            }
-        });
-    }
-
-    // Modal functionality
-    const modal = document.getElementById('petunjukModal');
-    const closeIcon = document.getElementById('closeModal');
-    const closeBtn = document.getElementById('closeModalBtn');
-
-    if (modal && closeIcon && closeBtn) {
-        // Close modal when clicking X or close button
-        closeIcon.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    }
-
-    // Searchable Select Implementation
-    const searchInput = document.querySelector('.select-search');
-    const selectItems = document.querySelector('.select-items');
-    const hiddenInput = document.querySelector('#jurusan');
-    const dropdownIcon = document.querySelector('.searchable-select-container .dropdown-icon');
-    const options = selectItems.querySelectorAll('div');
-
-    // Show/hide dropdown on search input focus
-    searchInput.addEventListener('focus', function() {
-        selectItems.classList.remove('select-hide');
-    });
-
-    // Handle click outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.searchable-select-container')) {
-            selectItems.classList.add('select-hide');
-        }
-    });
-
-    // Handle search
-    searchInput.addEventListener('input', function() {
-        const filter = this.value.toLowerCase();
-        options.forEach(option => {
-            const txtValue = option.textContent || option.innerText;
-            if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                option.style.display = "";
-            } else {
-                option.style.display = "none";
-            }
-        });
-    });
-
-    // Handle option selection
-    options.forEach(option => {
-        option.addEventListener('click', function() {
-            const value = this.getAttribute('data-value');
-            searchInput.value = this.textContent;
-            hiddenInput.value = value;
-            selectItems.classList.add('select-hide');
-            
-            // Trigger fakultas update
-            if (typeof updateFakultas === 'function') {
-                updateFakultas(value);
-            }
-        });
-    });
-
-    // Toggle dropdown on icon click
-    dropdownIcon.addEventListener('click', function() {
-        selectItems.classList.toggle('select-hide');
-        searchInput.focus();
-    });
-
-    // Initialize kelurahan dropdown immediately
-    initializeKelurahanDropdown();
-
-    // Fetch kelurahan data and populate dropdown
-    fetch('get_kelurahan.php')
-        .then(response => response.json())
-        .then(data => {
-            const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
-            const searchInput = document.querySelector('#toraja_fields .dropdown-search');
-            const hiddenInput = document.getElementById('kelurahan');
-            
-            function populateDropdown(items) {
-                dropdownList.innerHTML = '';
-                items.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'dropdown-item';
-                    div.textContent = item.area_name;
-                    div.dataset.kecamatan = item.district_name;
-                    div.dataset.kabupaten = item.kabupaten_name;
-                    dropdownList.appendChild(div);
-                });
-            }
-
-            // Initial population
-            populateDropdown(data);
-
-            // Search functionality
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const filtered = data.filter(item => 
-                    item.area_name.toLowerCase().includes(searchTerm)
-                );
-                populateDropdown(filtered);
-            });
-
-            // Selection handling
-            dropdownList.addEventListener('click', function(e) {
-                if (e.target.classList.contains('dropdown-item')) {
-                    const selectedArea = e.target;
-                    hiddenInput.value = selectedArea.textContent;
-                    searchInput.value = selectedArea.textContent;
-                    document.getElementById('kecamatan').value = selectedArea.dataset.kecamatan;
-                    document.getElementById('kabupaten').value = selectedArea.dataset.kabupaten;
-                    dropdownList.style.display = 'none';
-                }
-            });
-
-            // Show/hide dropdown list
-            searchInput.addEventListener('focus', () => dropdownList.style.display = 'block');
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.searchable-dropdown')) {
-                    dropdownList.style.display = 'none';
-                }
-            });
-        });
-});
-
-// Add this new function outside DOMContentLoaded
-function initializeKelurahanDropdown() {
-    const dropdownContainer = document.querySelector('#toraja_fields .searchable-dropdown');
-    const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
-    const searchInput = document.querySelector('#toraja_fields .dropdown-search');
-    const hiddenInput = document.getElementById('kelurahan');
-    
-    if (!dropdownContainer || !dropdownList || !searchInput || !hiddenInput) {
-        console.error('Required kelurahan dropdown elements not found');
-        return;
-    }
-
-    // Show loading state
-    searchInput.placeholder = 'Loading data...';
-    searchInput.disabled = true;
-
-    fetch('get_kelurahan.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
-            // Reset input state
-            searchInput.placeholder = 'Cari Kelurahan/Lembang...';
-            searchInput.disabled = false;
-
-            // Clear and populate dropdown
-            dropdownList.innerHTML = '';
-            
-            if (data.length === 0) {
-                const emptyMessage = document.createElement('div');
-                emptyMessage.className = 'dropdown-item';
-                emptyMessage.textContent = 'Tidak ada data tersedia';
-                dropdownList.appendChild(emptyMessage);
-                return;
-            }
-
-            data.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'dropdown-item';
-                div.textContent = item.display_name;
-                div.dataset.kecamatan = item.district_name;
-                div.dataset.kabupaten = item.kabupaten_name;
-                dropdownList.appendChild(div);
-            });
-
-            // Update event listeners
-            searchInput.addEventListener('focus', () => {
-                dropdownList.style.display = 'block';
-            });
-
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const items = dropdownList.getElementsByClassName('dropdown-item');
-                
-                Array.from(items).forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(searchTerm) ? '' : 'none';
-                });
-            });
-
-            dropdownList.addEventListener('click', function(e) {
-                const item = e.target.closest('.dropdown-item');
-                if (!item) return;
-                
-                searchInput.value = item.textContent;
-                hiddenInput.value = item.textContent;
-                
-                // Update related fields
-                if (item.dataset.kecamatan) {
-                    document.getElementById('kecamatan').value = item.dataset.kecamatan;
-                }
-                if (item.dataset.kabupaten) {
-                    document.getElementById('kabupaten').value = item.dataset.kabupaten;
-                }
-                
-                dropdownList.style.display = 'none';
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!dropdownContainer.contains(e.target)) {
-                    dropdownList.style.display = 'none';
-                }
-            });
-
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            searchInput.placeholder = 'Error loading data';
-            searchInput.disabled = true;
-            
-            // Show error message in dropdown
-            dropdownList.innerHTML = `
-                <div class="dropdown-item error">
-                    Error: ${error.message}. Please refresh the page or contact support.
-                </div>
-            `;
-        });
+// ===== Preloader Handling =====
+function initializePreloader() {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    // Force remove after 2 seconds
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
+      setTimeout(() => preloader.remove(), 300);
+    }, 2000);
+  }
 }
 
-// Move the Domicile radio button handlers outside of DOMContentLoaded
-function initializeDomicileHandlers() {
-    const torajaRadio = document.getElementById('toraja');
-    const luarTorajaRadio = document.getElementById('luar_toraja');
-    const torajaFields = document.getElementById('toraja_fields');
-    const luarTorajaFields = document.getElementById('luar_toraja_fields');
-
-    if (!torajaRadio || !luarTorajaRadio || !torajaFields || !luarTorajaFields) {
-        console.error('Domicile elements not found:', {
-            torajaRadio: !!torajaRadio,
-            luarTorajaRadio: !!luarTorajaRadio,
-            torajaFields: !!torajaFields,
-            luarTorajaFields: !!luarTorajaFields
-        });
-        return;
-    }
-
-    function toggleDomicileFields() {
-        console.log('Toggle called:', {
-            torajaChecked: torajaRadio.checked,
-            luarTorajaChecked: luarTorajaRadio.checked
-        });
-
-        if (torajaRadio.checked) {
-            torajaFields.style.display = 'block';
-            luarTorajaFields.style.display = 'none';
-            document.getElementById('kelurahan').setAttribute('required', 'required');
-            const domisiliManual = document.getElementById('domisili_manual');
-            if (domisiliManual) {
-                domisiliManual.removeAttribute('required');
-            }
-        } else if (luarTorajaRadio.checked) {
-            torajaFields.style.display = 'none';
-            luarTorajaFields.style.display = 'block';
-            const domisiliManual = document.getElementById('domisili_manual');
-            if (domisiliManual) {
-                domisiliManual.setAttribute('required', 'required');
-            }
-            document.getElementById('kelurahan').removeAttribute('required');
-        }
-    }
-
-    // Add change listeners
-    torajaRadio.addEventListener('change', toggleDomicileFields);
-    luarTorajaRadio.addEventListener('change', toggleDomicileFields);
-
-    // Initialize on page load
-    if (torajaRadio.checked || luarTorajaRadio.checked) {
-        toggleDomicileFields();
-    }
-}
-
-// Searchable Dropdown Implementation
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.querySelector('.dropdown-search');
-    const dropdownList = document.querySelector('.dropdown-list');
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    const hiddenInput = document.getElementById('jurusan');
-    const fakultasInput = document.getElementById('fakultas');
-
-    // Clear search input when clicking after a selection
-    searchInput.addEventListener('click', function() {
-        if (hiddenInput.value) { // Only clear if a value has been selected
-            this.value = '';
-            // Show all options again
-            dropdownItems.forEach(item => {
-                item.classList.remove('hidden');
-            });
-            dropdownList.classList.add('active');
-        }
+// ===== Form Navigation Functions =====
+function initializeFormSteps() {
+  const formSteps = document.querySelectorAll('.form-step');
+  const progressSteps = document.querySelectorAll('.progress-step');
+  let currentStep = 1;
+  
+  // Setup initial state
+  updateFormProgress();
+  
+  // Next step button handlers
+  document.querySelectorAll('.next-step').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+      
+      if (validateStep(currentStep)) {
+        currentStep++;
+        updateFormProgress();
+        showAlert(`Langkah ${currentStep-1} berhasil dilengkapi! ✅`, 'success');
+      }
     });
-
-    // Show dropdown on input focus
-    searchInput.addEventListener('focus', function() {
-        dropdownList.classList.add('active');
-        // Clear input if there's a selected value
-        if (hiddenInput.value) {
-            this.value = '';
-            // Show all options again
-            dropdownItems.forEach(item => {
-                item.classList.remove('hidden');
-            });
-        }
+  });
+  
+  // Previous step button handlers
+  document.querySelectorAll('.prev-step').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      currentStep--;
+      updateFormProgress();
     });
-
-    // Hide dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.searchable-dropdown')) {
-            dropdownList.classList.remove('active');
-        }
+  });
+  
+  // Form submission handler
+  const pendaftaranForm = document.getElementById('pendaftaranForm');
+  if (pendaftaranForm) {
+    pendaftaranForm.addEventListener('submit', handleFormSubmit);
+  }
+  
+  // Helper function to update form progress UI
+  function updateFormProgress() {
+    // Hide all steps
+    formSteps.forEach(step => {
+      step.classList.remove('active');
     });
-
-    // Filter dropdown items
-    searchInput.addEventListener('input', function() {
-        const searchText = this.value.toLowerCase();
-        let hasMatch = false;
-
-        dropdownItems.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            if (text.includes(searchText)) {
-                item.classList.remove('hidden');
-                hasMatch = true;
-            } else {
-                item.classList.add('hidden');
-            }
-        });
-
-        // Show/hide dropdown based on matches
-        if (hasMatch) {
-            dropdownList.classList.add('active');
-        } else {
-            dropdownList.classList.remove('active');
-        }
-    });
-
-    // Handle item selection
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const value = this.dataset.value;
-            searchInput.value = this.textContent;
-            hiddenInput.value = value;
-            dropdownList.classList.remove('active');
-
-            // Update fakultas if jurusanData is available
-            if (typeof jurusanData !== 'undefined' && jurusanData[value]) {
-                fakultasInput.value = jurusanData[value];
-                fakultasInput.classList.add('filled');
-            }
-
-            // Remove selected class from all items
-            dropdownItems.forEach(di => di.classList.remove('selected'));
-            // Add selected class to clicked item
-            this.classList.add('selected');
-        });
-    });
-
-    // Initialize domicile handlers
-    initializeDomicileHandlers();
-});
-
-// Form submission handler
-async function handleFormSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
     
-    try {
-        const response = await fetch('pendaftaran.php', {
-            method: 'POST',
-            body: formData
-        });
-        const data = await response.text();
-        
-        try {
-            const jsonData = JSON.parse(data);
-            if (jsonData.error) {
-                showAlert('error', jsonData.error);
-            }
-        } catch(e) {
-            if (data.trim() === 'success') {
-                window.location.href = 'success.php';
-            } else {
-                showAlert('warning', `Terjadi kesalahan: ${data}`);
-            }
-        }
-    } catch(error) {
-        console.error('Error:', error);
-        showAlert('error', 'Terjadi kesalahan pada server. Silakan coba lagi.');
-    }
-}
-
-// Helper functions for form steps
-function validateStep(step) {
-    let isValid = true;
-    console.log('Validating step:', step.dataset.step); // Debug log
-
-    // Clear previous errors
-    step.querySelectorAll('.error-message').forEach(msg => msg.remove());
-    step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
-
-    if (step.dataset.step === '1') {
-        // Validate jalur program
-        const jalurProgram = step.querySelector('input[name="jalur_program"]:checked');
-        if (!jalurProgram) {
-            isValid = false;
-            const container = step.querySelector('.radio-field');
-            container.classList.add('has-error');
-            showError('jalur_program', 'Pilih jalur program');
-        }
-
-        // Validate jurusan
-        const jurusan = document.getElementById('jurusan');
-        if (!jurusan.value) {
-            isValid = false;
-            const container = jurusan.closest('.field-container');
-            container.classList.add('has-error');
-            showError('jurusan', 'Pilih jurusan');
-        }
-
-        // Validate nama lengkap
-        const nama = document.getElementById('firstn');
-        if (!nama.value.trim()) {
-            isValid = false;
-            const container = nama.closest('.field-container');
-            container.classList.add('has-error');
-            showError('firstn', 'Nama lengkap wajib diisi');
-        }
-
-        console.log('Step 1 validation result:', isValid); // Debug log
-    }
-
-    // Add validation for other steps here...
-
-    return isValid;
-}
-
-// Update event listener for next step buttons
-document.addEventListener('DOMContentLoaded', function() {
-    // ...existing code...
-
-    // Next step handlers with debug logging
-    form.querySelectorAll('.next-step').forEach(button => {
-        button.addEventListener('click', function() {
-            const currentStep = this.closest('.form-step');
-            const nextStep = currentStep.nextElementSibling;
-            console.log('Current step:', currentStep.dataset.step); // Debug log
-            
-            if (validateStep(currentStep)) {
-                console.log('Validation passed, moving to next step'); // Debug log
-                currentStep.classList.remove('active');
-                nextStep.classList.add('active');
-                updateProgress('next', currentStep.dataset.step);
-            } else {
-                console.log('Validation failed'); // Debug log
-            }
-        });
+    // Show current step
+    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+    
+    // Update progress indicators
+    progressSteps.forEach(step => {
+      const stepNum = parseInt(step.getAttribute('data-step'));
+      
+      // Reset all steps
+      step.classList.remove('active', 'completed');
+      
+      // Mark current step as active
+      if (stepNum === currentStep) {
+        step.classList.add('active');
+      } 
+      // Mark previous steps as completed
+      else if (stepNum < currentStep) {
+        step.classList.add('completed');
+      }
     });
-
-    // ...existing code...
-});
-
-function updateProgress(direction, stepNumber) {
-    const step = parseInt(stepNumber);
-    const progressSteps = document.querySelectorAll('.progress-step');
     
-    progressSteps.forEach(progressStep => {
-        const stepNum = parseInt(progressStep.dataset.step);
-        if (direction === 'next' && stepNum <= step + 1) {
-            progressStep.classList.add('active');
-            if (stepNum < step + 1) progressStep.classList.add('completed');
-        } else if (direction === 'prev' && stepNum > step - 1) {
-            progressStep.classList.remove('active', 'completed');
-        }
+    // Scroll to top of form
+    document.querySelector('.contact-form').scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
     });
+  }
 }
 
-// Date formatting and validation
-function formatTanggalLahir(value, element) {
-    // ...existing date formatting code...
-}
-
-// Enhanced date validation
-function validateDate(dateString) {
-    const parts = dateString.split('/');
-    if (parts.length !== 3) return false;
-
-    const day = parseInt(parts[0]);
-    const month = parseInt(parts[1]);
-    const year = parseInt(parts[2]);
-    
-    // Validate month
-    if (month < 1 || month > 12) return false;
-    
-    // Validate day
-    const daysInMonth = new Date(year, month, 0).getDate();
-    if (day < 1 || day > daysInMonth) return false;
-    
-    // Validate year
-    const currentYear = new Date().getFullYear();
-    if (year < 1940 || year > currentYear) return false;
-    
-    return true;
-}
-
-// Alert helper function
-function showAlert(type, message) {
-    const alertContainer = document.getElementById('alert-container');
-    if (alertContainer) {
-        alertContainer.innerHTML = `
-            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                ${message}
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-            </div>
-        `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+// ===== Form Validation =====
+function initializeFormValidation() {
+  // Form field validation
+  document.querySelectorAll('input, select, textarea').forEach(field => {
+    if (field.hasAttribute('required')) {
+      field.addEventListener('blur', function() {
+        validateField(this);
+      });
     }
+  });
 }
 
-function validateDateOfBirth(dateString) {
+function validateStep(stepNumber) {
+  const currentStepElement = document.querySelector(`.form-step[data-step="${stepNumber}"]`);
+  const requiredFields = currentStepElement.querySelectorAll('[required]');
+  let valid = true;
+  
+  // Reset validation messages
+  currentStepElement.querySelectorAll('.validation-message').forEach(el => el.remove());
+  
+  // Check all required fields in current step
+  requiredFields.forEach(field => {
+    // Only validate visible fields (prevents validating hidden fields)
+    if (isElementVisible(field) && !field.value.trim()) {
+      valid = false;
+      showFieldError(field, 'Field ini wajib diisi');
+    }
+  });
+  
+  // Step-specific validation
+  switch(parseInt(stepNumber)) {
+    case 1:
+      valid = validateStepOne(currentStepElement) && valid;
+      break;
+    case 2:
+      valid = validateStepTwo(currentStepElement) && valid;
+      break;
+    case 3:
+      valid = validateStepThree(currentStepElement) && valid;
+      break;
+  }
+  
+  return valid;
+}
+
+function validateStepOne(stepElement) {
+  let valid = true;
+  
+  // Validate program selection
+  const jalurProgram = stepElement.querySelector('input[name="jalur_program"]:checked');
+  if (!jalurProgram) {
+    valid = false;
+    showErrorMessage('Silakan pilih jalur program pendaftaran');
+  }
+  
+  // Validate jurusan selection
+  const jurusan = document.getElementById('jurusan');
+  if (!jurusan || !jurusan.value) {
+    valid = false;
+    const dropdownSearch = stepElement.querySelector('.dropdown-search');
+    if (dropdownSearch) {
+      showFieldError(dropdownSearch, 'Silakan pilih jurusan');
+    }
+  }
+  
+  return valid;
+}
+
+function validateStepTwo(stepElement) {
+  let valid = true;
+  
+  // Validate phone number format
+  const phone = document.getElementById('phone');
+  if (phone && phone.value) {
+    if (!phone.value.startsWith('628') || phone.value.length < 11 || phone.value.length > 14) {
+      valid = false;
+      showFieldError(phone, 'Nomor HP tidak valid. Pastikan nomor dimulai dengan 628 dan terdiri dari 11-14 digit');
+    }
+  }
+  
+  // Validate NIK format
+  const nik = document.getElementById('nik');
+  if (nik && nik.value && nik.value.length !== 16) {
+    valid = false;
+    showFieldError(nik, 'NIK harus terdiri dari 16 digit');
+  }
+  
+  // Validate birthdate
+  const birthDate = document.getElementById('tanggal_lahir');
+  if (birthDate && birthDate.value) {
+    const birthDateObj = new Date(birthDate.value);
     const today = new Date();
-    const minDate = new Date('1940-01-01');
-    const maxDate = new Date(today.getFullYear() - 15, today.getMonth(), today.getDate());
-    const inputDate = new Date(dateString);
-
-    if (inputDate < minDate) {
-        return "Tanggal lahir tidak valid (minimal tahun 1940)";
+    
+    // Check if date is in the future
+    if (birthDateObj > today) {
+      valid = false;
+      showFieldError(birthDate, 'Tanggal lahir tidak dapat berada di masa depan');
     }
     
-    if (inputDate > maxDate) {
-        return "Usia minimal untuk mendaftar adalah 15 tahun";
+    // Check if person is at least 15 years old
+    const fifteenYearsAgo = new Date();
+    fifteenYearsAgo.setFullYear(fifteenYearsAgo.getFullYear() - 15);
+    
+    if (birthDateObj > fifteenYearsAgo) {
+      valid = false;
+      showFieldError(birthDate, 'Anda harus berusia minimal 15 tahun untuk mendaftar');
     }
-
-    return "";
+  }
+  
+  return valid;
 }
 
-// Enhanced form step handling
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('pendaftaranForm');
-    
-    if (form) {
-        initializeFormSteps(form);
-        initializeValidation(form);
-        initializeDropdowns();
+function validateStepThree(stepElement) {
+  let valid = true;
+  
+  // Validate domisili selection
+  const domisili = document.querySelector('input[name="domisili"]:checked');
+  if (domisili) {
+    if (domisili.value === 'toraja') {
+      const kelurahan = document.getElementById('kelurahan');
+      if (!kelurahan || !kelurahan.value) {
+        valid = false;
+        const dropdownSearch = document.querySelector('#toraja_fields .dropdown-search');
+        if (dropdownSearch) {
+          showFieldError(dropdownSearch, 'Silakan pilih Kelurahan/Lembang');
+        }
+      }
+    } else if (domisili.value === 'luar_toraja') {
+      const domisiliManual = document.getElementById('domisili_manual');
+      if (!domisiliManual || !domisiliManual.value.trim()) {
+        valid = false;
+        showFieldError(domisiliManual, 'Silakan isi domisili lengkap Anda');
+      }
     }
-});
-
-function initializeFormSteps(form) {
-    if (!form) return;
-
-    form.querySelectorAll('.next-step').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const currentStep = this.closest('.form-step');
-            const nextStep = currentStep.nextElementSibling;
-            
-            console.log('Attempting to move to next step');
-            
-            if (validateStep(currentStep)) {
-                console.log('Step validation passed');
-                currentStep.classList.remove('active');
-                nextStep.classList.add('active');
-                updateProgress('next', currentStep.dataset.step);
-            } else {
-                console.log('Step validation failed');
-            }
-        });
-    });
-
-    // Previous step handlers
-    form.querySelectorAll('.prev-step').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const currentStep = this.closest('.form-step');
-            const prevStep = currentStep.previousElementSibling;
-            moveToPrevStep(currentStep, prevStep);
-        });
-    });
-}
-
-function moveToNextStep(currentStep, nextStep) {
-    if (!nextStep) return;
-    
-    currentStep.classList.remove('active');
-    nextStep.classList.add('active');
-    updateProgress('next', currentStep.dataset.step);
-    
-    // Scroll to top of form
-    nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function moveToPrevStep(currentStep, prevStep) {
-    if (!prevStep) return;
-    
-    currentStep.classList.remove('active');
-    prevStep.classList.add('active');
-    updateProgress('prev', currentStep.dataset.step);
-    
-    // Scroll to top of form
-    prevStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Enhanced dropdown initialization
-function initializeDropdowns() {
-    const searchableDropdowns = document.querySelectorAll('.searchable-dropdown');
-    
-    searchableDropdowns.forEach(dropdown => {
-        const searchInput = dropdown.querySelector('.dropdown-search');
-        const dropdownList = dropdown.querySelector('.dropdown-list');
-        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
-        
-        if (!searchInput || !dropdownList || !hiddenInput) return;
-        
-        setupDropdownHandlers(searchInput, dropdownList, hiddenInput);
-    });
-}
-
-function setupDropdownHandlers(searchInput, dropdownList, hiddenInput) {
-    // Show dropdown on focus
-    searchInput.addEventListener('focus', () => {
-        dropdownList.style.display = 'block';
-    });
-
-    // Filter items on input
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        filterDropdownItems(dropdownList, searchTerm);
-    });
-
-    // Handle selection
-    dropdownList.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dropdown-item')) {
-            handleDropdownSelection(e.target, searchInput, hiddenInput, dropdownList);
-        }
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.searchable-dropdown')) {
-            dropdownList.style.display = 'none';
-        }
-    });
-}
-
-// Add missing initialization functions
-function initializeSearchableDropdowns() {
-    const searchableDropdowns = document.querySelectorAll('.searchable-dropdown');
-    searchableDropdowns.forEach(dropdown => {
-        const searchInput = dropdown.querySelector('.dropdown-search');
-        const dropdownList = dropdown.querySelector('.dropdown-list');
-        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
-        
-        if (searchInput && dropdownList && hiddenInput) {
-            setupDropdownHandlers(searchInput, dropdownList, hiddenInput);
-        }
-    });
-}
-
-function initializeValidation(form) {
-    // Add validation listeners to all required fields
-    const requiredFields = form.querySelectorAll('[required]');
-    requiredFields.forEach(field => {
-        field.addEventListener('blur', () => {
-            validateField(field);
-        });
-    });
-
-    // Add form submit validation
-    form.addEventListener('submit', handleFormSubmit);
+  } else {
+    valid = false;
+    showErrorMessage('Silakan pilih domisili Anda');
+  }
+  
+  return valid;
 }
 
 function validateField(field) {
-    const container = field.closest('.field-container');
-    if (!container) return;
-
-    clearError(field.id);
-    if (!field.value.trim()) {
-        showError(field.id, `${field.placeholder || 'Field ini'} wajib diisi`);
-        return false;
-    }
-    return true;
+  if (!field.value.trim() && field.hasAttribute('required')) {
+    showFieldError(field, 'Field ini wajib diisi');
+    return false;
+  }
+  return true;
 }
 
-// Add missing clearErrors function
-function clearErrors(step) {
-    if (!step) return;
-    step.querySelectorAll('.error-message').forEach(msg => msg.remove());
-    step.querySelectorAll('.has-error').forEach(field => field.classList.remove('has-error'));
+// ===== Enhanced Dropdowns Initialization =====
+function initializeDropdowns() {
+  // Initialize jurusan dropdown
+  initializeJurusanDropdown();
+  
+  // Initialize kelurahan dropdown
+  initializeKelurahanDropdown();
+  
+  // Initialize all searchable dropdowns with common functionality
+  initializeSearchableDropdowns();
 }
 
-// Add missing dropdown helper functions
-function filterDropdownItems(dropdownList, searchTerm) {
-    const items = dropdownList.getElementsByClassName('dropdown-item');
-    Array.from(items).forEach(item => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(searchTerm) ? '' : 'none';
+function initializeJurusanDropdown() {
+  const jurusanDropdown = document.querySelector('.field-container .dropdown-list');
+  const jurusanSearchInput = document.querySelector('.field-container .dropdown-search');
+  
+  if (!jurusanDropdown || !jurusanSearchInput || typeof jurusanData === 'undefined') return;
+  
+  // Clear existing items
+  jurusanDropdown.innerHTML = '';
+  
+  // Add data items
+  Object.keys(jurusanData).forEach(jurusan => {
+    const item = document.createElement('div');
+    item.className = 'dropdown-item';
+    item.setAttribute('data-value', jurusan);
+    item.textContent = jurusan;
+    
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      selectJurusan(this.getAttribute('data-value'));
+      
+      // ✅ FIX 1: Close dropdown after selection
+      const dropdown = this.closest('.searchable-dropdown');
+      if (dropdown) {
+        dropdown.classList.remove('active');
+        const dropdownList = dropdown.querySelector('.dropdown-list');
+        if (dropdownList) {
+          dropdownList.style.display = 'none';
+          dropdownList.style.visibility = 'hidden';
+        }
+      }
     });
+    
+    jurusanDropdown.appendChild(item);
+  });
 }
 
-function handleDropdownSelection(selectedItem, searchInput, hiddenInput, dropdownList) {
-    searchInput.value = selectedItem.textContent;
-    hiddenInput.value = selectedItem.dataset.value || selectedItem.textContent;
-    dropdownList.style.display = 'none';
-}
-
-// Fix form reference in DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('pendaftaranForm');
-    
-    // Initialize form steps only if form exists
-    if (form) {
-        // Next step handlers
-        form.querySelectorAll('.next-step').forEach(button => {
-            button.addEventListener('click', function() {
-                const currentStep = this.closest('.form-step');
-                const nextStep = currentStep.nextElementSibling;
-                
-                if (validateStep(currentStep)) {
-                    moveToNextStep(currentStep, nextStep);
-                }
-            });
-        });
-
-        // Previous step handlers
-        form.querySelectorAll('.prev-step').forEach(button => {
-            button.addEventListener('click', function() {
-                const currentStep = this.closest('.form-step');
-                const prevStep = currentStep.previousElementSibling;
-                moveToPrevStep(currentStep, prevStep);
-            });
-        });
-
-        // Initialize other form components
-        initializeValidation(form);
-        initializeDropdowns();
-    }
-
-    // Initialize other components that don't depend on form
-    initializeDomicileHandlers();
-    initializeSearchableDropdowns();
-    initializeKelurahanDropdown();
-    
-    // ...rest of existing DOMContentLoaded code...
-});
-
+// Fixed Kelurahan Dropdown initialization with improved selection handling
 function initializeKelurahanDropdown() {
-    const dropdownContainer = document.querySelector('#toraja_fields .searchable-dropdown');
-    const dropdownList = document.querySelector('#toraja_fields .dropdown-list');
-    const searchInput = document.querySelector('#toraja_fields .dropdown-search');
-    const hiddenInput = document.getElementById('kelurahan');
+  const kelurahanDropdown = document.querySelector('#toraja_fields .dropdown-list');
+  const kelurahanSearchInput = document.querySelector('#toraja_fields .dropdown-search');
+  
+  if (!kelurahanDropdown || !kelurahanSearchInput) return;
+  
+  // Clear existing items
+  kelurahanDropdown.innerHTML = '';
+  
+  // Add a placeholder item
+  const placeholderItem = document.createElement('div');
+  placeholderItem.className = 'dropdown-item dropdown-placeholder';
+  placeholderItem.textContent = 'Pilih Kelurahan/Lembang';
+  placeholderItem.style.fontStyle = 'italic';
+  placeholderItem.style.color = '#999';
+  kelurahanDropdown.appendChild(placeholderItem);
+  
+  // Check if kelurahanData exists and is properly formatted
+  if (typeof kelurahanData !== 'undefined' && kelurahanData && kelurahanData.length > 0) {
+    console.log('Populating kelurahan dropdown with data:', kelurahanData);
     
-    if (!dropdownContainer || !dropdownList || !searchInput || !hiddenInput) {
-        console.error('Required kelurahan dropdown elements not found:', {
-            container: !!dropdownContainer,
-            list: !!dropdownList,
-            input: !!searchInput,
-            hidden: !!hiddenInput
-        });
-        return;
-    }
-
-    // Show loading state
-    searchInput.placeholder = 'Loading data...';
-    searchInput.disabled = true;
-    dropdownList.style.display = 'none';
-
-    fetch('get_kelurahan.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(response => {
-            if (response.error) {
-                throw new Error(response.message || 'Error loading data');
-            }
-
-            const data = response.data || response;
-            
-            if (!Array.isArray(data)) {
-                throw new Error('Invalid data format received');
-            }
-
-            // Reset input state
-            searchInput.placeholder = 'Cari Kelurahan/Lembang...';
-            searchInput.disabled = false;
-
-            // Clear and populate dropdown
-            dropdownList.innerHTML = '';
-            
-            data.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'dropdown-item';
-                div.textContent = item.display_name;
-                div.dataset.kecamatan = item.district_name;
-                div.dataset.kabupaten = item.kabupaten_name;
-                dropdownList.appendChild(div);
-            });
-
-            // Show dropdown on input focus
-            searchInput.addEventListener('focus', () => {
-                dropdownList.style.display = 'block';
-            });
-
-            // Filter items on input
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                dropdownList.style.display = 'block';
-                
-                Array.from(dropdownList.children).forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(searchTerm) ? '' : 'none';
-                });
-            });
-
-            // Handle item selection
-            dropdownList.addEventListener('click', function(e) {
-                const item = e.target.closest('.dropdown-item');
-                if (!item) return;
-                
-                searchInput.value = item.textContent;
-                hiddenInput.value = item.textContent;
-                
-                document.getElementById('kecamatan').value = item.dataset.kecamatan;
-                document.getElementById('kabupaten').value = item.dataset.kabupaten;
-                
-                dropdownList.style.display = 'none';
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!dropdownContainer.contains(e.target)) {
-                    dropdownList.style.display = 'none';
-                }
-            });
-
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            searchInput.placeholder = 'Error loading data';
-            searchInput.disabled = true;
-            dropdownList.innerHTML = `
-                <div class="dropdown-item error">
-                    ${error.message}. Please refresh or contact support.
-                </div>
-            `;
-            dropdownList.style.display = 'block';
-        });
+    // Add data items
+    kelurahanData.forEach(data => {
+      const item = document.createElement('div');
+      item.className = 'dropdown-item';
+      
+      // Handle different data formats
+      const areaName = data.area_name || data;
+      const kemendagriCode = data.kemendagri_code || '';
+      
+      item.setAttribute('data-value', areaName);
+      item.setAttribute('data-kemendagri-code', kemendagriCode);
+      item.textContent = areaName;
+      
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectKelurahan(this.getAttribute('data-value'), this.getAttribute('data-kemendagri-code'));
+        
+        // ✅ FIX 1: Close dropdown after selection
+        const dropdown = this.closest('.searchable-dropdown');
+        if (dropdown) {
+          dropdown.classList.remove('active');
+          const dropdownList = dropdown.querySelector('.dropdown-list');
+          if (dropdownList) {
+            dropdownList.style.display = 'none';
+            dropdownList.style.visibility = 'hidden';
+          }
+        }
+      });
+      
+      kelurahanDropdown.appendChild(item);
+    });
+  } else {
+    console.error('kelurahanData is not defined or empty');
+    
+    // Add some default items if data is missing
+    const defaultAreas = ['Lembang A', 'Lembang B', 'Kelurahan C'];
+    defaultAreas.forEach(area => {
+      const item = document.createElement('div');
+      item.className = 'dropdown-item';
+      item.setAttribute('data-value', area);
+      item.textContent = area;
+      
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectKelurahan(this.getAttribute('data-value'));
+        
+        // ✅ FIX 1: Close dropdown after selection
+        const dropdown = this.closest('.searchable-dropdown');
+        if (dropdown) {
+          dropdown.classList.remove('active');
+          const dropdownList = dropdown.querySelector('.dropdown-list');
+          if (dropdownList) {
+            dropdownList.style.display = 'none';
+            dropdownList.style.visibility = 'hidden';
+          }
+        }
+      });
+      
+      kelurahanDropdown.appendChild(item);
+    });
+  }
 }
 
-// ...existing code...
-
-// Replace searchable dropdown handler with select handler
-document.getElementById('jurusan').addEventListener('change', function() {
-    const selectedJurusan = this.value;
-    const fakultasInput = document.getElementById('fakultas');
+function initializeSearchableDropdowns() {
+  const searchableDropdowns = document.querySelectorAll('.searchable-dropdown');
+  
+  searchableDropdowns.forEach(dropdown => {
+    const searchInput = dropdown.querySelector('.dropdown-search');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
     
-    if (selectedJurusan && jurusanData[selectedJurusan]) {
-        fakultasInput.value = jurusanData[selectedJurusan];
-        fakultasInput.classList.add('filled');
-    } else {
-        fakultasInput.value = '';
-        fakultasInput.classList.remove('filled');
-    }
-});
+    if (!searchInput || !dropdownList) return;
+    
+    // Toggle dropdown on click
+    searchInput.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-// Initialize jurusan searchable dropdown
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.querySelector('.dropdown-search');
-    const dropdownList = document.querySelector('.dropdown-list');
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    const hiddenInput = document.getElementById('jurusan');
-    const fakultasInput = document.getElementById('fakultas');
-
-    if (!searchInput || !dropdownList || !hiddenInput) return;
-
-    // Show dropdown on focus
-    searchInput.addEventListener('focus', function() {
-        dropdownList.style.display = 'block';
-        if (hiddenInput.value) {
-            this.value = '';
-            dropdownItems.forEach(item => item.style.display = '');
-        }
+      // ✅ FIX 2: Clear search input when dropdown is opened
+      if (!dropdown.classList.contains('active')) {
+        // Only clear if this is a new dropdown opening, not continuing an existing search
+        // searchInput.value = '';
+      }
+      
+      toggleDropdown(dropdown);
     });
-
-    // Filter items while typing
-    searchInput.addEventListener('input', function() {
-        const searchText = this.value.toLowerCase();
-        dropdownItems.forEach(item => {
-            const matches = item.textContent.toLowerCase().includes(searchText);
-            item.style.display = matches ? '' : 'none';
-        });
-    });
-
-    // Handle item selection
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const value = this.dataset.value || this.textContent;
-            searchInput.value = this.textContent;
-            hiddenInput.value = value;
-            dropdownList.style.display = 'none';
-            
-            // Add class to container when value is selected
-            searchInput.closest('.searchable-dropdown').classList.add('has-value');
-            
-            // Update fakultas
-            if (jurusanData[value]) {
-                fakultasInput.value = jurusanData[value];
-                fakultasInput.classList.add('filled');
-            }
-        });
-    });
-
-    // Clear has-value class when clicking to search again
-    searchInput.addEventListener('focus', function() {
-        if (hiddenInput.value) {
-            this.closest('.searchable-dropdown').classList.remove('has-value');
-        }
-    });
-
+    
     // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.searchable-dropdown')) {
-            dropdownList.style.display = 'none';
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+        if (dropdownList) {
+          dropdownList.style.display = 'none';
+          dropdownList.style.visibility = 'hidden';
         }
+      }
     });
-});
+    
+    // Filter dropdown items on search input
+    searchInput.addEventListener('input', function() {
+      const searchValue = this.value.toLowerCase();
+      filterDropdownItems(dropdown, searchValue);
+      
+      // When typing, always ensure dropdown is visible
+      if (searchValue.length > 0 && !dropdown.classList.contains('active')) {
+        toggleDropdown(dropdown);
+      }
+    });
+    
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+      handleDropdownKeyboard(e, dropdown);
+    });
+  });
+}
 
-// ...existing code...
+// ===== Conditional Field Handlers =====
+function initializeDomicileHandlers() {
+  const domisiliRadios = document.querySelectorAll('input[name="domisili"]');
+  const torajaFields = document.getElementById('toraja_fields');
+  const luarTorajaFields = document.getElementById('luar_toraja_fields');
+  
+  if (!domisiliRadios.length || !torajaFields || !luarTorajaFields) return;
+  
+  domisiliRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'toraja') {
+        torajaFields.style.display = 'block';
+        luarTorajaFields.style.display = 'none';
+        
+        // Update required attributes
+        const kelurahanInput = document.getElementById('kelurahan');
+        const domisiliManual = document.getElementById('domisili_manual');
+        
+        if (kelurahanInput) kelurahanInput.setAttribute('required', '');
+        if (domisiliManual) domisiliManual.removeAttribute('required');
+      } else {
+        torajaFields.style.display = 'none';
+        luarTorajaFields.style.display = 'block';
+        
+        // Update required attributes
+        const kelurahanInput = document.getElementById('kelurahan');
+        const domisiliManual = document.getElementById('domisili_manual');
+        
+        if (kelurahanInput) kelurahanInput.removeAttribute('required');
+        if (domisiliManual) domisiliManual.setAttribute('required', '');
+      }
+    });
+  });
+}
+
+function initializeWorkStatusHandler() {
+  const bekerjaRadios = document.querySelectorAll('input[name="bekerja"]');
+  const tempatKerjaContainer = document.getElementById('tempat_kerja_container');
+  
+  if (!bekerjaRadios.length || !tempatKerjaContainer) return;
+  
+  bekerjaRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      const tempatKerjaInput = document.getElementById('tempat_kerja');
+      
+      if (this.value === 'Ya') {
+        tempatKerjaContainer.style.display = 'block';
+        if (tempatKerjaInput) tempatKerjaInput.setAttribute('required', '');
+      } else {
+        tempatKerjaContainer.style.display = 'none';
+        if (tempatKerjaInput) tempatKerjaInput.removeAttribute('required');
+      }
+    });
+  });
+}
+
+function initializeDatePicker() {
+  const birthDateInput = document.getElementById('tanggal_lahir');
+  
+  if (!birthDateInput) return;
+  
+  // Set min/max dates
+  const today = new Date();
+  const fifteenYearsAgo = new Date();
+  fifteenYearsAgo.setFullYear(today.getFullYear() - 15);
+  
+  birthDateInput.setAttribute('max', fifteenYearsAgo.toISOString().split('T')[0]);
+  birthDateInput.setAttribute('min', '1940-01-01');
+}
+
+// ===== Dropdown Helper Functions =====
+function toggleDropdown(dropdown) {
+  if (!dropdown) return;
+  
+  const wasActive = dropdown.classList.contains('active');
+  const searchInput = dropdown.querySelector('.dropdown-search');
+  
+  // Close all dropdowns first
+  document.querySelectorAll('.searchable-dropdown').forEach(d => {
+    // ✅ FIX 2: Clear other search inputs when closing their dropdowns
+    if (d !== dropdown && d.classList.contains('active')) {
+      const otherSearchInput = d.querySelector('.dropdown-search');
+      // Don't clear the input value here, as it should display the selected value
+    }
+    
+    d.classList.remove('active');
+    const list = d.querySelector('.dropdown-list');
+    if (list) {
+      list.style.display = 'none';
+      list.style.visibility = 'hidden';
+    }
+  });
+  
+  // Toggle this dropdown
+  if (!wasActive) {
+    dropdown.classList.add('active');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
+    
+    if (dropdownList) {
+      // ✅ FIX 2: Select all text in search input for easy replacement
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+      }
+      
+      dropdownList.style.display = 'block';
+      dropdownList.style.visibility = 'visible';
+      dropdownList.style.opacity = '1';
+      dropdownList.style.backgroundColor = 'white';
+      dropdownList.style.zIndex = '9999';
+      
+      // Force repaint to ensure proper display
+      setTimeout(() => {
+        dropdownList.style.display = 'block';
+        dropdownList.style.visibility = 'visible';
+      }, 10);
+    }
+  }
+}
+
+function filterDropdownItems(dropdown, searchValue) {
+  const items = dropdown.querySelectorAll('.dropdown-item:not(.dropdown-placeholder)');
+  let hasMatches = false;
+  
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    const match = text.includes(searchValue);
+    
+    item.style.display = match ? '' : 'none';
+    
+    if (match) hasMatches = true;
+  });
+  
+  // If no matches, show "No results" message
+  let noResults = dropdown.querySelector('.no-results');
+  
+  if (!hasMatches) {
+    if (!noResults) {
+      noResults = document.createElement('div');
+      noResults.className = 'dropdown-item no-results';
+      noResults.textContent = 'Tidak ada hasil ditemukan';
+      dropdown.querySelector('.dropdown-list').appendChild(noResults);
+    }
+    noResults.style.display = '';
+  } else if (noResults) {
+    noResults.style.display = 'none';
+  }
+}
+
+function handleDropdownKeyboard(e, dropdown) {
+  const items = Array.from(dropdown.querySelectorAll('.dropdown-item')).filter(item => 
+    item.style.display !== 'none' && !item.classList.contains('no-results')
+  );
+  const currentIndex = items.findIndex(item => item.classList.contains('highlighted'));
+  
+  // If dropdown is not active, activate it on arrow down
+  if (!dropdown.classList.contains('active') && e.key === 'ArrowDown') {
+    e.preventDefault();
+    toggleDropdown(dropdown);
+    return;
+  }
+  
+  if (['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].includes(e.key)) {
+    e.preventDefault();
+    
+    if (e.key === 'ArrowDown') {
+      const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % items.length;
+      highlightItem(items, nextIndex);
+    } else if (e.key === 'ArrowUp') {
+      const prevIndex = currentIndex < 0 ? items.length - 1 : (currentIndex - 1 + items.length) % items.length;
+      highlightItem(items, prevIndex);
+    } else if (e.key === 'Enter') {
+      const highlighted = dropdown.querySelector('.dropdown-item.highlighted');
+      if (highlighted) {
+        highlighted.click();
+      }
+    } else if (e.key === 'Escape') {
+      dropdown.classList.remove('active');
+    }
+  }
+}
+
+function highlightItem(items, index) {
+  items.forEach(item => item.classList.remove('highlighted'));
+  if (items[index]) {
+    items[index].classList.add('highlighted');
+    items[index].scrollIntoView({ block: 'nearest' });
+  }
+}
+
+function selectJurusan(value) {
+  const jurusanInput = document.getElementById('jurusan');
+  const searchInput = document.querySelector('.dropdown-search');
+  if (!jurusanInput || !searchInput) return;
+  
+  const dropdown = searchInput.closest('.searchable-dropdown');
+  
+  jurusanInput.value = value;
+  searchInput.value = value;
+  
+  // ✅ FIX 1: Close dropdown after selection
+  if (dropdown) {
+    dropdown.classList.remove('active');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
+    if (dropdownList) {
+      dropdownList.style.display = 'none';
+    }
+  }
+  
+  // Update fakultas field
+  updateFakultas(value);
+  
+  // Highlight the selected item
+  const items = dropdown ? dropdown.querySelectorAll('.dropdown-item') : [];
+  items.forEach(item => {
+    item.classList.toggle('selected', item.getAttribute('data-value') === value);
+  });
+}
+
+function updateFakultas(jurusan) {
+  const fakultasInput = document.getElementById('fakultas');
+  if (fakultasInput && jurusanData && jurusanData[jurusan]) {
+    fakultasInput.value = jurusanData[jurusan];
+    fakultasInput.classList.add('filled');
+  } else if (fakultasInput) {
+    fakultasInput.value = '';
+    fakultasInput.classList.remove('filled');
+  }
+}
+
+// ✅ FIX 3: Enhanced Kelurahan selection with auto-population
+function selectKelurahan(value, kemendagriCode = '') {
+  const kelurahanInput = document.getElementById('kelurahan');
+  const searchInput = document.querySelector('#toraja_fields .dropdown-search');
+  if (!kelurahanInput || !searchInput) return;
+  
+  const dropdown = searchInput.closest('.searchable-dropdown');
+  
+  kelurahanInput.value = value;
+  searchInput.value = value;
+  
+  // Close dropdown
+  if (dropdown) {
+    dropdown.classList.remove('active');
+    const dropdownList = dropdown.querySelector('.dropdown-list');
+    if (dropdownList) {
+      dropdownList.style.display = 'none';
+    }
+  }
+  
+  // Highlight the selected item
+  const items = dropdown ? dropdown.querySelectorAll('.dropdown-item') : [];
+  items.forEach(item => {
+    item.classList.toggle('selected', item.getAttribute('data-value') === value);
+  });
+  
+  // Auto-populate kecamatan and kabupaten fields
+  fetchLocationDetails(value, kemendagriCode);
+}
+
+// ✅ FIX 3: New function to fetch district and regency data
+function fetchLocationDetails(kelurahanName, kemendagriCode = '') {
+  const kecamatanInput = document.getElementById('kecamatan');
+  const kabupatenInput = document.getElementById('kabupaten');
+  
+  if (!kecamatanInput || !kabupatenInput) return;
+  
+  // If we have the kelurahan data already loaded, we can populate from it directly
+  if (typeof kelurahanData !== 'undefined' && kelurahanData && kelurahanData.length > 0) {
+    // Find the selected kelurahan in our data
+    const selectedKelurahan = kelurahanData.find(item => 
+      (item.area_name === kelurahanName) || 
+      (kemendagriCode && item.kemendagri_code === kemendagriCode)
+    );
+    
+    if (selectedKelurahan) {
+      // Make an AJAX request to get kecamatan and kabupaten details
+      fetch(`get_location_details.php?kelurahan_name=${encodeURIComponent(kelurahanName)}&kemendagri_code=${encodeURIComponent(kemendagriCode || '')}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            kecamatanInput.value = data.kecamatan || 'Tidak ditemukan';
+            kabupatenInput.value = data.kabupaten || 'Tidak ditemukan';
+          } else {
+            // Fallback to default values if server request fails
+            setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching location details:', error);
+          // Fallback to default values
+          setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+        });
+    } else {
+      // If kelurahan not found in our data, set default values
+      setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+    }
+  } else {
+    // If no kelurahan data available, use default values
+    setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput);
+  }
+}
+
+// Helper function for default location values
+function setDefaultLocationValues(kelurahanName, kecamatanInput, kabupatenInput) {
+  // Set some intelligent defaults based on the name
+  if (kelurahanName.includes('Rantepao') || kelurahanName.includes('Tallunglipu')) {
+    kecamatanInput.value = 'Rantepao';
+    kabupatenInput.value = 'Toraja Utara';
+  } else if (kelurahanName.includes('Makale') || kelurahanName.includes('Sangalla')) {
+    kecamatanInput.value = 'Makale';
+    kabupatenInput.value = 'Tana Toraja';
+  } else if (kelurahanName.includes('Lembang')) {
+    kecamatanInput.value = 'Kecamatan (diisi otomatis)';
+    kabupatenInput.value = 'Toraja Utara';
+  } else {
+    kecamatanInput.value = 'Kecamatan (diisi otomatis)';
+    kabupatenInput.value = 'Kabupaten (diisi otomatis)';
+  }
+}
+
+// ===== Modal Handlers =====
+function setupModalHandlers() {
+  const modal = document.getElementById("petunjukModal");
+  const showModalBtn = document.getElementById("showPetunjukBtn");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const startRegistrationBtn = document.getElementById("startRegistrationBtn");
+  const closeModal = document.getElementById("closeModal");
+
+  if (!modal) return;
+
+  if (showModalBtn) {
+    showModalBtn.addEventListener('click', function() {
+      modal.classList.add('show');
+      setTimeout(() => {
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent) {
+          modalContent.style.opacity = '1';
+          modalContent.style.transform = 'translateY(0)';
+        }
+      }, 10);
+    });
+  }
+
+  // Define close modal function
+  const closeModalFunction = function() {
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) {
+      modalContent.style.opacity = '0';
+      modalContent.style.transform = 'translateY(-50px)';
+    }
+    setTimeout(() => {
+      modal.classList.remove('show');
+    }, 300);
+  };
+
+  if (closeModal) {
+    closeModal.addEventListener('click', closeModalFunction);
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModalFunction);
+  }
+
+  if (startRegistrationBtn) {
+    startRegistrationBtn.addEventListener('click', function() {
+      closeModalFunction();
+      // Focus on first form field
+      const firstField = document.querySelector('.form-step.active input, .form-step.active select');
+      if (firstField) firstField.focus();
+    });
+  }
+
+  // Close modal when clicking outside
+  window.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModalFunction();
+    }
+  });
+}
+
+// ===== Form Submission =====
+function handleFormSubmit(e) {
+  e.preventDefault();
+  
+  // Check if final step is valid
+  const currentStepElement = document.querySelector(`.form-step.active`);
+  const currentStep = parseInt(currentStepElement.dataset.step);
+  
+  if (validateStep(currentStep)) {
+    // Show loading state
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+    
+    // In a real application, you'd use AJAX to submit the form
+    // For this demo, we'll simulate a successful submission after a delay
+    setTimeout(() => {
+      submitButton.innerHTML = '<i class="fas fa-check-circle"></i> Berhasil!';
+      
+      showAlert('Pendaftaran berhasil dikirim! Tim kami akan menghubungi Anda segera. 🎉', 'success');
+      
+      // Redirect to success page
+      setTimeout(() => {
+        window.location.href = 'pendaftaran_sukses.php';
+      }, 2000);
+    }, 1500);
+  }
+}
+
+// ===== Helper Functions =====
+// Check if element is visible
+function isElementVisible(element) {
+  let currentElement = element;
+  while (currentElement) {
+    if (currentElement.style && 
+       (currentElement.style.display === 'none' || 
+        currentElement.style.visibility === 'hidden' ||
+        currentElement.offsetParent === null)) {
+      return false;
+    }
+    currentElement = currentElement.parentElement;
+  }
+  return true;
+}
+
+// Show field error
+function showFieldError(field, message) {
+  // Create error message element
+  const errorElement = document.createElement('div');
+  errorElement.className = 'validation-message';
+  errorElement.style.color = '#dc3545';
+  errorElement.style.fontSize = '13px';
+  errorElement.style.marginTop = '5px';
+  errorElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+  
+  // Insert after the field
+  if (field && field.parentNode) {
+    field.parentNode.insertBefore(errorElement, field.nextSibling);
+    
+    // Highlight the field
+    field.style.borderColor = '#dc3545';
+    
+    // Remove required attribute temporarily to allow focusing on other fields
+    if (field.hasAttribute('required')) {
+      field.dataset.wasRequired = "true";
+      field.removeAttribute('required');
+    }
+    
+    // Add event listener to remove error when field is focused
+    field.addEventListener('focus', function() {
+      field.style.borderColor = '';
+      if (errorElement.parentNode) {
+        errorElement.parentNode.removeChild(errorElement);
+      }
+      
+      // Restore required attribute if it was removed
+      if (field.dataset.wasRequired === "true") {
+        field.setAttribute('required', '');
+        delete field.dataset.wasRequired;
+      }
+    }, { once: true });
+  }
+}
+
+// Show alert message
+function showAlert(message, type) {
+  const alertContainer = document.getElementById('alert-container');
+  if (!alertContainer) return;
+  
+  const alertBox = document.createElement('div');
+  alertBox.className = `alert alert-${type} fade show`;
+  alertBox.innerHTML = `
+    <div class="d-flex align-items-center">
+      <i class="${type === 'danger' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle'} me-2"></i>
+      <span>${message}</span>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `;
+  
+  alertContainer.appendChild(alertBox);
+  
+  // Auto dismiss after 5 seconds
+  setTimeout(() => {
+    alertBox.classList.remove('show');
+    setTimeout(() => alertBox.remove(), 300);
+  }, 5000);
+}
+
+// Show error message in alert
+function showErrorMessage(message) {
+  showAlert(message, 'danger');
+}
+
+// Global input value formatters
+window.toUpperCase = function(input) {
+  input.value = input.value.toUpperCase();
+};
+
+// Validate phone number - Updated for 628 format
+window.validatePhone = function(input) {
+  // Allow only digits
+  input.value = input.value.replace(/\D/g, '');
+  
+  // Convert 08 to 628 if needed
+  if (input.value.startsWith('08')) {
+    input.value = '62' + input.value.substring(1);
+  }
+  
+  // Check if valid Indonesian mobile number format (628xx)
+  if (input.value.length > 0) {
+    if (!input.value.startsWith('628')) {
+      showAlert("Nomor HP harus diawali dengan 628 (format internasional)", "danger");
+      input.setCustomValidity("Nomor HP harus diawali dengan 628");
+    } else if (input.value.length < 11 || input.value.length > 14) {
+      showAlert("Nomor HP harus terdiri dari 11-14 digit", "danger");
+      input.setCustomValidity("Nomor HP harus terdiri dari 11-14 digit");
+    } else {
+      input.setCustomValidity("");
+    }
+  }
+};
+
+// Validate NIK
+window.validateNIK = function(input) {
+  // Allow only digits
+  input.value = input.value.replace(/\D/g, '');
+  
+  if (input.value.length > 0 && input.value.length !== 16) {
+    showAlert("NIK harus terdiri dari 16 digit", "danger");
+    input.setCustomValidity("NIK harus terdiri dari 16 digit");
+  } else {
+    input.setCustomValidity("");
+  }
+};
