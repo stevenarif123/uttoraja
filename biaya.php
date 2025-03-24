@@ -158,9 +158,9 @@
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="./informasi">Informasi Akademik</a></li>
+                              <li><a href="./informasi.php">Informasi Akademik</a></li>
                               <li><a href="./administrasi/">Administrasi Akademik</a></li>
-                              <li><a href="./kegiatan">Kegiatan Akademik</a></li>
+                              <li><a href="./kegiatan.php">Kegiatan Akademik</a></li>
                               <li><a href="./modul/">Pengambilan Modul</a></li>
                               <li><a href="./legalisir/">Legalisir Ijazah</a></li>
                               <li><a href="./suratketerangan/">Surat Keterangan</a></li>
@@ -180,8 +180,8 @@
                             <ul class="sub-menu">
                               <li><a href="./tentang/">Universitas Terbuka</a></li>
                               <li><a href="./tentang/salut/">SALUT</a></li>
-                              <li><a href="./tentang/saluttator">SALUT Tana Toraja</a></li>
-                              <li><a href="./tentang/kepalasalut">Pesan Kepala SALUT</a></li>
+                              <li><a href="./tentang/saluttator.php">SALUT Tana Toraja</a></li>
+                              <li><a href="./tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
                           <li class="active"><a href="./biaya.php">Biaya Kuliah</a></li>
@@ -287,7 +287,7 @@
           <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="biaya-overview-card">
               <div class="biaya-icon">
-                <i class="bi bi-credit-card"></i>
+                <i class="bi bi-cash-coin"></i>
               </div>
               <h3>Biaya Terjangkau 💰</h3>
               <p>UT menawarkan biaya kuliah yang lebih terjangkau dibandingkan universitas konvensional lainnya, dengan kualitas pendidikan yang setara.</p>

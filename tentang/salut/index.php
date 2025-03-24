@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>TENTANG SALUT</title>
-    <meta name="description" content="" />
+    <title>SALUT - Sentra Layanan Universitas Terbuka | UT Tana Toraja</title>
+    <meta name="description" content="Informasi lengkap tentang Sentra Layanan Universitas Terbuka (SALUT), pusat layanan UT yang tersebar di seluruh Indonesia" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
@@ -20,10 +20,8 @@
 
     <!-- CSS here -->
     <link rel="stylesheet" href="../../assets/css/01-bootstrap.min.css" />
-    <link rel="styles
-    heet" href="../../assets/css/02-all.min.css" />
+    <link rel="stylesheet" href="../../assets/css/02-all.min.css" />
     <link rel="stylesheet" href="../../assets/css/03-jquery.magnific-popup.css" />
-    <!-- <link rel="stylesheet" href="assets/css/04-nice-select.css" /> -->
     <link rel="stylesheet" href="../../assets/css/05-odometer.css" />
     <link rel="stylesheet" href="../../assets/css/06-swiper.min.css" />
     <link rel="stylesheet" href="../../assets/css/07-animate.min.css" />
@@ -34,10 +32,387 @@
     <link rel="stylesheet" href="../../assets/vendor/jarallax/jarallax.css" />
     <link rel="stylesheet" href="../../assets/vendor/odometer/odometer.min.css" />
     <link rel="stylesheet" href="../../assets/fonts/gilroy/stylesheet.css" />
+    
+    <!-- Add Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <link rel="stylesheet" href="../../assets/css/color1.css" />
     <link rel="stylesheet" href="../../assets/css/responsive.css" />
+    
+    <!-- Custom styles for SALUT page -->
+    <style>
+        .salut-hero {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('../../assets/img/background/salut-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            color: #fff;
+            margin-bottom: 60px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .hero-pattern {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('../../assets/img/shape/wave-pattern.png') repeat-x;
+            background-size: contain;
+            opacity: 0.2;
+        }
+        
+        .salut-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .salut-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: var(--thm-primary);
+            opacity: 0.05;
+            border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+            z-index: 0;
+        }
+        
+        .salut-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+        
+        .salut-icon i {
+            font-size: 36px;
+            color: var(--thm-primary);
+        }
+        
+        .salut-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .salut-text {
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .number-block {
+            padding: 70px 0;
+            background: linear-gradient(135deg, var(--thm-primary) 0%, var(--thm-secondary) 100%);
+            color: #fff;
+            border-radius: 15px;
+            margin-bottom: 60px;
+        }
+        
+        .counter-item {
+            text-align: center;
+        }
+        
+        .counter-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .counter-icon i {
+            font-size: 30px;
+            color: #fff;
+        }
+        
+        .counter-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .counter-title {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .mission-card {
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .mission-card.vision {
+            background: linear-gradient(45deg, #0062cc, #0097ff);
+            color: #fff;
+        }
+        
+        .mission-card.mission {
+            background: linear-gradient(45deg, #198754, #20c997);
+            color: #fff;
+        }
+        
+        .mission-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .mission-card h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+        }
+        
+        .mission-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mission-card ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .mission-card ul li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        
+        .mission-card .shape {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .mission-card .shape-1 {
+            top: -75px;
+            right: -75px;
+        }
+        
+        .mission-card .shape-2 {
+            bottom: -75px;
+            left: -75px;
+        }
+        
+        .location-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .location-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .location-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .location-card:hover .location-image img {
+            transform: scale(1.1);
+        }
+        
+        .location-content {
+            padding: 20px;
+        }
+        
+        .location-content h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--thm-black);
+        }
+        
+        .location-content p {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .location-contact {
+            display: flex;
+            align-items: center;
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .location-contact i {
+            color: var(--thm-primary);
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .location-footer {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .location-footer a {
+            display: inline-flex;
+            align-items: center;
+            color: var(--thm-primary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .location-footer a i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .location-footer a:hover {
+            color: var(--thm-secondary);
+        }
+        
+        .location-footer a:hover i {
+            transform: translateX(3px);
+        }
+        
+        .map-container {
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .salut-cta {
+            background: linear-gradient(135deg, var(--thm-primary) 0%, var(--thm-secondary) 100%);
+            padding: 50px 0;
+            border-radius: 15px;
+            position: relative;
+            color: #fff;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .salut-cta .shape {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .salut-cta .shape-1 {
+            top: -100px;
+            right: -100px;
+        }
+        
+        .salut-cta .shape-2 {
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        .salut-cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .salut-cta p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .btn-cta {
+            background: #fff;
+            color: var(--thm-primary);
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            background: var(--thm-black);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        
+        /* Animation classes */
+        .floating {
+            animation: floating 3s infinite ease-in-out;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @media (max-width: 767px) {
+            .salut-hero {
+                padding: 80px 0;
+            }
+            
+            .counter-number {
+                font-size: 36px;
+            }
+            
+            .mission-card {
+                margin-bottom: 30px;
+            }
+            
+            .salut-cta h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
   </head>
 
   <body class="body-gray-bg">
@@ -53,7 +428,7 @@
     <!-- preloader-end -->
 
     <div class="page-wrapper">
-      <!--Start Main Header One -->
+      <!-- Start Main Header One -->
       <header class="main-header main-header-one">
         <div class="main-header-one__top">
           <div class="container">
@@ -72,9 +447,7 @@
                         <span class="icon-email"></span>
                       </div>
                       <p>
-                        <a href="mailto:info@uttoraja.com"
-                          >info@uttoraja.com</a
-                        >
+                        <a href="mailto:info@uttoraja.com">info@uttoraja.com</a>
                       </p>
                     </li>
                   </ul>
@@ -100,7 +473,7 @@
                     </li>
                     <li>
                       <a href="https://www.youtube.com/@SALUTTanaToraja">
-                      <i class="icon.youtube"></i>
+                        <i class="icon-vimeo"></i>
                       </a>
                     </li>
                   </ul>
@@ -111,87 +484,98 @@
         </div>
 
         <div class="main-header-one__bottom">
-        <div id="sticky-header" class="menu-area">
-          <div class="container">
-            <div class="main-header-one__bottom-inner">
-              <div class="main-header-one__bottom-left">
-                <div class="logo-box-one">
-                  <a href="../../">
-                    <img src="../../assets/img/resource/logo.png" alt="Logo" />
-                  </a>
-                </div>
-              </div>
-              <div class="main-header-one__bottom-middle">
-                <div class="menu-area__inner">
-                  <div class="mobile-nav-toggler">
-                    <i class="fas fa-bars"></i>
-                  </div>
-                  <div class="menu-wrap">
-                    <nav class="menu-nav">
-                      <div class="navbar-wrap main-menu">
-                        <ul class="navigation">
-                          <li><a href="../">Home</a></li>
-                          <li class="menu-item-has-children">
-                            <a href="#">Aplikasi UT</a>
-                            <ul class="sub-menu">
-                              <li>
-                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                              </li>
-                              <li>
-                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                              </li>
-                              <li>
-                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                              </li>
-                              <li>
-                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                              </li>
-                              <li>
-                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="menu-item-has-children">
-                            <a href="#">Layanan</a>
-                            <ul class="sub-menu">
-                              <li><a href="../../informasi">Informasi Akademik</a></li>
-                              <li><a href="../../administrasi/">Administrasi Akademik</a></li>
-                              <li><a href="../../kegiatan">Kegiatan Akademik</a></li>
-                              <li><a href="../../modul/">Pengambilan Modul</a></li>
-                              <li><a href="../../legalisir/">Legalisir Ijazah</a></li>
-                              <li><a href="../../suratketerangan/">Surat Keterangan</a></li>
-                            </ul>
-                          </li>
-                          <li><a href="../galeri/">Galeri</a></li>
-                          <li class="menu-item-has-children">
-                            <a href="#">Tentang</a>
-                            <ul class="sub-menu">
-                              <li><a href="../../tentang/">Universitas Terbuka</a></li>
-                              <li><a href="../../tentang/salut/">SALUT</a></li>
-                              <li><a href="../../tentang/saluttator">SALUT Tana Toraja</a></li>
-                              <li><a href="../../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
+          <div id="sticky-header" class="menu-area">
+            <div class="container">
+              <div class="main-header-one__bottom-inner">
+                <div class="main-header-one__bottom-left">
+                  <div class="logo-box-one">
+                    <a href="../../">
+                      <img src="../../assets/img/resource/logo.png" alt="Logo" />
+                    </a>
                   </div>
                 </div>
-              </div>
+                <div class="main-header-one__bottom-middle">
+                  <div class="menu-area__inner">
+                    <div class="mobile-nav-toggler">
+                      <i class="fas fa-bars"></i>
+                    </div>
+                    <div class="menu-wrap">
+                      <nav class="menu-nav">
+                        <div class="navbar-wrap main-menu">
+                          <ul class="navigation">
+                            <li><a href="../../">Home</a></li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Aplikasi UT</a>
+                              <ul class="sub-menu">
+                                <li>
+                                  <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
+                                </li>
+                                <li>
+                                  <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
+                                </li>
+                                <li>
+                                  <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
+                                </li>
+                                <li>
+                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
+                                </li>
+                                <li>
+                                  <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Layanan</a>
+                              <ul class="sub-menu">
+                                <li><a href="../../informasi">Informasi Akademik</a></li>
+                                <li><a href="../../administrasi/">Administrasi Akademik</a></li>
+                                <li><a href="../../kegiatan">Kegiatan Akademik</a></li>
+                                <li><a href="../../modul/">Pengambilan Modul</a></li>
+                                <li><a href="../../legalisir/">Legalisir Ijazah</a></li>
+                                <li><a href="../../suratketerangan/">Surat Keterangan</a></li>
+                              </ul>
+                            </li>
+                            <li><a href="../../galeri/">Galeri</a></li>
+                            <li class="menu-item-has-children active">
+                              <a href="#">Tentang</a>
+                              <ul class="sub-menu">
+                                <li><a href="../../tentang/">Universitas Terbuka</a></li>
+                                <li class="active"><a href="../../tentang/salut/">SALUT</a></li>
+                                <li><a href="../../tentang/saluttator">SALUT Tana Toraja</a></li>
+                                <li><a href="../../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
+                              </ul>
+                            </li>
+                            <!-- Add Program menu -->
+                            <li class="menu-item-has-children">
+                              <a href="#">Program</a>
+                              <ul class="sub-menu">
+                                <li><a href="../../rpl.php">RPL</a></li>
+                                <li><a href="../../reguler.php">Reguler</a></li>
+                                <li><a href="../../jurusan.php">Program Studi</a></li>
+                              </ul>
+                            </li>
+                            <!-- Add Biaya Kuliah menu -->
+                            <li><a href="../../biaya.php">Biaya Kuliah</a></li>
+                          </ul>
+                        </div>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
 
-              <div class="main-header-one__bottom-right">
-                <div class="header-btn-box-one">
-                  <a class="thm-btn" href="../../pendaftaran/">
-                    <span class="txt">Mendaftar Disini</span>
-                  </a>
+                <div class="main-header-one__bottom-right">
+                  <div class="header-btn-box-one">
+                    <a class="thm-btn" href="../../pendaftaran/">
+                      <span class="txt">Mendaftar Disini</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-        <!--Start Mobile Menu  -->
+        <!-- Start Mobile Menu -->
         <div class="mobile-menu">
           <nav class="menu-box">
             <div class="close-btn">
@@ -199,10 +583,7 @@
             </div>
             <div class="nav-logo">
               <a href="../../">
-                <img
-                  src="assets/img/resource/mobile-menu-logo.png"
-                  alt="Logo"
-                />
+                <img src="../../assets/img/resource/mobile-menu-logo.png" alt="Logo" />
               </a>
             </div>
             <div class="menu-outer">
@@ -215,22 +596,16 @@
             <div class="social-links">
               <ul class="clearfix list-wrap">
                 <li>
-                  <a href="https://www.facebook.com/uttoraja"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
+                  <a href="https://www.facebook.com/uttoraja"><i class="fab fa-facebook-f"></i></a>
                 </li>
                 <li>
                   <a href="#"><i class="fab fa-twitter"></i></a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/uttoraja/"
-                    ><i class="fab fa-instagram"></i
-                  ></a>
+                  <a href="https://www.instagram.com/uttoraja/"><i class="fab fa-instagram"></i></a>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/@SALUTTanaToraja"
-                    ><i class="fab fa-youtube"></i
-                  ></a>
+                  <a href="https://www.youtube.com/@SALUTTanaToraja"><i class="fab fa-youtube"></i></a>
                 </li>
               </ul>
             </div>
@@ -239,92 +614,471 @@
         <div class="menu-backdrop"></div>
         <!-- End Mobile Menu -->
       </header>
-      <!--End Main Header One -->
+      <!-- End Main Header One -->
 
-      <!--Start Page Header-->
+      <!-- Start Page Header -->
       <section class="page-header">
         <div class="shape1 rotate-me">
-          <img src="assets/img/shape/page-header-shape1.png" alt="" />
+          <img src="../../assets/img/shape/page-header-shape1.png" alt="" />
         </div>
         <div class="shape2 float-bob-x">
-          <img src="assets/img/shape/page-header-shape2.png" alt="" />
+          <img src="../../assets/img/shape/page-header-shape2.png" alt="" />
         </div>
         <div class="container">
           <div class="page-header__inner">
-            <h2>TENTANG SENTRA LAYANAN UNIVERSITAS TERBUKA</h2>:
+            <h2>SENTRA LAYANAN UNIVERSITAS TERBUKA</h2>
             <ul class="thm-breadcrumb">
               <li>
                 <a href="../../"><span class="fa fa-home"></span> Home</a>
               </li>
               <li><i class="icon-right-arrow-angle"></i></li>
-              <li class="color-base"> Tentang Sentra Layanan Universitas Terbuka</li>
+              <li>Tentang</li>
+              <li><i class="icon-right-arrow-angle"></i></li>
+              <li class="color-base">SALUT</li>
             </ul>
           </div>
         </div>
       </section>
-      <!--End Page Header-->
+      <!-- End Page Header -->
 
-      <!--Start Contents Page-->
-      <section
-        id="contact"
-        class="contact-area contact-bg pt-120 pb-100 p-relative fix"
-      >
-        <div class="container jarakcontainer">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="contact-area__content">
-                        <div class="sec-title-four">
-                            <div class="sub-title">
-                                <h4>Mengenal SALUT</h4>
-                            </div>
-                            <h2>
-                                Sentra Layanan Universitas Terbuka
-                            </h2>
-                        </div>
-                        <div class="text">
-                            <p>
-                                Sentra Layanan Universitas Terbuka (SALUT) adalah unit layanan yang dibentuk oleh Universitas Terbuka untuk memberikan layanan dan dukungan kepada mahasiswa UT di berbagai wilayah.
-                            </p>
-                            <p>
-                                SALUT hadir sebagai mitra UT untuk memfasilitasi mahasiswa dalam berbagai aspek perkuliahan, mulai dari pendaftaran, bimbingan belajar, akses internet, hingga informasi terkait ujian dan kelulusan.
-                            </p>
-                            <p>
-                                <div style="text-align: center;">
-                                    <img src="../aset/salut1.JPG" alt="" width="700" height="800">
-                                </div>
-                            </p>
-                            <p>
-                                Kami berkomitmen untuk memberikan pelayanan yang ramah, profesional, dan responsif terhadap kebutuhan mahasiswa UT. Kami juga terus berupaya untuk meningkatkan kualitas layanan dan fasilitas yang kami sediakan.
-                            </p>
-                            <p>
-                                Dengan adanya SALUT, diharapkan mahasiswa UT dapat belajar dengan lebih nyaman dan efektif, serta meraih kesuksesan dalam studi mereka.
-                            </p>
-                        </div>
-                    </div>
+      <!-- Hero Section -->
+      <section class="pb-5">
+        <div class="container">
+          <div class="salut-hero wow fadeIn" data-wow-delay="0.1s">
+            <div class="hero-pattern"></div>
+            <div class="container text-center">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <h1 class="display-5 fw-bold mb-4">Sentra Layanan Universitas Terbuka</h1>
+                  <p class="lead fs-5 mb-4">Mitra Terdepan dalam Memberikan Layanan Pendidikan Tinggi Jarak Jauh di Seluruh Indonesia</p>
+                  <a href="#about-salut" class="thm-btn">
+                    <span class="txt">Pelajari Lebih Lanjut</span>
+                    <i class="bi bi-arrow-down ms-2"></i>
+                  </a>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
       </section>
-      <!--End Contents Page-->
 
-      <!--Start Footer Three-->
+      <!-- About SALUT Section -->
+      <section id="about-salut" class="py-5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+              <div class="pe-lg-4">
+                <div class="section-title mb-4">
+                  <span class="subtitle">Tentang SALUT</span>
+                  <h2>Apa itu SALUT?</h2>
+                </div>
+                <p>Sentra Layanan Universitas Terbuka (SALUT) adalah unit layanan Universitas Terbuka yang didirikan untuk memberikan akses yang lebih mudah bagi masyarakat dalam mendapatkan layanan pendidikan tinggi jarak jauh yang berkualitas.</p>
+                <p>SALUT hadir di berbagai lokasi strategis di seluruh Indonesia untuk memastikan bahwa layanan UT dapat dijangkau oleh semua lapisan masyarakat, terutama di daerah yang jauh dari kantor UPBJJ-UT (Unit Program Belajar Jarak Jauh-Universitas Terbuka).</p>
+                <p>Sebagai perpanjangan tangan dari Universitas Terbuka, SALUT berperan penting dalam memberikan informasi, layanan administrasi, dan dukungan akademik bagi para mahasiswa dan calon mahasiswa UT.</p>
+                <div class="d-flex mt-4">
+                  <div class="me-3 mt-1">
+                    <i class="bi bi-check-circle-fill text-primary fs-4"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-2">Layanan Terpadu</h5>
+                    <p>Menyediakan berbagai layanan administrasi dan informasi akademik dalam satu lokasi</p>
+                  </div>
+                </div>
+                <div class="d-flex mt-3">
+                  <div class="me-3 mt-1">
+                    <i class="bi bi-check-circle-fill text-primary fs-4"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-2">Jangkauan Luas</h5>
+                    <p>Tersebar di berbagai daerah untuk memudahkan akses masyarakat terhadap pendidikan tinggi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 mt-4 mt-lg-0 wow fadeInRight" data-wow-delay="0.2s">
+              <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-6">
+                  <div class="salut-card">
+                    <div class="card-pattern"></div>
+                    <div class="salut-icon floating">
+                      <i class="bi bi-info-circle-fill"></i>
+                    </div>
+                    <h3 class="salut-title">Informasi</h3>
+                    <p class="salut-text">Menyediakan informasi lengkap tentang program studi, biaya, dan prosedur pendaftaran di Universitas Terbuka</p>
+                  </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="col-md-6">
+                  <div class="salut-card">
+                    <div class="card-pattern"></div>
+                    <div class="salut-icon floating">
+                      <i class="bi bi-person-badge-fill"></i>
+                    </div>
+                    <h3 class="salut-title">Registrasi</h3>
+                    <p class="salut-text">Membantu proses pendaftaran dan registrasi ulang bagi calon mahasiswa dan mahasiswa aktif</p>
+                  </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="col-md-6">
+                  <div class="salut-card">
+                    <div class="card-pattern"></div>
+                    <div class="salut-icon floating">
+                      <i class="bi bi-book-fill"></i>
+                    </div>
+                    <h3 class="salut-title">Bahan Ajar</h3>
+                    <p class="salut-text">Mendistribusikan modul dan bahan ajar kepada mahasiswa UT di wilayah sekitarnya</p>
+                  </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="col-md-6">
+                  <div class="salut-card">
+                    <div class="card-pattern"></div>
+                    <div class="salut-icon floating">
+                      <i class="bi bi-laptop"></i>
+                    </div>
+                    <h3 class="salut-title">Tutorial</h3>
+                    <p class="salut-text">Menyelenggarakan tutorial tatap muka dan fasilitas untuk tutorial online</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics Section -->
+      <section class="py-5">
+        <div class="container">
+          <div class="number-block wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row">
+              <!-- Counter 1 -->
+              <div class="col-6 col-md-3">
+                <div class="counter-item">
+                  <div class="counter-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                  </div>
+                  <div class="counter-number" data-count="87">0</div>
+                  <div class="counter-title">Unit SALUT</div>
+                </div>
+              </div>
+              
+              <!-- Counter 2 -->
+              <div class="col-6 col-md-3">
+                <div class="counter-item">
+                  <div class="counter-icon">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                  <div class="counter-number" data-count="150000">0</div>
+                  <div class="counter-title">Mahasiswa Terlayani</div>
+                </div>
+              </div>
+              
+              <!-- Counter 3 -->
+              <div class="col-6 col-md-3">
+                <div class="counter-item">
+                  <div class="counter-icon">
+                    <i class="bi bi-globe2"></i>
+                  </div>
+                  <div class="counter-number" data-count="34">0</div>
+                  <div class="counter-title">Provinsi</div>
+                </div>
+              </div>
+              
+              <!-- Counter 4 -->
+              <div class="col-6 col-md-3">
+                <div class="counter-item">
+                  <div class="counter-icon">
+                    <i class="bi bi-building-fill"></i>
+                  </div>
+                  <div class="counter-number" data-count="12">0</div>
+                  <div class="counter-title">Tahun Pengalaman</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vision & Mission Section -->
+      <section class="py-5">
+        <div class="container">
+          <div class="section-title text-center mb-5">
+            <span class="subtitle">Visi & Misi</span>
+            <h2>SALUT Universitas Terbuka</h2>
+            <p class="mx-auto" style="max-width: 700px;">Komitmen kami dalam memberikan layanan pendidikan jarak jauh yang berkualitas</p>
+          </div>
+          
+          <div class="row">
+            <!-- Vision Card -->
+            <div class="col-lg-6 mb-4 mb-lg-0 wow fadeInLeft" data-wow-delay="0.1s">
+              <div class="mission-card vision">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <h3>Visi</h3>
+                <p>Menjadi pusat layanan terdepan dalam penyediaan akses pendidikan tinggi berkualitas melalui sistem pendidikan jarak jauh di seluruh Indonesia.</p>
+                <ul class="mt-4">
+                  <li>Terjangkau oleh seluruh lapisan masyarakat</li>
+                  <li>Penyedia informasi dan layanan yang komprehensif</li>
+                  <li>Pusat distribusi bahan ajar yang efektif</li>
+                  <li>Penunjang kegiatan akademik yang berkualitas</li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Mission Card -->
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+              <div class="mission-card mission">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <h3>Misi</h3>
+                <ul>
+                  <li>Memberikan akses pendidikan tinggi yang lebih luas kepada masyarakat melalui pendidikan jarak jauh</li>
+                  <li>Menyediakan informasi yang akurat tentang program pendidikan di Universitas Terbuka</li>
+                  <li>Memfasilitasi proses administrasi akademik yang efisien dan tepat waktu</li>
+                  <li>Mendistribusikan bahan ajar dan sumber belajar kepada mahasiswa</li>
+                  <li>Menyelenggarakan tutorial tatap muka dan mendukung tutorial online</li>
+                  <li>Membangun jaringan kerjasama dengan berbagai instansi untuk perluasan jangkauan layanan</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="section-title text-center mb-5">
+            <span class="subtitle">Layanan</span>
+            <h2>Layanan yang Disediakan</h2>
+            <p class="mx-auto" style="max-width: 700px;">SALUT menyediakan berbagai layanan untuk mendukung proses pendidikan jarak jauh Universitas Terbuka</p>
+          </div>
+          
+          <div class="row g-4">
+            <!-- Service 1 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="salut-card">
+                <div class="card-pattern"></div>
+                <div class="salut-icon">
+                  <i class="bi bi-info-square-fill"></i>
+                </div>
+                <h3 class="salut-title">Informasi Akademik</h3>
+                <p class="salut-text">Menyediakan informasi lengkap tentang program studi, kurikulum, jadwal akademik, dan persyaratan untuk menyelesaikan studi di Universitas Terbuka.</p>
+                <div class="text-center">
+                  <a href="../../informasi.php" class="btn btn-outline-primary">Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+              <div class="salut-card">
+                <div class="card-pattern"></div>
+                <div class="salut-icon">
+                  <i class="bi bi-person-plus-fill"></i>
+                </div>
+                <h3 class="salut-title">Pendaftaran</h3>
+                <p class="salut-text">Membantu proses pendaftaran mahasiswa baru dan registrasi ulang bagi mahasiswa aktif, termasuk pembayaran biaya kuliah melalui mitra bank.</p>
+                <div class="text-center">
+                  <a href="../../pendaftaran/" class="btn btn-outline-primary">Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="salut-card">
+                <div class="card-pattern"></div>
+                <div class="salut-icon">
+                  <i class="bi bi-book-half"></i>
+                </div>
+                <h3 class="salut-title">Distribusi Modul</h3>
+                <p class="salut-text">Menerima dan mendistribusikan modul cetak kepada mahasiswa serta memberikan akses dan informasi tentang modul digital.</p>
+                <div class="text-center">
+                  <a href="../../modul/" class="btn btn-outline-primary">Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Service 4 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+              <div class="salut-card">
+                <div class="card-pattern"></div>
+                <div class="salut-icon">
+                  <i class="bi bi-person-video3"></i>
+                </div>
+                <h3 class="salut-title">Tutorial</h3>
+                <p class="salut-text">Menyelenggarakan tutorial tatap muka untuk mata kuliah tertentu dan menyediakan fasilitas untuk akses tutorial online.</p>
+                <div class="text-center">
+                  <a href="../../kegiatan.php" class="btn btn-outline-primary">Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Service 5 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="salut-card">
+                <div class="card-pattern"></div>
+                <div class="salut-icon">
+                  <i class="bi bi-pencil-square"></i>
+                </div>
+                <h3 class="salut-title">Ujian</h3>
+                <p class="salut-text">Menjadi tempat pelaksanaan ujian akhir semester (UAS) dan ujian online untuk mahasiswa di wilayahnya.</p>
+                <div class="text-center">
+                  <a href="../../kegiatan.php" class="btn btn-outline-primary">Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Service 6 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+              <div class="salut-card">
+                <div class="card-pattern"></div>
+                <div class="salut-icon">
+                  <i class="bi bi-award-fill"></i>
+                </div>
+                <h3 class="salut-title">Legalisir Dokumen</h3>
+                <p class="salut-text">Melayani legalisir ijazah, transkrip nilai, dan dokumen akademik lainnya bagi alumni Universitas Terbuka.</p>
+                <div class="text-center">
+                  <a href="../../legalisir/" class="btn btn-outline-primary">Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Locations Section -->
+      <section class="py-5">
+        <div class="container">
+          <div class="section-title text-center mb-5">
+            <span class="subtitle">Lokasi</span>
+            <h2>SALUT di Indonesia</h2>
+            <p class="mx-auto" style="max-width: 700px;">Sentra Layanan Universitas Terbuka tersebar di berbagai lokasi strategis di seluruh Indonesia</p>
+          </div>
+          
+          <div class="row g-4">
+            <!-- Location 1 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="location-card">
+                <div class="location-image">
+                  <img src="../../assets/img/salut/salut-tana-toraja.jpg" alt="SALUT Tana Toraja">
+                </div>
+                <div class="location-content">
+                  <h4>SALUT Tana Toraja</h4>
+                  <p>Melayani wilayah Tana Toraja dan sekitarnya dengan berbagai layanan akademik dan administrasi.</p>
+                  <div class="location-contact">
+                    <i class="bi bi-pin-map-fill"></i>
+                    <span>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</span>
+                  </div>
+                  <div class="location-contact">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>+62 813-5561-9225</span>
+                  </div>
+                  <div class="location-footer">
+                    <a href="../../tentang/saluttator.php">Lihat Detail <i class="bi bi-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Location 2 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+              <div class="location-card">
+                <div class="location-image">
+                  <img src="../../assets/img/salut/salut-makassar.jpg" alt="SALUT Makassar">
+                </div>
+                <div class="location-content">
+                  <h4>SALUT Makassar</h4>
+                  <p>Unit layanan utama yang melayani wilayah Makassar dan sekitarnya dengan fasilitas lengkap.</p>
+                  <div class="location-contact">
+                    <i class="bi bi-pin-map-fill"></i>
+                    <span>Jl. Perintis Kemerdekaan No. 177, Makassar</span>
+                  </div>
+                  <div class="location-contact">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>+62 812-4567-8901</span>
+                  </div>
+                  <div class="location-footer">
+                    <a href="#">Lihat Detail <i class="bi bi-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Location 3 -->
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="location-card">
+                <div class="location-image">
+                  <img src="../../assets/img/salut/salut-palopo.jpg" alt="SALUT Palopo">
+                </div>
+                <div class="location-content">
+                  <h4>SALUT Palopo</h4>
+                  <p>Melayani mahasiswa di wilayah Palopo dan sekitarnya dengan berbagai fasilitas pendukung.</p>
+                  <div class="location-contact">
+                    <i class="bi bi-pin-map-fill"></i>
+                    <span>Jl. Anggrek No. 45, Palopo</span>
+                  </div>
+                  <div class="location-contact">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>+62 815-2345-6789</span>
+                  </div>
+                  <div class="location-footer">
+                    <a href="#">Lihat Detail <i class="bi bi-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Map Section -->
+          <div class="mt-5 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255281.19891429372!2d106.6894312442881!3d-6.229386695265757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x100c5e82dd4b820!2sUniversitas%20Terbuka!5e0!3m2!1sen!2sid!4v1649147231054!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-5">
+        <div class="container">
+          <div class="salut-cta text-center wow fadeInUp" data-wow-delay="0.1s">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="row justify-content-center position-relative z-index-1">
+              <div class="col-lg-8">
+                <h2>Mulai Perjalanan Pendidikan Anda</h2>
+                <p>Bergabunglah dengan Universitas Terbuka dan raih gelar akademik sesuai dengan jadwal dan kecepatan belajar Anda</p>
+                <a href="../../pendaftaran/" class="btn-cta">Daftar Sekarang <i class="bi bi-arrow-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Three -->
       <footer class="footer-three">
-        <!-- Start Footer Main -->
         <div class="footer-main footer-main__three">
           <div class="footer-three__shape1">
-            <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
+            <img src="../../assets/img/shape/footer-three__shape1.png" alt="shapes" />
           </div>
           <div class="footer-three__shape2">
-            <img src="assets/img/shape/footer-three__shape2.png" alt="shapes" />
+            <img src="../../assets/img/shape/footer-three__shape2.png" alt="shapes" />
           </div>
           <div class="container">
             <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
-            <div class="row">
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+              <div class="row">
+                <!-- Single Footer Widget -->
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s">
                   <div class="single-footer-widget single-footer-widget-style2">
                     <div class="title">
-                      <h3>Bantuan & Dukungan</h3>
+                      <h3>Bantuan &amp; Dukungan</h3>
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                       <div class="text">
@@ -359,10 +1113,10 @@
                     </div>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
+                <!-- End Single Footer Widget -->
 
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <!-- Single Footer Widget -->
+                <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                   <div class="single-footer-widget single-footer-widget-style2 ml55">
                     <div class="title">
                       <h3>Link Cepat</h3>
@@ -373,22 +1127,22 @@
                           <p><a href="../../tentang/">Tentang UT</a></p>
                         </li>
                         <li>
-                          <p><a href="../../layanan/informasi">Informasi Akademik</a></p>
+                          <p><a href="../../informasi.php">Informasi Akademik</a></p>
                         </li>
                         <li>
                           <p><a href="../../administrasi/">Administrasi</a></p>
                         </li>
                         <li>
-                          <p><a href="../../tentang/kepalasalut">Sapaan dari Kepala SALUT</a></p>
+                          <p><a href="../../tentang/kepalasalut.php">Sapaan dari Kepala SALUT</a></p>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
+                <!-- End Single Footer Widget -->
 
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                <!-- Single Footer Widget -->
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                   <div class="single-footer-widget single-footer-widget-style2 ml50">
                     <div class="title">
                       <h3>Layanan Kami</h3>
@@ -397,18 +1151,17 @@
                       <ul class="clearfix">
                         <li>
                           <p>
-                            <a href="../../informasi">Informasi Akademik</a>
+                            <a href="../../informasi.php">Informasi Akademik</a>
                           </p>
                         </li>
                         <li>
                           <p>
-                            <a href="../../administrasi">Administrasi Akademik</a>
+                            <a href="../../administrasi/">Administrasi Akademik</a>
                           </p>
                         </li>
                         <li>
                           <p>
-                            <a href="../../kegiatan">Kegiatan</a>
-                          </p>
+                            <a href="../../kegiatan.php">Kegiatan</                          </p>
                         </li>
                         <li>
                           <p>
@@ -417,30 +1170,59 @@
                         </li>
                         <li>
                           <p>
-                            <a href="../../suratketerangan">Surat Keterangan</a>
+                            <a href="../../suratketerangan/">Surat Keterangan</a>
                           </p>
                         </li>
                         <li>
                           <p>
-                            <a href="../../legalisir">Legalisir Ijazah</a>
+                            <a href="../../legalisir/">Legalisir Ijazah</a>
                           </p>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
+                <!-- End Single Footer Widget -->
+
+                <!-- Single Footer Widget -->
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+                  <div class="single-footer-widget single-footer-widget-style2">
+                    <div class="title">
+                      <h3>SALUT Universitas Terbuka</h3>
+                    </div>
+                    <div class="single-footer-widget-box single-footer-widget__newsletter">
+                      <p>Berlangganan newsletter kami untuk mendapatkan informasi terbaru tentang SALUT dan Universitas Terbuka.</p>
+                      <form class="footer__newsletter-form">
+                        <div class="footer__newsletter-input">
+                          <input type="email" placeholder="Email Anda" name="email">
+                          <button type="submit">Berlangganan</button>
+                        </div>
+                      </form>
+                      <div class="footer__newsletter-bottom">
+                        <div class="footer__newsletter-bottom-left">
+                          <h4>Ikuti Kami:</h4>
+                        </div>
+                        <div class="footer__newsletter-bottom-right">
+                          <div class="footer-social-link-two">
+                            <a href="https://www.facebook.com/uttoraja"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/uttoraja/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@SALUTTanaToraja"><i class="fab fa-youtube"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Single Footer Widget -->
               </div>
             </div>
           </div>
-          <!-- End Footer Main -->
-
-          <!--Start Footer Bottom -->
+          
+          <!-- Start Footer Bottom -->
           <div class="footer-bottom footer-bottom-two footer-bottom-three">
             <div class="container">
-              <div
-                class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner"
-              >
+              <div class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
                 <div class="copyright-text text-center">
                   <p>
                     Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
@@ -451,46 +1233,19 @@
               </div>
             </div>
           </div>
-          <!--End Footer Bottom -->
+          <!-- End Footer Bottom -->
         </div>
       </footer>
-      <!--End Footer Three-->
+      <!-- End Footer Three -->
     </div>
-
-    <!--Start Search Popup -->
-    <div class="search-popup">
-      <div class="search-popup__overlay search-toggler">
-        <div class="search-close-btn">
-          <i class="icon-plus"></i>
-        </div>
-      </div>
-      <div class="search-popup__content">
-        <form action="#">
-          <label for="search" class="sr-only">search here</label>
-          <input type="search" id="search" placeholder="Search Here..." />
-          <button type="submit" aria-label="search submit" class="btn-one">
-            <i class="icon-search-interface-symbol"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-    <!--End Search Popup -->
-
-    <!-- Scroll-top -->
-    <button class="scroll-top scroll-to-target" data-target="html">
-      <i class="icon-down-arrow"></i>
-    </button>
-    <!-- Scroll-top-end-->
 
     <!-- JS here -->
     <script src="../../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../../assets/js/01-ajax-form.js"></script>
-    <script src="../../assets/js/02-bootstrap.min.js"></script>
     <script src="../../assets/js/03-jquery.appear.js"></script>
     <script src="../../assets/js/04-swiper.min.js"></script>
     <script src="../../assets/js/05-jquery.odometer.min.js"></script>
     <script src="../../assets/js/06-jquery.magnific-popup.min.js"></script>
-    <!-- <script src="assets/js/07-jquery.nice-select.min.js"></script> -->
     <script src="../../assets/js/08-slick.min.js"></script>
     <script src="../../assets/js/09-wow.min.js"></script>
     <script src="../../assets/js/10-jquery.circleType.js"></script>
@@ -499,10 +1254,56 @@
     <script src="../../assets/vendor/jarallax/jarallax.min.js"></script>
     <script src="../../assets/vendor/marquee/marquee.min.js"></script>
     <script src="../../assets/vendor/odometer/odometer.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/main.js"></script>
+    
+    <script>
+      // Initialize WOW animations
+      new WOW().init();
+      
+      $(document).ready(function() {
+        // Smooth scroll for anchor links
+        $('a[href^="#"]').on('click', function(event) {
+          var target = $(this.getAttribute('href'));
+          if(target.length) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+              scrollTop: target.offset().top - 80
+            }, 800);
+          }
+        });
+        
+        // Counter animation
+        $('.counter-number').each(function() {
+          var $this = $(this);
+          var countTo = $this.attr('data-count');
+          
+          $({ Counter: 0 }).animate({
+            Counter: countTo
+          }, {
+            duration: 2000,
+            easing: 'swing',
+            step: function() {
+              $this.text(Math.floor(this.Counter).toLocaleString());
+            },
+            complete: function() {
+              $this.text(parseInt(countTo).toLocaleString());
+            }
+          });
+        });
+        
+        // Add floating animation to elements
+        $('.salut-icon').addClass('floating');
+        
+        // Image galleries with magnific popup
+        $('.location-image').magnificPopup({
+          delegate: 'a',
+          type: 'image',
+          gallery: {
+            enabled: true
+          }
+        });
+      });
+    </script>
   </body>
 </html>
-
-</file_content>
-</environment_details>

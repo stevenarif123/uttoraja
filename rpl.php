@@ -569,6 +569,23 @@
     </section>
     <!-- End CTA Section -->
 
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark">
+          <div class="modal-header border-0">
+            <h5 class="modal-title text-white" id="videoModalLabel">Program RPL Universitas Terbuka</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="stopVideo()"></button>
+          </div>
+          <div class="modal-body p-0">
+            <div class="ratio ratio-16x9">
+              <iframe id="videoFrame" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!--Start Footer Three-->
     <footer class="footer-three">
       <!-- Start Footer Main -->
@@ -761,6 +778,381 @@
   <script src="assets/vendor/progress-bar/knob.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+  
+  <script>
+    // Counter animation
+    $(document).ready(function() {
+      // Initialize WOW.js
+      new WOW().init();
+      
+      // Run counter animation for stat cards
+      $('.stat-number').each(function() {
+        const $this = $(this);
+        const countTo = $this.attr('data-counter');
+        
+        $({ Counter: 0 }).animate({
+          Counter: countTo
+        }, {
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            $this.text(Math.floor(this.Counter));
+          },
+          complete: function() {
+            $this.text(this.Counter);
+          }
+        });
+      });
+      
+      // Add animation to FAQ accordion
+      $('.faq-button').on('click', function() {
+        $(this).find('.bi-chevron-down').toggleClass('rotate-180');
+      });
+      
+      // Video modal handling
+      $('.video-play-btn').on('click', function() {
+        $('#videoFrame').attr('src', 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1');
+      });
+      
+      // Function to stop video when modal is closed
+      window.stopVideo = function() {
+        $('#videoFrame').attr('src', '');
+      };
+      
+      $('#videoModal').on('hidden.bs.modal', function() {
+        stopVideo();
+      });
+      
+      // Animate floating shapes
+      function animateShapes() {
+        $('.floating-shape').each(function() {
+          const randomX = Math.random() * 20 - 10;
+          const randomY = Math.random() * 20 - 10;
+          
+          $(this).animate({
+            'margin-top': randomY + 'px',
+            'margin-left': randomX + 'px'
+          }, 3000, 'swing', function() {
+            animateShapes();
+          });
+        });
+      }
+      
+      animateShapes();
+      
+      // Add hover effects to service items
+      $('.benefit-item').hover(
+        function() {
+          $(this).find('i').addClass('fa-bounce');
+        },
+        function() {
+          $(this).find('i').removeClass('fa-bounce');
+        }
+      );
+      
+      // Smooth scroll for anchor links
+      $('a[href^="#"]').on('click', function(event) {
+        var target = $(this.getAttribute('href'));
+        if(target.length) {
+          event.preventDefault();
+          $('html, body').stop().animate({
+            scrollTop: target.offset().top - 80
+          }, 1000);
+        }
+      });
+      
+      // Timeline dots animation
+      $('.step-number').each(function(index) {
+        setTimeout(() => {
+          $(this).addClass('animated');
+        }, 300 * index);
+      });
+    });
+  </script>
+  
+  <style>
+    /* Fix animation keyframe syntax error */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8; /* Fixed missing closing parenthesis */
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    /* Enhanced styles for program page */
+    .program-header {
+      background-color: rgba(var(--primary-rgb), 0.05);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    
+    .program-icon {
+      font-size: 3rem;
+      color: var(--thm-primary);
+      margin-bottom: 1rem;
+    }
+    
+    .program-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .program-meta span {
+      display: inline-flex;
+      align-items: center;
+      background-color: rgba(var(--primary-rgb), 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+    }
+    
+    .program-meta span i {
+      margin-right: 0.5rem;
+    }
+    
+    .info-box {
+      background-color: #e7f1ff;
+      border-left: 4px solid #0d6efd;
+      padding: 1.25rem;
+      border-radius: 0.25rem;
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-box i {
+      font-size: 2rem;
+      color: #0d6efd;
+      margin-right: 1rem;
+    }
+    
+    .benefit-item {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+    
+    .benefit-item i {
+      font-size: 2rem;
+      color: var(--thm-primary);
+      margin-bottom: 1rem;
+    }
+    
+    .testimonial-box {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+      margin: 2rem 0;
+    }
+    
+    .quote-icon {
+      position: absolute;
+      top: -1rem;
+      left: 2rem;
+      background-color: var(--thm-primary);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    
+    .program-types {
+      margin: 1.5rem 0;
+    }
+    
+    .program-type-item {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      margin-bottom: 1.5rem;
+    }
+    
+    .program-type-item h4 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      color: var(--thm-primary);
+    }
+    
+    .program-type-item h4 i {
+      margin-right: 0.75rem;
+    }
+    
+    .eligibility-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .eligibility-list li {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+    }
+    
+    .eligibility-list li i {
+      color: var(--thm-primary);
+      margin-right: 0.75rem;
+      font-size: 1.25rem;
+    }
+    
+    .principles-list {
+      margin: 1.5rem 0;
+    }
+    
+    .principle-item {
+      display: flex;
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+    
+    .principle-icon {
+      font-size: 1.75rem;
+      color: var(--thm-primary);
+      margin-right: 1.5rem;
+    }
+    
+    .principle-content h4 {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Sidebar Styles */
+    .sidebar-box {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .program-info-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .program-info-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    
+    .program-info-list li i {
+      color: var(--thm-primary);
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+    
+    .info-content {
+      flex: 1;
+    }
+    
+    .info-content .title {
+      font-size: 0.875rem;
+      color: #6c757d;
+      display: block;
+    }
+    
+    .info-content .value {
+      font-weight: 600;
+    }
+    
+    .documents-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .documents-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .documents-list li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .documents-list li i {
+      margin-right: 1rem;
+      font-size: 1.25rem;
+      color: var(--thm-primary);
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-item i {
+      font-size: 1.25rem;
+      color: var(--thm-primary);
+      margin-right: 1rem;
+    }
+    
+    .contact-link {
+      color: #212529;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-link:hover {
+      color: var(--thm-primary);
+    }
+    
+    .rotate-180 {
+      transform: rotate(180deg);
+      transition: transform 0.3s ease;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+      .program-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .principle-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .principle-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
 </body>
 
 </html>

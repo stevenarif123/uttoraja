@@ -4,19 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>INFORMASI AKADEMIK</title>
-  <meta name="description" content="" />
+  <title>Pengumuman & Jadwal Penting | Sentra Layanan UT Tana Toraja</title>
+  <meta name="description" content="Pengumuman penting dan jadwal akademik Universitas Terbuka untuk mahasiswa di Tana Toraja" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link
-    rel="shortcut icon"
-    type="image/x-icon"
-    href="assets/img/favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
   <!-- Place favicon.ico in the root directory -->
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
   <!-- CSS here -->
   <link rel="stylesheet" href="assets/css/01-bootstrap.min.css" />
@@ -29,19 +24,327 @@
   <link rel="stylesheet" href="assets/css/08-custom-animate.css" />
   <link rel="stylesheet" href="assets/css/09-slick.css" />
   <link rel="stylesheet" href="assets/css/10-icomoon.css" />
-  <link
-    rel="stylesheet"
-    href="assets/vendor/custom-animate/custom-animate.css" />
+  <link rel="stylesheet" href="assets/vendor/custom-animate/custom-animate.css" />
   <link rel="stylesheet" href="assets/vendor/jarallax/jarallax.css" />
   <link rel="stylesheet" href="assets/vendor/odometer/odometer.min.css" />
   <link rel="stylesheet" href="assets/fonts/gilroy/stylesheet.css" />
 
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/customstyles.css" />
 
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    .announcement-section {
+      padding: 50px 0 40px; /* Reduced from 70px 0 50px */
+    }
+    
+    .announcement-header {
+      background: linear-gradient(135deg, #0062cc, #0097e6);
+      padding: 25px 30px;
+      border-radius: 15px;
+      margin-bottom: 25px; /* Reduced from 30px */
+      box-shadow: 0 10px 25px rgba(0, 98, 204, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .announcement-header__content {
+      color: #fff;
+    }
+    
+    .announcement-header__content h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+      color: #fff;
+      font-weight: 700;
+    }
+    
+    .announcement-header__content p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0;
+    }
+    
+    .announcement-header__action {
+      margin-top: 10px;
+    }
+    
+    @media (min-width: 576px) {
+      .announcement-header__action {
+        margin-top: 0;
+      }
+    }
+    
+    /* Table Styles */
+    .announcement-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 25px; /* Reduced from 30px */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      background-color: #fff;
+    }
+    
+    .announcement-table thead th {
+      background-color: #0062cc;
+      color: #fff;
+      padding: 15px;
+      font-weight: 600;
+      text-align: left;
+      border: none;
+    }
+    
+    .announcement-table tbody td {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+    }
+    
+    .announcement-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .announcement-table tbody tr:hover td {
+      background-color: #f0f7ff;
+    }
+    
+    .table-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      min-width: 90px;
+    }
+    
+    .badge-urgent {
+      background-color: #fdedec;
+      color: #e74c3c;
+    }
+    
+    .badge-info {
+      background-color: #ebf5fb;
+      color: #3498db;
+    }
+    
+    .badge-warning {
+      background-color: #fef5e7;
+      color: #f39c12;
+    }
+    
+    .badge-success {
+      background-color: #eafaf1;
+      color: #2ecc71;
+    }
+    
+    .calendar-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 25px; /* Reduced from 30px */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      background-color: #fff;
+    }
+    
+    .calendar-table thead th {
+      background: linear-gradient(135deg, #0062cc, #0097e6);
+      color: #fff;
+      padding: 12px 15px;
+      font-weight: 600;
+      border: none;
+    }
+    
+    .calendar-table tbody td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .calendar-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .calendar-table tbody tr:hover td {
+      background-color: #f0f7ff;
+    }
+    
+    .calendar-date {
+      font-weight: 600;
+      color: #0062cc;
+    }
+    
+    .calendar-event {
+      color: #333;
+    }
+    
+    .quick-links-box {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      margin-bottom: 25px; /* Reduced from 30px */
+    }
+    
+    .quick-links-box h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 10px;
+      color: #333;
+    }
+    
+    .quick-links-box h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: #0062cc;
+    }
+    
+    .quick-links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .quick-links-list li {
+      margin-bottom: 10px;
+    }
+    
+    .quick-links-list li:last-child {
+      margin-bottom: 0;
+    }
+    
+    .quick-links-list a {
+      display: flex;
+      align-items: center;
+      color: #505050;
+      font-size: 14px;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .quick-links-list a:hover {
+      background-color: #f0f7ff;
+      color: #0062cc;
+    }
+    
+    .quick-links-list a i {
+      margin-right: 10px;
+      color: #0062cc;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .quick-links-list a:hover i {
+      transform: translateX(3px);
+    }
+    
+    .table-responsive {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .calendar-view-all {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      background-color: #f8f9fa;
+      color: #0062cc;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+    
+    .calendar-view-all:hover {
+      background-color: #e9ecef;
+      color: #004a99;
+    }
+    
+    .calendar-view-all i {
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+    
+    .calendar-view-all:hover i {
+      transform: translateX(3px);
+    }
+    
+    @media (max-width: 767px) {
+      .announcement-header {
+        padding: 20px;
+        text-align: center;
+      }
+      
+      .announcement-header__content h2 {
+        font-size: 22px;
+      }
+      
+      .announcement-header__action {
+        margin-top: 15px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .announcement-table thead {
+        display: none;
+      }
+      
+      .announcement-table tbody td {
+        display: block;
+        text-align: right;
+      }
+      
+      .announcement-table tbody td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #505050;
+      }
+      
+      .announcement-table tbody tr {
+        display: block;
+        border-bottom: 2px solid #e3f2fd;
+        margin-bottom: 15px;
+      }
+      
+      .calendar-table thead {
+        display: none;
+      }
+      
+      .calendar-table tbody td {
+        display: block;
+        text-align: right;
+      }
+      
+      .calendar-table tbody td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #505050;
+      }
+      
+      .calendar-table tbody tr {
+        display: block;
+        border-bottom: 2px solid #e3f2fd;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body class="body-gray-bg">
@@ -153,10 +456,10 @@
                               </li>
                             </ul>
                           </li>
-                          <li class="menu-item-has-children">
+                          <li class="menu-item-has-children active">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="./informasi">Informasi Akademik</a></li>
+                              <li class="active"><a href="./informasi">Informasi Akademik</a></li>
                               <li><a href="./administrasi/">Administrasi Akademik</a></li>
                               <li><a href="./kegiatan">Kegiatan Akademik</a></li>
                               <li><a href="./modul/">Pengambilan Modul</a></li>
@@ -166,6 +469,14 @@
                           </li>
                           <li><a href="./galeri/">Galeri</a></li>
                           <li class="menu-item-has-children">
+                            <a href="#">Program</a>
+                            <ul class="sub-menu">
+                              <li><a href="./rpl.php">RPL</a></li>
+                              <li><a href="./reguler.php">Reguler</a></li>
+                              <li><a href="./jurusan.php">Program Studi</a></li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
                               <li><a href="./tentang/">Universitas Terbuka</a></li>
@@ -174,6 +485,7 @@
                               <li><a href="./tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
+                          <li><a href="./biaya.php">Biaya Kuliah</a></li>
                         </ul>
                       </div>
                     </nav>
@@ -246,329 +558,174 @@
       </div>
       <div class="container">
         <div class="page-header__inner">
-          <h2>INFORMASI AKADEMIK</h2>
+          <h2>Pengumuman & Jadwal Penting</h2>
           <ul class="thm-breadcrumb">
             <li>
               <a href="./"><span class="fa fa-home"></span> Home</a>
             </li>
             <li><i class="icon-right-arrow-angle"></i></li>
-            <li class="color-base"> Informasi</li>
+            <li class="color-base">Informasi Akademik</li>
           </ul>
         </div>
       </div>
     </section>
     <!--End Page Header-->
 
-    <!--Start Banner One-->
-    <section class="banner-one">
-      <div class="banner-one__shape1 float-bob-x">
-        <img src="assets/img/shape/banner-one__shape1.png" alt="#" />
-      </div>
-      <div class="banner-one__shape3 float-bob-y">
-        <img src="assets/img/shape/banner-one__shape3.png" alt="#" />
-      </div>
+    <!-- Start Announcement Section -->
+    <section class="announcement-section">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12">
-            <div class="section-title text-center mb-5">
-              <h2 class="fw-bold">Jadwal Akademik Universitas Terbuka Sarjana</h2>
-              <p class="text-muted">Tahun Akademik 2024/2025</p>
-            </div>
+        <!-- Announcement Header -->
+        <div class="announcement-header">
+          <div class="announcement-header__content">
+            <h2>📢 Pengumuman & Informasi Penting</h2>
+            <p>Informasi terbaru dan pengumuman penting terkait perkuliahan di Universitas Terbuka</p>
+          </div>
+          <div class="announcement-header__action">
+            <a href="./jadwal.php" class="thm-btn">
+              <span class="txt"><i class="bi bi-calendar-check"></i> Lihat Jadwal Lengkap</span>
+            </a>
+          </div>
+        </div>
 
-            <div class="table-responsive">
-              <style>
-                .jadwal-table {
-                  width: 100%;
-                  border-collapse: separate;
-                  border-spacing: 0;
-                  margin-bottom: 2rem;
-                  background: #fff;
-                  border-radius: 10px;
-                  overflow: hidden;
-                  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                }
-                
-                .jadwal-table thead th {
-                  background: #2b4eff;
-                  color: #fff;
-                  font-weight: 600;
-                  padding: 15px;
-                  text-align: center;
-                  border: none;
-                }
-                
-                .jadwal-table tbody td {
-                  padding: 12px 15px;
-                  border-bottom: 1px solid #eee;
-                  transition: all 0.3s ease;
-                  font-size: 14px;
-                }
-
-                .jadwal-table tbody tr:hover td {
-                  background-color: #f8f9fa;
-                }
-
-                .jadwal-table tbody tr:last-child td {
-                  border-bottom: none;
-                }
-
-                .jadwal-table td:first-child,
-                .jadwal-table td:last-child {
-                  font-weight: 500;
-                  text-align: center;
-                }
-
-                .jadwal-table td:nth-child(2) {
-                  font-weight: 500;
-                }
-
-                .jadwal-table td[data-label="KEGIATAN"] {
-                  text-align: center !important;
-                }
-
-                @media (max-width: 768px) {
-                  .jadwal-table thead {
-                    display: none;
-                  }
-                  
-                  .jadwal-table tbody td {
-                    display: block;
-                    text-align: left;
-                    padding: 8px 10px;
-                  }
-
-                  .jadwal-table tbody td:before {
-                    content: attr(data-label);
-                    float: left;
-                    font-weight: bold;
-                    margin-right: 10px;
-                  }
-
-                  .jadwal-table tbody tr {
-                    margin-bottom: 15px;
-                    display: block;
-                    border-bottom: 2px solid #2b4eff;
-                  }
-
-                  .jadwal-table tbody td[data-label="KEGIATAN"]:before {
-                    width: 100%;
-                    text-align: center;
-                    margin-bottom: 5px;
-                  }
-                  
-                  .jadwal-table tbody td[data-label="KEGIATAN"] {
-                    text-align: center !important;
-                    padding-left: 0;
-                  }
-                }
-              </style>
-
-              <table class="jadwal-table">
+        <div class="row">
+          <!-- Main Content - Announcements Table -->
+          <div class="col-xl-8">
+            <div class="table-responsive wow fadeInUp" data-wow-delay="0.1s">
+              <table class="announcement-table">
                 <thead>
                   <tr>
-                    <th>2024/2025 GANJIL</th>
-                    <th>KEGIATAN</th>
-                    <th>2024/2025 GENAP</th>
+                    <th width="15%">Tanggal</th>
+                    <th width="15%">Kategori</th>
+                    <th width="70%">Informasi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <!-- Urgent Announcements -->
                   <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Pendaftaran Mahasiswa Baru</td>
-                    <td data-label="2024/2025 GENAP"></td>
+                    <td data-label="Tanggal">15 Juli 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-urgent">Penting</span></td>
+                    <td data-label="Informasi">
+                      <strong>Penjadwalan Ulang Ujian Mata Kuliah Statistika Ekonomi</strong><br>
+                      Ujian Akhir Semester untuk mata kuliah Statistika Ekonomi (EKON4115) pada tanggal 18 Juli 2024 ditunda menjadi 25 Juli 2024 dikarenakan kendala teknis. Ujian akan dilaksanakan pada jam yang sama.
+                    </td>
                   </tr>
+
                   <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 26 Agustus 2024</td>
-                    <td data-label="KEGIATAN">– Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 12 Februari 2025</td>
+                    <td data-label="Tanggal">10 Juli 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-urgent">Penting</span></td>
+                    <td data-label="Informasi">
+                      <strong>Batas Akhir Pembayaran SPP Semester Ganjil 2024/2025</strong><br>
+                      Batas akhir pembayaran SPP untuk semester Ganjil 2024/2025 adalah 31 Juli 2024. Mahasiswa yang belum melakukan pembayaran hingga batas waktu tersebut akan dianggap cuti pada semester ini.
+                    </td>
                   </tr>
+
                   <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 19 Agustus 2024</td>
-                    <td data-label="KEGIATAN">-Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit</td>
-                    <td data-label="2024/2025 GENAP">18 November 2024 – 22 Januari 2025</td>
+                    <td data-label="Tanggal">5 Juli 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-info">Informasi</span></td>
+                    <td data-label="Informasi">
+                      <strong>Pendaftaran Tutorial Tatap Muka (TTM) Semester Ganjil 2024/2025</strong><br>
+                      Pendaftaran TTM untuk semester Ganjil 2024/2025 telah dibuka. Mahasiswa dapat mendaftar melalui aplikasi SILAYAR mulai 10 Juli hingga 20 September 2024. TTM akan dimulai pada 5 Oktober 2024.
+                    </td>
                   </tr>
+
                   <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Pembayaran LIP Admisi Mahasiswa Baru</td>
-                    <td data-label="2024/2025 GENAP"></td>
+                    <td data-label="Tanggal">25 Juni 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-warning">Pengingat</span></td>
+                    <td data-label="Informasi">
+                      <strong>Pengambilan Kartu Tanda Peserta Ujian (KTPU)</strong><br>
+                      Pencetakan KTPU untuk UAS semester Genap 2023/2024 dapat dilakukan mulai tanggal 1 Juli 2024 melalui laman myUT. Pastikan semua kewajiban pembayaran telah diselesaikan sebelumnya.
+                    </td>
                   </tr>
+
                   <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 27 Agustus 2024</td>
-                    <td data-label="KEGIATAN">– Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 19 Februari 2025</td>
+                    <td data-label="Tanggal">20 Juni 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-success">Akademik</span></td>
+                    <td data-label="Informasi">
+                      <strong>UT Raih Akreditasi Unggul dari BAN-PT</strong><br>
+                      Universitas Terbuka berhasil mempertahankan status akreditasi "Unggul" dari BAN-PT untuk periode 2024-2029. Pencapaian ini menunjukkan komitmen UT dalam menyediakan pendidikan tinggi berkualitas.
+                    </td>
                   </tr>
+
                   <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 20 Agustus 2024</td>
-                    <td data-label="KEGIATAN">– Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit</td>
-                    <td data-label="2024/2025 GENAP">18 November 2024 – 30 Januari 2025</td>
+                    <td data-label="Tanggal">15 Juni 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-info">Informasi</span></td>
+                    <td data-label="Informasi">
+                      <strong>Peluncuran Program Studi Baru: Sains Data & Kecerdasan Buatan</strong><br>
+                      Universitas Terbuka resmi meluncurkan program studi baru Sains Data & Kecerdasan Buatan (S1) pada Fakultas Sains dan Teknologi mulai semester Ganjil 2024/2025.
+                    </td>
                   </tr>
+
                   <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Unggah Berkas Mahasiswa Baru</td>
-                    <td data-label="2024/2025 GENAP"></td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 29 Agustus 2024</td>
-                    <td data-label="KEGIATAN">– Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 26 Februari 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 21 Agustus 2024</td>
-                    <td data-label="KEGIATAN">– Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit</td>
-                    <td data-label="2024/2025 GENAP">18 November 2024 – 26 Februari 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 5 September 2024</td>
-                    <td data-label="KEGIATAN">Registrasi Mata Kuliah</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 26 Februari 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Pembayaran Uang Kuliah</td>
-                    <td data-label="2024/2025 GENAP"></td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 11 September 2024</td>
-                    <td data-label="KEGIATAN">Pembayaran Uang Kuliah Jalur Umum (Non RPL/Non Alih Kredit)</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 5 Maret 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Pembayaran Uang Kuliah&nbsp;Jalur Rekognisi Pembelajaran Lampau (RPL)/Alih Kredit dan On Going</td>
-                    <td data-label="2024/2025 GENAP">18 November 2024 – 5 Maret 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 18 September 2024</td>
-                    <td data-label="KEGIATAN">Registrasi TTM Atas Permintaan Mahasiswa</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 12 Maret 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">6 Mei – 20 September 2024</td>
-                    <td data-label="KEGIATAN">Pembayaran TTM Atas Permintaan Mahasiswa</td>
-                    <td data-label="2024/2025 GENAP">17 Oktober 2024 – 15 Maret 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">4 September 2024</td>
-                    <td data-label="KEGIATAN">Dies Natalis Universitas Terbuka</td>
-                    <td data-label="2024/2025 GENAP">4 September 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">7 Mei – 23 September 2024</td>
-                    <td data-label="KEGIATAN">Aktivasi dan Pengisian Form Kesediaan&nbsp; Mengikuti Tutorial Online</td>
-                    <td data-label="2024/2025 GENAP">18 Oktober 2024 – 24 Maret 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Layanan Pendukung Kesuksesan Belajar Jarak Jauh Mahasiswa Baru</td>
-                    <td data-label="2024/2025 GENAP"></td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">23 Juni – 22 September 2024</td>
-                    <td data-label="KEGIATAN">– Orientasi Studi Mahasiswa Baru (OSMB) – Pelatihan Keterampilan Belajar Jarak Jauh (PKBJJ)</td>
-                    <td data-label="2024/2025 GENAP">21 Desember 2024 – 23 Maret 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Layanan Pendukung Kesuksesan Belajar Jarak Jauh</td>
-                    <td data-label="2024/2025 GENAP"></td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">23 Juni – 27 Oktober 2024</td>
-                    <td data-label="KEGIATAN">– Workshop Tugas – Klinik Ujian</td>
-                    <td data-label="2024/2025 GENAP">21 Desember 2024 – 27 April 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Pengumuman Lulusan</td>
-                    <td data-label="2024/2025 GENAP"></td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">24 September 2024</td>
-                    <td data-label="KEGIATAN">Tahap I</td>
-                    <td data-label="2024/2025 GENAP">2 April 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">15 Oktober 2024</td>
-                    <td data-label="KEGIATAN">Tahap II</td>
-                    <td data-label="2024/2025 GENAP">30 April 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">5 Oktober – 8 Desember 2024</td>
-                    <td data-label="KEGIATAN">Tutorial Tatap Muka (TTM)</td>
-                    <td data-label="2024/2025 GENAP">5 April – 8 Juni 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">14 Oktober – 8 Desember 2024</td>
-                    <td data-label="KEGIATAN">Tutorial Online (Tuton)</td>
-                    <td data-label="2024/2025 GENAP">14 April – 8 Juni 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL"></td>
-                    <td data-label="KEGIATAN">Tugas Mata Kuliah</td>
-                    <td data-label="2024/2025 GENAP"></td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">28 Oktober – 3 November 2024</td>
-                    <td data-label="KEGIATAN">– Tugas Mata Kuliah 1</td>
-                    <td data-label="2024/2025 GENAP">28 April – 4 Mei 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">11 – 17 November 2024</td>
-                    <td data-label="KEGIATAN">– Tugas Mata Kuliah 2</td>
-                    <td data-label="2024/2025 GENAP">12 – 18 Mei 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">25 November – 1 Desember 2024</td>
-                    <td data-label="KEGIATAN">– Tugas Mata Kuliah 3</td>
-                    <td data-label="2024/2025 GENAP">26 Mei – 1 Juni 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">14 Oktober – 22 Desember 2024</td>
-                    <td data-label="KEGIATAN">Bimbingan dan Unggah Karya Ilmiah</td>
-                    <td data-label="2024/2025 GENAP">7 April – 23 Juni 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">11 – 12 November 2024 (Wisuda Periode I Wilayah I Tahun Akademik 2024/2025) 18 – 19 November 2024 (Wisuda Periode I Wilayah II Tahun Akademik 2024/2025)</td>
-                    <td data-label="KEGIATAN">Wisuda</td>
-                    <td data-label="2024/2025 GENAP">14 – 15 Juli 2025 (Wisuda Periode II Wilayah I Tahun Akademik 2024/2025) 28 – 29 Juli 2025 (Wisuda Periode II Wilayah II Tahun Akademik 2024/2025)</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">11 November 2024 – 25 Januari 2025</td>
-                    <td data-label="KEGIATAN">Pencetakan KTPU melalui Laman <a href="https://myut.ut.ac.id">https://myut.ut.ac.id</a></td>
-                    <td data-label="2024/2025 GENAP">12 Mei – 26 Juli 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">22 Desember 2024</td>
-                    <td data-label="KEGIATAN">Batas Akhir Mengunggah Laporan Praktik/Praktikum ke Laman <a href="https://praktik.ut.ac.id">https://praktik.ut.ac.id</a></td>
-                    <td data-label="2024/2025 GENAP">23 Juni 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">14 dan 15 Desember 2024</td>
-                    <td data-label="KEGIATAN">Ujian Akhir Semester (Tatap Muka)</td>
-                    <td data-label="2024/2025 GENAP">14 dan 15 Juni 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">10 Desember 2024 – 26 Januari 2025</td>
-                    <td data-label="KEGIATAN">Ujian Akhir Semester (Ujian Online)</td>
-                    <td data-label="2024/2025 GENAP">10 Juni – 27 Juli 2025</td>
-                  </tr>
-                  <tr>
-                    <td data-label="2024/2025 GANJIL">5 Februari 2025</td>
-                    <td data-label="KEGIATAN">Pengumuman Nilai Akhir Mata Kuliah</td>
-                    <td data-label="2024/2025 GENAP">6 Agustus 2025</td>
+                    <td data-label="Tanggal">10 Juni 2024</td>
+                    <td data-label="Kategori"><span class="table-badge badge-warning">Pengingat</span></td>
+                    <td data-label="Informasi">
+                      <strong>Batas Akhir Unggah Laporan Praktikum</strong><br>
+                      Batas akhir pengunggahan laporan praktikum/praktik untuk semester Genap 2023/2024 adalah tanggal 20 Juni 2024 melalui laman praktik.ut.ac.id.
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+
+          <!-- Sidebar - Calendar & Quick Links -->
+          <div class="col-xl-4">
+            <!-- Important Dates -->
+            <div class="table-responsive wow fadeInUp" data-wow-delay="0.2s">
+              <table class="calendar-table">
+                <thead>
+                  <tr>
+                    <th colspan="2"><i class="bi bi-calendar-event me-2"></i> Jadwal Penting</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Tanggal" class="calendar-date">31 Juli 2024</td>
+                    <td data-label="Kegiatan" class="calendar-event">Batas Akhir Pembayaran SPP Semester Ganjil 2024/2025</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Tanggal" class="calendar-date">20 Sept 2024</td>
+                    <td data-label="Kegiatan" class="calendar-event">Batas Akhir Pendaftaran TTM</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Tanggal" class="calendar-date">5 Okt 2024</td>
+                    <td data-label="Kegiatan" class="calendar-event">Mulai Tutorial Tatap Muka (TTM)</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Tanggal" class="calendar-date">14 Okt 2024</td>
+                    <td data-label="Kegiatan" class="calendar-event">Mulai Tutorial Online (Tuton)</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Tanggal" class="calendar-date">14-15 Des 2024</td>
+                    <td data-label="Kegiatan" class="calendar-event">Ujian Akhir Semester (Tatap Muka)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <a href="./jadwal.php" class="calendar-view-all">Lihat Jadwal Lengkap <i class="bi bi-arrow-right"></i></a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links-box wow fadeInUp" data-wow-delay="0.3s">
+              <h3>Akses Cepat</h3>
+              <ul class="quick-links-list">
+                <li><a href="https://elearning.ut.ac.id" target="_blank"><i class="bi bi-laptop"></i> Tutorial Online</a></li>
+                <li><a href="https://tmk.ut.ac.id" target="_blank"><i class="bi bi-file-earmark-text"></i> Tugas Mata Kuliah</a></li>
+                <li><a href="https://silayar.ut.ac.id" target="_blank"><i class="bi bi-people"></i> SILAYAR UT</a></li>
+                <li><a href="https://www.ut.ac.id/kalender-akademik" target="_blank"><i class="bi bi-calendar3"></i> Kalender Akademik</a></li>
+                <li><a href="./jadwal.php"><i class="bi bi-calendar-check"></i> Jadwal Perkuliahan</a></li>
+                <li><a href="./biaya.php"><i class="bi bi-cash-stack"></i> Informasi Biaya</a></li>
+                <li><a href="https://hallo-ut.ut.ac.id/" target="_blank"><i class="bi bi-headset"></i> Layanan Hallo-UT</a></li>
+                <li><a href="https://wa.me/6282293924242"><i class="bi bi-whatsapp"></i> Konsultasi (WhatsApp)</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <!--End Banner One-->
+    <!-- End Announcement Section -->
 
     <!--Start Footer Three-->
     <footer class="footer-three">
-      <!-- Start Footer Main -->
       <div class="footer-main footer-main__three">
         <div class="footer-three__shape1">
           <img src="assets/img/shape/footer-three__shape1.png" alt="shapes" />
@@ -580,7 +737,7 @@
           <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
             <div class="row">
               <!--Start Single Footer Widget-->
-              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s">
                 <div class="single-footer-widget single-footer-widget-style2">
                   <div class="title">
                     <h3>Bantuan &amp; Dukungan</h3>
@@ -621,7 +778,7 @@
               <!--End Single Footer Widget-->
 
               <!--Start Single Footer Widget-->
-              <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+              <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                 <div class="single-footer-widget single-footer-widget-style2 ml55">
                   <div class="title">
                     <h3>Link Cepat</h3>
@@ -647,7 +804,7 @@
               <!--End Single Footer Widget-->
 
               <!--Start Single Footer Widget-->
-              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                 <div class="single-footer-widget single-footer-widget-style2 ml50">
                   <div class="title">
                     <h3>Layanan Kami</h3>
@@ -692,13 +849,11 @@
             </div>
           </div>
         </div>
-        <!-- End Footer Main -->
-
+        
         <!--Start Footer Bottom -->
         <div class="footer-bottom footer-bottom-two footer-bottom-three">
           <div class="container">
-            <div
-              class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
+            <div class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
               <div class="copyright-text text-center">
                 <p>
                   Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
@@ -712,7 +867,7 @@
         <!--End Footer Bottom -->
       </div>
     </footer>
-    <!--Start Footer One-->
+    <!--End Footer Three-->
   </div>
 
   <!-- Scroll-top -->
@@ -743,7 +898,6 @@
   <!-- JS here -->
   <script src="assets/js/jquery-3.6.0.min.js"></script>
   <script src="assets/js/01-ajax-form.js"></script>
-  <!-- <script src="assets/js/02-bootstrap.min.js"></script> -->
   <script src="assets/js/03-jquery.appear.js"></script>
   <script src="assets/js/04-swiper.min.js"></script>
   <script src="assets/js/05-jquery.odometer.min.js"></script>

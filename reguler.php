@@ -777,7 +777,8 @@
                       </li>
                       <li>
                         <p>
-                          <a href="./suratketerangan">Surat Keterangan</</p>
+                          <a href="./suratketerangan">Surat Keterangan</a>
+                        </p>
                       </li>
                       <li>
                         <p>
@@ -858,6 +859,419 @@
   <script src="assets/vendor/progress-bar/knob.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+  
+  <script>
+    // Initialize animations
+    $(document).ready(function() {
+      new WOW().init();
+      
+      // Add hover effects
+      $('.choose-card').hover(
+        function() {
+          $(this).find('.choose-icon i').addClass('fa-bounce');
+        },
+        function() {
+          $(this).find('.choose-icon i').removeClass('fa-bounce');
+        }
+      );
+      
+      // FAQ accordion icon rotation
+      $('.accordion-button').on('click', function() {
+        if ($(this).hasClass('collapsed')) {
+          $(this).find('i.bi').css('transform', 'rotate(0deg)');
+        } else {
+          $(this).find('i.bi').css('transform', 'rotate(180deg)');
+        }
+      });
+      
+      // Add hover effects to benefit items
+      $('.benefit-item').hover(
+        function() {
+          $(this).find('i').addClass('fa-pulse');
+        },
+        function() {
+          $(this).find('i').removeClass('fa-pulse');
+        }
+      );
+    });
+  </script>
+  
+  <style>
+    /* Enhanced styles for program page */
+    .program-content-section {
+      padding: 5rem 0;
+    }
+    
+    .program-header {
+      background-color: rgba(var(--primary-rgb), 0.05);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    
+    .program-icon {
+      font-size: 3rem;
+      color: var(--thm-primary);
+      margin-bottom: 1rem;
+    }
+    
+    .program-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .program-meta span {
+      display: inline-flex;
+      align-items: center;
+      background-color: rgba(var(--primary-rgb), 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+    }
+    
+    .program-meta span i {
+      margin-right: 0.5rem;
+    }
+    
+    .info-box {
+      background-color: #e7f1ff;
+      border-left: 4px solid #0d6efd;
+      padding: 1.25rem;
+      border-radius: 0.25rem;
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-box i {
+      font-size: 2rem;
+      color: #0d6efd;
+      margin-right: 1rem;
+    }
+    
+    .benefit-items {
+      margin-bottom: 2rem;
+    }
+    
+    .benefit-item {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .benefit-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+    
+    .benefit-item i {
+      font-size: 2rem;
+      color: var(--thm-primary);
+      margin-bottom: 1rem;
+    }
+    
+    .testimonial-box {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+      margin: 2rem 0;
+    }
+    
+    .quote-icon {
+      position: absolute;
+      top: -1rem;
+      left: 2rem;
+      background-color: var(--thm-primary);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    
+    .learning-methods {
+      margin: 1.5rem 0;
+    }
+    
+    .learning-method-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .learning-method-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .method-icon {
+      font-size: 2rem;
+      color: var(--thm-primary);
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .method-content h4 {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Sidebar Styles */
+    .sidebar-box {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .program-info-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .program-info-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    
+    .program-info-list li i {
+      color: var(--thm-primary);
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+    
+    .info-content {
+      flex: 1;
+    }
+    
+    .info-content .title {
+      font-size: 0.875rem;
+      color: #6c757d;
+      display: block;
+    }
+    
+    .info-content .value {
+      font-weight: 600;
+    }
+    
+    .progress-path {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    
+    .path-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+    
+    .path-item:last-child {
+      padding-bottom: 0;
+    }
+    
+    .path-icon {
+      position: absolute;
+      left: -2.5rem;
+      top: 0;
+      font-size: 1.5rem;
+      color: var(--thm-primary);
+      z-index: 1;
+    }
+    
+    .path-line {
+      position: absolute;
+      left: -2rem;
+      top: 1.75rem;
+      bottom: 0;
+      width: 2px;
+      background-color: rgba(var(--primary-rgb), 0.2);
+    }
+    
+    .path-content h4 {
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-item i {
+      font-size: 1.25rem;
+      color: var(--thm-primary);
+      margin-right: 1rem;
+    }
+    
+    .contact-link {
+      color: #212529;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-link:hover {
+      color: var(--thm-primary);
+    }
+    
+    /* Why Choose Section */
+    .why-choose-section {
+      background-color: #f8f9fa;
+      padding: 5rem 0;
+    }
+    
+    .choose-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      padding: 2rem;
+      text-align: center;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .choose-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+    
+    .choose-icon {
+      font-size: 2.5rem;
+      color: var(--thm-primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Testimonial Section */
+    .student-testimonial-section {
+      padding: 5rem 0;
+    }
+    
+    .testimonial-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      overflow: hidden;
+    }
+    
+    .testimonial-image {
+      position: relative;
+      height: 100%;
+    }
+    
+    .testimonial-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .testimonial-quote {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: var(--thm-primary);
+      color: #fff;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .testimonial-content {
+      padding: 3rem;
+    }
+    
+    .testimonial-author {
+      margin-top: 1.5rem;
+    }
+    
+    /* CTA Section */
+    .program-cta-section {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, var(--thm-primary) 0%, var(--thm-secondary) 100%);
+      color: #fff;
+    }
+    
+    .program-cta-inner {
+      border-radius: 8px;
+    }
+    
+    .program-cta-inner h2 {
+      color: #fff;
+    }
+    
+    .thm-btn2 {
+      background-color: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+    }
+    
+    /* Animation */
+    @keyframes fa-pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    .fa-pulse {
+      animation: fa-pulse 1s infinite;
+    }
+    
+    .fa-bounce {
+      animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+      .program-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .learning-method-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .method-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+      
+      .testimonial-content {
+        padding: 2rem;
+      }
+    }
+  </style>
 </body>
 
 </html>

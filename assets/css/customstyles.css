@@ -68,8 +68,169 @@ a {
 
 /* Section spacing 📏 */
 .jarakcontainer {
-  padding: 4rem 0;
+  padding: 60px 0; /* Reduced from default (likely 80px or 100px) */
+}
+
+/* Reduce spacing between sections */
+section + section {
+  margin-top: -20px; /* Negative margin to bring sections closer */
+}
+
+/* Specific spacing adjustments for various sections */
+.testimonials-three {
+  padding: 60px 0 60px !important; /* Further reduced from 70px 0 80px */
+}
+
+.faculty-section {
+  padding: 60px 0 !important; /* Reduced from 80px */
+}
+
+.faq-section {
+  padding: 60px 0 !important; /* Reduced from 80px */
+}
+
+.about-section {
+  padding: 60px 0 !important; /* Reduced from 80px */
+}
+
+.cta-one {
+  padding: 60px 0 !important; /* Reduced from 80px */
+}
+
+/* Reduce spacing between title components and content */
+.sec-title-three {
+  margin-bottom: 25px !important; /* Reduced from 30px */
+}
+
+.about-title {
+  margin-bottom: 20px !important; /* Reduced from likely 30px or 40px */
+}
+
+/* Enhanced Testimonial Styles - More Compact Layout 🌟 */
+.testimonials-carousel-wrapper {
+  padding: 15px 0 !important; /* Reduced from 40px 0 */
   position: relative;
+}
+
+/* Enhanced Circle Image Layout - More Compact 📷 */
+.testimonial-image-circle {
+  position: relative;
+  height: 200px !important; /* Reduced from 260px */
+  margin-bottom: 15px !important; /* Reduced from 30px */
+}
+
+/* Adjusted circle positions for more compact layout */
+.circle-item:nth-child(1) {
+  transform: translate(-50%, -50%) translate(0px, -90px) scale(0.85) !important; /* Reduced vertical distance from -120px */
+}
+
+.circle-item:nth-child(2) {
+  transform: translate(-50%, -50%) translate(90px, 45px) scale(0.85) !important; /* Adjusted position */
+}
+
+.circle-item:nth-child(3) {
+  transform: translate(-50%, -50%) translate(-90px, 45px) scale(0.85) !important; /* Adjusted position */
+}
+
+.circle-item:nth-child(1).active {
+  transform: translate(-50%, -50%) translate(0px, -90px) scale(1.1) !important;
+}
+
+.circle-item:nth-child(2).active {
+  transform: translate(-50%, -50%) translate(90px, 45px) scale(1.1) !important;
+}
+
+.circle-item:nth-child(3).active {
+  transform: translate(-50%, -50%) translate(-90px, 45px) scale(1.1) !important;
+}
+
+/* Dynamic positioning for more testimonials - also more compact */
+.circle-item:nth-child(4) {
+  transform: translate(-50%, -50%) translate(0px, 90px) scale(0.85) !important; /* Reduced from 120px */
+}
+
+.circle-item:nth-child(5) {
+  transform: translate(-50%, -50%) translate(-90px, -45px) scale(0.85) !important; /* Adjusted position */
+}
+
+.circle-item:nth-child(6) {
+  transform: translate(-50%, -50%) translate(90px, -45px) scale(0.85) !important; /* Adjusted position */
+}
+
+.circle-item:nth-child(4).active {
+  transform: translate(-50%, -50%) translate(0px, 90px) scale(1.1) !important;
+}
+
+.circle-item:nth-child(5).active {
+  transform: translate(-50%, -50%) translate(-90px, -45px) scale(1.1) !important;
+}
+
+.circle-item:nth-child(6).active {
+  transform: translate(-50%, -50%) translate(90px, -45px) scale(1.1) !important;
+}
+
+/* Enhanced Testimonial Card */
+.testimonial-card {
+  margin-bottom: 15px !important; /* Reduced from 30px */
+  padding: 25px !important; /* Reduced from 35px */
+}
+
+/* Make the card text more compact */
+.testimonial-text p {
+  margin-bottom: 15px !important; /* Reduced from 25px */
+}
+
+/* Navigation Controls */
+.testimonial-navigation {
+  margin-top: 15px !important; /* Reduced from 40px */
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+  .testimonial-image-circle {
+    height: 180px !important; /* Reduced from 220px */
+  }
+  
+  .testimonial-card {
+    padding: 20px !important; /* Reduced from 30px */
+  }
+  
+  .testimonials-three,
+  .faculty-section,
+  .faq-section,
+  .about-section,
+  .cta-one {
+    padding: 45px 0 !important; /* Reduced from 50px */
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonial-image-circle {
+    height: 160px !important; /* Reduced from 200px */
+  }
+  
+  .testimonial-card {
+    padding: 15px !important; /* Reduced from 30px */
+  }
+  
+  .testimonials-three,
+  .faculty-section,
+  .faq-section,
+  .about-section,
+  .cta-one {
+    padding: 35px 0 !important; /* Reduced from 40px */
+  }
+}
+
+@media (max-width: 575px) {
+  .testimonial-image-circle {
+    height: 150px !important; /* Reduced from 180px */
+  }
+  
+  .circle-item {
+    width: 60px !important; /* Reduced from 65px */
+    height: 60px !important; /* Reduced from 65px */
+  }
 }
 
 /* Colors 🌈 */
@@ -229,8 +390,8 @@ a {
 
 /* Testimonial section 💬 - Enhanced for mobile and improved readability */
 .testimonials-three {
+  padding: 60px 0 60px !important; /* Further reduced from 70px 0 80px */
   background-color: #f8f9fa;
-  padding: 5rem 0;
   position: relative;
 }
 
@@ -321,7 +482,7 @@ a {
 
 .testimonial-card {
   background: white;
-  padding: 3rem; /* 📏 Increased padding for better spacing */
+  padding: 25px !important; /* Reduced from 35px */
   border-radius: 15px; /* 🔄 Slightly more rounded corners */
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* 🌟 Enhanced shadow for depth */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -331,6 +492,7 @@ a {
   width: 100%;
   margin: 0 auto;
   position: relative; /* 📍 For positioning decorative elements */
+  margin-bottom: 15px !important; /* Reduced from 30px */
 }
 
 /* Add decorative connector between image and card */
@@ -360,7 +522,7 @@ a {
   }
   
   .testimonial-card {
-    padding: 2.5rem;
+    padding: 20px !important; /* Reduced from 30px */
   }
 }
 
@@ -387,7 +549,7 @@ a {
   }
   
   .testimonial-card {
-    padding: 2rem;
+    padding: 15px !important; /* Reduced from 30px */
   }
   
   .testimonial-card::before {
@@ -700,11 +862,13 @@ a {
 
 /* Faculty tabs 🎓 */
 .faculty-section {
+  padding: 60px 0 !important; /* Reduced from 80px */
   background-color: white;
 }
 
 .faculty-tabs {
   margin-top: 2rem;
+  padding: 20px !important; /* Reduced from 30px */
 }
 
 .nav-pills .nav-link {
@@ -722,11 +886,11 @@ a {
 }
 
 .tab-content {
-  padding: 2rem;
+  padding: 15px !important; /* Reduced from 20px */
   background-color: white;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  margin-top: 1rem;
+  margin-top: 20px !important; /* Reduced from 30px */
 }
 
 .tab-content h4 {
@@ -761,6 +925,7 @@ a {
 
 /* FAQ section ❓ */
 .faq-section {
+  padding: 60px 0 !important; /* Reduced from 80px */
   background-color: #f8f9fa;
 }
 
@@ -768,6 +933,7 @@ a {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
+  margin-top: 25px !important; /* Reduced from 40px */
 }
 
 .accordion-section {
@@ -816,12 +982,13 @@ a {
 
 /* About section 📖 */
 .about-section {
+  padding: 60px 0 !important; /* Reduced from 80px */
   background-color: white;
 }
 
 .about-title {
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 20px !important; /* Reduced from likely 30px or 40px */
 }
 
 .s-about-img2 {
@@ -842,8 +1009,8 @@ a {
 
 /* CTA section 📣 */
 .cta-one {
+  padding: 60px 0 !important; /* Reduced from 80px */
   background-color: var(--primary-color);
-  padding: 4rem 0;
   color: white;
   position: relative;
   overflow: hidden;
@@ -883,6 +1050,7 @@ a {
 
 /* Footer section 👣 */
 .footer-three {
+  margin-top: -20px; /* Negative margin to bring footer closer to last section */
   background-color: #1a1a1a;
   color: #aaaaaa;
 }
@@ -950,6 +1118,10 @@ a {
 
 /* Responsive fixes 📱 */
 @media (max-width: 992px) {
+  .jarakcontainer {
+    padding: 50px 0;
+  }
+  
   .banner-one__inner {
     flex-direction: column;
   }
@@ -965,15 +1137,23 @@ a {
   .faculty-list {
     column-count: 1;
   }
+  
+  .testimonials-three,
+  .faculty-section,
+  .faq-section,
+  .about-section,
+  .cta-one {
+    padding: 50px 0 !important;
+  }
 }
 
 @media (max-width: 768px) {
-  .banner-one .big-title h2 {
-    font-size: 2rem;
+  .jarakcontainer {
+    padding: 40px 0;
   }
   
-  .jarakcontainer {
-    padding: 3rem 0;
+  .banner-one .big-title h2 {
+    font-size: 2rem;
   }
   
   .fixed-size-image {
@@ -987,6 +1167,18 @@ a {
   
   .testimonial-card .text p {
     font-size: 1rem;
+  }
+  
+  .testimonials-three,
+  .faculty-section,
+  .faq-section,
+  .about-section,
+  .cta-one {
+    padding: 40px 0 !important;
+  }
+  
+  .sec-title-three {
+    margin-bottom: 20px !important;
   }
 }
 
