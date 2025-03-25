@@ -413,6 +413,27 @@ Stack trace:
 #1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
 #2 {main}
   thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[23-Mar-2025 15:19:34 Europe/Berlin] Koneksi database berhasil
+[23-Mar-2025 15:30:40 Europe/Berlin] Koneksi database berhasil
+[23-Mar-2025 15:30:46 Europe/Berlin] Koneksi database berhasil
+[23-Mar-2025 15:38:37 Europe/Berlin] Koneksi database berhasil
+[23-Mar-2025 15:39:07 Europe/Berlin] Koneksi database berhasil
+[23-Mar-2025 15:44:45 Europe/Berlin] Koneksi database berhasil
+[23-Mar-2025 15:54:52 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 11:19:22 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 11:19:22 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 11:19:24 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 11:19:24 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
 [22-Mar-2025 13:55:15 Europe/Berlin] Koneksi database berhasil
 [22-Mar-2025 14:14:17 Europe/Berlin] Koneksi database berhasil
 [22-Mar-2025 14:47:34 Europe/Berlin] Koneksi database berhasil
@@ -474,3 +495,73 @@ Stack trace:
 [23-Mar-2025 04:37:33 Europe/Berlin] Koneksi database berhasil
 [23-Mar-2025 04:41:04 Europe/Berlin] Koneksi database berhasil
 [23-Mar-2025 04:41:30 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:44:15 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:44:15 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 13:44:17 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:44:17 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 13:48:48 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:48:48 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 13:49:00 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:49:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 13:49:00 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:49:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 13:49:00 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 13:49:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 14:06:34 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 14:06:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 14:06:34 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 14:06:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 14:06:34 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 14:06:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[24-Mar-2025 14:06:35 Europe/Berlin] Koneksi database berhasil
+[24-Mar-2025 14:06:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php:7
+Stack trace:
+#0 C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php(7): mysqli_connect('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7

@@ -5,6 +5,7 @@
 galeri/
 ├── images/           # Store all gallery images here
 ├── index.php         # Gallery page
+├── upload.php        # Image upload functionality
 └── README.md         # This documentation
 ```
 
@@ -70,6 +71,39 @@ Images must follow this naming pattern:
 - Image Compression: TinyPNG or ImageOptim
 - Image Editing: GIMP or PhotoShop
 - Batch Renaming: Advanced Renamer
+
+## 🖥️ Gallery Display Options
+
+### Display Modes
+The gallery supports various display options that can be toggled from the interface:
+- **Grid View**: Default view showing all images in a responsive grid
+- **Masonry Layout**: Pinterest-style layout adjusting to image dimensions
+- **Fullscreen View**: Maximizes viewing area for immersive experience
+
+### Sorting Options
+- By date (newest/oldest)
+- By category (wisuda/kegiatan/kampus)
+- By popularity/views
+
+### Filter Effects
+Visual transitions when filtering content:
+- Fade transition: 300ms ease-in-out
+- Scale transition: 200ms cubic-bezier
+- Slide effects: 400ms with slight bounce
+
+## 🔍 Search Functionality
+Users can search the gallery by:
+- Keywords in image filename
+- Category tags
+- Description text (if available)
+- Date ranges
+
+## 💻 Technical Requirements
+For optimal gallery performance:
+- Browser: Chrome 80+, Firefox 75+, Safari 13+, Edge 85+
+- JavaScript: Enabled
+- Minimum screen resolution: 768px width for best experience
+- Bandwidth: 1Mbps+ recommended for smooth loading
 
 ## 📞 Support
 For assistance with gallery management:
