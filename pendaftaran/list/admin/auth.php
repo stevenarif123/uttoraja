@@ -48,10 +48,10 @@ class Auth {
             }
         }
         
-        // Add new user
+        // Add new user with plain text password 🔑
         $this->credentials['users'][] = [
             'username' => $username,
-            'password_hash' => password_hash($password, PASSWORD_BCRYPT),
+            'password' => $password, // Store password as plain text
             'name' => $name,
             'role' => $role,
             'last_login' => null
@@ -72,7 +72,8 @@ class Auth {
         
         foreach ($this->credentials['users'] as &$user) {
             if ($user['username'] === $username) {
-                if (password_verify($password, $user['password_hash'])) {
+                // Simple direct password comparison ✅
+                if ($password === $user['password']) {
                     // Update last login
                     $user['last_login'] = date('Y-m-d H:i:s');
                     $this->saveCredentials();
@@ -97,6 +98,24 @@ class Auth {
         $this->incrementLoginAttempts();
         
         return ['success' => false, 'message' => 'Username atau password salah.'];
+    }
+    
+    /**
+     * Change password for a user
+     */
+    public function changePassword($username, $oldPassword, $newPassword) {
+        foreach ($this->credentials['users'] as &$user) {
+            if ($user['username'] === $username) {
+                // Direct password comparison for old password ✅
+                if ($oldPassword === $user['password']) {
+                    $user['password'] = $newPassword; // Store new password as plain text
+                    $this->saveCredentials();
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
     }
     
     /**
@@ -149,23 +168,6 @@ class Auth {
      */
     public function currentUser() {
         return isset($_SESSION['user']) ? $_SESSION['user'] : null;
-    }
-    
-    /**
-     * Change password for a user
-     */
-    public function changePassword($username, $oldPassword, $newPassword) {
-        foreach ($this->credentials['users'] as &$user) {
-            if ($user['username'] === $username) {
-                if (password_verify($oldPassword, $user['password_hash'])) {
-                    $user['password_hash'] = password_hash($newPassword, PASSWORD_BCRYPT);
-                    $this->saveCredentials();
-                    return true;
-                }
-                return false;
-            }
-        }
-        return false;
     }
     
     /**
@@ -226,7 +228,7 @@ function requireLogin() {
         // Store the requested URL for redirection after login
         $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
         
-        header('Location: /uttoraja/pendaftaran/admin/login.php');
+        header('Location: admin/login.php');
         exit;
     }
 }
