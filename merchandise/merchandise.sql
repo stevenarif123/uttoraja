@@ -117,16 +117,19 @@ CREATE TABLE `products` (
   `price_student` decimal(10,2) NOT NULL,
   `price_guest` decimal(10,2) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `size_options` varchar(255) DEFAULT NULL COMMENT 'Comma-separated list of available sizes'
+  `size_options` varchar(255) DEFAULT NULL COMMENT 'Comma-separated list of available sizes',
+  `category` varchar(50) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `featured` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price_student`, `price_guest`, `image`, `size_options`) VALUES
-(1, 'Baju Almamater', 'baju Almamater UT', 150000.00, 200000.00, '67bbf7773fc87_id-11134207-7r98y-lnklpmw7aikmc0.jpeg', NULL),
-(2, 'Topi UT', 'Topi dengan tulisan UT', 50000.00, 70000.00, '67bbf82c47ed0_316059194_634429251797308_7201826121817591657_n.jpeg', NULL);
+INSERT INTO `products` (`id`, `name`, `description`, `price_student`, `price_guest`, `image`, `size_options`, `category`, `active`, `featured`) VALUES
+(1, 'Baju Almamater', 'baju Almamater UT', 150000.00, 200000.00, '67bbf7773fc87_id-11134207-7r98y-lnklpmw7aikmc0.jpeg', NULL, 'Apparel', 1, 1),
+(2, 'Topi UT', 'Topi dengan tulisan UT', 50000.00, 70000.00, '67bbf82c47ed0_316059194_634429251797308_7201826121817591657_n.jpeg', NULL, 'Headwear', 1, 0);
 
 -- --------------------------------------------------------
 
