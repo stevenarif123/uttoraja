@@ -576,10 +576,6 @@
                     <p>Untuk kebanyakan layanan administrasi, Anda perlu menyiapkan: </p>
                     <ul>
                       <li>Kartu Tanda Mahasiswa (KTM) atau bukti identitas yang valid</li>
-                      <li>Bukti pembayaran SPP semester berjalan</li>
-                      <li>Formulir permintaan layanan yang relevan (akan diberikan oleh admin)</li>
-                      <li>Dokumen pendukung tambahan sesuai jenis permintaan (misalnya bukti kelulusan mata kuliah untuk transkrip)</li>
-                    </ul>
                     <p>Admin akan memberikan petunjuk lengkap tentang dokumen spesifik yang diperlukan saat Anda mengajukan permintaan. 📄</p>
                   </div>
                 </div>
@@ -597,7 +593,6 @@
                   <div class="faq-body">
                     <p>Jika nilai mata kuliah belum keluar setelah 1-2 bulan dari tanggal ujian, Anda dapat mengikuti langkah-langkah berikut:</p>
                     <ol>
-                      <li>Cek status nilai di sistem SIM-UT secara berkala</li>
                       <li>Hubungi admin program studi Anda melalui WhatsApp dengan menyertakan NIM, nama, kode dan nama mata kuliah, serta tanggal ujian</li>
                       <li>Admin akan membantu melakukan pengecekan dan penelusuran nilai ke bagian Pengujian UT</li>
                       <li>Jika diperlukan, admin akan membantu mengajukan pengaduan nilai resmi</li>
@@ -617,19 +612,17 @@
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                   <div class="faq-body">
-                    <p>Sebagian besar layanan administrasi akademik dasar sudah termasuk dalam biaya kuliah yang Anda bayarkan dan tidak dikenakan biaya tambahan, seperti:</p>
+                    <p>Sebagian besar layanan administrasi akademik dasar sudah termasuk dalam biaya sumbangan SALUT yang Anda bayarkan dan tidak dikenakan biaya tambahan, seperti:</p>
                     <ul>
                       <li>Konsultasi akademik</li>
-                      <li>Registrasi mata kuliah reguler</li>
                       <li>Verifikasi pembayaran</li>
                       <li>Pengaduan nilai</li>
                       <li>Informasi jadwal ujian</li>
                     </ul>
                     <p>Namun, beberapa layanan khusus mungkin dikenakan biaya sesuai ketentuan UT, seperti:</p>
                     <ul>
-                      <li>Penerbitan transkrip resmi (±Rp 50.000)</li>
-                      <li>Legalisir ijazah (±Rp 10.000 per lembar)</li>
-                      <li>Penerbitan surat keterangan khusus (±Rp 25.000)</li>
+                      <li>Legalisir Ijazah (±Rp 150.000 -Rp 250.000)</li>
+                      <li>Tatap Muka Atas Permintaan (±Rp 150.000/per MK)</li>
                       <li>Ujian susulan atau perbaikan nilai (sesuai kebijakan UT)</li>
                     </ul>
                     <p>Admin akan selalu menginformasikan biaya yang perlu dibayarkan (jika ada) sebelum memproses permintaan Anda. 💰</p>
@@ -740,134 +733,6 @@
       </div>
     </section>
     <!-- End Features Section -->
-
-    <!-- Admin Documents Section -->
-    <section class="document-section py-5 bg-light">
-      <div class="container">
-        <div class="section-title">
-          <span class="subtitle">Dokumen Penting</span>
-          <h2>Dokumen & Formulir Administrasi</h2>
-          <p class="mx-auto mt-3" style="max-width: 700px;">Unduh dokumen dan formulir penting untuk keperluan administrasi akademik Anda</p>
-        </div>
-        
-        <div class="row g-4">
-          <!-- Document Item 1 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="document-card p-4 bg-white rounded-3 shadow-sm hover-shadow wow fadeInUp" data-wow-delay="0.1s">
-              <div class="d-flex align-items-center mb-3">
-                <div class="document-icon me-3">
-                  <i class="bi bi-file-earmark-pdf text-danger fs-1"></i>
-                </div>
-                <div>
-                  <h5 class="mb-0">Formulir Registrasi</h5>
-                  <span class="text-muted small">PDF, 128KB</span>
-                </div>
-              </div>
-              <p class="mb-3">Digunakan untuk registrasi mata kuliah di setiap awal semester.</p>
-              <a href="#" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-download me-2"></i> Unduh Dokumen
-              </a>
-            </div>
-          </div>
-          
-          <!-- Document Item 2 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="document-card p-4 bg-white rounded-3 shadow-sm hover-shadow wow fadeInUp" data-wow-delay="0.2s">
-              <div class="d-flex align-items-center mb-3">
-                <div class="document-icon me-3">
-                  <i class="bi bi-file-earmark-excel text-success fs-1"></i>
-                </div>
-                <div>
-                  <h5 class="mb-0">Form Pengaduan Nilai</h5>
-                  <span class="text-muted small">XLS, 76KB</span>
-                </div>
-              </div>
-              <p class="mb-3">Untuk mengajukan pengaduan nilai yang belum keluar atau tidak sesuai.</p>
-              <a href="#" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-download me-2"></i> Unduh Dokumen
-              </a>
-            </div>
-          </div>
-          
-          <!-- Document Item 3 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="document-card p-4 bg-white rounded-3 shadow-sm hover-shadow wow fadeInUp" data-wow-delay="0.3s">
-              <div class="d-flex align-items-center mb-3">
-                <div class="document-icon me-3">
-                  <i class="bi bi-file-earmark-word text-primary fs-1"></i>
-                </div>
-                <div>
-                  <h5 class="mb-0">Surat Keterangan Aktif</h5>
-                  <span class="text-muted small">DOCX, 94KB</span>
-                </div>
-              </div>
-              <p class="mb-3">Template surat keterangan aktif kuliah untuk keperluan beasiswa atau instansi.</p>
-              <a href="#" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-download me-2"></i> Unduh Dokumen
-              </a>
-            </div>
-          </div>
-          
-          <!-- Document Item 4 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="document-card p-4 bg-white rounded-3 shadow-sm hover-shadow wow fadeInUp" data-wow-delay="0.4s">
-              <div class="d-flex align-items-center mb-3">
-                <div class="document-icon me-3">
-                  <i class="bi bi-file-earmark-pdf text-danger fs-1"></i>
-                </div>
-                <div>
-                  <h5 class="mb-0">Formulir Legalisir</h5>
-                  <span class="text-muted small">PDF, 112KB</span>
-                </div>
-              </div>
-              <p class="mb-3">Digunakan untuk mengajukan permohonan legalisir ijazah atau transkrip.</p>
-              <a href="#" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-download me-2"></i> Unduh Dokumen
-              </a>
-            </div>
-          </div>
-          
-          <!-- Document Item 5 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="document-card p-4 bg-white rounded-3 shadow-sm hover-shadow wow fadeInUp" data-wow-delay="0.5s">
-              <div class="d-flex align-items-center mb-3">
-                <div class="document-icon me-3">
-                  <i class="bi bi-file-earmark-text text-secondary fs-1"></i>
-                </div>
-                <div>
-                  <h5 class="mb-0">Panduan Pembayaran SPP</h5>
-                  <span class="text-muted small">PDF, 246KB</span>
-                </div>
-              </div>
-              <p class="mb-3">Petunjuk lengkap cara pembayaran SPP melalui berbagai kanal pembayaran.</p>
-              <a href="#" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-download me-2"></i> Unduh Dokumen
-              </a>
-            </div>
-          </div>
-          
-          <!-- Document Item 6 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="document-card p-4 bg-white rounded-3 shadow-sm hover-shadow wow fadeInUp" data-wow-delay="0.6s">
-              <div class="d-flex align-items-center mb-3">
-                <div class="document-icon me-3">
-                  <i class="bi bi-file-earmark-zip text-warning fs-1"></i>
-                </div>
-                <div>
-                  <h5 class="mb-0">Semua Dokumen</h5>
-                  <span class="text-muted small">ZIP, 1.2MB</span>
-                </div>
-              </div>
-              <p class="mb-3">Semua formulir administrasi akademik dalam satu paket file terkompresi.</p>
-              <a href="#" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-download me-2"></i> Unduh Semua
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Admin Documents Section -->
     
     <!-- CTA Section -->
     <section class="cta-section py-5">
@@ -919,29 +784,29 @@
                       <td>
                         <span class="fw-bold">Senin - Kamis</span>
                       </td>
-                      <td>08:00 - 16:00 WITA</td>
+                      <td>08:30 - 15:30 WITA</td>
                       <td>Semua layanan administrasi</td>
                     </tr>
                     <tr>
                       <td>
                         <span class="fw-bold">Jumat</span>
                       </td>
-                      <td>08:00 - 15:00 WITA</td>
+                      <td>08:30 - 15:30 WITA</td>
                       <td>Semua layanan administrasi</td>
                     </tr>
                     <tr>
                       <td>
                         <span class="fw-bold">Sabtu</span>
                       </td>
-                      <td>09:00 - 13:00 WITA</td>
-                      <td>Layanan terbatas (konsultasi & pengambilan dokumen)</td>
+                      <td>08:30 - 15:30 WITA</td>
+                      <td>Semua layanan administrasi</td>
                     </tr>
                     <tr class="table-light">
                       <td>
-                        <span class="fw-bold">Minggu & Hari Libur</span>
+                        <span class="fw-bold">Minggu & Tanggal Merah</span>
                       </td>
-                      <td>Tutup</td>
                       <td>-</td>
+                      <td>Layanan terbatas (konsultasi & pengambilan dokumen)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -975,7 +840,7 @@
           <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
             <div class="location-map rounded-3 shadow-sm overflow-hidden" style="height: 400px;">
               <!-- Replace with a Google Maps embed or any other map service -->
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15960.009343150962!2d119.82967791331788!3d-3.096392578357006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93ef675a92e0cd%3A0x162ed84e537c84db!2sMakale%2C%20Tana%20Toraja%20Regency%2C%20South%20Sulawesi!5e0!3m2!1sen!2sid!4v1649508419179!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.0246234317324!2d119.85904430000001!3d-3.0881011999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93edf1c2aefbab%3A0x20382e4bc7be4445!2sSentra%20Layanan%20Universitas%20Terbuka%20(SALUT)%20Tana%20Toraja!5e0!3m2!1sid!2sid!4v1743159699101!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
           <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
@@ -1018,8 +883,7 @@
                     <i class="bi bi-building text-primary fs-4"></i>
                   </div>
                   <div>
-                    <h5 class="mb-1">Gedung</h5>
-                    <p class="mb-0">Gedung SALUT, Lantai 1, Ruang Administrasi Akademik</p>
+                    <h5 class="mb-1">Gedung</h5>Kantor Sentra Layanan Universitas Terbuka Tana Toraja</p>
                   </div>
                 </li>
               </ul>

@@ -569,21 +569,236 @@ if (isset($_SESSION['error'])) {
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
     }
     
-    #startRegistrationBtn, #closeModalBtn {
+    /* Fixed Modal Button Styles - Eliminate Glitching */
+    #petunjukModal .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    
+    #petunjukModal .modal-footer button {
       border-radius: 10px;
       padding: 10px 20px;
       font-weight: 500;
-      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      margin: 0;
+      height: auto;
+      width: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #closeModalBtn {
+      background-color: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+      box-shadow: none;
     }
     
     #startRegistrationBtn {
       background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
       border: none;
+      color: white;
+      box-shadow: none;
+    }
+    
+    #closeModalBtn:hover {
+      background-color: #e5e7eb;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
     }
     
     #startRegistrationBtn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      transform: translateY(-1px);
+    }
+    
+    /* Remove conflicting button animations */
+    #petunjukModal .modal-footer button.animate__pulse,
+    #petunjukModal .modal-footer button:hover.animate__pulse {
+      animation: none !important;
+    }
+    
+    /* Ensure icons stay in place */
+    #petunjukModal .modal-footer button i {
+      display: inline-block;
+      margin-right: 5px;
+      position: relative;
+    }
+    
+    /* Override any unwanted transitions */
+    #petunjukModal {
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Remove any other conflicting styles */
+    #startRegistrationBtn, #closeModalBtn {
+      /* Clear previous styling */
+    }
+    
+    /* Enhanced Section Title with proper pseudo-elements - Modified */
+    .section-title {
+      position: relative;
+      margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+      position: relative;
+      display: inline-block;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      /* Removed the padding-bottom that was added for pseudo-element spacing */
+    }
+    
+    /* Removed ::before and ::after for h2 */
+    
+    .section-title .salut-title {
+      position: relative;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2563eb;
+      display: inline-block;
+      margin-top: 10px;
+      padding: 0 25px;
+    }
+    
+    .section-title .salut-title::before,
+    .section-title .salut-title::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #2563eb 0%, rgba(37, 99, 235, 0.1) 100%);
+    }
+    
+    .section-title .salut-title::before {
+      left: -25px;
+    }
+    
+    .section-title .salut-title::after {
+      right: -25px;
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.1) 0%, #2563eb 100%);
+    }
+    
+    /* Enhanced Button Styles for All Form Buttons - Fix Glitching Issues */
+    .pnd-btn, 
+    #showPetunjukBtn,
+    #petunjukModal .modal-footer button,
+    button[type="submit"] {
+      position: relative;
+      border-radius: 10px;
+      font-weight: 500;
+      overflow: hidden;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      margin: 0;
+      height: auto;
+      width: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    
+    /* Custom styles for show petunjuk button */
+    #showPetunjukBtn {
+      background-color: white;
+      color: #2563eb;
+      border: 2px solid #2563eb;
+      padding: 12px 20px;
+      border-radius: 12px;
+      gap: 8px;
+    }
+    
+    #showPetunjukBtn:hover {
+      background-color: #f0f7ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    }
+    
+    /* Form buttons styles */
+    .form-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .pnd-btn {
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      box-shadow: none;
+    }
+    
+    .pnd-btn:hover {
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      transform: translateY(-1px);
+    }
+    
+    .pnd-btn.prev-step {
+      background: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .pnd-btn.prev-step:hover {
+      background: #e5e7eb;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Modal footer button styles - already defined but keeping for reference */
+    #petunjukModal .modal-footer button {
+      padding: 10px 20px;
+    }
+    
+    #closeModalBtn {
+      background-color: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+      box-shadow: none;
+    }
+    
+    #startRegistrationBtn {
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      border: none;
+      color: white;
+      box-shadow: none;
+    }
+    
+    /* Remove all animation classes from buttons to prevent glitches */
+    .pnd-btn.animate__pulse,
+    .btn.animate__pulse,
+    #showPetunjukBtn.animate__pulse,
+    button[type="submit"].animate__pulse,
+    .pnd-btn:hover.animate__pulse,
+    .btn:hover.animate__pulse,
+    #showPetunjukBtn:hover.animate__pulse,
+    button[type="submit"]:hover.animate__pulse {
+      animation: none !important;
+    }
+    
+    /* Ensure icons stay in place */
+    .pnd-btn i,
+    .btn i,
+    #showPetunjukBtn i {
+      display: inline-block;
+      margin-right: 5px;
+      position: relative;
     }
   </style>
 
@@ -632,6 +847,57 @@ if (isset($_SESSION['error'])) {
         });
       });
     }
+    
+    // Enhanced function to properly handle all button animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fix all buttons to prevent animation glitches
+      const allButtons = document.querySelectorAll('.pnd-btn, .btn, #showPetunjukBtn, button[type="submit"]');
+      allButtons.forEach(btn => {
+        // Remove any existing animations
+        btn.classList.remove('animate__animated', 'animate__pulse');
+        
+        // Override hover listeners to prevent animation
+        btn.addEventListener('mouseover', function(e) {
+          e.stopPropagation();
+          // Don't add animation classes
+          this.classList.remove('animate__pulse');
+        });
+        
+        btn.addEventListener('mouseout', function(e) {
+          e.stopPropagation();
+          // Don't add animation classes
+          this.classList.remove('animate__pulse');
+        });
+      });
+      
+      // Override the initializeAnimations function to prevent adding animations to buttons
+      const originalInitializeAnimations = window.initializeAnimations;
+      window.initializeAnimations = function() {
+        // Call the original function
+        if (typeof originalInitializeAnimations === 'function') {
+          originalInitializeAnimations();
+        }
+        
+        // Then remove animations from buttons again (in case they were added)
+        allButtons.forEach(btn => {
+          btn.classList.remove('animate__pulse');
+          btn.classList.remove('animate__animated');
+        });
+      };
+      
+      // Fix animations for form elements
+      const formElements = document.querySelectorAll('.contact-field, .field-container');
+      formElements.forEach((el, index) => {
+        // Only animate non-button elements
+        if (!el.querySelector('button')) {
+          el.style.opacity = '0';
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.classList.add('slide-in-up');
+          }, 100 * index);
+        }
+      });
+    });
   </script>
 </head>
 
@@ -872,7 +1138,9 @@ if (isset($_SESSION['error'])) {
             <div class="contact-bg02 mt-90">
               <div class="section-title text-center mb-50">
                 <h2>Pendaftaran Mahasiswa Baru</h2>
-                <span class="mt-2 d-inline-block">SALUT Tana Toraja</span>
+                <div class="mt-2 d-block">
+                  <span class="salut-title">SALUT Tana Toraja</span>
+                </div>
               </div>
               
               <!-- Form Progress Steps -->
@@ -1348,11 +1616,11 @@ if (isset($_SESSION['error'])) {
           </div>
         </div>
         <div class="modal-footer">
-          <button id="closeModalBtn" class="btn btn-secondary">
-            <i class="fas fa-times me-1"></i> Tutup
+          <button type="button" id="closeModalBtn" class="btn">
+            <i class="fas fa-times me-1"></i>Tutup
           </button>
-          <button id="startRegistrationBtn" class="btn btn-primary">
-            <i class="fas fa-check-circle me-1"></i> Mulai Pendaftaran
+          <button type="button" id="startRegistrationBtn" class="btn">
+            <i class="fas fa-check-circle me-1"></i>Mulai Pendaftaran
           </button>
         </div>
       </div>
@@ -1520,6 +1788,24 @@ if (isset($_SESSION['error'])) {
             sessionStorage.setItem('instructionsShown', 'true');
           }
         }, 1500);
+        
+        // Disable animation classes on modal buttons to prevent glitching
+        const modalButtons = document.querySelectorAll('#petunjukModal .modal-footer button');
+        modalButtons.forEach(btn => {
+          // Remove any existing animations
+          btn.classList.remove('animate__animated', 'animate__pulse');
+          
+          // Override hover listeners
+          btn.addEventListener('mouseover', function(e) {
+            e.stopPropagation();
+            // Don't add any animation classes
+          });
+          
+          btn.addEventListener('mouseout', function(e) {
+            e.stopPropagation();
+            // Don't add any animation classes
+          });
+        });
       });
     </script>
 
