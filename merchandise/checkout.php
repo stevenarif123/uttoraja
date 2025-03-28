@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php'; // Include database connection
+include 'koneksi.php'; 
 
 // Check if the user is logged in or a guest
 if (!isset($_SESSION['nim']) && !isset($_SESSION['guest'])) {
@@ -8,198 +8,352 @@ if (!isset($_SESSION['nim']) && !isset($_SESSION['guest'])) {
     exit;
 }
 
-// Initialize variables
-$status = 'pending'; // Initialize status
-$delivery_cost = 0;
-
-// Process the form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $delivery_method = null;
-    $address = null;
-    $phone = null;
-    $delivery_cost = 0;
-
-    if (isset($_POST['delivery_checkbox'])) {
-        $delivery_method = $_POST['delivery_method'] ?? null;
-        $address = $_POST['address'] ?? null;
-        $phone = $_POST['phone'] ?? null;
-
-        // Set delivery cost based on selected method
-        if ($delivery_method === 'standard') {
-            $delivery_cost = 10000;
-        } elseif ($delivery_method === 'express') {
-            $delivery_cost = 20000;
-        }
-    }
-
-
-    // Insert order into the database
-    $stmt = $conn->prepare("INSERT INTO Orders (user_id, order_date, status, delivery_method, delivery_cost, address, phone) VALUES (?, NOW(), ?, ?, ?, ?, ?)");
-    if ($stmt === false) {
-        die('Prepare failed: ' . htmlspecialchars($conn->error));
-    }
-    $user_id = isset($_SESSION['guest']) ? null : $_SESSION['nim']; // Use NULL for guest
-
-    $stmt->bind_param("isssis", $user_id, $status, $delivery_method, $delivery_cost, $address, $phone);
-    $stmt->execute();
-
-    $order_id = $stmt->insert_id; // Get the last inserted order ID
-
-    // Insert order items
-    $stmt = $conn->prepare("INSERT INTO Order_Items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
-    if ($stmt === false) {
-        die('Prepare failed: ' . htmlspecialchars($conn->error));
-    }
-    foreach ($_SESSION['cart'] as $item) {
-        $quantity = $item['quantity'];
-        $product_id = $item['id'];
-        $product_price = $item['price'];
-        $stmt->bind_param("iiid", $order_id, $product_id, $quantity, $product_price);
-        $stmt->execute();
-    }
-
-    // Clear the cart after successful order
-     unset($_SESSION['cart']);
-
-    // Redirect to confirmation page
-    header('Location: confirmation.php');
+// Check if cart is empty
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+    header('Location: cart.php');
     exit;
 }
 
-// Calculate cart total
-$cartTotal = 0;
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $item) {
-        $cartTotal += $item['price'] * $item['quantity'];
+// Initialize variables
+$status = 'menunggu'; 
+$delivery_cost = 10000; // Biaya pengiriman default
+$order_reference = "UTT" . time() . rand(1000, 9999);
+
+// Process the form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $delivery_method = $_POST['delivery_method'] ?? 'standard';
+    $address = $_POST['address'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $notes = $_POST['notes'] ?? '';
+    $email = $_POST['email'] ?? '';
+
+    // Set delivery cost based on selected method
+    if ($delivery_method === 'standard') {
+        $delivery_cost = 10000; // Pengiriman standar
+    } elseif ($delivery_method === 'express') {
+        $delivery_cost = 20000; // Pengiriman ekspres
+    }
+
+    // Insert order into the database
+    $stmt = $conn->prepare("INSERT INTO Orders (reference_number, user_id, order_date, status, delivery_method, delivery_cost, address, phone, notes, email) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)");
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+    
+    $user_id = isset($_SESSION['nim']) ? $_SESSION['nim'] : null; // Use NULL for guest
+    $stmt->bind_param("sissdssss", $order_reference, $user_id, $status, $delivery_method, $delivery_cost, $address, $phone, $notes, $email);
+    
+    if ($stmt->execute()) {
+        $order_id = $stmt->insert_id; // Get the last inserted order ID
+
+        // Insert order items
+        $stmt = $conn->prepare("INSERT INTO Order_Items (order_id, product_id, quantity, price, size) VALUES (?, ?, ?, ?, ?)");
+        if ($stmt === false) {
+            die('Prepare failed: ' . htmlspecialchars($conn->error));
+        }
+        
+        foreach ($_SESSION['cart'] as $item) {
+            $quantity = $item['quantity'];
+            $product_id = $item['id'];
+            $product_price = $item['price'];
+            $size = $item['size'] ?? '';
+            $stmt->bind_param("iiids", $order_id, $product_id, $quantity, $product_price, $size);
+            $stmt->execute();
+        }
+
+        // Store order reference in session for confirmation page
+        $_SESSION['order_reference'] = $order_reference;
+        
+        // Clear the cart after successful order
+        $_SESSION['cart'] = [];
+
+        // Redirect to confirmation page
+        $_SESSION['message'] = ['type' => 'success', 'text' => '✅ Pesanan berhasil dibuat!'];
+        header('Location: confirmation.php');
+        exit;
+    } else {
+        $error_message = "Terjadi masalah dalam memproses pesanan Anda. Silakan coba lagi. 😥";
     }
 }
+
+// Calculate cart subtotal
+$subtotal = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $subtotal += $item['price'] * $item['quantity'];
+}
+
+// Add delivery cost to get the total
+$total = $subtotal + $delivery_cost;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="css/marketplace.css">
+    <title>Checkout - UTToraja Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
-    <header class="site-header">
-        <div class="header-content">
-            <h1 class="text-2xl font-bold text-gray-900">Checkout</h1>
-            <nav class="nav-links">
-                <a href="index.php" class="nav-link">Home</a>
-                <a href="products.php" class="nav-link">Products</a>
-                <a href="../kontak/index.php" class="nav-link">Contact</a>
-                <a href="logout.php" class="nav-link">Logout</a>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Top navigation bar -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.php" class="font-bold text-xl text-primary-600">UTToraja Store</a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.php" class="text-gray-500 hover:text-primary-600 transition">Home</a>
+                <a href="products.php" class="text-gray-500 hover:text-primary-600 transition">Shop</a>
+                <a href="../kontak/index.php" class="text-gray-500 hover:text-primary-600 transition">Contact</a>
             </nav>
+            <div class="flex items-center space-x-4">
+                <a href="cart.php" class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600 hover:text-primary-600 transition">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                    <?php if (!empty($_SESSION['cart'])): ?>
+                        <span class="absolute -top-2 -right-2 bg-primary-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                            <?php echo count($_SESSION['cart']); ?>
+                        </span>
+                    <?php endif; ?>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile navigation menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-4">
+            <div class="container mx-auto px-4 flex flex-col space-y-3">
+                <a href="index.php" class="text-gray-500 hover:text-primary-600 py-2 transition">Home</a>
+                <a href="products.php" class="text-gray-500 hover:text-primary-600 py-2 transition">Shop</a>
+                <a href="../kontak/index.php" class="text-gray-500 hover:text-primary-600 py-2 transition">Contact</a>
+                <a href="../jadwal/logout.php" class="text-gray-500 hover:text-primary-600 py-2 transition">Logout</a>
+            </div>
         </div>
     </header>
 
-    <div class="marketplace-container flex-grow">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
-                <div class="p-6 bg-blue-600">
-                    <h2 class="text-2xl font-bold text-white flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
-                        Checkout Process
-                    </h2>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Checkout Progress Indicator -->
+        <div class="max-w-4xl mx-auto mb-8">
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">1</div>
+                    <span class="text-xs mt-1 font-medium text-primary-600">Cart</span>
                 </div>
-                
-                <div class="p-6">
-                    <div class="flex items-center mb-6">
-                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
-                        <div class="ml-4 text-lg font-medium">Delivery Details</div>
+                <div class="flex-1 h-1 bg-primary-200 mx-1">
+                    <div class="bg-primary-600 h-1 w-full"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">2</div>
+                    <span class="text-xs mt-1 font-medium text-primary-600">Checkout</span>
+                </div>
+                <div class="flex-1 h-1 bg-gray-200 mx-1"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 font-medium">3</div>
+                    <span class="text-xs mt-1 text-gray-400">Confirmation</span>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Complete Your Purchase 🛒</h1>
+        
+        <?php if (isset($error_message)): ?>
+            <div class="mb-6 p-4 bg-red-50 text-red-800 border border-red-100 rounded-md">
+                <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
+        
+        <div class="lg:flex lg:gap-8">
+            <!-- Shipping & Payment Form (Left Side) -->
+            <div class="lg:w-2/3 mb-8 lg:mb-0">
+                <form method="post" action="" id="checkout-form">
+                    <!-- Shipping Information -->
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Shipping Information 📦</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="delivery_method" class="block text-sm font-medium text-gray-700 mb-1">Delivery Method</label>
+                                <select id="delivery_method" name="delivery_method" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option value="standard">Standard Delivery - Rp 10.000 (3-5 days)</option>
+                                    <option value="express">Express Delivery - Rp 20.000 (1-2 days)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
+                                <textarea id="address" name="address" required rows="3" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Enter your complete address with street, building number, city and postal code"></textarea>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" required class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Format: 08xxxx">
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email (for receipt)</label>
+                                    <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="your@email.com">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Order Notes (Optional)</label>
+                                <textarea id="notes" name="notes" rows="2" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Any special instructions for delivery"></textarea>
+                            </div>
+                        </div>
                     </div>
                     
-                    <form method="post" action="" class="space-y-6">
-                        <div class="border rounded-lg p-6 bg-gray-50">
-                            <div class="mb-4 flex items-start">
-                                <input type="checkbox" id="delivery_checkbox" name="delivery_checkbox" class="mt-1" checked>
-                                <label for="delivery_checkbox" class="ml-2 text-gray-800">I want my order to be delivered</label>
-                            </div>
-                            
-                            <div id="delivery_options" class="space-y-4">
-                                <div>
-                                    <label for="delivery_method" class="block text-sm font-medium text-gray-700 mb-2">Select Delivery Method</label>
-                                    <select id="delivery_method" name="delivery_method" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <option value="standard">Standard Delivery (Rp 10.000) - 3-5 days</option>
-                                        <option value="express">Express Delivery (Rp 20.000) - 1-2 days</option>
-                                    </select>
-                                </div>
-                                
-                                <div>
-                                    <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Delivery Address</label>
-                                    <textarea id="address" name="address" rows="3" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter your complete delivery address"></textarea>
-                                </div>
-                                
-                                <div>
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                    <input type="text" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 08123456789">
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Payment Method -->
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Payment Method 💳</h2>
                         
-                        <div class="border rounded-lg p-6 bg-gray-50">
-                            <div class="flex items-center mb-6">
-                                <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
-                                <div class="ml-4 text-lg font-medium">Order Summary</div>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="flex justify-between py-2 border-b">
-                                    <span class="text-gray-600">Subtotal</span>
-                                    <span class="font-medium">Rp <?php echo number_format($cartTotal, 0, ',', '.'); ?></span>
-                                </div>
-                                <div class="flex justify-between py-2 border-b">
-                                    <span class="text-gray-600">Delivery Cost</span>
-                                    <span id="delivery_cost" class="font-medium">Rp 10.000</span>
-                                </div>
-                                <div class="flex justify-between py-2 text-lg font-bold">
-                                    <span>Total</span>
-                                    <span id="total_cost">Rp <?php echo number_format($cartTotal + 10000, 0, ',', '.'); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="border rounded-lg p-6 bg-gray-50">
-                            <div class="flex items-center mb-6">
-                                <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
-                                <div class="ml-4 text-lg font-medium">Confirm Order</div>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <p class="text-gray-600">By clicking "Place Order" you agree to our terms of service and privacy policy.</p>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-sm transition duration-200 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 border border-gray-200 rounded-md">
+                                <input type="radio" id="cash" name="payment_method" value="cash" checked class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="cash" class="ml-3 block text-sm font-medium text-gray-700">
+                                    Cash on Delivery
+                                </label>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-auto text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9.75m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 01-.75.75h-.75m-6-1.5H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m10.875-1.5H21a.75.75 0 00.75-.75v-.75m0 0H3.375m0 0h-.375a1.125 1.125 0 01-1.125-1.125V9.75M8.25 4.5h7.5v2.25H8.25V4.5z" />
                                 </svg>
-                                Place Order
-                            </button>
+                            </div>
+                            
+                            <div class="flex items-center p-4 border border-gray-200 rounded-md bg-gray-50">
+                                <input type="radio" id="bank" name="payment_method" value="bank" disabled class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="bank" class="ml-3 block text-sm font-medium text-gray-400">
+                                    Bank Transfer (Coming Soon)
+                                </label>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-auto text-gray-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008h-.008V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                            </div>
+                            
+                            <div class="flex items-center p-4 border border-gray-200 rounded-md bg-gray-50">
+                                <input type="radio" id="ewallet" name="payment_method" value="ewallet" disabled class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="ewallet" class="ml-3 block text-sm font-medium text-gray-400">
+                                    E-Wallet (Coming Soon)
+                                </label>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-auto text-gray-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
+                                </svg>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                    
+                    <button type="submit" id="place-order-btn" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-md transition mb-4 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9.75m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 01-.75.75h-.75m-6-1.5H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m10.875-1.5H21a.75.75 0 00.75-.75v-.75m0 0H3.375m0 0h-.375a1.125 1.125 0 01-1.125-1.125V9.75M8.25 4.5h7.5v2.25H8.25V4.5z" />
+                        </svg>
+                        Place Order
+                    </button>
+                    
+                    <p class="text-xs text-gray-500 text-center">
+                        By placing your order, you agree to our <a href="#" class="text-primary-600 hover:underline">Terms of Service</a> and <a href="#" class="text-primary-600 hover:underline">Privacy Policy</a>.
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Order Summary (Right Side) -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-6">Order Summary 📋</h2>
+                    
+                    <div class="mb-6">
+                        <?php foreach ($_SESSION['cart'] as $item): ?>
+                            <div class="flex py-3 border-b border-gray-100">
+                                <div class="h-16 w-16 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-300">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                    </svg>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <h3 class="text-sm font-medium text-gray-900"><?php echo htmlspecialchars($item['name']); ?></h3>
+                                    <?php if (!empty($item['size'])): ?>
+                                        <p class="text-xs text-gray-500">Size: <?php echo htmlspecialchars($item['size']); ?></p>
+                                    <?php endif; ?>
+                                    <div class="mt-1 flex justify-between">
+                                        <span class="text-xs text-gray-500">Qty: <?php echo $item['quantity']; ?></span>
+                                        <span class="text-sm font-medium">Rp <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    
+                    <div class="space-y-3 py-3 border-b border-gray-100 mb-3">
+                        <div class="flex justify-between text-gray-600 text-sm">
+                            <span>Subtotal</span>
+                            <span>Rp <?php echo number_format($subtotal, 0, ',', '.'); ?></span>
+                        </div>
+                        <div class="flex justify-between text-gray-600 text-sm">
+                            <span>Shipping</span>
+                            <span id="shipping-cost">Rp <?php echo number_format($delivery_cost, 0, ',', '.'); ?></span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between text-lg font-bold">
+                        <span>Total</span>
+                        <span id="total-price">Rp <?php echo number_format($total, 0, ',', '.'); ?></span>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <a href="cart.php" class="inline-flex items-center text-primary-600 hover:text-primary-800 text-sm font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                            Return to cart
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <footer class="bg-white shadow-inner py-8 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p class="text-gray-600">&copy; 2025 Merchandise Sales. All rights reserved.</p>
-                <div class="mt-4 flex justify-center space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-gray-500">
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="text-sm text-gray-500">© 2025 UTToraja Store. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition">
                         <span class="sr-only">Facebook</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition">
                         <span class="sr-only">Instagram</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
@@ -212,42 +366,65 @@ if (isset($_SESSION['cart'])) {
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const deliveryCheckbox = document.getElementById('delivery_checkbox');
-            const deliveryOptions = document.getElementById('delivery_options');
-            const deliveryMethodSelect = document.getElementById('delivery_method');
-            const deliveryCostDisplay = document.getElementById('delivery_cost');
-            const totalCostDisplay = document.getElementById('total_cost');
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
             
-            // Initial subtotal value (from PHP)
-            const subtotal = <?php echo $cartTotal; ?>;
-            
-            function updateTotalCost() {
-                let deliveryCost = 0;
-                
-                if (deliveryCheckbox.checked) {
-                    deliveryCost = deliveryMethodSelect.value === 'standard' ? 10000 : 20000;
-                    deliveryCostDisplay.textContent = `Rp ${deliveryCost.toLocaleString('id-ID')}`;
-                } else {
-                    deliveryCostDisplay.textContent = 'Rp 0';
-                }
-                
-                const totalCost = subtotal + deliveryCost;
-                totalCostDisplay.textContent = `Rp ${totalCost.toLocaleString('id-ID')}`;
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
             }
             
-            deliveryCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    deliveryOptions.style.display = 'block';
-                } else {
-                    deliveryOptions.style.display = 'none';
-                }
-                updateTotalCost();
+            // Delivery cost and total calculation
+            const deliveryMethodSelect = document.getElementById('delivery_method');
+            const shippingCostDisplay = document.getElementById('shipping-cost');
+            const totalPriceDisplay = document.getElementById('total-price');
+            const subtotal = <?php echo $subtotal; ?>;
+            
+            deliveryMethodSelect.addEventListener('change', function() {
+                const deliveryCost = this.value === 'express' ? 20000 : 10000;
+                const total = subtotal + deliveryCost;
+                
+                shippingCostDisplay.textContent = `Rp ${deliveryCost.toLocaleString('id-ID')}`;
+                totalPriceDisplay.textContent = `Rp ${total.toLocaleString('id-ID')}`;
             });
             
-            deliveryMethodSelect.addEventListener('change', updateTotalCost);
+            // Form validation
+            const checkoutForm = document.getElementById('checkout-form');
+            const placeOrderBtn = document.getElementById('place-order-btn');
             
-            // Initial update
-            updateTotalCost();
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function(e) {
+                    const address = document.getElementById('address').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    
+                    if (!address) {
+                        e.preventDefault();
+                        alert('Please enter your delivery address');
+                        return false;
+                    }
+                    
+                    if (!phone) {
+                        e.preventDefault();
+                        alert('Please enter your phone number');
+                        return false;
+                    }
+                    
+                    // Phone validation - simple check for numeric and minimum length
+                    if (!/^[0-9]{10,15}$/.test(phone.replace(/\D/g, ''))) {
+                        e.preventDefault();
+                        alert('Please enter a valid phone number (10-15 digits)');
+                        return false;
+                    }
+                    
+                    // Disable button to prevent double submission
+                    placeOrderBtn.disabled = true;
+                    placeOrderBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...';
+                    
+                    return true;
+                });
+            }
         });
     </script>
 </body>

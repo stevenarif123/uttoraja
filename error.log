@@ -565,3 +565,9 @@ Stack trace:
 #1 C:\xampp\htdocs\uttoraja\pendaftaran\index.php(4): require_once('C:\\xampp\\htdocs...')
 #2 {main}
   thrown in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[28-Mar-2025 10:00:08 Europe/Berlin] Koneksi database berhasil
+[28-Mar-2025 10:00:08 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/1049): Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[28-Mar-2025 10:00:09 Europe/Berlin] Koneksi database berhasil
+[28-Mar-2025 10:00:09 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/1049): Unknown database 'data_daerah' in C:\xampp\htdocs\uttoraja\koneksi_datadaerah.php on line 7
+[28-Mar-2025 10:01:13 Europe/Berlin] Koneksi database berhasil
+[28-Mar-2025 10:01:13 Europe/Berlin] Koneksi database berhasil

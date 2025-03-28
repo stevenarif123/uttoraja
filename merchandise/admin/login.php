@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Login</title>
+    <title>Admin Login - UTToraja Store</title>
     <style>
         body { padding: 20px; font-family: Arial, sans-serif; }
         .error { color: red; margin-bottom: 15px; }
@@ -60,19 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 <body>
-    <h2>Admin Login</h2>
-    <?php if (isset($error)) echo "<div class='error'>" . htmlspecialchars($error) . "</div>"; ?>
+    <h2>Login Admin</h2>
+    <?php if (isset($error)) echo "<div class='error'>" . htmlspecialchars(str_replace('Invalid username or password', 'Username atau password salah', $error)) . "</div>"; ?>
     <form method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <div class="form-group">
             <label>Username:</label><br>
-            <input type="text" name="username" required>
+            <input type="text" name="username" required placeholder="Masukkan username">
         </div>
         <div class="form-group">
             <label>Password:</label><br>
-            <input type="password" name="password" required>
+            <input type="password" name="password" required placeholder="Masukkan password">
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Masuk</button>
     </form>
 </body>
 </html>
