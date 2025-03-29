@@ -674,7 +674,7 @@
           <div class="row g-5">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
               <div class="location-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3980.7547905608895!2d119.85559571475607!3d-3.87207849737507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9400d52c33c0bb%3A0x66f30b35553f7fe4!2sUniversitas%20Terbuka%20Tana%20Toraja!5e0!3m2!1sen!2sid!4v1654235689050!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.0246234317324!2d119.85904430000001!3d-3.0881011999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93edf1c2aefbab%3A0x20382e4bc7be4445!2sUniversitas%20Terbuka%20Kabupaten%20Tana%20Toraja!5e0!3m2!1sen!2sid!4v1743245864540!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
             
@@ -719,7 +719,7 @@
                   </div>
                   <div class="contact-content">
                     <h4>Jam Operasional</h4>
-                    <p>Senin - Jumat: 08.00 - 16.00 WITA<br>Sabtu: 09.00 - 13.00 WITA</p>
+                    <p>Senin - Jumat: 08.30 - 15.30 WITA<br>Sabtu: 08.30 - 15.30 WITA</p>
                   </div>
                 </div>
                 

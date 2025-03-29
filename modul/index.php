@@ -1299,7 +1299,7 @@
                   </div>
                   <div>
                     <h5 class="mb-1">Admin Modul</h5>
-                    <p class="mb-0">Ibu Ratih</p>
+                    <p class="mb-0">Elza</p>
                   </div>
                 </div>
                 
@@ -1365,7 +1365,7 @@
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                       <div class="text">
-                        <p>
+                        <p class="white-text">
                           Butuh bantuan dan dukungan dalam perkuliahan di UT?
                         </p>
                       </div>
@@ -1477,7 +1477,7 @@
                     <div class="footer-module-info">
                       <p>Bahan ajar Universitas Terbuka terdiri dari berbagai jenis yang dapat Anda akses untuk mendukung proses pembelajaran jarak jauh Anda.</p>
                       <div class="footer-module-links">
-                        <a href="https://elearning.ut.ac.id" class="footer-module-btn" target="_blank">
+                        <a href="https://pustaka.ut.ac.id" class="footer-module-btn" target="_blank">
                           <i class="bi bi-laptop"></i> Akses Modul Digital
                         </a>
                         <a href="#check-module" class="footer-module-btn">
