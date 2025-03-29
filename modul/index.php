@@ -45,8 +45,7 @@
     <style>
       /* Custom styles for module page */
       .module-hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                    url('../assets/img/background/modules-bg.jpg');
+        background: var(--thm-secondary);
         background-size: cover;
         background-position: center;
         padding: 80px 0;
@@ -706,7 +705,7 @@
                     <nav class="menu-nav">
                       <div class="navbar-wrap main-menu">
                         <ul class="navigation">
-                          <li><a href="./">Home</a></li>
+                          <li><a href="../">Home</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Aplikasi UT</a>
                             <ul class="sub-menu">
@@ -748,6 +747,15 @@
                               <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Program</a>
+                            <ul class="sub-menu">
+                              <li><a href="../rpl.php">RPL</a></li>
+                              <li><a href="../reguler.php">Reguler</a></li>
+                              <li><a href="../jurusan.php">Program Studi</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="../biaya.php">Biaya Kuliah</a></li>
                         </ul>
                       </div>
                     </nav>
@@ -841,7 +849,7 @@
               <div class="row justify-content-center">
                 <div class="col-lg-8">
                   <h1 class="display-5 fw-bold mb-4">Bahan Ajar Universitas Terbuka</h1>
-                  <p class="lead fs-5 mb-4">Akses dan periksa ketersediaan modul cetak dan bahan ajar digital untuk mendukung pembelajaran Anda di Universitas Terbuka</p>
+                  <p class="text-white lead fs-5 mb-4">Akses dan periksa ketersediaan modul cetak dan bahan ajar digital untuk mendukung pembelajaran Anda di Universitas Terbuka</p>
                   <a href="#check-module" class="btn btn-primary btn-lg">
                     <span>Cek Ketersediaan Modul</span>
                     <i class="bi bi-arrow-down-circle ms-2"></i>
@@ -928,7 +936,7 @@
                       <i class="bi bi-check-circle-fill"></i>
                     </div>
                     <div class="feature-text">
-                      <p>Tersedia dalam format PDF</p>
+                      <p>Tersedia secara online</p>
                     </div>
                   </div>
                   <div class="feature-item">
@@ -942,7 +950,7 @@
                 </div>
                 
                 <div class="text-center">
-                  <a href="https://elearning.ut.ac.id" target="_blank" class="btn btn-outline-primary">Akses Modul Digital</a>
+                  <a href="https://pustaka.ut.ac.id/lib/" target="_blank" class="btn btn-outline-primary">Akses Modul Digital</a>
                 </div>
               </div>
             </div>
@@ -1138,7 +1146,7 @@
                   <div class="step-number">3</div>
                   <div class="step-content">
                     <h4>Kunjungi SALUT Tana Toraja</h4>
-                    <p>Datang ke kantor SALUT Tana Toraja pada jam kerja (Senin-Jumat: 08.00-16.00 WITA, Sabtu: 09.00-13.00 WITA).</p>
+                    <p>Datang ke kantor SALUT Tana Toraja pada jam kerja (Senin-Sabtu: 08.30-15.30 WITA).</p>
                   </div>
                 </div>
                 
@@ -1172,7 +1180,7 @@
               
               <div class="info-box mt-4 wow fadeInUp" data-wow-delay="0.7s">
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                <span><strong>Penting:</strong> Modul hanya dapat diambil oleh mahasiswa yang bersangkutan atau dapat diwakilkan dengan membawa surat kuasa dan fotokopi identitas mahasiswa.</span>
+                <span><strong>Penting:</strong> Modul dapat diambil oleh mahasiswa yang bersangkutan atau dapat diwakilkan.</span>
               </div>
             </div>
           </div>
@@ -1216,13 +1224,13 @@
                   </h2>
                   <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#faqAccordion">
                     <div class="faq-body">
-                      <p>Tidak wajib. Mahasiswa dapat memilih untuk hanya menggunakan modul digital jika merasa lebih nyaman. Namun, modul cetak tetap disediakan bagi yang membutuhkan dan sudah termasuk dalam biaya kuliah. Anda dapat memutuskan untuk mengambil atau tidak mengambil modul cetak tersebut.</p>
+                        <p>Ya, Anda tetap harus mengambil modul cetak meskipun sudah mengakses modul digital. Hal ini karena biaya modul cetak sudah termasuk dalam paket SPP yang Anda bayarkan dan tidak bisa dipisahkan. Modul cetak dan digital saling melengkapi dalam proses pembelajaran jarak jauh UT. Modul cetak memiliki beberapa keunggulan seperti kemudahan penggunaan tanpa perlu perangkat elektronik, dapat dibaca kapan saja bahkan saat tidak ada koneksi internet, dan dapat digunakan untuk pembelajaran jangka panjang. Oleh karena itu, sangat disarankan untuk mengambil modul cetak yang sudah menjadi hak Anda sebagai mahasiswa. 📚✨</p>
                     </div>
                   </div>
                 </div>
                 
                 <!-- FAQ Item 3 -->
-                <div class="faq-item wow fadeInUp" data-wow-delay="0.3s">
+                <!-- <div class="faq-item wow fadeInUp" data-wow-delay="0.3s">
                   <h2 class="faq-header" id="heading3">
                     <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
                       Bagaimana jika modul yang saya terima rusak atau tidak lengkap?
@@ -1234,7 +1242,7 @@
                       <p>Jika modul yang Anda terima dalam kondisi rusak atau tidak lengkap, segera laporkan ke SALUT Tana Toraja dengan membawa bukti modul yang rusak tersebut. Pihak SALUT akan membantu proses penggantian atau penyelesaiannya. Pelaporan sebaiknya dilakukan maksimal 7 hari setelah menerima modul.</p>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 
                 <!-- FAQ Item 4 -->
                 <div class="faq-item wow fadeInUp" data-wow-delay="0.4s">
@@ -1246,7 +1254,7 @@
                   </h2>
                   <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#faqAccordion">
                     <div class="faq-body">
-                      <p>Ya, pengambilan modul dapat diwakilkan dengan syarat membawa surat kuasa yang ditandatangani oleh mahasiswa yang bersangkutan, disertai fotokopi kartu mahasiswa/KTP mahasiswa dan KTP penerima kuasa. Semua dokumen ini diperlukan untuk verifikasi dan pencatatan dalam sistem pengambilan modul.</p>
+                        <p>Ya, pengambilan modul dapat diwakilkan kepada orang lain (keluarga, teman, atau rekan) tanpa perlu surat kuasa formal. Namun, sebaiknya Anda memberitahu admin SALUT terlebih dahulu melalui WhatsApp atau telepon bahwa akan ada seseorang yang mengambil modul atas nama Anda. 📚✨</p>
                     </div>
                   </div>
                 </div>
@@ -1261,7 +1269,7 @@
                   </h2>
                   <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#faqAccordion">
                     <div class="faq-body">
-                      <p>Modul yang telah dikirim ke SALUT akan disimpan hingga akhir semester berjalan. Jika tidak diambil hingga batas waktu tersebut, modul akan diarsipkan dan mahasiswa perlu membuat permintaan khusus untuk pengambilannya. Dianjurkan untuk mengambil modul sesegera mungkin setelah informasi ketersediaan diterima.</p>
+                      <p>Modul yang telah dikirim ke SALUT akan disimpan hingga akhir semester berjalan. Jika tidak diambil hingga batas waktu tersebut, modul akan diarsipkan. Dianjurkan untuk mengambil modul sesegera mungkin setelah informasi ketersediaan diterima.</p>
                     </div>
                   </div>
                 </div>

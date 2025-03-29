@@ -644,12 +644,12 @@
                     <ol>
                       <li>Konsultasikan rencana studi Anda dengan admin program studi</li>
                       <li>Dapatkan daftar mata kuliah yang tersedia dan disarankan untuk diambil</li>
-                      <li>Lakukan pembayaran biaya semester melalui bank yang bekerja sama dengan UT</li>
-                      <li>Kirimkan bukti pembayaran dan daftar mata kuliah yang diambil ke admin program studi</li>
+                      <li>Lakukan pembayaran biaya semester melalui bank yang akan di transfer atau membayar cash</li>
+                      <li>Kirimkan bukti transfer ke admin program studi</li>
                       <li>Admin akan membantu proses registrasi mata kuliah di sistem UT</li>
-                      <li>Verifikasi mata kuliah yang telah terdaftar melalui SIM-UT atau melalui admin</li>
+                      <li>Verifikasi mata kuliah yang telah terdaftar melalui admin</li>
                     </ol>
-                    <p>Penting untuk memperhatikan jadwal registrasi yang ditetapkan oleh UT setiap semesternya. Keterlambatan registrasi dapat menyebabkan status tidak aktif atau biaya tambahan. 📅</p>
+                    <p>Penting untuk memperhatikan jadwal registrasi yang ditetapkan oleh UT setiap semesternya. Keterlambatan registrasi dapat menyebabkan status tidak aktif/cuti. 📅</p>
                   </div>
                 </div>
               </div>
@@ -741,7 +741,7 @@
           <div class="row align-items-center">
             <div class="col-lg-8">
               <h2 class="mb-3">Butuh Bantuan Administrasi? 📝</h2>
-              <p class="fs-5 mb-lg-0">Jangan ragu untuk menghubungi tim administrasi kami untuk mendapatkan bantuan seputar urusan akademik Anda. Kami siap membantu!</p>
+              <p class="text-white fs-5 mb-lg-0">Jangan ragu untuk menghubungi tim administrasi kami untuk mendapatkan bantuan seputar urusan akademik Anda. Kami siap membantu!</p>
             </div>
             <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
               <a href="#kontak" class="thm-btn rounded-pill px-4 py-3">
@@ -815,7 +815,7 @@
               <div class="schedule-notes mt-4 p-3 bg-light rounded-3">
                 <h5 class="mb-3"><i class="bi bi-info-circle me-2"></i> Catatan Penting:</h5>
                 <ul class="mb-0">
-                  <li>Layanan WhatsApp tetap dapat diakses di luar jam kerja, namun respons akan diberikan pada jam kerja berikutnya.</li>
+                  <li>Layanan WhatsApp tetap dapat diakses di luar jam kerja, namun respons mungkin akan lambat.</li>
                   <li>Pada masa registrasi dan ujian, jadwal layanan dapat diperpanjang sesuai kebutuhan.</li>
                   <li>Perubahan jadwal layanan akan diinformasikan melalui media sosial resmi SALUT Tana Toraja.</li>
                 </ul>
