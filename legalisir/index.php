@@ -43,8 +43,7 @@
     <style>
       /* Custom styles for legalisir page */
       .legalisir-hero {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                    url('../assets/img/background/legalisir-bg.jpg');
+        background: var(--thm-secondary);
         background-size: cover;
         background-position: center;
         padding: 100px 0;
@@ -558,8 +557,8 @@
             <div class="container text-center">
               <div class="row justify-content-center">
                 <div class="col-lg-8">
-                  <h1 class="display-5 fw-bold mb-4">Layanan Legalisir Dokumen Akademik</h1>
-                  <p class="lead fs-5 mb-4">Tersedia layanan legalisir ijazah, transkrip nilai dan dokumen akademik lainnya untuk alumni Universitas Terbuka di SALUT Tana Toraja</p>
+                  <h1 class="text-white display-5 fw-bold mb-4">Layanan Legalisir Dokumen Akademik</h1>
+                  <p class="text-white lead fs-5 mb-4">Tersedia layanan legalisir ijazah, transkrip nilai dan dokumen akademik lainnya untuk alumni Universitas Terbuka di SALUT Tana Toraja</p>
                   <a href="#prosedur" class="thm-btn">
                     <span class="txt">Lihat Prosedur</span>
                     <i class="bi bi-arrow-down-circle ms-2"></i>
@@ -588,7 +587,7 @@
                   <i class="bi bi-mortarboard-fill"></i>
                 </div>
                 <h3 class="legalisir-title">Ijazah</h3>
-                <p class="legalisir-text">Legalisir ijazah asli untuk keperluan resmi termasuk melamar pekerjaan, kenaikan pangkat, atau melanjutkan studi ke jenjang yang lebih tinggi.</p>
+                <p class="legalisir-text">Legalisir ijazah untuk keperluan resmi termasuk melamar pekerjaan, kenaikan pangkat, atau melanjutkan studi ke jenjang yang lebih tinggi. Dapat legalisir secara online atau dikirim ke Makassar</p>
                 <a href="#prosedur" class="btn btn-outline-primary d-block">Lihat Prosedur</a>
               </div>
             </div>
@@ -612,7 +611,7 @@
                   <i class="bi bi-file-earmark-check"></i>
                 </div>
                 <h3 class="legalisir-title">Dokumen Lainnya</h3>
-                <p class="legalisir-text">Legalisir dokumen akademik lainnya seperti Surat Keterangan Pendamping Ijazah (SKPI), sertifikat, dan dokumen pendukung lainnya.</p>
+                <p class="legalisir-text">Legalisir dokumen akademik lainnya seperti Surat Akta IV, Surat Keterangan Pendamping Ijazah (SKPI), sertifikat, dan dokumen pendukung lainnya.</p>
                 <a href="#prosedur" class="btn btn-outline-primary d-block">Lihat Prosedur</a>
               </div>
             </div>
@@ -636,7 +635,7 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                   <h4>Siapkan Dokumen Asli</h4>
-                  <p>Persiapkan dokumen asli yang akan dilegalisir (ijazah, transkrip nilai, atau dokumen lainnya) dan fotokopi dokumen tersebut sesuai kebutuhan jumlah legalisir.</p>
+                  <p>Persiapkan dokumen asli yang akan dilegalisir (ijazah, transkrip nilai, atau dokumen lainnya) atau fotokopi dokumen tersebut sesuai kebutuhan jumlah legalisir.</p>
                 </div>
               </div>
               
@@ -681,7 +680,7 @@
                 <div class="step-number">6</div>
                 <div class="step-content">
                   <h4>Pengambilan Dokumen</h4>
-                  <p>Ambil dokumen yang sudah dilegalisir sesuai dengan waktu yang ditentukan oleh admin (biasanya 1-2 hari kerja).</p>
+                  <p>Ambil dokumen yang sudah dilegalisir sesuai dengan waktu yang ditentukan oleh admin (biasanya 3-7 hari kerja).</p>
                 </div>
               </div>
             </div>
@@ -752,7 +751,7 @@
                     <i class="bi bi-info-circle"></i>
                   </div>
                   <h5>Catatan Penting</h5>
-                  <p>Semua dokumen asli akan dikembalikan setelah proses verifikasi. Dokumen yang dilegalisir adalah fotokopi dari dokumen asli tersebut.</p>
+                  <p>Semua dokumen asli akan langsung dikembalikan setelah proses pengajuan legalisir selesai. Dokumen yang dilegalisir adalah fotokopi dari dokumen asli tersebut.</p>
                 </div>
               </div>
             </div>
@@ -769,25 +768,17 @@
                   <thead>
                     <tr>
                       <th>Jenis Dokumen</th>
-                      <th>Biaya per Lembar</th>
+                      <th>Biaya Legalisir</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Ijazah</td>
-                      <td>Rp 10.000</td>
+                      <td>Legalisir Online(Ijazah dan Transkrip Nilai)</td>
+                      <td>Rp 150.000</td>
                     </tr>
                     <tr>
-                      <td>Transkrip Nilai</td>
-                      <td>Rp 10.000</td>
-                    </tr>
-                    <tr>
-                      <td>SKPI (Surat Keterangan Pendamping Ijazah)</td>
-                      <td>Rp 10.000</td>
-                    </tr>
-                    <tr>
-                      <td>Dokumen Akademik Lainnya</td>
-                      <td>Rp 10.000</td>
+                      <td>Legalisir Offline (Kirim ke UPBJJ Makassar)</td>
+                      <td>Rp 235.000 (10 Lembar)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -805,7 +796,7 @@
                     <i class="bi bi-clock"></i>
                   </div>
                   <h5>Waktu Proses</h5>
-                  <p>Proses legalisir membutuhkan waktu <span class="highlight">1-2 hari kerja</span> tergantung dari jumlah dokumen yang diajukan.</p>
+                  <p>Proses legalisir membutuhkan waktu <span class="highlight">3-7 hari kerja</span> tergantung dari proses sistem atau dengan UPBJJ.</p>
                 </div>
               </div>
             </div>
@@ -822,7 +813,7 @@
             <div class="row align-items-center position-relative z-index-1">
               <div class="col-lg-8">
                 <h2 class="mb-3">Butuh Bantuan Legalisir Ijazah? 📑</h2>
-                <p class="fs-5 mb-lg-0">Hubungi admin kami sekarang untuk bantuan legalisir ijazah, transkrip, dan dokumen akademik lainnya.</p>
+                <p class="text-white fs-5 mb-lg-0">Hubungi admin kami sekarang untuk bantuan legalisir ijazah, transkrip, dan dokumen akademik lainnya.</p>
               </div>
               <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
                 <a href="https://wa.me/6281354852018" class="thm-btn rounded-pill px-4 py-3" target="_blank">
@@ -856,7 +847,7 @@
                   </h2>
                   <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                      <p>Legalisir dokumen dapat diwakilkan oleh orang lain dengan membawa <strong>surat kuasa</strong> dari pemilik dokumen asli. Surat kuasa harus dilengkapi dengan fotokopi KTP pemberi kuasa dan penerima kuasa. Meskipun diwakilkan, dokumen asli tetap harus dibawa untuk proses verifikasi.</p>
+                      <p>Ya, layanan legalisir dokumen dapat diwakilkan oleh orang lain tanpa perlu membawa surat kuasa formal! Yang terpenting adalah wakil Anda membawa dokumen asli yang akan dilegalisir, fotokopi dalam jumlah yang dibutuhkan, dan identitas diri yang masih berlaku. Admin kami akan dengan senang hati membantu proses legalisir meskipun bukan pemilik dokumen yang datang langsung. Ini sangat memudahkan alumni yang tinggal jauh atau memiliki kesibukan yang tidak memungkinkan untuk datang secara langsung ke kantor SALUT Tana Toraja! ✨📄</p>
                     </div>
                   </div>
                 </div>
@@ -870,7 +861,7 @@
                   </h2>
                   <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                      <p>Proses legalisir dokumen membutuhkan waktu sekitar <strong>1-2 hari kerja</strong>. Waktu ini dapat bertambah jika jumlah dokumen yang dilegalisir sangat banyak atau jika diperlukan verifikasi tambahan. Admin kami akan menginformasikan perkiraan waktu pengambilan saat Anda mengajukan permohonan legalisir.</p>
+                        <p>Proses legalisir dokumen memerlukan waktu sekitar <strong>3-7 hari kerja</strong> ⏱️ tergantung pada beban kerja sistem dan kompleksitas verifikasi. Waktu tunggu ini bisa sedikit lebih lama saat terjadi pembaruan sistem di Universitas Terbuka atau pada periode sibuk ketika banyak alumni mengajukan legalisir secara bersamaan. Kami selalu berusaha memproses dokumen Anda secepat mungkin dengan tetap menjaga kualitas dan keabsahan legalisir! 📝✨</p>
                     </div>
                   </div>
                 </div>
@@ -884,21 +875,21 @@
                   </h2>
                   <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                      <p>Ya, Anda dapat meminta legalisir dokumen dalam jumlah banyak. Tidak ada batasan untuk jumlah dokumen yang dapat dilegalisir. Namun, untuk jumlah yang sangat banyak (lebih dari 20 lembar), sebaiknya Anda menghubungi admin terlebih dahulu untuk memastikan ketersediaan layanan dan perkiraan waktu penyelesaian.</p>
+                        <p>Ya, Anda dapat meminta legalisir dokumen dalam jumlah banyak sesuai kebutuhan Anda. Untuk legalisir online, Anda hanya perlu mencetak sejumlah salinan yang diperlukan setelah proses legalisir selesai. Sementara itu, untuk legalisir offline yang dikirim ke UPBJJ Makassar, Anda perlu menyediakan tambahan fotokopi dari berkas yang akan dilegalisir dan membayar biaya tambahan sebesar Rp 10.000 untuk setiap lembar tambahan. Kami siap membantu Anda mengurus legalisir dokumen dalam jumlah berapapun yang Anda butuhkan! 📑✨</p>
                     </div>
                   </div>
                 </div>
-                
+    </ul>            
                 <!-- FAQ Item 4 -->
                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
                   <h2 class="accordion-header" id="heading4">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                      <i class="bi bi-question-circle me-2"></i> Apakah legalisir dokumen bisa dilakukan secara online atau harus datang langsung?
+                      <i class="bi bi-question-circle me-2"></i> Apakah ada opsi lain selain legalisir offline?
                     </button>
                   </h2>
                   <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                      <p>Untuk saat ini, proses legalisir dokumen akademik masih harus dilakukan dengan kunjungan langsung ke kantor SALUT Tana Toraja. Hal ini karena diperlukan verifikasi fisik terhadap dokumen asli. Namun, Anda bisa membuat janji terlebih dahulu melalui WhatsApp untuk memastikan proses legalisir berjalan lancar dan cepat saat Anda datang.</p>
+                      <p>Ya, SALUT Tana Toraja menyediakan dua opsi layanan legalisir dokumen: online dan offline. 📱💻 Layanan online memiliki masa berlaku 3 bulan dengan biaya tetap Rp 150.000 (tidak tergantung jumlah lembar), sangat praktis untuk kebutuhan mendesak! 🚀 Sementara layanan offline melalui UPBJJ Makassar memiliki masa berlaku lebih lama yaitu 6 bulan dengan biaya Rp 235.000 untuk 10 lembar dokumen. Kedua layanan ini dirancang untuk memudahkan alumni sesuai dengan kebutuhan dan preferensi Anda! ✨ Silahkan konsultasikan dengan admin kami untuk memilih opsi yang paling sesuai dengan kebutuhan Anda. 🤝</p>
                     </div>
                   </div>
                 </div>
@@ -907,12 +898,26 @@
                 <div class="accordion-item wow fadeInUp" data-wow-delay="0.5s">
                   <h2 class="accordion-header" id="heading5">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                      <i class="bi bi-question-circle me-2"></i> Bagaimana jika dokumen asli saya hilang atau rusak?
+                      <i class="bi bi-question-circle me-2"></i> Berapa lama dokumen legalisir berlaku?
                     </button>
                   </h2>
                   <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                      <p>Jika dokumen asli Anda hilang atau rusak, Anda perlu mengajukan permohonan penerbitan dokumen pengganti ke Universitas Terbuka Pusat melalui SALUT Tana Toraja. Proses ini memerlukan beberapa persyaratan tambahan seperti surat keterangan kehilangan dari kepolisian (jika hilang) dan biaya penggantian dokumen. Admin kami akan membantu Anda dengan prosedur pengajuan dokumen pengganti tersebut.</p>
+                      <p>Masa berlaku dokumen legalisir berbeda berdasarkan metode yang Anda pilih! ⏳ Untuk legalisir online, dokumen akan berlaku selama 3 bulan sejak tanggal penerbitan, sementara legalisir offline melalui UPBJJ Makassar memiliki masa berlaku lebih panjang yaitu 6 bulan. Pastikan Anda mempertimbangkan kebutuhan dan timeline penggunaan dokumen saat memilih jenis layanan legalisir yang tepat untuk Anda! 📝✨</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                  <h2 class="accordion-header" id="heading6">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse4">
+                      <i class="bi bi-question-circle me-2"></i> Berapa lembar jumlah legalisir yang dapat dilakukan?
+                    </button>
+                  </h2>
+                  <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <p>Untuk legalisir online, Anda memiliki fleksibilitas tak terbatas karena hasilnya berupa file PDF yang bisa Anda cetak sesuai kebutuhan! 🖨️ Sementara itu, layanan legalisir offline sudah mencakup 10 lembar legalisir untuk setiap jenis dokumen (ijazah, transkrip nilai, Akta IV) dalam biaya standar. Jika Anda membutuhkan lebih banyak, tersedia opsi penambahan dengan biaya Rp 10.000 per lembar tambahan. Kami siap membantu memenuhi kebutuhan legalisir Anda dalam jumlah berapapun! ✨📑</p>
                     </div>
                   </div>
                 </div>
@@ -941,7 +946,7 @@
                     </div>
                     <div>
                       <h5 class="mb-1">Admin Legalisir</h5>
-                      <p class="mb-0">Ibu Elza</p>
+                      <p class="mb-0">Elza</p>
                     </div>
                   </div>
                   
@@ -971,7 +976,7 @@
                     </div>
                     <div>
                       <h5 class="mb-1">Jam Layanan</h5>
-                      <p class="mb-0">Senin - Jumat: 08.00 - 16.00 WITA<br>Sabtu: 09.00 - 13.00 WITA</p>
+                      <p class="mb-0">Senin - Jumat: 08.30 - 15.30 WITA<br>Sabtu: 08.30 - 15.30 WITA</p>
                     </div>
                   </div>
                   
@@ -992,7 +997,7 @@
                   <h2>Kantor SALUT Tana Toraja</h2>
                 </div>
                 <div class="map-container rounded-3 shadow-sm overflow-hidden" style="height: 400px;">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15960.009343150962!2d119.82967791331788!3d-3.096392578357006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93ef675a92e0cd%3A0x162ed84e537c84db!2sMakale%2C%20Tana%20Toraja%20Regency%2C%20South%20Sulawesi!5e0!3m2!1sen!2sid!4v1649508419179!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.0246234317324!2d119.85904430000001!3d-3.0881011999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93edf1c2aefbab%3A0x20382e4bc7be4445!2sUniversitas%20Terbuka%20Kabupaten%20Tana%20Toraja!5e0!3m2!1sen!2sid!4v1743245567824!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="mt-3 text-center">
                   <p><i class="bi bi-geo-alt-fill text-primary me-2"></i> Jl. Buntu Pantan No. 22, Makale, Tana Toraja, Sulawesi Selatan 91811</p>
