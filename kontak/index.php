@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Hubungi Kami | Sentra Layanan Universitas Terbuka Tana Toraja</title>
-    <meta name="description" content="Hubungi tim SALUT UT Tana Toraja untuk informasi dan bantuan seputar perkuliahan di Universitas Terbuka" />
+    <title>Kontak | SALUT Tana Toraja</title>
+    <meta name="description" content="Hubungi kami untuk informasi lebih lanjut tentang layanan SALUT Tana Toraja" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
@@ -348,47 +348,43 @@
                           <ul class="navigation">
                             <li><a href="../">Home</a></li>
                             <li class="menu-item-has-children">
-                              <a href="#">Aplikasi UT</a>
+                              <a href="#">Akademik</a>
                               <ul class="sub-menu">
-                                <li>
-                                  <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                                </li>
-                                <li>
-                                  <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                                </li>
-                                <li>
-                                  <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                                </li>
+                                <li><a href="../informasi">Informasi Akademik</a></li>
+                                <li><a href="../kalender">Kalender Akademik</a></li>
+                                <li><a href="../jurusan.php">Program Studi</a></li>
+                                <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                              </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Program</a>
+                              <ul class="sub-menu">
+                                <li><a href="../rpl.php">Rekognisi Pembelajaran Lampau (RPL)</a></li>
+                                <li><a href="../reguler.php">Program Reguler</a></li>
+                                <li><a href="../pasca.php">Program Pascasarjana</a></li>
                               </ul>
                             </li>
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li><a href="../informasi.php">Informasi Akademik</a></li>
                                 <li><a href="../administrasi/">Administrasi Akademik</a></li>
-                                <li><a href="../kegiatan.php">Kegiatan Akademik</a></li>
+                                <li><a href="../kegiatan">Kegiatan Akademik</a></li>
                                 <li><a href="../modul/">Pengambilan Modul</a></li>
                                 <li><a href="../legalisir/">Legalisir Ijazah</a></li>
                                 <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
-                            <li><a href="../galeri/">Galeri</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
                                 <li><a href="../tentang/">Universitas Terbuka</a></li>
                                 <li><a href="../tentang/salut/">SALUT</a></li>
-                                <li><a href="../tentang/saluttator.php">SALUT Tana Toraja</a></li>
-                                <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
+                                <li><a href="../tentang/saluttator">SALUT Tana Toraja</a></li>
+                                <li><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
-                            <li class="active"><a href="../kontak/">Kontak</a></li>
+                            <li><a href="../galeri/">Galeri</a></li>
+                            <li class="current"><a href="../kontak">Kontak</a></li>
                           </ul>
                         </div>
                       </nav>
@@ -398,7 +394,7 @@
                 <div class="main-header-one__bottom-right">
                   <div class="header-btn-box-one">
                     <a class="thm-btn" href="../pendaftaran/">
-                      <span class="txt">Mendaftar Disini</span>
+                      <span class="txt">Daftar Sekarang</span>
                     </a>
                   </div>
                 </div>

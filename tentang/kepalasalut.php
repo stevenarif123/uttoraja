@@ -532,29 +532,25 @@
                           <ul class="navigation">
                             <li><a href="../">Home</a></li>
                             <li class="menu-item-has-children">
-                              <a href="#">Aplikasi UT</a>
+                              <a href="#">Akademik</a>
                               <ul class="sub-menu">
-                                <li>
-                                  <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                                </li>
-                                <li>
-                                  <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                                </li>
-                                <li>
-                                  <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                                </li>
+                                <li><a href="../informasi">Informasi Akademik</a></li>
+                                <li><a href="../kalender">Kalender Akademik</a></li>
+                                <li><a href="../jurusan.php">Program Studi</a></li>
+                                <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                              </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Program</a>
+                              <ul class="sub-menu">
+                                <li><a href="../rpl.php">Rekognisi Pembelajaran Lampau (RPL)</a></li>
+                                <li><a href="../reguler.php">Program Reguler</a></li>
+                                <li><a href="../pasca.php">Program Pascasarjana</a></li>
                               </ul>
                             </li>
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li><a href="../informasi">Informasi Akademik</a></li>
                                 <li><a href="../administrasi/">Administrasi Akademik</a></li>
                                 <li><a href="../kegiatan">Kegiatan Akademik</a></li>
                                 <li><a href="../modul/">Pengambilan Modul</a></li>
@@ -562,7 +558,6 @@
                                 <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
-                            <li><a href="../galeri/">Galeri</a></li>
                             <li class="menu-item-has-children active">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
@@ -572,16 +567,8 @@
                                 <li class="active"><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
-                            <!-- Add Program menu if missing -->
-                            <li class="menu-item-has-children">
-                              <a href="#">Program</a>
-                              <ul class="sub-menu">
-                                <li><a href="../rpl.php">RPL</a></li>
-                                <li><a href="../reguler.php">Reguler</a></li>
-                                <li><a href="../jurusan.php">Program Studi</a></li>
-                              </ul>
-                            </li>
-                            <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                            <li><a href="../galeri/">Galeri</a></li>
+                            <li><a href="../kontak">Kontak</a></li>
                           </ul>
                         </div>
                       </nav>
@@ -676,7 +663,7 @@
               <div class="row justify-content-center">
                 <div class="col-lg-8">
                   <h1 class="display-5 fw-bold mb-4">Kata Sambutan Kepala SALUT</h1>
-                  <p class="lead fs-5 mb-4">Pesan khusus dari Ir. Markus Rembon sebagai Kepala Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja</p>
+                  <p class="text-white lead fs-5 mb-4">Pesan khusus dari Ribka Padang, S.Pd., M.Pd., M.H. sebagai Kepala Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja</p>
                 </div>
               </div>
             </div>
@@ -697,7 +684,7 @@
                     <img src="../assets/img/team/kepala-salut.jpg" alt="Kepala SALUT">
                   </div>
                   <div class="message-author">
-                    <h3>Ir. Markus Rembon</h3>
+                    <h3>Ribka Padang, S.Pd., M.Pd., M.H.</h3>
                     <p>Kepala SALUT Tana Toraja</p>
                   </div>
                 </div>
@@ -729,7 +716,7 @@
                   
                   <div class="message-signature">
                     <img src="../assets/img/team/signature-kepala.png" alt="Tanda tangan Kepala SALUT" class="signature-img">
-                    <h4>Ir. Markus Rembon</h4>
+                    <h4>Ribka Padang, S.Pd., M.Pd., M.H.</h4>
                     <p>Kepala SALUT Tana Toraja</p>
                   </div>
                 </div>
@@ -758,7 +745,7 @@
                   <div class="profile-img">
                     <img src="../assets/img/team/kepala-salut.jpg" alt="Kepala SALUT">
                   </div>
-                  <h3 class="profile-name">Ir. Markus Rembon</h3>
+                  <h3 class="profile-name">Ribka Padang, S.Pd., M.Pd., M.H.</h3>
                   <p class="profile-designation">Kepala SALUT Tana Toraja</p>
                 </div>
                 <div class="profile-body">
@@ -778,7 +765,9 @@
                     </div>
                     <div class="profile-info-content">
                       <h4>Pendidikan</h4>
-                      <p>S1 Teknik Sipil, Universitas Hasanuddin</p>
+                      <p>- S1 Pendidikan Guru Bahasa Inggris, Universitas Negeri Makassar</p>
+                      <p>- S2 Magister Pendidikan, Universitas Kristen Indonesia Jakarta</p>
+                      <p>- S2 Magister Hukum, Universitas Kristen Indonesia Paulus</p>
                     </div>
                   </div>
                   
@@ -798,24 +787,23 @@
                     </div>
                     <div class="profile-info-content">
                       <h4>Email</h4>
-                      <p><a href="mailto:markusrembon@ut.ac.id">markusrembon@ut.ac.id</a></p>
+                      <p><a href="mailto:ribkapadang74ps@gmail.com">ribkapadang74ps@gmail.com</a></p>
                     </div>
                   </div>
                 </div>
               </div>
               
               <!-- Credentials Card -->
-              <div class="message-card">
+              <!-- <div class="message-card">
                 <div class="message-pattern"></div>
                 <h4>Kredensial & Prestasi</h4>
                 <ul class="credentials-list">
-                  <li>Penghargaan Pelayanan Terbaik SALUT, 2022</li>
                   <li>Pelopor Digitalisasi Layanan Akademik UT</li>
                   <li>Pembicara Nasional Pendidikan Jarak Jauh</li>
                   <li>Anggota Dewan Pendidikan Tana Toraja</li>
                   <li>Penggagas Program "UT Menyapa Desa"</li>
                 </ul>
-              </div>
+              </div> -->
               
               <!-- Vision Card -->
               <div class="vision-card">
@@ -823,7 +811,7 @@
                 <div class="vision-shape shape-4"></div>
                 <div class="vision-content">
                   <h3 class="vision-title">Visi Kepemimpinan</h3>
-                  <p class="vision-text">Menjadikan SALUT Tana Toraja sebagai pusat layanan pendidikan tinggi jarak jauh terdepan yang inovatif, berkualitas, dan terjangkau bagi seluruh lapisan masyarakat di wilayah Tana Toraja dan sekitarnya.</p>
+                  <p class="text-white vision-text">Menjadikan SALUT Tana Toraja sebagai pusat layanan pendidikan tinggi jarak jauh terdepan yang inovatif, berkualitas, dan terjangkau bagi seluruh lapisan masyarakat di wilayah Tana Toraja dan sekitarnya.</p>
                 </div>
               </div>
               

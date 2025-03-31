@@ -996,7 +996,7 @@
                 <div class="main-header-one__bottom-left">
                   <div class="logo-box-one">
                     <a href="./">
-                      <img src="serve-image?img=assets/img/resource/logo.png" alt="Logo" />
+                      <img src="serve-image.php?img=assets/img/resource/logo.png" alt="Logo" />
                     </a>
                   </div>
                 </div>
@@ -1011,37 +1011,25 @@
                           <ul class="navigation">
                             <li><a href="./">Home</a></li>
                             <li class="menu-item-has-children">
-                              <a href="#">Aplikasi UT</a>
+                              <a href="#">Akademik</a>
                               <ul class="sub-menu">
-                                <li>
-                                  <a href="https://elearning.ut.ac.id"
-                                    >Elearning/Tuton</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://tmk.ut.ac.id"
-                                    >Tugas Mata Kuliah (TMK)</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://silayar.ut.ac.id"
-                                    >SILAYAR UT</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://the.ut.ac.id"
-                                    >Take Home Exam (THE)</a
-                                  >
-                                </li>
+                                <li><a href="./informasi">Informasi Akademik</a></li>
+                                <li><a href="./kalender">Kalender Akademik</a></li>
+                                <li><a href="./jurusan.php">Program Studi</a></li>
+                                <li><a href="./biaya.php">Biaya Kuliah</a></li>
+                              </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Program</a>
+                              <ul class="sub-menu">
+                                <li><a href="./rpl.php">Rekognisi Pembelajaran Lampau (RPL)</a></li>
+                                <li><a href="./reguler.php">Program Reguler</a></li>
+                                <li><a href="./pasca.php">Program Pascasarjana</a></li>
                               </ul>
                             </li>
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li><a href="./informasi">Informasi Akademik</a></li>
                                 <li><a href="./administrasi/">Administrasi Akademik</a></li>
                                 <li><a href="./kegiatan">Kegiatan Akademik</a></li>
                                 <li><a href="./modul/">Pengambilan Modul</a></li>
@@ -1049,7 +1037,6 @@
                                 <li><a href="./suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
-                            <li><a href="./galeri/">Galeri</a></li>
                             <li class="menu-item-has-children">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
@@ -1059,15 +1046,8 @@
                                 <li><a href="./tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
-                            <li class="menu-item-has-children">
-                              <a href="#">Program</a>
-                              <ul class="sub-menu">
-                                <li><a href="./rpl.php">RPL</a></li>
-                                <li><a href="./reguler.php">Reguler</a></li>
-                                <li><a href="./jurusan.php">Program Studi</a></li>
-                              </ul>
-                            </li>
-                            <li><a href="./biaya.php">Biaya Kuliah</a></li>
+                            <li><a href="./galeri/">Galeri</a></li>
+                            <li><a href="./kontak">Kontak</a></li>
                           </ul>
                         </div>
                       </nav>
@@ -1078,7 +1058,7 @@
                 <div class="main-header-one__bottom-right">
                   <div class="header-btn-box-one">
                     <a class="thm-btn" href="./pendaftaran/">
-                      <span class="txt">Mendaftar Disini</span>
+                      <span class="txt">Daftar Sekarang <i class="bi bi-arrow-right-short"></i></span>
                     </a>
                   </div>
                 </div>
@@ -1944,6 +1924,26 @@
                         </li>
                         <li>
                           <p>
+                <!--Start Single Footer Widget-->
+                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                  <div class="single-footer-widget single-footer-widget-style2 ml50">
+                    <div class="title">
+                      <h3>Layanan Kami</h3>
+                    </div>
+                    <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                      <ul class="clearfix">
+                        <li>
+                          <p>
+                            <a href="./informasi.php">Informasi Akademik</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="./administrasi/">Administrasi Akademik</a>
+                          </p>
+                        </li>
+                        <li>
+                          <p>
                             <a href="./kegiatan.php">Kegiatan</a>
                           </p>
                         </li>
@@ -1969,29 +1969,6 @@
                 <!--End Single Footer Widget-->
                 
                 <!--Start Single Footer Widget-->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                  <div class="single-footer-widget single-footer-widget-style2">
-                    <div class="title">
-                      <h3>Newsletter</h3>
-                    </div>
-                    <div class="single-footer-widget-box">
-                      <div class="footer-newsletter-box">
-                        <p>Dapatkan berita dan informasi terbaru dari kami</p>
-                        <form class="footer-newsletter-form" action="#">
-                          <input type="email" name="email" placeholder="Email Anda">
-                          <button type="submit">Berlangganan</button>
-                        </form>
-                      </div>
-                      <div class="footer-social-links mt-4">
-                        <p class="mb-2">Ikuti kami di media sosial:</p>
-                        <a href="https://www.facebook.com/uttoraja"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/uttoraja/"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@SALUTTanaToraja"><i class="fab fa-youtube"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <!--End Single Footer Widget-->
               </div>
             </div>

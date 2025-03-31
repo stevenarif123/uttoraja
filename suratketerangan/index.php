@@ -38,6 +38,38 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/color1.css" />
     <link rel="stylesheet" href="../assets/css/responsive.css" />
+
+    <!-- Add Letter Service specific styles -->
+    <style>
+        .letter-service-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .letter-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .processing-time {
+            padding: 8px 15px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+    </style>
   </head>
 
   <body class="body-gray-bg">
@@ -130,38 +162,33 @@
                         <ul class="navigation">
                           <li><a href="../">Home</a></li>
                           <li class="menu-item-has-children">
-                            <a href="#">Aplikasi UT</a>
+                            <a href="#">Akademik</a>
                             <ul class="sub-menu">
-                              <li>
-                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                              </li>
-                              <li>
-                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                              </li>
-                              <li>
-                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                              </li>
-                              <li>
-                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                              </li>
-                              <li>
-                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                              </li>
+                              <li><a href="../informasi">Informasi Akademik</a></li>
+                              <li><a href="../kalender">Kalender Akademik</a></li>
+                              <li><a href="../jurusan.php">Program Studi</a></li>
+                              <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Program</a>
+                            <ul class="sub-menu">
+                              <li><a href="../rpl.php">Rekognisi Pembelajaran Lampau (RPL)</a></li>
+                              <li><a href="../reguler.php">Program Reguler</a></li>
+                              <li><a href="../pasca.php">Program Pascasarjana</a></li>
                             </ul>
                           </li>
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="../informasi">Informasi Akademik</a></li>
                               <li><a href="../administrasi/">Administrasi Akademik</a></li>
                               <li><a href="../kegiatan">Kegiatan Akademik</a></li>
                               <li><a href="../modul/">Pengambilan Modul</a></li>
                               <li><a href="../legalisir/">Legalisir Ijazah</a></li>
-                              <li><a href="../suratketerangan/">Surat Keterangan</a></li>
+                              <li class="active"><a href="../suratketerangan/">Surat Keterangan</a></li>
                             </ul>
                           </li>
-                          <li><a href="../galeri/">Galeri</a></li>
-                          <li class="menu-item-has-chil  dren">
+                          <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
                               <li><a href="../tentang/">Universitas Terbuka</a></li>
@@ -170,6 +197,8 @@
                               <li><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
+                          <li><a href="../galeri/">Galeri</a></li>
+                          <li><a href="../kontak">Kontak</a></li>
                         </ul>
                       </div>
                     </nav>

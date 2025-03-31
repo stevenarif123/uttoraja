@@ -1,12 +1,17 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "data_daerah";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "data_daerah";
 
-$conn_daerah = mysqli_connect($host, $user, $pass, $db);
+// Create connection
+$conn_daerah = new mysqli($servername, $username, $password, $dbname);
 
-if (!$conn_daerah) {
-    die("Connection failed: " . mysqli_connect_error());
+// Check connection
+if ($conn_daerah->connect_error) {
+    die("Connection failed: " . $conn_daerah->connect_error);
 }
+
+// Set charset to utf8mb4
+$conn_daerah->set_charset("utf8mb4");
 ?>

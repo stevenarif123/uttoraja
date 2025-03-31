@@ -1640,29 +1640,22 @@ if (isset($_SESSION['error'])) {
           <img src="../assets/img/shape/footer-v3-img2.jpg" alt="" />
         </div>
         <div class="container">
-          <div class="row">
+          <div class="row justify-content-between">
             <!--Start Single Footer Widget-->
-            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-              <div class="single-footer-widget single-footer-widget-style2 ml50">
-                <div class="title">
-                  <h3>Kontak</h3>
+            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s">
+              <div class="single-footer-widget single-footer-widget-style2">
+                <div class="footer-logo">
+                  <a href="../"><img src="../assets/img/resource/footer-logo.png" alt="Logo"></a>
                 </div>
-                <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
+                <div class="footer-text mt-4">
+                  <p>SALUT Tana Toraja adalah Sentra Aktivitas Layanan Universitas Terbuka yang melayani masyarakat di wilayah Tana Toraja dan sekitarnya.</p>
+                </div>
+                <div class="footer-social-links mt-4">
                   <ul class="clearfix">
-                    <li>
-                      <div class="icon">
-                        <span class="icon-phone-call"></span>
-                      </div>
-                      <p>+62 813-5561-9225</p>
-                    </li>
-                    <li>
-                      <div class="icon">
-                        <span class="icon-mail"></span>
-                      </div>
-                      <p>
-                        <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
-                      </p>
-                    </li>
+                    <li><a href="https://www.facebook.com/uttoraja"><i class="icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/uttoraja/"><i class="icon-instagram-symbol"></i></a></li>
+                    <li><a href="https://www.youtube.com/@SALUTTanaToraja"><i class="icon-youtube"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -1670,8 +1663,8 @@ if (isset($_SESSION['error'])) {
             <!--End Single Footer Widget-->
             
             <!--Start Single Footer Widget-->
-            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-              <div class="single-footer-widget single-footer-widget-style2 ml50">
+            <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+              <div class="single-footer-widget single-footer-widget-style2">
                 <div class="title">
                   <h3>Link Cepat</h3>
                 </div>
@@ -1697,7 +1690,7 @@ if (isset($_SESSION['error'])) {
             
             <!--Start Single Footer Widget-->
             <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-              <div class="single-footer-widget single-footer-widget-style2 ml50">
+              <div class="single-footer-widget single-footer-widget-style2">
                 <div class="title">
                   <h3>Administrasi</h3>
                 </div>
@@ -1723,10 +1716,58 @@ if (isset($_SESSION['error'])) {
               </div>
             </div>
             <!--End Single Footer Widget-->
+            
+            <!--Start Single Footer Widget-->
+            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+              <div class="single-footer-widget single-footer-widget-style2">
+                <div class="title">
+                  <h3>Kontak</h3>
+                </div>
+                <div class="single-footer-widget-box single-footer-widget__contact">
+                  <p class="mb-2">Jl. Pemuda No. 39, Rantepao<br>Toraja Utara, Sulawesi Selatan</p>
+                  <ul class="footer-contact-info">
+                    <li>
+                      <div class="icon">
+                        <span class="icon-phone-call"></span>
+                      </div>
+                      <p><a href="tel:+6281355619225">+62 813-5561-9225</a></p>
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <span class="icon-mail"></span>
+                      </div>
+                      <p>
+                        <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
+                      </p>
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <span class="icon-clock"></span>
+                      </div>
+                      <p>Senin - Jumat: 08:00 - 16:00</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--End Single Footer Widget-->
           </div>
         </div>
       </div>
       <!-- End Footer Main -->
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom footer-bottom-style2">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="footer-bottom-inner text-center">
+                <p>&copy; 2023 SALUT Tana Toraja. All Rights Reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
     <!--End Footer Three-->
 

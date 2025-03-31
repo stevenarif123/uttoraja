@@ -130,29 +130,25 @@
                           <ul class="navigation">
                             <li><a href="../">Home</a></li>
                             <li class="menu-item-has-children">
-                              <a href="#">Aplikasi UT</a>
+                              <a href="#">Akademik</a>
                               <ul class="sub-menu">
-                                <li>
-                                  <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                                </li>
-                                <li>
-                                  <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                                </li>
-                                <li>
-                                  <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                                </li>
-                                <li>
-                                  <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                                </li>
+                                <li><a href="../informasi">Informasi Akademik</a></li>
+                                <li><a href="../kalender">Kalender Akademik</a></li>
+                                <li><a href="../jurusan.php">Program Studi</a></li>
+                                <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                              </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                              <a href="#">Program</a>
+                              <ul class="sub-menu">
+                                <li><a href="../rpl.php">Rekognisi Pembelajaran Lampau (RPL)</a></li>
+                                <li><a href="../reguler.php">Program Reguler</a></li>
+                                <li><a href="../pasca.php">Program Pascasarjana</a></li>
                               </ul>
                             </li>
                             <li class="menu-item-has-children">
                               <a href="#">Layanan</a>
                               <ul class="sub-menu">
-                                <li><a href="../informasi">Informasi Akademik</a></li>
                                 <li><a href="../administrasi/">Administrasi Akademik</a></li>
                                 <li><a href="../kegiatan">Kegiatan Akademik</a></li>
                                 <li><a href="../modul/">Pengambilan Modul</a></li>
@@ -160,7 +156,6 @@
                                 <li><a href="../suratketerangan/">Surat Keterangan</a></li>
                               </ul>
                             </li>
-                            <li><a href="../galeri/">Galeri</a></li>
                             <li class="menu-item-has-children active">
                               <a href="#">Tentang</a>
                               <ul class="sub-menu">
@@ -170,17 +165,8 @@
                                 <li><a href="../tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                               </ul>
                             </li>
-                            <!-- Add missing Program menu -->
-                            <li class="menu-item-has-children">
-                              <a href="#">Program</a>
-                              <ul class="sub-menu">
-                                <li><a href="../rpl.php">RPL</a></li>
-                                <li><a href="../reguler.php">Reguler</a></li>
-                                <li><a href="../jurusan.php">Program Studi</a></li>
-                              </ul>
-                            </li>
-                            <!-- Add missing Biaya Kuliah menu -->
-                            <li><a href="../biaya.php">Biaya Kuliah</a></li>
+                            <li><a href="../galeri/">Galeri</a></li>
+                            <li><a href="../kontak">Kontak</a></li>
                           </ul>
                         </div>
                       </nav>
@@ -371,7 +357,7 @@
                   <p class="mb-0">Tingkat Kepuasan</p>
                 </div>
                 <div class="col-6 col-md-3">
-                  <div class="display-6 fw-bold mb-2 counter-number">8+</div>
+                  <div class="display-6 fw-bold mb-2 counter-number">8+</</div>
                   <p class="mb-0">Kecamatan Terjangkau</p>
                 </div>
               </div>

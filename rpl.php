@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Rekognisi Pembelajaran Lampau (RPL) | Sentra Layanan Universitas Terbuka Tana Toraja</title>
+  <title>Program RPL | Sentra Layanan Universitas Terbuka Tana Toraja</title>
   <meta name="description" content="Informasi lengkap tentang program Rekognisi Pembelajaran Lampau (RPL) di Universitas Terbuka" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -42,6 +42,74 @@
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Add RPL specific styles -->
+  <style>
+    .rpl-feature {
+      padding: 20px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .rpl-feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .rpl-feature i {
+      font-size: 2.5rem;
+      color: var(--thm-primary);
+      margin-bottom: 15px;
+    }
+
+    .requirement-list li {
+      padding: 15px;
+      margin-bottom: 10px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .requirement-list i {
+      color: var(--thm-primary);
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 30px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: var(--thm-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-weight: bold;
+    }
+
+    .info-box {
+      background: #e7f1ff;
+      border-left: 4px solid var(--thm-primary);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 
 <body class="body-gray-bg">
@@ -134,29 +202,25 @@
                         <ul class="navigation">
                           <li><a href="./">Home</a></li>
                           <li class="menu-item-has-children">
-                            <a href="#">Aplikasi UT</a>
+                            <a href="#">Akademik</a>
                             <ul class="sub-menu">
-                              <li>
-                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                              </li>
-                              <li>
-                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                              </li>
-                              <li>
-                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                              </li>
-                              <li>
-                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                              </li>
-                              <li>
-                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                              </li>
+                              <li><a href="./informasi">Informasi Akademik</a></li>
+                              <li><a href="./kalender">Kalender Akademik</a></li>
+                              <li><a href="./jurusan.php">Program Studi</a></li>
+                              <li><a href="./biaya.php">Biaya Kuliah</a></li>
+                            </ul>
+                          </li>
+                          <li class="menu-item-has-children">
+                            <a href="#">Program</a>
+                            <ul class="sub-menu">
+                              <li class="active"><a href="./rpl.php">Rekognisi Pembelajaran Lampau (RPL)</a></li>
+                              <li><a href="./reguler.php">Program Reguler</a></li>
+                              <li><a href="./pasca.php">Program Pascasarjana</a></li>
                             </ul>
                           </li>
                           <li class="menu-item-has-children">
                             <a href="#">Layanan</a>
                             <ul class="sub-menu">
-                              <li><a href="./informasi">Informasi Akademik</a></li>
                               <li><a href="./administrasi/">Administrasi Akademik</a></li>
                               <li><a href="./kegiatan">Kegiatan Akademik</a></li>
                               <li><a href="./modul/">Pengambilan Modul</a></li>
@@ -164,7 +228,6 @@
                               <li><a href="./suratketerangan/">Surat Keterangan</a></li>
                             </ul>
                           </li>
-                          <li><a href="./galeri/">Galeri</a></li>
                           <li class="menu-item-has-children">
                             <a href="#">Tentang</a>
                             <ul class="sub-menu">
@@ -174,15 +237,8 @@
                               <li><a href="./tentang/kepalasalut">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
-                          <li class="menu-item-has-children active">
-                            <a href="#">Program</a>
-                            <ul class="sub-menu">
-                              <li class="active"><a href="./rpl.php">RPL</a></li>
-                              <li><a href="./reguler.php">Reguler</a></li>
-                              <li><a href="./jurusan.php">Program Studi</a></li>
-                            </ul>
-                          </li>
-                          <li><a href="./biaya.php">Biaya Kuliah</a></li>
+                          <li><a href="./galeri/">Galeri</a></li>
+                          <li><a href="./kontak">Kontak</a></li>
                         </ul>
                       </div>
                     </nav>
@@ -255,7 +311,7 @@
       </div>
       <div class="container">
         <div class="page-header__inner">
-          <h2>Rekognisi Pembelajaran Lampau (RPL)</h2>
+          <h2>Program RPL (Rekognisi Pembelajaran Lampau)</h2>
           <ul class="thm-breadcrumb">
             <li>
               <a href="./"><span class="fa fa-home"></span> Home</a>
@@ -271,22 +327,18 @@
     <!--End Page Header-->
 
     <!-- Start RPL Content Section -->
-    <section class="program-content-section">
+    <section class="rpl-content-section py-5">
       <div class="container">
         <!-- Main content area -->
         <div class="row">
           <div class="col-lg-8">
-            <div class="program-content wow fadeInUp" data-wow-delay="0.1s">
-              <div class="program-header">
-                <div class="program-icon">
-                  <i class="bi bi-award"></i>
-                </div>
-                <h2>Rekognisi Pembelajaran Lampau (RPL)</h2>
-                <div class="program-meta">
-                  <span><i class="bi bi-calendar3"></i> Program Dibuka</span>
-                  <span><i class="bi bi-mortarboard-fill"></i> Gelar Akademik</span>
-                  <span><i class="bi bi-clock-history"></i> Hemat Waktu</span>
-                </div>
+            <div class="content-wrapper">
+              <h3>Apa itu Program RPL? 🎓</h3>
+              <p>Program Rekognisi Pembelajaran Lampau (RPL) adalah proses pengakuan atas capaian pembelajaran seseorang yang diperoleh dari pendidikan formal, nonformal, informal, dan/atau pengalaman kerja ke dalam pendidikan formal.</p>
+
+              <div class="info-box mt-4">
+                <i class="bi bi-lightbulb"></i>
+                <p>RPL memungkinkan Anda mendapatkan gelar akademik dengan mempertimbangkan pengalaman kerja dan pembelajaran sebelumnya! 🌟</p>
               </div>
 
               <div class="program-description">
@@ -351,13 +403,63 @@
                 </div>
 
                 <h3>Siapa yang Cocok untuk Program RPL? 👨‍💼👩‍💼</h3>
+                
+                <div class="important-notice">
+                  <div class="notice-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                  </div>
+                  <div class="notice-content">
+                    <h4>⚠️ PENTING: Persyaratan Minimal Pendidikan</h4>
+                    <p>Pelamar program RPL <strong>WAJIB</strong> memiliki ijazah minimal D1, D2, D3, D4 atau S1 yang relevan dengan program studi yang dipilih. Tanpa kualifikasi akademik tersebut, aplikasi RPL tidak dapat diproses. Hubungi admin registrasi untuk mendapatkan saran dan infromasi registrasi RPL.</p>
+                  </div>
+                </div>
+                
                 <ul class="eligibility-list">
-                  <li><i class="bi bi-check-circle-fill"></i> <strong>Profesional berpengalaman</strong> yang ingin meningkatkan kualifikasi akademik</li>
-                  <li><i class="bi bi-check-circle-fill"></i> <strong>Karyawan yang ingin naik jabatan</strong> namun membutuhkan gelar akademik</li>
-                  <li><i class="bi bi-check-circle-fill"></i> <strong>Pemilik sertifikat profesi</strong> yang ingin mendapatkan pengakuan akademik</li>
-                  <li><i class="bi bi-check-circle-fill"></i> <strong>Pindahan dari perguruan tinggi lain</strong> yang ingin melanjutkan studi</li>
-                  <li><i class="bi bi-check-circle-fill"></i> <strong>Lulusan D3/D4</strong> yang ingin melanjutkan ke jenjang sarjana</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Profesional berpengalaman</strong>&nbsp; yang ingin meningkatkan kualifikasi akademik</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Karyawan yang ingin naik jabatan</strong>&nbsp; namun membutuhkan gelar akademik</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Pemilik sertifikat profesi</strong>&nbsp; yang ingin mendapatkan pengakuan akademik</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Pindahan dari perguruan tinggi lain</strong>&nbsp; yang ingin melanjutkan studi</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Lulusan D1/D2/D3/D4</strong>&nbsp; yang ingin melanjutkan ke jenjang sarjana</li>
                 </ul>
+                
+                <style>
+                  .important-notice {
+                    display: flex;
+                    background-color: #fff3cd;
+                    border-left: 5px solid #ffc107;
+                    padding: 1.5rem;
+                    border-radius: 0.25rem;
+                    margin: 1.5rem 0;
+                    align-items: flex-start;
+                  }
+                  
+                  .notice-icon {
+                    font-size: 2rem;
+                    color: #ffc107;
+                    margin-right: 1rem;
+                  }
+                  
+                  .notice-content h4 {
+                    margin-bottom: 0.5rem;
+                    color: #856404;
+                  }
+                  
+                  .notice-content p {
+                    color: #856404;
+                    margin-bottom: 0;
+                  }
+                  
+                  @media (max-width: 767.98px) {
+                    .important-notice {
+                      flex-direction: column;
+                    }
+                    
+                    .notice-icon {
+                      margin-right: 0;
+                      margin-bottom: 1rem;
+                    }
+                  }
+                </style>
 
                 <div class="testimonial-box">
                   <div class="quote-icon">
@@ -511,7 +613,7 @@
                     </h2>
                     <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
                       <div class="accordion-body">
-                        Secara umum, maksimal 50% dari total SKS program studi dapat diakui melalui proses RPL, tergantung pada kebijakan program studi dan hasil asesmen portofolio calon mahasiswa.
+                        Secara umum, maksimal 70% dari total SKS program studi dapat diakui melalui proses RPL, tergantung pada kebijakan program studi dan hasil asesmen portofolio calon mahasiswa.
                       </div>
                     </div>
                   </div>
@@ -927,7 +1029,7 @@
       padding: 1.25rem;
       border-radius: 0.25rem;
       margin: 1.5rem 0;
-      display: flex;
+      display: block;
       align-items: center;
     }
     

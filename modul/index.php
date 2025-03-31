@@ -707,23 +707,12 @@
                         <ul class="navigation">
                           <li><a href="../">Home</a></li>
                           <li class="menu-item-has-children">
-                            <a href="#">Aplikasi UT</a>
+                            <a href="#">Akademik</a>
                             <ul class="sub-menu">
-                              <li>
-                                <a href="https://elearning.ut.ac.id">Elearning/Tuton</a>
-                              </li>
-                              <li>
-                                <a href="https://tmk.ut.ac.id">Tugas Mata Kuliah (TMK)</a>
-                              </li>
-                              <li>
-                                <a href="https://silayar.ut.ac.id">SILAYAR UT</a>
-                              </li>
-                              <li>
-                                <a href="https://aksi.ut.ac.id">AKSI UT</a>
-                              </li>
-                              <li>
-                                <a href="https://the.ut.ac.id">Take Home Exam (THE)</a>
-                              </li>
+                              <li><a href="../informasi">Informasi Akademik</a></li>
+                              <li><a href="../kalender">Kalender Akademik</a></li>
+                              <li><a href="../jurusan.php">Program Studi</a></li>
+                              <li><a href="../biaya.php">Biaya Kuliah</a></li>
                             </ul>
                           </li>
                           <li class="menu-item-has-children">
@@ -747,15 +736,6 @@
                               <li><a href="../tentang/kepalasalut.php">Pesan Kepala SALUT</a></li>
                             </ul>
                           </li>
-                          <li class="menu-item-has-children">
-                            <a href="#">Program</a>
-                            <ul class="sub-menu">
-                              <li><a href="../rpl.php">RPL</a></li>
-                              <li><a href="../reguler.php">Reguler</a></li>
-                              <li><a href="../jurusan.php">Program Studi</a></li>
-                            </ul>
-                          </li>
-                          <li><a href="../biaya.php">Biaya Kuliah</a></li>
                         </ul>
                       </div>
                     </nav>
@@ -1299,7 +1279,7 @@
                   </div>
                   <div>
                     <h5 class="mb-1">Admin Modul</h5>
-                    <p class="mb-0">Elza</p>
+                    <p class="mb-0">Ibu Ratih</p>
                   </div>
                 </div>
                 
@@ -1365,7 +1345,7 @@
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                       <div class="text">
-                        <p class="white-text">
+                        <p>
                           Butuh bantuan dan dukungan dalam perkuliahan di UT?
                         </p>
                       </div>
@@ -1477,7 +1457,7 @@
                     <div class="footer-module-info">
                       <p>Bahan ajar Universitas Terbuka terdiri dari berbagai jenis yang dapat Anda akses untuk mendukung proses pembelajaran jarak jauh Anda.</p>
                       <div class="footer-module-links">
-                        <a href="https://pustaka.ut.ac.id" class="footer-module-btn" target="_blank">
+                        <a href="https://elearning.ut.ac.id" class="footer-module-btn" target="_blank">
                           <i class="bi bi-laptop"></i> Akses Modul Digital
                         </a>
                         <a href="#check-module" class="footer-module-btn">
