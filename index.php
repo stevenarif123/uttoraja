@@ -1845,7 +1845,7 @@
                     </div>
                     <div class="single-footer-widget-box single-footer-widget__about single-footer-widget__about--2">
                       <div class="text">
-                        <p>
+                        <p class="text-white">
                           Butuh bantuan dan dukungan dalam perkuliahan di UT?
                         </p>
                       </div>
@@ -1854,14 +1854,14 @@
                           <div class="icon">
                             <span class="icon-pin"></span>
                           </div>
-                          <p>Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
+                          <p class="text-white">Jl. Buntu Pantan No. 22, Makale, Tana Toraja</p>
                         </li>
                         <li>
                           <div class="icon">
                             <span class="icon-mail-inbox-app"></span>
                           </div>
-                          <p>
-                            <a href="mailto:saluttanatoraja@gmail.com">saluttanatoraja@gmail.com</a>
+                          <p class="text-white">
+                            <a href="mailto:saluttanatoraja@gmail.com" class="text-white">saluttanatoraja@gmail.com</a>
                           </p>
                         </li>
                         <li>
@@ -1869,7 +1869,7 @@
                             <span class="icon-phone-call"></span>
                           </div>
                           <p>
-                            <a href="tel:6281355619225">+62 813-5561-9225</a>
+                            <a href="tel:6281355619225" class="text-white">+62 813-5561-9225</a>
                           </p>
                         </li>
                       </ul>
@@ -1924,26 +1924,6 @@
                         </li>
                         <li>
                           <p>
-                <!--Start Single Footer Widget-->
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                  <div class="single-footer-widget single-footer-widget-style2 ml50">
-                    <div class="title">
-                      <h3>Layanan Kami</h3>
-                    </div>
-                    <div class="single-footer-widget-box single-footer-widget__links single-footer-widget__links-style2">
-                      <ul class="clearfix">
-                        <li>
-                          <p>
-                            <a href="./informasi.php">Informasi Akademik</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
-                            <a href="./administrasi/">Administrasi Akademik</a>
-                          </p>
-                        </li>
-                        <li>
-                          <p>
                             <a href="./kegiatan.php">Kegiatan</a>
                           </p>
                         </li>
@@ -1966,9 +1946,6 @@
                     </div>
                   </div>
                 </div>
-                <!--End Single Footer Widget-->
-                
-                <!--Start Single Footer Widget-->
                 <!--End Single Footer Widget-->
               </div>
             </div>
