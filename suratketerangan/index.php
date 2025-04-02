@@ -208,8 +208,8 @@
 
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
-                  <a class="thm-btn" href=".. v b /pendaftaran/">
-                    <span class="txt">Mendaftar Disini</span>
+                  <a class="thm-btn" href="../pendaftaran/">
+                    <span class="txt">Daftar Sekarang <i class="bi bi-arrow-right-short"></i></span>
                   </a>
                 </div>
               </div>

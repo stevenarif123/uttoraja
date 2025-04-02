@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -42,6 +41,80 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `username`, `password`, `name`, `created_at`) VALUES
 (1, 'admin', '$2y$10$8FKqYmrPIb8wFxP5YHKpGOE5YR6E3A4ZgXqDXf8.IXqzGBGwzHKYi', 'Administrator', '2025-02-24 02:45:54'),
 (2, 'fannycantik', '$2y$10$nl52rfQG7ysnFDD5iB0mnuIIETANauGvUXq3bNptcVL0C8hDrsI/u', 'Fanny', '2025-02-24 02:52:15');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price_student` decimal(10,2) NOT NULL,
+  `price_guest` decimal(10,2) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `size_options` varchar(255) DEFAULT NULL COMMENT 'Comma-separated list of available sizes',
+  `category` varchar(50) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `featured` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price_student`, `price_guest`, `image`, `size_options`, `category`, `active`, `featured`) VALUES
+(1, 'Baju Almamater', 'baju Almamater UT', 150000.00, 200000.00, '67bbf7773fc87_id-11134207-7r98y-lnklpmw7aikmc0.jpeg', NULL, 'Apparel', 1, 1),
+(2, 'Topi UT', 'Topi dengan tulisan UT', 50000.00, 70000.00, '67bbf82c47ed0_316059194_634429251797308_7201826121817591657_n.jpeg', NULL, 'Headwear', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `product_sizes`
+--
+
+CREATE TABLE `product_sizes` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `size` varchar(10) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `product_sizes`
+--
+
+INSERT INTO `product_sizes` (`product_id`, `size`, `stock`) VALUES 
+(1, 'S', 20),
+(1, 'M', 25),
+(1, 'L', 15),
+(1, 'XL', 10),
+(2, 'All Size', 20);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `nim` varchar(20) DEFAULT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `role` enum('student','guest') NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1 COMMENT 'User account status (1=active, 0=inactive)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `nim`, `tanggal_lahir`, `name`, `email`, `role`, `active`) VALUES
+(1, '123456789', '2024-02-01', 'Akhbar M. A.', 'akhbar@gmail.com', 'student', 1);
 
 -- --------------------------------------------------------
 
@@ -82,7 +155,7 @@ INSERT INTO `orders` (`id`, `user_id`, `order_date`, `status`, `delivery_method`
 CREATE TABLE `order_items` (
   `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `selected_size` varchar(10) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL
@@ -93,86 +166,45 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `selected_size`, `price`) VALUES
-(2, 3, NULL, 4, NULL, 150000.00),
-(3, 3, NULL, 1, NULL, 100000.00),
-(4, 4, NULL, 4, NULL, 150000.00),
-(5, 4, NULL, 1, NULL, 100000.00),
-(6, 5, NULL, 3, NULL, 150000.00),
-(7, 5, NULL, 1, NULL, 100000.00),
-(8, 6, NULL, 3, NULL, 150000.00),
-(9, 6, NULL, 1, NULL, 100000.00),
-(10, 7, NULL, 3, NULL, 150000.00),
-(11, 7, NULL, 1, NULL, 100000.00);
+(2, 3, 1, 4, 'M', 150000.00),
+(3, 3, 2, 1, 'All Size', 100000.00),
+(4, 4, 1, 4, 'S', 150000.00),
+(5, 4, 2, 1, 'All Size', 100000.00),
+(6, 5, 1, 3, 'L', 150000.00),
+(7, 5, 2, 1, 'All Size', 100000.00),
+(8, 6, 1, 3, 'XL', 150000.00),
+(9, 6, 2, 1, 'All Size', 100000.00),
+(10, 7, 1, 3, 'M', 150000.00),
+(11, 7, 2, 1, 'All Size', 100000.00);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `products`
+-- Struktur dari tabel `store_settings`
 --
 
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `price_student` decimal(10,2) NOT NULL,
-  `price_guest` decimal(10,2) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `size_options` varchar(255) DEFAULT NULL COMMENT 'Comma-separated list of available sizes',
-  `category` varchar(50) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 1,
-  `featured` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `price_student`, `price_guest`, `image`, `size_options`, `category`, `active`, `featured`) VALUES
-(1, 'Baju Almamater', 'baju Almamater UT', 150000.00, 200000.00, '67bbf7773fc87_id-11134207-7r98y-lnklpmw7aikmc0.jpeg', NULL, 'Apparel', 1, 1),
-(2, 'Topi UT', 'Topi dengan tulisan UT', 50000.00, 70000.00, '67bbf82c47ed0_316059194_634429251797308_7201826121817591657_n.jpeg', NULL, 'Headwear', 1, 0);
-
--- --------------------------------------------------------
-
--- Add new table for product sizes and stock
-CREATE TABLE `product_sizes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) NOT NULL,
-  `size` varchar(10) NOT NULL,
-  `stock` int(11) NOT NULL DEFAULT 0,
+CREATE TABLE `store_settings` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `setting_key` VARCHAR(50) NOT NULL,
+  `setting_value` TEXT NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `product_sizes_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Sample data for product_sizes
-INSERT INTO product_sizes (product_id, size, stock) VALUES 
-(1, 'S', 20),
-(1, 'M', 25),
-(1, 'L', 15),
-(1, 'XL', 10),
-(2, 'All Size', 20);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `nim` varchar(20) DEFAULT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `role` enum('student','guest') NOT NULL
+  UNIQUE KEY `unique_setting` (`setting_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data untuk tabel `store_settings`
 --
 
-INSERT INTO `users` (`id`, `nim`, `tanggal_lahir`, `name`, `email`, `role`) VALUES
-(1, '123456789', '2024-02-01', 'Akhbar M. A.', 'akhbar@gmail.com', 'student');
+INSERT INTO `store_settings` (`setting_key`, `setting_value`) VALUES
+('site_name', 'UTToraja Merchandise'),
+('contact_email', 'store@uttoraja.ac.id'),
+('phone', '+62 123 456 789'),
+('address', 'Jl. Kampus Universitas Toraja, Indonesia'),
+('currency', 'Rp'),
+('tax_rate', '10'),
+('shipping_fee_standard', '10000'),
+('shipping_fee_express', '20000');
 
 --
 -- Indexes for dumped tables
@@ -184,6 +216,26 @@ INSERT INTO `users` (`id`, `nim`, `tanggal_lahir`, `name`, `email`, `role`) VALU
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indeks untuk tabel `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `product_sizes`
+--
+ALTER TABLE `product_sizes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nim` (`nim`);
 
 --
 -- Indeks untuk tabel `orders`
@@ -201,19 +253,6 @@ ALTER TABLE `order_items`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indeks untuk tabel `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nim` (`nim`);
-
---
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -222,6 +261,24 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `product_sizes`
+--
+ALTER TABLE `product_sizes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
@@ -236,20 +293,20 @@ ALTER TABLE `order_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `products`
+-- AUTO_INCREMENT untuk tabel `store_settings`
 --
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `store_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `product_sizes`
+--
+ALTER TABLE `product_sizes`
+  ADD CONSTRAINT `product_sizes_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `orders`
@@ -264,38 +321,18 @@ ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
--- Remove stock column from products table
-ALTER TABLE `products` DROP COLUMN `stock`;
+--
+-- Add constraint to ensure stock is not negative
+--
+ALTER TABLE `product_sizes` 
+ADD CONSTRAINT `check_positive_stock` CHECK (`stock` >= 0);
 
--- Common Database Operations
--- Update stock level
-UPDATE product_sizes 
-SET stock = stock - 1 
-WHERE product_id = 1 AND size = 'M';
-
--- Check stock level
-SELECT p.name, ps.size, ps.stock 
-FROM products p 
-JOIN product_sizes ps ON p.id = ps.product_id 
-WHERE ps.stock < 10;
-
--- Add new size to existing product
-INSERT INTO product_sizes (product_id, size, stock) 
-VALUES (1, 'XXL', 5);
-
--- Remove size from product
-DELETE FROM product_sizes 
-WHERE product_id = 1 AND size = 'XXL';
-
--- Update multiple sizes stock levels
-UPDATE product_sizes 
-SET stock = CASE 
-    WHEN size = 'S' THEN 15
-    WHEN size = 'M' THEN 20
-    WHEN size = 'L' THEN 25
-    ELSE stock
-END
-WHERE product_id = 1;
+--
+-- Add indexes for better query performance
+--
+CREATE INDEX idx_product_active ON products (active);
+CREATE INDEX idx_order_status ON orders (status);
+CREATE INDEX idx_user_role ON users (role);
 
 COMMIT;
 

@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Program Studi | Sentra Layanan Universitas Terbuka Tana Toraja</title>
-  <meta name="description" content="Daftar lengkap program studi dan jurusan di Universitas Terbuka berdasarkan fakultas" />
+  <title>KEGIATAN AKADEMIK</title>
+  <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link
     rel="shortcut icon"
     type="image/x-icon"
-    href="serve-image.php?img=assets/img/favicon.png" />
+    href="assets/img/favicon.png" />
   <!-- Place favicon.ico in the root directory -->
 
   <link
@@ -38,8 +38,6 @@
 
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
-  <link rel="stylesheet" href="assets/css/customstyles.css" />
-  <link rel="stylesheet" href="assets/css/jurusan.css" />
 
   <link
     rel="stylesheet"
@@ -121,7 +119,7 @@
               <div class="main-header-one__bottom-left">
                 <div class="logo-box-one">
                   <a href="./">
-                    <img src="serve-image.php?img=assets/img/resource/logo.png" alt="Logo" />
+                    <img src="assets/img/resource/logo.png" alt="Logo" />
                   </a>
                 </div>
               </div>
@@ -183,7 +181,7 @@
               <div class="main-header-one__bottom-right">
                 <div class="header-btn-box-one">
                   <a class="thm-btn" href="./pendaftaran/">
-                    <span class="txt">Daftar Sekarang <i class="bi bi-arrow-right-short"></i></span>
+                    <span class="txt">Mendaftar Disini</span>
                   </a>
                 </div>
               </div>
@@ -201,7 +199,7 @@
           <div class="nav-logo">
             <a href="./">
               <img
-                src="serve-image.php?img=assets/img/resource/mobile-menu-logo.png"
+                src="assets/img/resource/mobile-menu-logo.png"
                 alt="Logo" />
             </a>
           </div>
@@ -245,287 +243,119 @@
       </div>
       <div class="container">
         <div class="page-header__inner">
-          <h2>Program Studi UT</h2>
+          <h2>KEGIATAN AKADEMIK</h2>
           <ul class="thm-breadcrumb">
             <li>
               <a href="./"><span class="fa fa-home"></span> Home</a>
             </li>
             <li><i class="icon-right-arrow-angle"></i></li>
-            <li class="color-base">Program Studi</li>
+            <li class="color-base"> Kegiatan Akademik</li>
           </ul>
         </div>
       </div>
     </section>
     <!--End Page Header-->
 
-    <!-- Start Program Studi Section -->
-    <section class="program-studi-section">
+    <!--Start Banner One-->
+    <section class="banner-one">
       <div class="container">
-        <div class="sec-title-three text-center mb-5">
-          <div class="sub-title">
-            <h4>Program Studi</h4>
-          </div>
-          <h2>Pilihan Program Studi di Universitas Terbuka</h2>
-          <p class="mt-3">Universitas Terbuka menawarkan beragam program studi untuk memenuhi kebutuhan pendidikan Anda. <br>Temukan program studi yang sesuai dengan minat dan tujuan karir Anda!</p>
+        <div class="section-intro text-center mb-5">
+          <h3 class="fw-bold">Jadwal Kegiatan Akademik</h3>
+          <p class="lead">Informasi lengkap mengenai jadwal kegiatan akademik di SALUT Tana Toraja</p>
         </div>
 
-        <div class="jurusan-container">
-          <!-- FKIP Card -->
-          <div class="jurusan-card wow fadeInUp" data-wow-delay="0.1s">
-            <div class="jurusan-card-header fkip-header">
-              <div class="fakultas-icon">
-                <i class="bi bi-mortarboard-fill"></i>
+        <div class="row g-4">
+          <!-- Activity Cards Container -->
+          <div class="col-12">
+            <div class="activity-card rounded-3 shadow-sm hover-shadow p-4">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="bg-light">
+                    <tr>
+                      <th class="text-center" style="width: 80px">No</th>
+                      <th>Kegiatan Akademik</th>
+                      <th>Deskripsi</th>
+                      <th class="text-center">Tanggal</th>
+                      <th class="text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">1</td>
+                      <td>
+                        <h6 class="mb-1">Seminar Nasional</h6>
+                        <small class="text-muted">Aula SALUT Tana Toraja</small>
+                      </td>
+                      <td>Seminar tentang Pendidikan Jarak Jauh di Era Digital</td>
+                      <td class="text-center">20 Juli 2024</td>
+                      <td class="text-center">
+                        <span class="badge bg-success rounded-pill">Selesai</span>
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <td class="text-center">2</td>
+                      <td>
+                        <h6 class="mb-1">Workshop Tuton</h6>
+                        <small class="text-muted">Lab Komputer SALUT</small>
+                      </td>
+                      <td>Pelatihan penggunaan sistem Tutorial Online UT</td>
+                      <td class="text-center">25 Juli 2024</td>
+                      <td class="text-center">
+                        <span class="badge bg-warning rounded-pill">Selesai</span>
+                      </td>
+                    </tr> -->
+                  </tbody>
+                </table>
               </div>
-              <h3>Fakultas Keguruan dan Ilmu Pendidikan</h3>
-              <p>FKIP</p>
-            </div>
-            <div class="jurusan-card-body">
-              <ul class="jurusan-list">
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Bahasa dan Sastra Indonesia (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Bahasa Inggris (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Biologi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Fisika (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Kimia (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Matematika (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Ekonomi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Pancasila dan Kewarganegaraan (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Teknologi Pendidikan (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Guru Sekolah Dasar (PGSD) (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Guru Pendidikan Anak Usia Dini (PGPAUD) (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Program Pendidikan Profesi Guru (PPG) (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pendidikan Agama Islam (PAI) (S1)</li>
-              </ul>
-            </div>
-            <div class="jurusan-card-footer">
-              <a href="./pendaftaran/" class="thm-btn">
-                <span class="txt">Daftar Sekarang</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- FHISIP Card -->
-          <div class="jurusan-card wow fadeInUp" data-wow-delay="0.2s">
-            <div class="jurusan-card-header fhisip-header">
-              <div class="fakultas-icon">
-                <i class="bi bi-bank2"></i>
-              </div>
-              <h3>Fakultas Hukum, Ilmu Sosial, dan Ilmu Politik</h3>
-              <p>FHISIP</p>
-            </div>
-            <div class="jurusan-card-body">
-              <ul class="jurusan-list">
-                <li><i class="bi bi-check-circle-fill"></i> Kearsipan (D4)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Perpajakan (D3)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Administrasi Publik (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Administrasi Bisnis (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Hukum (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Ilmu Pemerintahan (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Ilmu Komunikasi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Ilmu Perpustakaan (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Sosiologi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Sastra Inggris (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Perpajakan (S1)</li>
-              </ul>
-            </div>
-            <div class="jurusan-card-footer">
-              <a href="./pendaftaran/" class="thm-btn">
-                <span class="txt">Daftar Sekarang</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- FST Card -->
-          <div class="jurusan-card wow fadeInUp" data-wow-delay="0.3s">
-            <div class="jurusan-card-header fst-header">
-              <div class="fakultas-icon">
-                <i class="bi bi-cpu-fill"></i>
-              </div>
-              <h3>Fakultas Sains dan Teknologi</h3>
-              <p>FST</p>
-            </div>
-            <div class="jurusan-card-body">
-              <ul class="jurusan-list">
-                <li><i class="bi bi-check-circle-fill"></i> Statistika (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Matematika (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Biologi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Teknologi Pangan (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Agribisnis (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Perencanaan Wilayah dan Kota (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Sistem Informasi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Sains Data (S1)</li>
-              </ul>
-            </div>
-            <div class="jurusan-card-footer">
-              <a href="./pendaftaran/" class="thm-btn">
-                <span class="txt">Daftar Sekarang</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- FEB Card -->
-          <div class="jurusan-card wow fadeInUp" data-wow-delay="0.4s">
-            <div class="jurusan-card-header feb-header">
-              <div class="fakultas-icon">
-                <i class="bi bi-cash-coin"></i>
-              </div>
-              <h3>Fakultas Ekonomi dan Bisnis</h3>
-              <p>FEB</p>
-            </div>
-            <div class="jurusan-card-body">
-              <ul class="jurusan-list">
-                <li><i class="bi bi-check-circle-fill"></i> Manajemen (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Ekonomi Pembangunan (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Ekonomi Syariah (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Akuntansi (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Akuntansi Keuangan Publik (S1)</li>
-                <li><i class="bi bi-check-circle-fill"></i> Pariwisata (S1)</li>
-              </ul>
-            </div>
-            <div class="jurusan-card-footer">
-              <a href="./pendaftaran/" class="thm-btn">
-                <span class="txt">Daftar Sekarang</span>
-              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Call to Action Section -->
-      <div class="container mt-5">
-        <div class="program-cta wow fadeInUp" data-wow-delay="0.5s">
-          <div class="row align-items-center">
-            <div class="col-lg-8 col-md-8">
-              <h3>Siap untuk memulai perjalanan pendidikan Anda? 🎓</h3>
-              <p>Konsultasikan pilihan program studi yang tepat dengan tim kami melalui WhatsApp</p>
-            </div>
-            <div class="col-lg-4 col-md-4 text-md-end mt-3 mt-md-0">
-              <a class="thm-btn2" href="https://wa.me/6282293924242">
-                <i class="bi bi-whatsapp"></i>
-                <span class="txt"> Konsultasi Sekarang</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <style>
+        .activity-card {
+          background: #fff;
+          transition: all 0.3s ease;
+          margin-bottom: 80px;
+        }
+        .hover-shadow:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+        }
+        .table > :not(caption) > * > * {
+          padding: 1rem;
+        }
+        .badge {
+          padding: 0.5em 1em;
+          font-weight: 500;
+        }
+        .table-hover tbody tr:hover {
+          background-color: rgba(var(--primary-rgb), 0.05);
+        }
+        .section-intro {
+          margin-top: 30px;
+          margin-bottom: 40px !important;
+        }
+        .banner-one {
+          padding: 10px 0;
+        }
+        .banner-one__shape1,
+        .banner-one__shape3 {
+          display: none;
+        }
+      </style>
     </section>
-    <!-- End Program Studi Section -->
+    <!--End Banner One-->
+    
+    <!-- Add spacer before footer -->
+    <div class="spacer-section"></div>
 
-    <!-- Program Benefits Section -->
-    <section class="benefits-section">
-      <div class="container">
-        <div class="sec-title-three text-center mb-5">
-          <div class="sub-title">
-            <h4>Keunggulan</h4>
-          </div>
-          <h2>Mengapa Memilih Program Studi di UT?</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="bi bi-award"></i>
-              </div>
-              <h4>Akreditasi Terjamin</h4>
-              <p>Program studi di UT telah terakreditasi oleh BAN-PT dan diakui secara nasional maupun internasional. 🏆</p>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="bi bi-clock-history"></i>
-              </div>
-              <h4>Fleksibilitas Waktu</h4>
-              <p>Belajar kapanpun dan dimanapun sesuai dengan jadwal Anda tanpa harus meninggalkan pekerjaan. ⏰</p>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="bi bi-cash"></i>
-              </div>
-              <h4>Biaya Terjangkau</h4>
-              <p>Biaya pendidikan yang lebih ekonomis dibandingkan dengan universitas konvensional. 💰</p>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.4s">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="bi bi-people"></i>
-              </div>
-              <h4>Jejaring Luas</h4>
-              <p>Terhubung dengan mahasiswa dari berbagai daerah dan latar belakang di seluruh Indonesia. 🌐</p>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="bi bi-laptop"></i>
-              </div>
-              <h4>Teknologi Modern</h4>
-              <p>Proses pembelajaran didukung dengan teknologi terkini untuk memudahkan mahasiswa dalam mengakses materi. 💻</p>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.6s">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="bi bi-briefcase"></i>
-              </div>
-              <h4>Peluang Karir</h4>
-              <p>Lulusan UT memiliki prospek karir yang luas dan diakui oleh berbagai instansi pemerintah maupun swasta. 🚀</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Program Benefits Section -->
-
-    <!--Start CTA Section-->
-    <section class="cta-one">
-      <div class="container">
-        <div class="cta-one__inner text-center">
-          <div class="cta-one__shape1 float-bob-y">
-            <img src="assets/img/shape/cta-one__shape1.png" alt="#" />
-          </div>
-          <div class="cta-one__shape2 float-bob-y">
-            <img src="assets/img/shape/cta-one__shape2.png" alt="#" />
-          </div>
-          <div class="cta-one__shape3 rotate-me">
-            <img src="assets/img/shape/cta-one__shape3.png" alt="#" />
-          </div>
-          <div class="cta-one__shape4 float-bob-x">
-            <img src="assets/img/shape/cta-one__shape4.png" alt="#" />
-          </div>
-          <div class="cta-one__shape5 float-bob-x">
-            <img src="assets/img/shape/cta-one__shape5.png" alt="#" />
-          </div>
-          <div class="cta-one__shape6 float-bob-y">
-            <img src="assets/img/shape/cta-one__shape6.png" alt="#" />
-          </div>
-          <div class="cta-one__inner-title-box">
-            <h2>Memiliki Pertanyaan Tentang Program Studi?</h2>
-          </div>
-          <div class="cta-one__inner-text-box">
-            <p>
-              Hubungi kami melalui tombol dibawah ini
-              <br />Kami siap membantu Anda memilih program studi yang tepat.
-            </p>
-          </div>
-          <div class="cta-one__inner-btn-box">
-            <a class="thm-btn" href="./kontak/">
-              <span class="txt">Kontak</span>
-              <i class="icon-next"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--End CTA Section-->
+    <style>
+      .spacer-section {
+        height: 60px;
+        background: transparent;
+      }
+    </style>
 
     <!--Start Footer Three-->
     <footer class="footer-three">
@@ -541,7 +371,7 @@
           <div class="footer-main__inner footer-main-two__inner footer-main-three__inner">
             <div class="row">
               <!--Start Single Footer Widget-->
-              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s">
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
                 <div class="single-footer-widget single-footer-widget-style2">
                   <div class="title">
                     <h3>Bantuan &amp; Dukungan</h3>
@@ -582,7 +412,7 @@
               <!--End Single Footer Widget-->
 
               <!--Start Single Footer Widget-->
-              <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+              <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                 <div class="single-footer-widget single-footer-widget-style2 ml55">
                   <div class="title">
                     <h3>Link Cepat</h3>
@@ -608,7 +438,7 @@
               <!--End Single Footer Widget-->
 
               <!--Start Single Footer Widget-->
-              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+              <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                 <div class="single-footer-widget single-footer-widget-style2 ml50">
                   <div class="title">
                     <h3>Layanan Kami</h3>
@@ -653,11 +483,13 @@
             </div>
           </div>
         </div>
-        
+        <!-- End Footer Main -->
+
         <!--Start Footer Bottom -->
         <div class="footer-bottom footer-bottom-two footer-bottom-three">
           <div class="container">
-            <div class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
+            <div
+              class="footer-bottom__inner footer-bottom__two-inner footer-bottom__three-inner">
               <div class="copyright-text text-center">
                 <p>
                   Copyright © 2024 Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja by
@@ -671,7 +503,7 @@
         <!--End Footer Bottom -->
       </div>
     </footer>
-    <!--End Footer Three-->
+    <!--Start Footer One-->
   </div>
 
   <!-- Scroll-top -->
