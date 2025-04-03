@@ -15,9 +15,10 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
 }
 
 // Initialize variables
-$status = 'menunggu'; 
+$status = 'pending'; 
 $delivery_cost = 10000; // Biaya pengiriman default
 $order_reference = "UTT" . time() . rand(1000, 9999);
+$user_type = isset($_SESSION['nim']) ? 'student' : 'guest'; // Track if user is student or guest
 
 // Process the form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,6 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'] ?? '';
     $notes = $_POST['notes'] ?? '';
     $email = $_POST['email'] ?? '';
+    $payment_method = $_POST['payment_method'] ?? 'cash';
+    
+    // Get customer name - if logged in as student use session name, otherwise use form input
+    if (isset($_SESSION['nim']) && isset($_SESSION['name'])) {
+        $customer_name = $_SESSION['name'];
+    } else {
+        $customer_name = $_POST['customer_name'] ?? 'Guest';
+    }
 
     // Set delivery cost based on selected method
     if ($delivery_method === 'standard') {
@@ -34,31 +43,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $delivery_cost = 20000; // Pengiriman ekspres
     }
 
-    // Insert order into the database
-    $stmt = $conn->prepare("INSERT INTO Orders (reference_number, user_id, order_date, status, delivery_method, delivery_cost, address, phone, notes, email) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)");
+    // Calculate total amount
+    $subtotal = 0;
+    foreach ($_SESSION['cart'] as $item) {
+        $subtotal += $item['price'] * $item['quantity'];
+    }
+    $total_amount = $subtotal + $delivery_cost;
+    
+    // Insert order into the database - using the enhanced schema
+    $stmt = $conn->prepare("INSERT INTO orders (reference_number, user_id, customer_name, order_date, status, payment_method, 
+                           delivery_method, delivery_cost, total_amount, address, phone, email, notes, user_type) 
+                           VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if ($stmt === false) {
         die('Prepare failed: ' . htmlspecialchars($conn->error));
     }
     
     $user_id = isset($_SESSION['nim']) ? $_SESSION['nim'] : null; // Use NULL for guest
-    $stmt->bind_param("sissdssss", $order_reference, $user_id, $status, $delivery_method, $delivery_cost, $address, $phone, $notes, $email);
+    $stmt->bind_param("sissssddsssss", $order_reference, $user_id, $customer_name, $status, $payment_method, 
+                     $delivery_method, $delivery_cost, $total_amount, $address, $phone, $email, $notes, $user_type);
     
     if ($stmt->execute()) {
         $order_id = $stmt->insert_id; // Get the last inserted order ID
 
         // Insert order items
-        $stmt = $conn->prepare("INSERT INTO Order_Items (order_id, product_id, quantity, price, size) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO order_items (order_id, product_id, quantity, price, selected_size) VALUES (?, ?, ?, ?, ?)");
         if ($stmt === false) {
             die('Prepare failed: ' . htmlspecialchars($conn->error));
         }
         
         foreach ($_SESSION['cart'] as $item) {
             $quantity = $item['quantity'];
-            $product_id = $item['id'];
+            $product_id = $item['product_id'];
             $product_price = $item['price'];
             $size = $item['size'] ?? '';
             $stmt->bind_param("iiids", $order_id, $product_id, $quantity, $product_price, $size);
             $stmt->execute();
+        }
+
+        // Add to order tracking (optional, if you implemented the tracking table)
+        $tracking_stmt = $conn->prepare("INSERT INTO order_tracking (order_id, status, notes) VALUES (?, ?, ?)");
+        if ($tracking_stmt) {
+            $tracking_note = "Order placed successfully";
+            $tracking_stmt->bind_param("iss", $order_id, $status, $tracking_note);
+            $tracking_stmt->execute();
         }
 
         // Store order reference in session for confirmation page
@@ -68,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['cart'] = [];
 
         // Redirect to confirmation page
-        $_SESSION['message'] = ['type' => 'success', 'text' => '✅ Pesanan berhasil dibuat!'];
+        $_SESSION['message'] = ['type' => 'success', 'text' => '✅ Pesanan berhasil dibuat! Reference #' . $order_reference];
         header('Location: confirmation.php');
         exit;
     } else {
@@ -201,6 +228,27 @@ $total = $subtotal + $delivery_cost;
                         <h2 class="text-lg font-semibold text-gray-900 mb-4">Shipping Information 📦</h2>
                         
                         <div class="space-y-4">
+                            <?php if (!isset($_SESSION['nim'])): ?>
+                            <!-- Show name field for guest users only -->
+                            <div>
+                                <label for="customer_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name <span class="text-red-500">*</span></label>
+                                <input type="text" id="customer_name" name="customer_name" required 
+                                       class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                       placeholder="Enter your full name">
+                                <p class="mt-1 text-xs text-gray-500">You're ordering as a guest 🧑‍🦱</p>
+                            </div>
+                            <?php else: ?>
+                            <!-- Show student status for logged-in students -->
+                            <div class="px-3 py-2 bg-green-50 text-green-800 rounded-md">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                                    </svg>
+                                    <p class="text-sm font-medium">Ordering as Student: <?php echo htmlspecialchars($_SESSION['name']); ?></p>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            
                             <div>
                                 <label for="delivery_method" class="block text-sm font-medium text-gray-700 mb-1">Delivery Method</label>
                                 <select id="delivery_method" name="delivery_method" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">

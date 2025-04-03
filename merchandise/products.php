@@ -15,7 +15,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 // Buat query dasar
 $query = "SELECT p.*, GROUP_CONCAT(DISTINCT ps.size) as sizes, MIN(ps.stock) as min_stock 
-          FROM Products p 
+          FROM products p 
           LEFT JOIN product_sizes ps ON p.id = ps.product_id 
           WHERE p.active = 1";
 
@@ -60,7 +60,7 @@ if (!$result) {
 $products = $result->fetch_all(MYSQLI_ASSOC);
 
 // Fetch categories for filter
-$categories_query = "SELECT DISTINCT category FROM Products WHERE active = 1 AND category IS NOT NULL AND category != ''";
+$categories_query = "SELECT DISTINCT category FROM products WHERE active = 1 AND category IS NOT NULL AND category != ''";
 $categories_result = $conn->query($categories_query);
 $categories = $categories_result->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -115,7 +115,7 @@ $categories = $categories_result->fetch_all(MYSQLI_ASSOC);
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-600 hover:text-primary-600 transition">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <?php if (!empty($_SESSION['cart'])): ?>
+                    <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
                         <span class="absolute -top-2 -right-2 bg-primary-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                             <?php echo count($_SESSION['cart']); ?>
                         </span>
@@ -129,7 +129,7 @@ $categories = $categories_result->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
         
-        <!-- Mobile menu -->
+        <!-- Mobile navigation menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-4">
             <div class="container mx-auto px-4 flex flex-col space-y-3">
                 <a href="index.php" class="text-gray-500 hover:text-primary-600 py-2 transition">Beranda</a>
@@ -139,187 +139,162 @@ $categories = $categories_result->fetch_all(MYSQLI_ASSOC);
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-8">
-        <!-- Filters and Search -->
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page title -->
+        <div class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Merchandise UTToraja 🛍️</h1>
+            <p class="text-gray-600">Temukan berbagai produk resmi UTToraja yang berkualitas</p>
+        </div>
+        
+        <!-- Search and filters -->
         <div class="mb-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <h1 class="text-2xl font-bold text-gray-900">Produk Merchandise 🛍️</h1>
-                
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <form action="" method="GET" class="flex gap-4">
-                        <div class="relative">
-                            <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" 
-                                   placeholder="Cari produk..." 
-                                   class="w-full sm:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                </svg>
-                            </div>
-                        </div>
-                        
-                        <select name="category" class="pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            <option value="all" <?php echo $category_filter === 'all' ? 'selected' : ''; ?>>Semua Kategori</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo htmlspecialchars($category['category']); ?>" 
-                                        <?php echo $category_filter === $category['category'] ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($category['category']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                        
-                        <select name="sort" class="pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            <option value="name_asc" <?php echo $sort_by === 'name_asc' ? 'selected' : ''; ?>>Nama (A-Z)</option>
-                            <option value="name_desc" <?php echo $sort_by === 'name_desc' ? 'selected' : ''; ?>>Nama (Z-A)</option>
-                            <option value="price_asc" <?php echo $sort_by === 'price_asc' ? 'selected' : ''; ?>>Harga (Terendah)</option>
-                            <option value="price_desc" <?php echo $sort_by === 'price_desc' ? 'selected' : ''; ?>>Harga (Tertinggi)</option>
-                        </select>
-                        
-                        <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition">
-                            Filter
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="md:w-2/3">
+                    <form action="" method="get" class="flex">
+                        <input 
+                            type="text" 
+                            name="search" 
+                            placeholder="Cari produk..." 
+                            value="<?php echo htmlspecialchars($search); ?>"
+                            class="w-full border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300"
+                        >
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-r-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
                         </button>
                     </form>
                 </div>
+                <div class="md:w-1/3 flex gap-2">
+                    <select 
+                        name="category" 
+                        id="category-filter"
+                        onchange="this.options[this.selectedIndex].value && (window.location = '?category=' + this.options[this.selectedIndex].value + '&sort=<?php echo $sort_by; ?>&search=<?php echo urlencode($search); ?>')"
+                        class="w-1/2 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300"
+                    >
+                        <option value="all" <?php echo $category_filter === 'all' ? 'selected' : ''; ?>>Semua Kategori</option>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?php echo htmlspecialchars($category['category']); ?>" <?php echo $category_filter === $category['category'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($category['category']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    
+                    <select 
+                        name="sort" 
+                        id="sort-filter"
+                        onchange="this.options[this.selectedIndex].value && (window.location = '?category=<?php echo $category_filter; ?>&sort=' + this.options[this.selectedIndex].value + '&search=<?php echo urlencode($search); ?>')"
+                        class="w-1/2 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300"
+                    >
+                        <option value="name_asc" <?php echo $sort_by === 'name_asc' ? 'selected' : ''; ?>>Nama (A-Z)</option>
+                        <option value="name_desc" <?php echo $sort_by === 'name_desc' ? 'selected' : ''; ?>>Nama (Z-A)</option>
+                        <option value="price_asc" <?php echo $sort_by === 'price_asc' ? 'selected' : ''; ?>>Harga (Rendah-Tinggi)</option>
+                        <option value="price_desc" <?php echo $sort_by === 'price_desc' ? 'selected' : ''; ?>>Harga (Tinggi-Rendah)</option>
+                        <option value="newest" <?php echo $sort_by === 'newest' ? 'selected' : ''; ?>>Terbaru</option>
+                    </select>
+                </div>
             </div>
         </div>
-
-        <!-- Products Grid -->
-        <?php if ($result->num_rows === 0): ?>
-            <div class="text-center py-12">
-                <div class="bg-gray-100 rounded-full p-6 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-400">
+        
+        <!-- Product grid -->
+        <?php if (empty($products)): ?>
+            <div class="text-center py-16">
+                <div class="mb-4 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
                 </div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak ada produk ditemukan 😔</h3>
-                <p class="text-gray-500">
-                    Coba ubah filter atau kata kunci pencarian Anda
-                </p>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak ada produk yang ditemukan</h3>
+                <p class="text-gray-500 mb-6">Coba gunakan kata kunci pencarian lain atau hapus filter yang diterapkan.</p>
+                <a href="products.php" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                    </svg>
+                    Reset Filter
+                </a>
             </div>
         <?php else: ?>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <?php while ($product = $result->fetch_assoc()): ?>
-                    <?php 
-                        $price = isset($_SESSION['guest']) ? $product['price_guest'] : $product['price_student'];
-                        $sizes = $product['sizes'] ? explode(',', $product['sizes']) : [];
-                    ?>
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition group">
-                        <a href="product_details.php?id=<?php echo $product['id']; ?>" class="block">
-                            <div class="aspect-square bg-gray-50">
-                                <?php 
-                                // First check if product has a regular image
-                                $hasImage = false;
-                                $legacyPath = "./uploads/" . $product['image'];
-                                
-                                // Debug information (uncomment if needed)
-                                // echo "<!-- Checking image: {$legacyPath} -->";
-                                
-                                if (!empty($product['image']) && file_exists($legacyPath)) {
-                                    $hasImage = true;
-                                    ?>
-                                    <img src="<?php echo htmlspecialchars($legacyPath); ?>" 
-                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                         class="w-full h-full object-cover group-hover:opacity-90 transition">
-                                    <?php
-                                } 
-                                
-                                // If no legacy image, try the product_images table as fallback
-                                if (!$hasImage) {
-                                    // Check if table exists first to avoid errors
-                                    $tableCheck = $conn->query("SHOW TABLES LIKE 'product_images'");
-                                    if ($tableCheck && $tableCheck->num_rows > 0) {
-                                        // Table exists, try to get the primary image
-                                        $stmt = $conn->prepare("SELECT image_path FROM product_images WHERE product_id = ? AND is_primary = 1 LIMIT 1");
-                                        if ($stmt) {
-                                            $stmt->bind_param("i", $product['id']);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            if ($result->num_rows > 0) {
-                                                $image = $result->fetch_assoc();
-                                                $imagePath = "./uploads/" . $image['image_path'];
-                                                if (file_exists($imagePath)) {
-                                                    $hasImage = true;
-                                                    ?>
-                                                    <img src="<?php echo htmlspecialchars($imagePath); ?>" 
-                                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                                         class="w-full h-full object-cover group-hover:opacity-90 transition">
-                                                    <?php
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                
-                                // If still no image found, show placeholder
-                                if (!$hasImage) {
-                                    ?>
-                                    <div class="h-full w-full flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-300">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                        </svg>
-                                    </div>
-                                    <?php 
-                                    // Debug info - uncomment to see what's going on
-                                    // echo "<!-- Debug: No image found for product ID " . $product['id'] . " -->";
-                                }
-                                ?>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <?php foreach ($products as $product): ?>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition transform hover:-translate-y-1 hover:shadow-md">
+                        <a href="product_details.php?id=<?php echo $product['id']; ?>" class="block aspect-square overflow-hidden bg-gray-100">
+                            <?php if (!empty($product['image']) && file_exists("./uploads/" . $product['image'])): ?>
+                                <img src="./uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="w-full h-full object-cover object-center">
+                            <?php else: ?>
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-300">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                    </svg>
+                                </div>
+                            <?php endif; ?>
+                        </a>
+                        
+                        <div class="p-4">
+                            <?php if (!empty($product['category'])): ?>
+                                <span class="text-xs font-medium text-primary-600 bg-primary-50 rounded-full px-2 py-1 mb-2 inline-block"><?php echo htmlspecialchars($product['category']); ?></span>
+                            <?php endif; ?>
+                            
+                            <h3 class="font-medium text-gray-900 mb-1">
+                                <a href="product_details.php?id=<?php echo $product['id']; ?>" class="hover:text-primary-600">
+                                    <?php echo htmlspecialchars($product['name']); ?>
+                                </a>
+                            </h3>
+                            
+                            <div class="text-gray-500 text-sm mb-2 line-clamp-2 h-10">
+                                <?php echo htmlspecialchars($product['description']); ?>
                             </div>
                             
-                            <div class="p-4">
-                                <?php if ($product['featured']): ?>
-                                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-md mb-2">
-                                        ✨ Unggulan
-                                    </span>
-                                <?php endif; ?>
-                                
-                                <h3 class="font-medium text-gray-900 group-hover:text-primary-600 transition">
-                                    <?php echo htmlspecialchars($product['name']); ?>
-                                </h3>
-                                
-                                <div class="mt-2 flex items-center justify-between">
-                                    <span class="font-medium text-primary-600">
-                                        Rp <?php echo number_format($price, 0, ',', '.'); ?>
-                                    </span>
-                                    <?php if (!empty($sizes)): ?>
-                                        <span class="text-xs text-gray-500">
-                                            <?php echo count($sizes) . ' ukuran'; ?>
-                                        </span>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="text-primary-600 font-medium">
+                                    <?php if (isset($_SESSION['guest'])): ?>
+                                        Rp <?php echo number_format($product['price_guest'], 0, ',', '.'); ?>
+                                    <?php else: ?>
+                                        Rp <?php echo number_format($product['price_student'], 0, ',', '.'); ?>
                                     <?php endif; ?>
                                 </div>
+                                
+                                <?php if (isset($product['min_stock']) && $product['min_stock'] > 0): ?>
+                                    <span class="text-xs font-medium text-green-600 bg-green-50 rounded-full px-2 py-1">In Stock</span>
+                                <?php else: ?>
+                                    <span class="text-xs font-medium text-red-600 bg-red-50 rounded-full px-2 py-1">Out of Stock</span>
+                                <?php endif; ?>
                             </div>
-                        </a>
+                        </div>
+                        
+                        <div class="px-4 pb-4">
+                            <a href="product_details.php?id=<?php echo $product['id']; ?>" class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center font-medium py-2 rounded-md transition">
+                                View Details
+                            </a>
+                        </div>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
-    </div>
-
+    </main>
+    
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-12 mt-12">
+    <footer class="bg-white border-t border-gray-100 mt-12 py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <p class="text-sm text-gray-500">© 2025 UTToraja Store. Hak Cipta Dilindungi.</p>
+                <div class="mb-4 md:mb-0">
+                    <a href="index.php" class="font-bold text-xl text-primary-600">UTToraja Store</a>
+                    <p class="text-sm text-gray-500 mt-1">Merchandise Resmi Universitas Teknologi Toraja</p>
                 </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-gray-600 transition">
-                        <span class="sr-only">Facebook</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gray-600 transition">
-                        <span class="sr-only">Instagram</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
+                <div class="flex space-x-4">
+                    <a href="../kontak/index.php" class="text-gray-500 hover:text-primary-600 transition">Contact</a>
+                    <a href="#" class="text-gray-500 hover:text-primary-600 transition">About</a>
+                    <a href="#" class="text-gray-500 hover:text-primary-600 transition">FAQs</a>
                 </div>
+            </div>
+            <div class="border-t border-gray-100 mt-6 pt-6 text-center text-sm text-gray-500">
+                &copy; 2025 UTToraja Store. All rights reserved.
             </div>
         </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
