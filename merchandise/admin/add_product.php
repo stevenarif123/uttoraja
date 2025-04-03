@@ -23,15 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stocks = isset($_POST['stocks']) ? $_POST['stocks'] : [];
         
         // Handle image upload
-        $image = '';
-        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $images = [];
+        if (isset($_FILES['images']) && $_FILES['images']['error'][0] == 0) {
             $allowed = ['jpg', 'jpeg', 'png', 'gif'];
-            $filename = $_FILES['image']['name'];
-            $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-            
-            if (in_array($ext, $allowed)) {
-                $image = uniqid() . '.' . $ext;
-                move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/' . $image);
+            foreach ($_FILES['images']['name'] as $index => $filename) {
+                $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                if (in_array($ext, $allowed)) {
+                    $image = uniqid() . '.' . $ext;
+                    move_uploaded_file($_FILES['images']['tmp_name'][$index], '../uploads/' . $image);
+                    $images[] = $image;
+                }
             }
         }
 
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Insert product
         $stmt = $conn->prepare("INSERT INTO Products (name, description, price_student, price_guest, image) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssdds", $name, $description, $price_student, $price_guest, $image);
+        $stmt->bind_param("ssdds", $name, $description, $price_student, $price_guest, $images[0]);
         
         if (!$stmt->execute()) {
             throw new Exception("Error adding product");
@@ -56,6 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!$stmt->execute()) {
                     throw new Exception("Error adding size and stock");
                 }
+            }
+        }
+
+        // Insert additional images
+        $stmt = $conn->prepare("INSERT INTO product_images (product_id, image) VALUES (?, ?)");
+        foreach (array_slice($images, 1) as $image) {
+            $stmt->bind_param("is", $product_id, $image);
+            if (!$stmt->execute()) {
+                throw new Exception("Error adding additional images");
             }
         }
 
@@ -155,18 +165,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <form method="POST" enctype="multipart/form-data" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Product Image -->
+                            <!-- Product Images -->
                             <div class="md:row-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Product Image 📷</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Product Images 📷</label>
                                 <div class="flex flex-col items-center">
-                                    <div id="image-preview" class="h-48 w-48 rounded-lg bg-gray-200 flex items-center justify-center mb-4">
-                                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                                    <div id="image-preview" class="grid grid-cols-2 gap-4 w-full mb-4">
+                                        <!-- Image previews will be inserted here -->
                                     </div>
                                     <label class="w-full flex flex-col items-center px-4 py-2 bg-white text-blue-600 rounded-lg shadow-sm border border-blue-600 cursor-pointer hover:bg-blue-50">
-                                        <span class="mt-2 text-base leading-normal">Select Image</span>
-                                        <input type="file" name="image" id="image-upload" class="hidden" accept="image/*">
+                                        <span class="mt-2 text-base leading-normal">Select Images</span>
+                                        <input type="file" name="images[]" id="image-upload" class="hidden" accept="image/*" multiple>
                                     </label>
-                                    <p class="mt-2 text-xs text-gray-500">Recommended size: 500x500px</p>
+                                    <p class="mt-2 text-xs text-gray-500">You can select multiple images. First image will be the primary image.</p>
                                 </div>
                             </div>
                             
@@ -300,15 +310,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // Image preview functionality
         document.getElementById('image-upload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
+            const preview = document.getElementById('image-preview');
+            preview.innerHTML = '';
+            
+            Array.from(e.target.files).forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const preview = document.getElementById('image-preview');
-                    preview.innerHTML = `<img src="${e.target.result}" class="h-full w-full object-cover rounded-lg">`;
+                    const div = document.createElement('div');
+                    div.className = 'relative aspect-square bg-gray-100 rounded-lg overflow-hidden';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-full object-cover">
+                        ${index === 0 ? '<span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Primary</span>' : ''}
+                    `;
+                    preview.appendChild(div);
                 }
                 reader.readAsDataURL(file);
-            }
+            });
         });
     </script>
 </body>

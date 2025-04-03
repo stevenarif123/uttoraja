@@ -27,13 +27,13 @@ if ($category_filter !== 'all') {
 // Tambahkan pencarian
 if ($search) {
     $query .= " AND (p.name LIKE '%" . $conn->real_escape_string($search) . "%' 
-                OR p.description LIKE '%" . $conn->real_escape_string($search) . "%')";
+              OR p.description LIKE '%" . $conn->real_escape_string($search) . "%')";
 }
 
-// Tambahkan group by
+// Add GROUP BY clause - this is necessary when using aggregate functions
 $query .= " GROUP BY p.id";
 
-// Tambahkan pengurutan
+// Add sorting
 switch ($sort_by) {
     case 'price_asc':
         $query .= " ORDER BY p.price_student ASC";
@@ -44,19 +44,25 @@ switch ($sort_by) {
     case 'name_desc':
         $query .= " ORDER BY p.name DESC";
         break;
+    case 'newest':
+        $query .= " ORDER BY p.id DESC";
+        break;
     default:
         $query .= " ORDER BY p.name ASC";
+        break;
 }
 
+// Execute the query
 $result = $conn->query($query);
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
+$products = $result->fetch_all(MYSQLI_ASSOC);
 
-// Ambil kategori unik untuk filter
-$category_query = "SELECT DISTINCT category FROM Products WHERE active = 1 ORDER BY category";
-$category_result = $conn->query($category_query);
-$categories = $category_result->fetch_all(MYSQLI_ASSOC);
+// Fetch categories for filter
+$categories_query = "SELECT DISTINCT category FROM Products WHERE active = 1 AND category IS NOT NULL AND category != ''";
+$categories_result = $conn->query($categories_query);
+$categories = $categories_result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -200,17 +206,63 @@ $categories = $category_result->fetch_all(MYSQLI_ASSOC);
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition group">
                         <a href="product_details.php?id=<?php echo $product['id']; ?>" class="block">
                             <div class="aspect-square bg-gray-50">
-                                <?php if (!empty($product['image']) && file_exists("../uploads/" . $product['image'])): ?>
-                                    <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" 
+                                <?php 
+                                // First check if product has a regular image
+                                $hasImage = false;
+                                $legacyPath = "./uploads/" . $product['image'];
+                                
+                                // Debug information (uncomment if needed)
+                                // echo "<!-- Checking image: {$legacyPath} -->";
+                                
+                                if (!empty($product['image']) && file_exists($legacyPath)) {
+                                    $hasImage = true;
+                                    ?>
+                                    <img src="<?php echo htmlspecialchars($legacyPath); ?>" 
                                          alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                         class="w-full h-full object-contain group-hover:opacity-90 transition">
-                                <?php else: ?>
+                                         class="w-full h-full object-cover group-hover:opacity-90 transition">
+                                    <?php
+                                } 
+                                
+                                // If no legacy image, try the product_images table as fallback
+                                if (!$hasImage) {
+                                    // Check if table exists first to avoid errors
+                                    $tableCheck = $conn->query("SHOW TABLES LIKE 'product_images'");
+                                    if ($tableCheck && $tableCheck->num_rows > 0) {
+                                        // Table exists, try to get the primary image
+                                        $stmt = $conn->prepare("SELECT image_path FROM product_images WHERE product_id = ? AND is_primary = 1 LIMIT 1");
+                                        if ($stmt) {
+                                            $stmt->bind_param("i", $product['id']);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            if ($result->num_rows > 0) {
+                                                $image = $result->fetch_assoc();
+                                                $imagePath = "./uploads/" . $image['image_path'];
+                                                if (file_exists($imagePath)) {
+                                                    $hasImage = true;
+                                                    ?>
+                                                    <img src="<?php echo htmlspecialchars($imagePath); ?>" 
+                                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
+                                                         class="w-full h-full object-cover group-hover:opacity-90 transition">
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                // If still no image found, show placeholder
+                                if (!$hasImage) {
+                                    ?>
                                     <div class="h-full w-full flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-300">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                         </svg>
                                     </div>
-                                <?php endif; ?>
+                                    <?php 
+                                    // Debug info - uncomment to see what's going on
+                                    // echo "<!-- Debug: No image found for product ID " . $product['id'] . " -->";
+                                }
+                                ?>
                             </div>
                             
                             <div class="p-4">

@@ -63,6 +63,8 @@ $related_products = $related_result->fetch_all(MYSQLI_ASSOC);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -152,17 +154,102 @@ $related_products = $related_result->fetch_all(MYSQLI_ASSOC);
             <div class="md:flex">
                 <!-- Product Image -->
                 <div class="md:w-1/2">
-                    <div class="aspect-square bg-gray-50">
-                        <?php if (!empty($product['image']) && file_exists("../uploads/" . $product['image'])): ?>
-                            <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" 
-                                 alt="<?php echo htmlspecialchars($product['name']); ?>" 
-                                 class="w-full h-full object-contain">
-                        <?php else: ?>
-                            <div class="h-full flex items-center justify-center bg-gray-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-gray-300">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                </svg>
-                            </div>
+                    <!-- Image Gallery -->
+                    <div class="relative">
+                        <div class="aspect-square bg-gray-50 mb-4">
+                            <?php
+                            // Debug flags - uncomment to troubleshoot image issues
+                            // error_reporting(E_ALL);
+                            // ini_set('display_errors', 1);
+                            
+                            // Check if table exists first
+                            $check_table = $conn->query("SHOW TABLES LIKE 'product_images'");
+                            $tableExists = $check_table && $check_table->num_rows > 0;
+                            
+                            $hasImages = false;
+                            $images = [];
+                            
+                            // Get images if table exists
+                            if ($tableExists) {
+                                $images_query = "SELECT * FROM product_images WHERE product_id = ? ORDER BY is_primary DESC, sort_order ASC";
+                                $stmt = $conn->prepare($images_query);
+                                
+                                if ($stmt) {
+                                    $stmt->bind_param("i", $product_id);
+                                    $stmt->execute();
+                                    $images_result = $stmt->get_result();
+                                    $images = $images_result->fetch_all(MYSQLI_ASSOC);
+                                    
+                                    // Check if we actually have valid images
+                                    if (!empty($images)) {
+                                        $validImages = false;
+                                        foreach ($images as $image) {
+                                            if (file_exists("./uploads/" . $image['image_path'])) {
+                                                $validImages = true;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        $hasImages = $validImages;
+                                    }
+                                }
+                            }
+                            
+                            // Check if we have any images from the product_images table
+                            if ($hasImages): ?>
+                                <div class="swiper product-gallery">
+                                    <div class="swiper-wrapper">
+                                        <?php foreach($images as $image): 
+                                            $imagePath = "./uploads/" . $image['image_path'];
+                                            if (file_exists($imagePath)): ?>
+                                                <div class="swiper-slide">
+                                                    <img src="<?php echo htmlspecialchars($imagePath); ?>" 
+                                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
+                                                         class="w-full h-full object-contain">
+                                                </div>
+                                            <?php endif;
+                                        endforeach; ?>
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+                                </div>
+                            <?php else: 
+                                // Fallback to legacy image if available
+                                $legacyPath = "./uploads/" . $product['image'];
+                                if (!empty($product['image']) && file_exists($legacyPath)): ?>
+                                    <div class="flex items-center justify-center h-full">
+                                        <img src="<?php echo htmlspecialchars($legacyPath); ?>" 
+                                             alt="<?php echo htmlspecialchars($product['name']); ?>"
+                                             class="max-h-full max-w-full object-contain">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="h-full flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-gray-300">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                        </svg>
+                                        <!-- Debug info - uncomment to see what's going on -->
+                                        <!-- <p class="text-sm text-gray-500 mt-2">No image available for this product</p> -->
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <!-- Thumbnail Navigation -->
+                        <?php if (!empty($images) && count($images) > 1): ?>
+                        <div class="grid grid-cols-4 gap-2 mt-2">
+                            <?php foreach($images as $index => $image):
+                                $thumbPath = "./uploads/" . $image['image_path'];
+                                if (file_exists($thumbPath)): ?>
+                                    <button class="aspect-square rounded-md overflow-hidden border-2 focus:outline-none thumbnail-btn <?php echo $index === 0 ? 'border-primary-500' : 'border-transparent'; ?>"
+                                            onclick="switchImage(<?php echo $index; ?>)">
+                                        <img src="<?php echo htmlspecialchars($thumbPath); ?>" 
+                                             alt="Thumbnail"
+                                             class="w-full h-full object-cover">
+                                    </button>
+                                <?php endif;
+                            endforeach; ?>
+                        </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -250,8 +337,8 @@ $related_products = $related_result->fetch_all(MYSQLI_ASSOC);
                     <a href="product_details.php?id=<?php echo $related['id']; ?>" class="group">
                         <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow transition">
                             <div class="aspect-square bg-gray-50">
-                                <?php if (!empty($related['image']) && file_exists("../uploads/" . $related['image'])): ?>
-                                    <img src="../uploads/<?php echo htmlspecialchars($related['image']); ?>" 
+                                <?php if (!empty($related['image']) && file_exists("./uploads/" . $related['image'])): ?>
+                                    <img src="./uploads/<?php echo htmlspecialchars($related['image']); ?>" 
                                         alt="<?php echo htmlspecialchars($related['name']); ?>" 
                                         class="w-full h-full object-contain group-hover:opacity-90 transition">
                                 <?php else: ?>
@@ -398,6 +485,25 @@ $related_products = $related_result->fetch_all(MYSQLI_ASSOC);
                 }
             });
         });
+        
+        // Initialize Swiper
+        const swiper = new Swiper('.product-gallery', {
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        function switchImage(index) {
+            swiper.slideTo(index);
+            document.querySelectorAll('.thumbnail-btn').forEach((btn, i) => {
+                btn.classList.toggle('border-primary-500', i === index);
+                btn.classList.toggle('border-transparent', i !== index);
+            });
+        }
     </script>
 </body>
 </html>
