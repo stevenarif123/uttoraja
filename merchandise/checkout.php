@@ -36,6 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $customer_name = $_POST['customer_name'] ?? 'Guest';
     }
 
+    // Replace any usage of $_POST['name'] with $_POST['customer_name'] to match the form field:
+    $customerName = $_POST['customer_name'] ?? '';
+
     // Set delivery cost based on selected method
     if ($delivery_method === 'standard') {
         $delivery_cost = 10000; // Pengiriman standar
