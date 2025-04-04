@@ -29,59 +29,6 @@ if (isset($_GET['remove']) && isset($_SESSION['cart'])) {
     exit;
 }
 
-// Handle updating quantities
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])) {
-    if (isset($_POST['quantities']) && is_array($_POST['quantities'])) {
-        foreach ($_POST['quantities'] as $cart_item_id => $new_quantity) {
-            $new_quantity = (int)$new_quantity;
-            if ($new_quantity <= 0) {
-                // Remove item if quantity is 0 or negative
-                foreach ($_SESSION['cart'] as $key => $item) {
-                    if ($item['cart_item_id'] === $cart_item_id) {
-                        unset($_SESSION['cart'][$key]);
-                        break;
-                    }
-                }
-            } else {
-                // Update quantity
-                foreach ($_SESSION['cart'] as $key => $item) {
-                    if ($item['cart_item_id'] === $cart_item_id) {
-                        // Check stock availability before updating
-                        if (isset($item['size'])) {
-                            $stock_stmt = $conn->prepare("SELECT stock FROM product_sizes WHERE product_id = ? AND size = ?");
-                            if ($stock_stmt) {
-                                $stock_stmt->bind_param('is', $item['product_id'], $item['size']);
-                                $stock_stmt->execute();
-                                $stock_result = $stock_stmt->get_result();
-                                
-                                if ($stock_result->num_rows > 0) {
-                                    $stock_row = $stock_result->fetch_assoc();
-                                    if ($stock_row['stock'] < $new_quantity) {
-                                        $_SESSION['message'] = [
-                                            'type' => 'error', 
-                                            'text' => '❌ Sorry, we only have ' . $stock_row['stock'] . ' items in stock for ' . $item['name'] . ' (' . $item['size'] . ').'
-                                        ];
-                                        continue;
-                                    }
-                                }
-                                $stock_stmt->close();
-                            }
-                        }
-                        
-                        $_SESSION['cart'][$key]['quantity'] = $new_quantity;
-                        break;
-                    }
-                }
-            }
-        }
-        // Re-index the array after updates
-        $_SESSION['cart'] = array_values($_SESSION['cart']);
-        $_SESSION['message'] = ['type' => 'success', 'text' => '✅ Cart updated successfully!'];
-    }
-    header('Location: cart.php');
-    exit;
-}
-
 // Calculate cart totals
 $cart_total = 0;
 $item_count = 0;
@@ -170,7 +117,7 @@ foreach ($_SESSION['cart'] as $item) {
         <!-- Page title -->
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-gray-900 mb-1">Shopping Cart 🛒</h1>
-            <p class="text-gray-500">Review your items and proceed to checkout</p>
+            <p class="text-gray-500">Review your <span class="item-count"><?php echo $item_count; ?></span> items and proceed to checkout</p>
         </div>
         
         <?php if (isset($_SESSION['message'])): ?>
@@ -195,9 +142,11 @@ foreach ($_SESSION['cart'] as $item) {
                 </a>
             </div>
         <?php else: ?>
+            
             <!-- Cart with items - NEW RESPONSIVE DESIGN -->
             <div class="max-w-5xl mx-auto">
-                <form method="POST" action="cart.php">
+                <!-- Replaced form with div since we're handling updates with AJAX -->
+                <div>
                     <!-- Desktop View (hidden on mobile) -->
                     <div class="hidden md:block bg-white rounded-lg shadow-sm overflow-hidden mb-6">
                         <div class="overflow-x-auto">
@@ -248,7 +197,7 @@ foreach ($_SESSION['cart'] as $item) {
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium text-gray-900">
+                                                <div class="text-sm font-medium text-gray-900" data-item-id="<?php echo htmlspecialchars($item['cart_item_id']); ?>">
                                                     Rp <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?>
                                                 </div>
                                             </td>
@@ -299,7 +248,7 @@ foreach ($_SESSION['cart'] as $item) {
                                         </div>
                                     </div>
                                     <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900 mr-4">
+                                        <div class="text-sm font-medium text-gray-900" data-item-id="<?php echo htmlspecialchars($item['cart_item_id']); ?>">
                                             Rp <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?>
                                         </div>
                                         <a href="cart.php?remove=<?php echo urlencode($item['cart_item_id']); ?>" class="text-red-600 hover:text-red-900">
@@ -314,14 +263,12 @@ foreach ($_SESSION['cart'] as $item) {
                         
                         <div class="bg-white rounded-lg shadow-sm p-4">
                             <div class="flex justify-between items-center font-medium">
-                                <span>Subtotal (<?php echo $item_count; ?> items):</span>
-                                <span>Rp <?php echo number_format($cart_total, 0, ',', '.'); ?></span>
+                                <span>Subtotal (<span class="item-count"><?php echo $item_count; ?></span> items):</span>
+                                <span class="cart-subtotal">Rp <?php echo number_format($cart_total, 0, ',', '.'); ?></span>
                             </div>
                         </div>
                         
-                        <button type="submit" name="update_cart" class="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-3 px-6 rounded transition">
-                            Update Cart 🔄
-                        </button>
+                        <!-- Removed Update Cart button -->
                     </div>
                     
                     <div class="flex flex-col md:flex-row justify-between items-start gap-6">
@@ -330,8 +277,8 @@ foreach ($_SESSION['cart'] as $item) {
                                 <h3 class="text-lg font-medium text-gray-900 mb-4">Order Summary 📋</h3>
                                 <div class="space-y-3">
                                     <div class="flex justify-between items-center pb-3 border-b border-gray-100">
-                                        <span class="text-gray-600">Items (<?php echo $item_count; ?>):</span>
-                                        <span class="text-gray-900 font-medium">Rp <?php echo number_format($cart_total, 0, ',', '.'); ?></span>
+                                        <span class="text-gray-600">Items (<span class="item-count"><?php echo $item_count; ?></span>):</span>
+                                        <span class="text-gray-900 font-medium cart-subtotal">Rp <?php echo number_format($cart_total, 0, ',', '.'); ?></span>
                                     </div>
                                     <div class="flex justify-between items-center pb-3 border-b border-gray-100">
                                         <span class="text-gray-600">Estimated Shipping:</span>
@@ -339,7 +286,7 @@ foreach ($_SESSION['cart'] as $item) {
                                     </div>
                                     <div class="flex justify-between items-center pt-2">
                                         <span class="text-gray-900 font-medium">Total:</span>
-                                        <span class="text-xl text-primary-600 font-semibold">Rp <?php echo number_format($cart_total, 0, ',', '.'); ?></span>
+                                        <span class="text-xl text-primary-600 font-semibold cart-total" id="total-price">Rp <?php echo number_format($cart_total, 0, ',', '.'); ?></span>
                                     </div>
                                 </div>
                                 
@@ -352,10 +299,8 @@ foreach ($_SESSION['cart'] as $item) {
                         </div>
                         
                         <div class="w-full md:w-1/2 flex flex-col gap-4">
-                            <div class="hidden md:flex justify-between">
-                                <button type="submit" name="update_cart" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-6 rounded transition">
-                                    Update Cart 🔄
-                                </button>
+                            <div class="hidden md:flex justify-end">
+                                <!-- Removed Update Cart button, kept only Continue Shopping -->
                                 <a href="products.php" class="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -368,12 +313,12 @@ foreach ($_SESSION['cart'] as $item) {
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0 pt-0.5">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-blue-600">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                         </svg>
                                     </div>
                                     <div class="ml-3">
-                                        <h4 class="text-sm font-medium text-blue-800">ℹ️ Shipping Information</h4>
-                                        <p class="mt-1 text-sm text-blue-700">Shipping costs will be calculated at checkout based on your location and delivery preference.</p>
+                                        <h4 class="text-sm font-medium text-blue-800">ℹ️ Dynamic Cart Updates</h4>
+                                        <p class="mt-1 text-sm text-blue-700">Your cart updates in real-time as you change quantities. All changes are saved automatically!</p>
                                     </div>
                                 </div>
                             </div>
@@ -386,7 +331,7 @@ foreach ($_SESSION['cart'] as $item) {
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         <?php endif; ?>
     </div>
@@ -415,9 +360,8 @@ foreach ($_SESSION['cart'] as $item) {
             </div>
         </div>
     </footer>
-    
+
     <script>
-        // Mobile menu toggle and quantity controls
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -429,9 +373,10 @@ foreach ($_SESSION['cart'] as $item) {
                 });
             }
             
-            // Quantity controls
+            // Quantity controls with dynamic updates
             const decreaseButtons = document.querySelectorAll('.decrease-qty');
             const increaseButtons = document.querySelectorAll('.increase-qty');
+            const quantityInputs = document.querySelectorAll('input[type="number"][name^="quantities"]');
             
             decreaseButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -439,6 +384,7 @@ foreach ($_SESSION['cart'] as $item) {
                     const currentValue = parseInt(input.value);
                     if (currentValue > 1) {
                         input.value = currentValue - 1;
+                        updateCartItem(input);
                     }
                 });
             });
@@ -447,8 +393,130 @@ foreach ($_SESSION['cart'] as $item) {
                 button.addEventListener('click', function() {
                     const input = this.parentNode.querySelector('input[type="number"]');
                     input.value = parseInt(input.value) + 1;
+                    updateCartItem(input);
                 });
             });
+            
+            // Handle direct input changes (when user types a number)
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    updateCartItem(this);
+                });
+            });
+            
+            // Function to update cart via AJAX - Enhanced with better price updates
+            function updateCartItem(inputElement) {
+                const cartItemId = inputElement.name.match(/quantities\[(.*?)\]/)[1];
+                const newQuantity = parseInt(inputElement.value);
+                
+                if (isNaN(newQuantity) || newQuantity < 1) {
+                    inputElement.value = 1;
+                    return;
+                }
+                
+                // Show loading state
+                const rowElement = inputElement.closest('tr') || inputElement.closest('.bg-white.rounded-lg');
+                if (rowElement) {
+                    rowElement.classList.add('opacity-50');
+                }
+                
+                // Create form data for the AJAX request
+                const formData = new FormData();
+                formData.append('cart_item_id', cartItemId);
+                formData.append('quantity', newQuantity);
+                
+                // Send AJAX request
+                fetch('update_cart_ajax.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Cart data updated:', data); // Debug info
+                        
+                        // Update individual item total using data attributes
+                        const itemTotalElements = document.querySelectorAll(`[data-item-id="${cartItemId}"]`);
+                        itemTotalElements.forEach(el => {
+                            el.textContent = `Rp ${data.formatted_item_total}`;
+                        });
+                        
+                        // Update ALL cart subtotal instances
+                        const subtotalElements = document.querySelectorAll('.cart-subtotal');
+                        subtotalElements.forEach(el => {
+                            el.textContent = `Rp ${data.formatted_cart_total}`;
+                        });
+                        
+                        // Update ALL total price instances including the main total
+                        const totalElements = document.querySelectorAll('.cart-total');
+                        totalElements.forEach(el => {
+                            el.textContent = `Rp ${data.formatted_cart_total}`;
+                        });
+                        
+                        // Update the "total-price" element specifically 
+                        const totalPriceElement = document.getElementById('total-price');
+                        if (totalPriceElement) {
+                            totalPriceElement.textContent = `Rp ${data.formatted_cart_total}`;
+                        }
+                        
+                        // Update item count everywhere
+                        const itemCountElements = document.querySelectorAll('.item-count');
+                        itemCountElements.forEach(el => {
+                            el.textContent = data.item_count;
+                        });
+                        
+                        // If item was removed (quantity set to 0), reload the page
+                        if (newQuantity <= 0) {
+                            location.reload();
+                        }
+                        
+                        // Show mini notification
+                        showNotification('🛒 Cart updated successfully!', 'success');
+                    } else {
+                        // Show error message
+                        showNotification(data.message || 'Error updating cart', 'error');
+                        // Reset to previous quantity if stock issue
+                        if (data.message && data.message.includes('stock')) {
+                            inputElement.value = inputElement.defaultValue;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating cart:', error);
+                    showNotification('⚠️ Failed to update cart. Please try again.', 'error');
+                })
+                .finally(() => {
+                    // Remove loading state
+                    if (rowElement) {
+                        rowElement.classList.remove('opacity-50');
+                    }
+                });
+            }
+            
+            // Simple notification function
+            function showNotification(message, type = 'success') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 z-50 p-4 rounded-md shadow-lg ${
+                    type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 
+                    'bg-red-50 text-red-800 border border-red-200'
+                } transition-all duration-500 transform translate-x-full opacity-0`;
+                notification.textContent = message;
+                
+                // Add to DOM
+                document.body.appendChild(notification);
+                
+                // Trigger animation to show
+                setTimeout(() => {
+                    notification.classList.remove('translate-x-full', 'opacity-0');
+                }, 10);
+                
+                // Remove after delay
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full', 'opacity-0');
+                    setTimeout(() => notification.remove(), 500);
+                }, 3000);
+            }
         });
     </script>
 </body>
