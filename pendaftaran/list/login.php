@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($result['success']) {
             // Redirect to intended page or dashboard
-            $redirect = $_SESSION['redirect_after_login'] ?? '/uttoraja/pendaftaran/admin/index.php';
+            $redirect = $_SESSION['redirect_after_login'] ?? 'index.php';
             unset($_SESSION['redirect_after_login']);
             
             header("Location: $redirect");
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // If already logged in, redirect to dashboard
 if ($auth->isLoggedIn()) {
-    header('Location: /uttoraja/pendaftaran/admin/index.php');
+    header('Location: index.php');
     exit;
 }
 ?>

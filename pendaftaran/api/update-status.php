@@ -1,45 +1,42 @@
 <?php
 header('Content-Type: application/json');
+require_once '../../koneksi.php';
 
-// Path to status JSON file
-$statusFile = __DIR__ . '/../data/status.json';
+// Get JSON input
+$input = json_decode(file_get_contents('php://input'), true);
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
+if (!isset($input['id']) || !isset($input['status'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing required parameters']);
     exit;
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id'] ?? null;
-$status = $data['status'] ?? null;
+$id = $input['id'];
+$status = $input['status'];
 
-if (!$id || !$status) {
+// Validate status
+$valid_statuses = ['belum_diproses', 'sudah_dihubungi', 'berminat', 'tidak_berminat', 'pendaftaran_selesai'];
+if (!in_array($status, $valid_statuses)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Missing required fields']);
+    echo json_encode(['error' => 'Invalid status']);
     exit;
 }
 
 try {
-    // Read current status data
-    $statusData = json_decode(file_get_contents($statusFile), true) ?: ['pendaftar_status' => []];
+    // Update the status in the database
+    $stmt = $conn->prepare("UPDATE pendaftar SET status = ? WHERE id = ?");
+    $stmt->bind_param("si", $status, $id);
     
-    // Update status for this ID
-    $statusData['pendaftar_status'][$id] = [
-        'status' => $status,
-        'updated_at' => date('Y-m-d H:i:s')
-    ];
-    
-    // Save back to file
-    if (file_put_contents($statusFile, json_encode($statusData, JSON_PRETTY_PRINT))) {
-        echo json_encode([
-            'success' => true,
-            'message' => 'Status updated successfully'
-        ]);
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Status updated successfully']);
     } else {
-        throw new Exception('Failed to write status data');
+        throw new Exception("Failed to update status");
     }
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to update status: ' . $e->getMessage()]);
+    echo json_encode(['error' => $e->getMessage()]);
+} finally {
+    if (isset($stmt)) $stmt->close();
+    if (isset($conn)) $conn->close();
 }
+?>

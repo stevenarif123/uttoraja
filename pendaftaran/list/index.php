@@ -82,8 +82,11 @@ try {
         }
     }
     
-    // Get latest registrations for display
-    $latestPendaftar = array_slice($data, 0, 4);
+    // Get latest registrations for display - sort by ID in descending order
+    usort($data, function($a, $b) {
+        return $b['id'] - $a['id']; // Sort by ID descending
+    });
+    $latestPendaftar = array_slice($data, 0, 5); // Get 5 latest entries
     
 } catch (Exception $e) {
     $data = [];
@@ -272,5 +275,38 @@ try {
     </div>
 
     <script src="js/shared.js"></script>
+    <script>
+        // Simple functions for dashboard actions
+        function showDetail(id) {
+            window.location.href = `pendaftar.php?action=view&id=${id}`;
+        }
+
+        // Function to get greeting based on time of day
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 12) return "Selamat pagi";
+            if (hour < 15) return "Selamat siang";
+            if (hour < 18) return "Selamat sore";
+            return "Selamat malam";
+        }
+
+        // Function to format phone number
+        function formatPhoneNumber(phone) {
+            let formattedPhone = phone.replace(/\D/g, '');
+            if (!formattedPhone.startsWith('62')) {
+                formattedPhone = formattedPhone.startsWith('0') 
+                    ? '62' + formattedPhone.substring(1) 
+                    : '62' + formattedPhone;
+            }
+            return formattedPhone;
+        }
+
+        // Function to send WhatsApp message
+        function sendWhatsApp(phone, nama) {
+            const formattedPhone = formatPhoneNumber(phone);
+            const message = `${getGreeting()}, ${nama}\n\nterima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:\n\n1. Membayar uang pendaftaran sebesar Rp. 200.000 ke nomor rekening berikut:\nNama: Ribka Padang (Kepala SALUT Tana Toraja)\nBank: Mandiri\nNomor Rekening: 1700000588917\n\n2. Melengkapi berkas data diri berupa:\n- Foto diri Formal (dapat menggunakan foto HP)\n- Foto KTP asli (KTP asli difoto secara keseluruhan/tidak terpotong)\n- Foto ijazah asli\n- Mengisi formulir Keabsahan Data (dikirimkan)`;
+            window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
 </body>
 </html>
