@@ -582,3 +582,42 @@ Stack trace:
 [01-Apr-2025 15:25:45 Europe/Berlin] Koneksi database berhasil
 [01-Apr-2025 15:25:51 Europe/Berlin] Koneksi database berhasil
 [01-Apr-2025 15:25:55 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:39:42 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:39:42 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:39:42 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 04:39:47 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:39:47 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:39:47 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 04:58:23 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:58:23 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:58:23 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 04:58:26 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:58:26 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:58:26 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 04:58:27 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:58:27 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:58:27 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 04:58:35 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:58:35 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:58:35 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 04:59:08 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 04:59:08 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 04:59:08 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 07:56:37 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 07:56:37 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 07:56:37 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 07:56:37 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 07:56:37 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 07:56:37 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 08:04:01 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 08:04:01 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 08:04:01 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 08:04:01 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 08:04:01 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 08:04:01 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 08:04:06 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 08:04:06 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 08:04:06 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[09-Apr-2025 08:04:07 Europe/Berlin] Koneksi database berhasil
+[09-Apr-2025 08:04:07 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
+[09-Apr-2025 08:04:07 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783

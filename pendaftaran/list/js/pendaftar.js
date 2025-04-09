@@ -1,3 +1,6 @@
+// Import shared functionality
+import './shared.js';
+
 // Debug configuration
 const DEBUG = true;
 
@@ -7,7 +10,7 @@ function debug(message, data = null) {
     }
 }
 
-// Form handling functions - Define this before using it
+// Form handling functions
 async function handleFormSubmit(e) {
     e.preventDefault();
     debug('Form submission started');
@@ -92,16 +95,59 @@ function handleWhatsAppClick(e) {
     const pendaftar = findPendaftarById(id);
     
     if (pendaftar) {
-        sendWhatsApp(phone, nama, pendaftar.jalur_program);
+        sendWhatsApp(phone, nama, id);
     } else {
         debug('Pendaftar not found:', id);
-        sendWhatsApp(phone, nama); // Fallback to default amount
+        sendWhatsApp(phone, nama, id); // Fallback to default amount
     }
 }
 
-function sendWhatsApp(phone, nama, jalurProgram) {
-    const message = encodeURIComponent(generateWhatsAppMessage(nama, jalurProgram));
-    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+async function sendInitialMessage(phone, nama, id) {
+    const message = generateInitialMessage(nama);
+    window.open(`https://wa.me/${formatPhoneNumber(phone)}?text=${encodeURIComponent(message)}`, '_blank');
+    // Update status after sending message
+    await updateStatus(id, 'sudah_dihubungi');
+}
+
+async function sendWhatsApp(phone, nama, id) {
+    const pendaftar = findPendaftarById(id);
+    const message = generateWhatsAppMessage(nama, pendaftar?.jalur_program);
+    window.open(`https://wa.me/${formatPhoneNumber(phone)}?text=${encodeURIComponent(message)}`, '_blank');
+    // Update status after sending message
+    await updateStatus(id, 'sudah_dihubungi');
+}
+
+async function updateStatus(id, status) {
+    try {
+        const response = await fetch('/uttoraja/pendaftaran/api/update-status.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                status: status
+            })
+        });
+
+        const result = await response.json();
+        if (!result.success) {
+            throw new Error(result.error || 'Failed to update status');
+        }
+
+        // Update UI to reflect new status
+        const select = document.querySelector(`select[data-id="${id}"]`);
+        if (select) {
+            select.value = status;
+            // Update select background color
+            select.className = `status-select px-2 py-1 rounded border ${getStatusClass(status)}`;
+        }
+        
+        console.log('✅ Status updated successfully:', status);
+    } catch (error) {
+        console.error('❌ Error updating status:', error);
+        alert('Failed to update status. Please try again.');
+    }
 }
 
 // Modal Functions
@@ -242,11 +288,5 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeEventHandlers();
 });
 
-// Export functions for use in other scripts
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.findPendaftarById = findPendaftarById;
-window.showDetail = showDetail;
-window.editData = editData;
-window.handleWhatsAppClick = handleWhatsAppClick;
+// Export needed functions
 window.handleFormSubmit = handleFormSubmit;

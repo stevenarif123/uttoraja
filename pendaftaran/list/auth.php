@@ -2,7 +2,7 @@
 session_start();
 
 // Constants
-define('CREDENTIALS_FILE', __DIR__ . '/credentials.json');
+define('CREDENTIALS_FILE', dirname(__FILE__) . '/credentials.json');
 define('SESSION_NAME', 'uttoraja_admin');
 define('SESSION_LIFETIME', 7200); // 2 hours in seconds
 define('LOGIN_ATTEMPTS_LIMIT', 5);
@@ -228,7 +228,7 @@ function requireLogin() {
         // Store the requested URL for redirection after login
         $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
         
-        header('Location: admin/login.php');
+        header('Location: login.php');
         exit;
     }
 }

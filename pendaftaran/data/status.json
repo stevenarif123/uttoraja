@@ -1,0 +1,17 @@
+{
+    "1": {
+        "status": "berminat",
+        "updated_at": "2025-04-09 11:15:49",
+        "last_message_sent": null
+    },
+    "pendaftar_status": {
+        "1": {
+            "status": "sudah_dihubungi",
+            "updated_at": "2025-04-09 11:24:44"
+        },
+        "2": {
+            "status": "sudah_dihubungi",
+            "updated_at": "2025-04-09 11:24:49"
+        }
+    }
+}

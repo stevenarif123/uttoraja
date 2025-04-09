@@ -5,7 +5,7 @@ requireLogin();
 // Set page title for navbar
 $pageTitle = 'Dashboard';
 
-// API URL with HTTPS
+// Update API URL to use HTTPS instead of HTTP
 $apiUrl = 'https://uttoraja.com/pendaftaran/api/pendaftar';
 
 // Add error handling for API call with cURL
@@ -40,8 +40,6 @@ try {
     
     // Get statistics
     $totalPendaftar = count($data);
-    
-    // Calculate new registrations (last 7 days)
     $newRegistrations = 0;
     $todayRegistrations = 0;
     $now = time();
@@ -62,7 +60,6 @@ try {
             $todayRegistrations++;
         }
         
-        // Count by faculty/jurusan
         if (!empty($pendaftar['jurusan'])) {
             $faculty = $pendaftar['jurusan'];
             if (!isset($faculties[$faculty])) {
@@ -104,51 +101,22 @@ try {
     <title>Dashboard - UT Toraja</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Added fixed height and scrolling for content */
-        .layout-container {
-            min-height: 100vh;
-            display: flex;
-        }
-        
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 16rem; /* w-64 = 16rem */
-            overflow-y: auto;
-            z-index: 40;
-        }
-        
-        .main-content {
-            margin-left: 16rem; /* Same as sidebar width */
-            width: calc(100% - 16rem);
-            min-height: 100vh;
-        }
-        
-        .content-container {
-            padding: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
-    <div class="layout-container">
+    <div class="flex">
         <!-- Include Sidebar -->
         <?php include 'components/sidebar.php'; ?>
         
         <!-- Main Content -->
-        <div class="main-content">
+        <div class="flex-1">
             <!-- Include Navbar -->
             <?php include 'components/navbar.php'; ?>
             
             <!-- Dashboard Content -->
-            <div class="content-container">
+            <div class="p-6">
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Stats Card 1 -->
+                    <!-- Stats Card 1: Total Pendaftar -->
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center justify-between">
                             <div>
@@ -165,7 +133,7 @@ try {
                         </p>
                     </div>
                     
-                    <!-- Stats Card 2 -->
+                    <!-- Stats Card 2: New Registrations -->
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center justify-between">
                             <div>
@@ -182,7 +150,7 @@ try {
                         </p>
                     </div>
                     
-                    <!-- Stats Card 3 -->
+                    <!-- Stats Card 3: Popular Faculty -->
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center justify-between">
                             <div>
@@ -203,11 +171,11 @@ try {
                 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-4">Tindakan Cepat</h3>
                     <div class="flex flex-wrap gap-4">
-                        <a href="pendaftar.php" class="flex items-center p-3 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg transition duration-200">
+                        <a href="pendaftaran/list/pendaftar.php" class="flex items-center p-3 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg transition duration-200">
                             <i class="fas fa-list mr-2"></i>
                             <span>Lihat Daftar Pendaftar</span>
                         </a>
-                        <a href="pendaftar.php?action=add" class="flex items-center p-3 bg-green-100 hover:bg-green-200 text-green-800 rounded-lg transition duration-200">
+                        <a href="pendaftaran/list/pendaftar.php?action=add" class="flex items-center p-3 bg-green-100 hover:bg-green-200 text-green-800 rounded-lg transition duration-200">
                             <i class="fas fa-user-plus mr-2"></i>
                             <span>Tambah Pendaftar Baru</span>
                         </a>
@@ -218,11 +186,13 @@ try {
                     </div>
                 </div>
 
-                <!-- Recent Registrations table -->
+                <!-- Recent Registrations -->
                 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-gray-800">Pendaftar Terbaru</h3>
-                        <a href="pendaftar.php" class="text-blue-600 hover:text-blue-800 text-sm">Lihat Semua</a>
+                        <a href="pendaftaran/list/pendaftar.php" class="text-blue-600 hover:text-blue-800 text-sm">
+                            Lihat Semua
+                        </a>
                     </div>
                     
                     <div class="overflow-x-auto">
@@ -246,7 +216,7 @@ try {
                                             <td class="py-4 px-6"><?php echo htmlspecialchars($pendaftar['jurusan'] ?? '-'); ?></td>
                                             <td class="py-4 px-6 text-center">
                                                 <div class="flex justify-center space-x-2">
-                                                    <button onclick="showDetail(<?php echo $pendaftar['id']; ?>)" 
+                                                    <button onclick="showDetail('<?php echo $pendaftar['id']; ?>')" 
                                                             class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-200">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
@@ -272,5 +242,25 @@ try {
     </div>
 
     <script src="js/shared.js"></script>
+    <script>
+        // Simple functions for dashboard actions
+        function showDetail(id) {
+            window.location.href = `pendaftaran/list/pendaftar.php?action=view&id=${id}`;
+        }
+
+        function sendWhatsApp(phone, nama) {
+            const message = `${getGreeting()}, ${nama}\n\nterima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja...`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+        }
+
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 12) return "Selamat pagi";
+            if (hour < 15) return "Selamat siang";
+            if (hour < 18) return "Selamat sore";
+            return "Selamat malam";
+        }
+    </script>
 </body>
 </html>
