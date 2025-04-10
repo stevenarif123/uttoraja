@@ -23,7 +23,7 @@ function getStatusClass($status) {
 
 // Add this function to retrieve stored status from JSON
 function getStoredStatus($id) {
-    $statusFile = __DIR__ . 'data/status.json';
+    $statusFile = __DIR__ . '/data/status.json';
     if (!file_exists($statusFile)) {
         return 'belum_diproses';
     }
@@ -70,15 +70,45 @@ $isAjax = isset($_GET['ajax']) && $_GET['ajax'] === 'true';
 // Check for action parameter (e.g., add, edit, view)
 $action = $_GET['action'] ?? null;
 
-// Update API URL to use HTTPS instead of HTTP
-$apiUrl = 'https://uttoraja.com/pendaftaran/api/pendaftar'; // Changed this line
+// Handle AJAX requests for details
+if (isset($_GET['action']) && $_GET['action'] === 'get_detail' && isset($_GET['id'])) {
+    $id = (int)$_GET['id'];
+    
+    try {
+        $query = "SELECT * FROM pendaftar WHERE id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$data) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Data not found']);
+            exit;
+        }
+        
+        // Get status from status.json
+        $statusData = $statusHandler->getAllStatuses();
+        $data['status'] = $statusData['pendaftar_status'][$id]['status'] ?? 'belum_diproses';
+        
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+        exit;
+    }
+}
 
-// Add error handling for API call with cURL instead of file_get_contents
+// Update API URL to use the deployed server endpoint
+$apiUrl = 'http://uttoraja.com/pendaftaran/api/pendaftar/';
+
+// Use the existing fetchData function but with updated error handling
 function fetchData($url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // For development only
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -139,110 +169,130 @@ if (!$isAjax):
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/pendaftar.css"> <!-- Updated path to pendaftar.css -->
     <style>
-        /* Fixed modal styles to ensure proper display */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 50;
-            display: none;
-            overflow-y: auto;
+/* Enhanced Modal Styles 🎨 */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: flex-start; /* Changed from center to allow scrolling */
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: auto; /* Enable scrolling on modal */
+}
+
+.modal-dialog {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 1rem;
+    transform: translateY(-30px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Update form submission handling */
+</style>
+<script>
+// Fix modal opening and closing issues
+const Modal = {
+    open(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
-        
-        .modal.show {
-            display: block !important;
+    },
+    close(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = ''; // Restore scrolling
         }
-        
-        .modal-dialog {
-            max-width: 800px;
-            margin: 1.75rem auto;
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+};
+
+// Fix edit form not saving data
+async function saveEditData(event) {
+    event.preventDefault();
+    const form = event.target;
+    const id = document.getElementById('editId').value;
+    const saveButton = document.getElementById('saveEditButton');
+    
+    try {
+        saveButton.disabled = true;
+        saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-KEY': 'pantanmandiri25'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to update data');
         }
-        
-        .modal-content {
-            position: relative;
-            padding: 1rem;
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .modal-body {
-            padding: 1rem;
-        }
-        
-        .modal-footer {
-            padding: 1rem;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: flex-end;
-        }
-        
-        /* Pagination Styles */
-        .pagination-link {
-            padding: 0.75rem;
-            border-radius: 0.25rem;
-            transition: all 0.2s;
-        }
-        
-        .pagination-link.active {
-            background-color: #3b82f6;
-            color: white;
-        }
-        
-        .pagination-link:not(.active) {
-            background-color: #f3f4f6;
-            color: #374151;
-        }
-        
-        .pagination-link:not(.active):hover {
-            background-color: #2563eb;
-            color: white;
-        }
-        
-        .pagination-info {
-            font-size: 0.875rem;
-            color: #4b5563;
-        }
-        
-        /* Loading State */
-        .loading-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            display: none;
-        }
-        
-        .loading-spinner {
-            animation: spin 1s linear infinite;
-            height: 3rem;
-            width: 3rem;
-            color: white;
-        }
-        
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
+
+        showNotification('✅ Data updated successfully!', 'success');
+        Modal.close('editModal');
+        location.reload(); // Refresh page to show updated data
+    } catch (error) {
+        console.error('Save error:', error);
+        showNotification('❌ ' + error.message, 'error');
+    } finally {
+        saveButton.disabled = false;
+        saveButton.innerHTML = 'Save Changes';
+    }
+}
+
+// Fix scrolling issues in modals
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                Modal.close(modal.id);
             }
-            to {
-                transform: rotate(360deg);
-            }
+        });
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            document.querySelectorAll('.modal.flex').forEach(modal => {
+                Modal.close(modal.id);
+            });
         }
-    </style>
+    });
+});
+
+// Fix page becoming unclickable by ensuring proper modal state
+document.querySelectorAll('[data-modal-open]').forEach(button => {
+    button.addEventListener('click', function() {
+        const modalId = button.getAttribute('data-modal-open');
+        Modal.open(modalId);
+    });
+});
+
+document.querySelectorAll('[data-modal-close]').forEach(button => {
+    button.addEventListener('click', function() {
+        const modalId = button.getAttribute('data-modal-close');
+        Modal.close(modalId);
+    });
+});
+</script>
 </head>
 <body class="bg-gray-100">
     <div class="flex">
@@ -259,7 +309,7 @@ if (!$isAjax):
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h1 class="text-2xl font-bold text-gray-800">Daftar Pendaftar</h1>
-                        <button onclick="showAddModal()" 
+                        <button onclick="Modal.open('addModal')" 
                                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200">
                             <i class="fas fa-plus mr-2"></i>Tambah Pendaftar
                         </button>
@@ -312,8 +362,8 @@ if (!$isAjax):
                                                         <i class="fas fa-eye"></i>
                                                     </button>
                                                     <button onclick="editData(<?php echo $pendaftar['id']; ?>)"
-                                                            class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition duration-200">
-                                                        <i class="fas fa-edit"></i>
+                                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        Edit
                                                     </button>
                                                     <button onclick="confirmDelete(<?php echo $pendaftar['id']; ?>)"
                                                             class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition duration-200">
@@ -325,7 +375,7 @@ if (!$isAjax):
                                                                 title="Kirim Pesan Awal">
                                                             <i class="fab fa-whatsapp"></i> 1
                                                         </button>
-                                                        <button onclick="sendWhatsApp('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', <?php echo $pendaftar['id']; ?>)"
+                                                        <button onclick="sendPaymentMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>')"
                                                                 class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition duration-200"
                                                                 title="Kirim Pesan Pembayaran">
                                                             <i class="fab fa-whatsapp"></i> 2
@@ -386,21 +436,22 @@ if (!$isAjax):
 
     <!-- Only include modals if not in AJAX mode or specifically requested -->
     <?php if (!$isAjax || isset($_GET['action'])): ?>
-    <!-- Fix modal classes and structure -->
-    <div id="detailModal" class="modal hidden">
+    <!-- Replace existing detailModal div with this optimized version -->
+    <div id="detailModal" class="modal hidden" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content shadow-lg rounded-lg">
+                <div class="modal-header flex justify-between items-center border-b p-4">
                     <h2 class="text-2xl font-bold text-gray-800">Detail Pendaftar</h2>
-                    <button type="button" onclick="closeModal('detailModal')" class="text-gray-500 hover:text-gray-700">
+                    <button type="button" onclick="Modal.close('detailModal')" 
+                            class="text-gray-500 hover:text-gray-700 transition-colors">
                         <i class="fas fa-times text-2xl"></i>
                     </button>
                 </div>
-                <div id="detailContent" class="modal-body">
+                <div id="detailContent" class="modal-body overflow-y-auto">
                     <!-- Content will be dynamically inserted here -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="closeModal('detailModal')" 
+                <div class="modal-footer border-t p-4">
+                    <button type="button" onclick="Modal.close('detailModal')" 
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">
                         Tutup
                     </button>
@@ -409,61 +460,162 @@ if (!$isAjax):
         </div>
     </div>
 
-    <!-- Improved Edit Modal -->
-    <div id="editModal" class="modal hidden">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="text-2xl font-bold text-gray-800">Edit Pendaftar</h2>
-                    <button type="button" onclick="closeModal('editModal')" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-2xl"></i>
-                    </button>
-                </div>
-                <form id="editForm" class="modal-body">
-                    <!-- Form content will be dynamically inserted here -->
+    <!-- Updated Edit Modal -->
+    <div id="editModal" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+        <div class="modal-content relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-2xl">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Edit Data Pendaftar
+                </h3>
+                <button type="button" onclick="Modal.close('editModal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <form id="editForm" method="post" class="p-6 space-y-6">
+                <input type="hidden" id="editId" name="id">
+                
+                <!-- Personal Information -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <h4 class="text-lg font-semibold mb-3 text-gray-700">Data Pribadi 👤</h4>
+                    </div>
+                    
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap <span class="text-red-500">*</span></label>
+                        <input type="text" name="nama_lengkap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    </div>
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">NIK</label>
+                        <input type="text" name="nik" pattern="[0-9]*" maxlength="16" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
                     <div>
-                        <label class="block text-gray-700 font-bold mb-2">Agama</label>
-                        <select id="editAgama" name="agama" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Ibu Kandung</label>
+                        <input type="text" name="ibu_kandung" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Pilih Jenis Kelamin</option>
+                            <option value="laki-laki">Laki-laki</option>
+                            <option value="perempuan">Perempuan</option>
+                        </select>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="col-span-2">
+                        <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Kontak 📞</h4>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Nomor HP <span class="text-red-500">*</span></label>
+                        <input type="tel" name="nomor_hp" pattern="[0-9]*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    </div>
+
+                    <div class="col-span-2">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Alamat</label>
+                        <textarea name="alamat" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></textarea>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <div class="col-span-2">
+                        <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Akademik 📚</h4>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Program Studi <span class="text-red-500">*</span></label>
+                        <select name="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <option value="">Pilih Program Studi</option>
+                            <?php foreach ($programStudies as $prodi): ?>
+                                <option value="<?php echo htmlspecialchars($prodi); ?>"><?php echo htmlspecialchars($prodi); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Jalur Program</label>
+                        <select name="jalur_program" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Pilih Jalur Program</option>
+                            <option value="RPL">RPL</option>
+                            <option value="Reguler">Reguler</option>
+                        </select>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="col-span-2">
+                        <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Tambahan ℹ️</h4>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Status Bekerja</label>
+                        <select name="bekerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="0">Tidak Bekerja</option>
+                            <option value="1">Bekerja</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Tempat Kerja</label>
+                        <input type="text" name="tempat_kerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Ukuran Baju</label>
+                        <select name="ukuran_baju" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Pilih Ukuran</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="XXXL">XXXL</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Agama</label>
+                        <select name="agama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Pilih Agama</option>
                             <option value="Islam">Islam</option>
-                            <option value="Protestan">Protestan</option>
+                            <option value="Kristen">Kristen</option>
                             <option value="Katolik">Katolik</option>
                             <option value="Hindu">Hindu</option>
                             <option value="Buddha">Buddha</option>
                             <option value="Konghucu">Konghucu</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2">Program Studi</label>
-                        <select id="editJurusan" name="jurusan" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">Pilih Program Studi</option>
-                            <?php foreach($programStudies as $prodi): ?>
-                            <option value="<?php echo htmlspecialchars($prodi); ?>"><?php echo htmlspecialchars($prodi); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2">Jalur Program</label>
-                        <select id="editJalurProgram" name="jalur_program" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">Pilih Jalur Program</option>
-                            <option value="RPL" ${data.jalur_program === 'RPL' ? 'selected' : ''}>RPL</option>
-                            <option value="REGULER" ${data.jalur_program === 'REGULER' ? 'selected' : ''}>REGULER</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2">Ukuran Baju</label>
-                        <select id="editUkuranBaju" name="ukuran_baju" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">Pilih Ukuran Baju</option>
-                            <option value="S" ${data.ukuran_baju === 'S' ? 'selected' : ''}>S</option>
-                            <option value="M" ${data.ukuran_baju === 'M' ? 'selected' : ''}>M</option>
-                            <option value="L" ${data.ukuran_baju === 'L' ? 'selected' : ''}>L</option>
-                            <option value="XL" ${data.ukuran_baju === 'XL' ? 'selected' : ''}>XL</option>
-                            <option value="XXL" ${data.ukuran_baju === 'XXL' ? 'selected' : ''}>XXL</option>
-                            <option value="XXXL" ${data.ukuran_baju === 'XXXL' ? 'selected' : ''}>XXXL</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex items-center justify-end space-x-2 border-t pt-4 mt-4">
+                    <button type="button" onclick="Modal.close('editModal')" 
+                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                        Cancel
+                    </button>
+                    <button type="submit" id="saveEditButton"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                        <span class="save-text">Save Changes</span>
+                        <span class="loading-text hidden">
+                            <i class="fas fa-spinner fa-spin mr-2"></i> Saving...
+                        </span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -473,7 +625,7 @@ if (!$isAjax):
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="text-2xl font-bold text-gray-800">Tambah Pendaftar Baru</h2>
-                    <button type="button" onclick="closeModal('addModal')" class="text-gray-500 hover:text-gray-700">
+                    <button type="button" onclick="Modal.close('addModal')" class="text-gray-500 hover:text-gray-700">
                         <i class="fas fa-times text-2xl"></i>
                     </button>
                 </div>
@@ -510,7 +662,7 @@ if (!$isAjax):
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="text-xl font-bold">Konfirmasi Hapus</h3>
-                    <button type="button" onclick="closeModal('deleteConfirmModal')" class="text-gray-500 hover:text-gray-700">
+                    <button type="button" onclick="Modal.close('deleteConfirmModal')" class="text-gray-500 hover:text-gray-700">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -518,7 +670,7 @@ if (!$isAjax):
                     <p class="mb-4">Apakah Anda yakin ingin menghapus data ini?</p>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="closeModal('deleteConfirmModal')" 
+                    <button onclick="Modal.close('deleteConfirmModal')" 
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
                         Batal
                     </button>
@@ -533,144 +685,323 @@ if (!$isAjax):
     <?php endif; ?>
     <?php if (!$isAjax): // Only include full scripts if not AJAX request ?>
     <script>
-        // Global variables for better organization
-        let lastTimeout = null;
-        let deleteId = null;
-        let currentEditId = null;
-        
-        // Store all data in a global variable
-        const allPendaftarData = <?php echo json_encode($data); ?>;
-
-        // Function to find pendaftar by phone number
-        function findPendaftarByPhone(phone) {
-            if (!phone) return null;
-            const cleanPhone = phone.replace(/\D/g, '');
-            return allPendaftarData.find(p => p.nomor_hp && p.nomor_hp.replace(/\D/g, '') === cleanPhone);
+// Simplified Modal object
+const Modal = {
+    open(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            // Force reflow for transition
+            modal.offsetHeight;
+            modal.classList.remove('hidden');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
-
-        // Function to find pendaftar by ID
-        function findPendaftarById(id) {
-            return allPendaftarData.find(p => p.id === id);
+    },
+    
+    close(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('show');
+            modal.addEventListener('transitionend', () => {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+            }, { once: true });
+            document.body.style.overflow = '';
         }
+    }
+};
 
-        // Message status update function
-        async function updateMessageSent(id, messageType) {
+// API interactions
+const API = {
+    baseUrl: 'http://uttoraja.com/pendaftaran/api/pendaftar',
+    
+    async get(id) {
+        const response = await fetch(`${this.baseUrl}/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        return response.json();
+    },
+    
+    async update(id, data) {
+        const response = await fetch(`${this.baseUrl}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-KEY': 'pantanmandiri25'
+            },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to update data');
+        return response.json();
+    }
+};
+
+// Feature handlers
+async function showDetail(id) {
+    try {
+        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const data = await response.json();
+
+        // Format date properly
+        const formatDate = (dateString) => {
+            if (!dateString) return '-';
             try {
-                const response = await fetch(`${window.location.origin}/pendaftaran/api/update-message-sent.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id, messageType })
+                return new Date(dateString).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                 });
-
-                if (!response.ok) throw new Error('Failed to update message status');
-                console.log('✅ Message status updated successfully');
-            } catch (error) {
-                console.error('❌ Error updating message status:', error);
+            } catch (e) {
+                return dateString;
             }
-        }
+        };
 
-        // Initialize search functionality when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const tableBody = document.getElementById('pendaftarTableBody');
-            
-            if (searchInput && tableBody) {
-                const rows = Array.from(tableBody.getElementsByTagName('tr'));
-                const noDataRow = document.getElementById('noDataRow');
-                
-                const performSearch = function(searchTerm) {
-                    searchTerm = searchTerm.toLowerCase().trim();
-                    let visibleCount = 0;
+        // Format gender properly
+        const formatGender = (gender) => {
+            if (!gender) return '-';
+            return gender.charAt(0).toUpperCase() + gender.slice(1);
+        };
 
-                    rows.forEach((row) => {
-                        if (row.id === 'noDataRow') return;
-                        const text = row.textContent.toLowerCase();
-                        const shouldShow = text.includes(searchTerm);
-                        row.style.display = shouldShow ? '' : 'none';
-                        if (shouldShow) {
-                            visibleCount++;
-                            const rowNumber = row.querySelector('.row-number');
-                            if (rowNumber) rowNumber.textContent = visibleCount;
-                        }
-                    });
+        // Format working status
+        const formatWorkingStatus = (status) => {
+            if (status === null || status === undefined) return '-';
+            return status ? 'Ya' : 'Tidak';
+        };
 
-                    if (noDataRow) {
-                        noDataRow.style.display = visibleCount === 0 ? '' : 'none';
-                    }
-                };
+        // Format empty values
+        const formatValue = (value) => value || '-';
 
-                const debounceSearch = function(fn, delay) {
-                    return function() {
-                        const context = this;
-                        const args = arguments;
-                        clearTimeout(lastTimeout);
-                        lastTimeout = setTimeout(() => fn.apply(context, args), delay);
-                    };
-                };
+        const detailContent = document.getElementById('detailContent');
+        detailContent.innerHTML = `
+            <div class="space-y-4 p-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Personal Information Section -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded">
+                        <h3 class="font-bold text-blue-800 mb-2">Data Pribadi</h3>
+                    </div>
 
-                const debouncedSearch = debounceSearch(performSearch, 300);
+                    <div class="font-bold">Nama Lengkap:</div>
+                    <div>${formatValue(data.nama_lengkap)}</div>
+                    
+                    <div class="font-bold">Tempat, Tanggal Lahir:</div>
+                    <div>${formatValue(data.tempat_lahir)}, ${formatDate(data.tanggal_lahir)}</div>
 
-                searchInput.addEventListener('input', function() {
-                    debouncedSearch(this.value);
-                });
+                    <div class="font-bold">NIK:</div>
+                    <div>${formatValue(data.nik)}</div>
 
-                searchInput.addEventListener('keyup', function(e) {
-                    if (e.key === 'Escape') {
-                        this.value = '';
-                        performSearch('');
-                    }
-                });
+                    <div class="font-bold">Nama Ibu Kandung:</div>
+                    <div>${formatValue(data.ibu_kandung)}</div>
+
+                    <div class="font-bold">Jenis Kelamin:</div>
+                    <div>${formatGender(data.jenis_kelamin)}</div>
+
+                    <div class="font-bold">Agama:</div>
+                    <div>${formatValue(data.agama)}</div>
+
+                    <!-- Contact Information Section -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
+                        <h3 class="font-bold text-blue-800 mb-2">Informasi Kontak</h3>
+                    </div>
+
+                    <div class="font-bold">Nomor HP:</div>
+                    <div>${formatValue(data.nomor_hp)}</div>
+
+                    <div class="font-bold">Alamat:</div>
+                    <div>${formatValue(data.alamat)}</div>
+
+                    <!-- Academic Information Section -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
+                        <h3 class="font-bold text-blue-800 mb-2">Informasi Akademik</h3>
+                    </div>
+
+                    <div class="font-bold">Program Studi:</div>
+                    <div>${formatValue(data.jurusan)}</div>
+                    
+                    <div class="font-bold">Jalur Program:</div>
+                    <div>${formatValue(data.jalur_program)}</div>
+
+                    <!-- Additional Information Section -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
+                        <h3 class="font-bold text-blue-800 mb-2">Informasi Tambahan</h3>
+                    </div>
+
+                    <div class="font-bold">Status Bekerja:</div>
+                    <div>${formatWorkingStatus(data.bekerja)}</div>
+
+                    <div class="font-bold">Tempat Kerja:</div>
+                    <div>${formatValue(data.tempat_kerja)}</div>
+
+                    <div class="font-bold">Ukuran Baju:</div>
+                    <div>${formatValue(data.ukuran_baju)}</div>
+
+                    <div class="font-bold">Status Pendaftaran:</div>
+                    <div class="font-semibold ${getStatusClass(data.status)}">
+                        ${(data.status?.replace(/_/g, ' ') || 'BELUM DIPROSES').toUpperCase()}
+                    </div>
+
+                    ${data.pertanyaan ? `
+                        <div class="font-bold">Pertanyaan:</div>
+                        <div>${data.pertanyaan}</div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+
+        Modal.open('detailModal');
+    } catch (error) {
+        console.error('Error:', error);
+        showNotification('❌ Gagal memuat detail pendaftar', 'error');
+    }
+}
+
+async function editData(id) {
+    try {
+        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const data = await response.json();
+
+        const form = document.getElementById('editForm');
+        if (!form) return;
+
+        // Reset form first
+        form.reset();
+
+        // Populate all form fields
+        const fields = [
+            'nama_lengkap', 'nomor_hp', 'nik', 'tempat_lahir', 'tanggal_lahir',
+            'ibu_kandung', 'jenis_kelamin', 'agama', 'jurusan', 'jalur_program',
+            'bekerja', 'tempat_kerja', 'ukuran_baju', 'alamat'
+        ];
+
+        fields.forEach(field => {
+            const input = form.elements[field];
+            if (!input) return;
+
+            // Handle special cases
+            if (field === 'tanggal_lahir' && data[field]) {
+                // Ensure date is in YYYY-MM-DD format for input[type="date"]
+                input.value = data[field].split('T')[0];
+            } else if (field === 'bekerja') {
+                // Convert boolean/integer to string for select
+                input.value = data[field] ? "1" : "0";
+            } else {
+                input.value = data[field] || '';
             }
         });
-    </script>
+
+        // Set hidden ID field
+        document.getElementById('editId').value = id;
+
+        // Show modal
+        Modal.open('editModal');
+    } catch (error) {
+        console.error('Error loading edit data:', error);
+        showNotification('❌ Gagal memuat data untuk diedit', 'error');
+    }
+}
+
+// Helper functions
+function getStatusClass(status) {
+    return {
+        'belum_diproses': 'bg-gray-100',
+        'sudah_dihubungi': 'bg-yellow-100',
+        'berminat': 'bg-green-100',
+        'tidak_berminat': 'bg-red-100',
+        'pendaftaran_selesai': 'bg-blue-100'
+    }[status] || 'bg-gray-100';
+}
+
+// Add to script section
+async function saveEditData(event) {
+    event.preventDefault();
+    const form = event.target;
+    const id = document.getElementById('editId').value;
+    const saveButton = document.getElementById('saveEditButton');
+    const saveText = saveButton.querySelector('.save-text');
+    const loadingText = saveButton.querySelector('.loading-text');
+
+    try {
+        // Disable form and show loading
+        form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+        saveText.classList.add('hidden');
+        loadingText.classList.remove('hidden');
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-KEY': 'pantanmandiri25'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error('Failed to update data');
+        
+        showNotification('✅ Data berhasil diperbarui!', 'success');
+        Modal.close('editModal');
+        location.reload();
+    } catch (error) {
+        console.error('Error saving data:', error);
+        showNotification('❌ Gagal menyimpan perubahan', 'error');
+        
+        // Re-enable form on error
+        form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = false);
+        saveText.classList.remove('hidden');
+        loadingText.classList.add('hidden');
+    }
+}
+
+// Add form submit handler
+document.getElementById('editForm')?.addEventListener('submit', saveEditData);
+
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking outside
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', e => {
+            if (e.target === modal) Modal.close(modal.id);
+        });
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal:not(.hidden)').forEach(modal => {
+                Modal.close(modal.id);
+            });
+        }
+    });
+
+    // Handle close buttons
+    document.querySelectorAll('[onclick^="closeModal"]').forEach(button => {
+        button.addEventListener('click', e => {
+            e.preventDefault();
+            const modalId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+            Modal.close(modalId);
+        });
+    });
+
+    // Update onclick attributes to use Modal object
+    document.querySelectorAll('[onclick^="openModal"]').forEach(button => {
+        button.addEventListener('click', e => {
+            e.preventDefault();
+            const modalId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+            Modal.open(modalId);
+        });
+    });
+});
+
+// Make functions globally available
+window.Modal = Modal;
+window.showDetail = showDetail;
+window.editData = editData;
+window.getStatusClass = getStatusClass;
+</script>
     <?php endif; ?>
-    
-    <!-- Add missing JavaScript functions -->
-    <script>
-        // Modal functions
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-        
-        function showDetail(id) {
-            // Implementation for showing details modal
-            document.getElementById('detailModal').classList.remove('hidden');
-        }
-        
-        function editData(id) {
-            // Implementation for editing data
-            currentEditId = id;
-            document.getElementById('editModal').classList.remove('hidden');
-        }
-        
-        function confirmDelete(id) {
-            deleteId = id;
-            document.getElementById('deleteConfirmModal').classList.remove('hidden');
-        }
-        
-        function deleteData() {
-            // Implementation for deleting data
-            closeModal('deleteConfirmModal');
-        }
-        
-        function showAddModal() {
-            document.getElementById('addModal').classList.remove('hidden');
-        }
-        
-        function updateStatus(id, status) {
-            // Implementation for updating status
-        }
-        
-        function sendInitialMessage(phone, name, id) {
-            // Implementation for sending initial WhatsApp message
-        }
-        
-        function sendWhatsApp(phone, name, id) {
-            // Implementation for sending WhatsApp message
-        }
-    </script>
 </body>
 </html>
 <?php endif; ?>

@@ -1,7 +1,7 @@
 {
     "github.copilot.chat.commitMessageGeneration.instructions": [
         {
-            "text": "Be extremly detailed in code change. Divide into category and change. Possibly add detailed code change in every files that will be committed. Add lots of emojis to make it fun! 🎉",
+            "text": "Be extremly detailed in code change. Divide into category and change. Possibly add detailed code change in every files that will be committed. I chat using english but when it comes generate UI you will generate the UI dalam Bahasa Indonesia. Add lots of emojis to make it fun! 🎉",
         }
     ],
     "liveServer.settings.port": 5501

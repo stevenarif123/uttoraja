@@ -10,6 +10,9 @@ function debug(message, data = null) {
     }
 }
 
+// Store all data in a global variable
+let allPendaftarData = [];
+
 // Form handling functions
 async function handleFormSubmit(e) {
     e.preventDefault();
@@ -64,90 +67,109 @@ function getGreeting() {
     return "Selamat malam";
 }
 
-function generateWhatsAppMessage(nama, jalurProgram) {
-    const biaya = jalurProgram?.toLowerCase() === 'rpl' ? '600.000' : '200.000';
-    
-    return `${getGreeting()}, ${nama}
-    
-terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:
-
-1. Membayar uang pendaftaran sebesar Rp${biaya} ke nomor rekening berikut:
-Nama : Ribka Padang (Kepala SALUT Tana Toraja)
-Bank : Mandiri
-Nomor Rekening : 1700000588917
-
-2. Melengkapi berkas data diri berupa:
-- Foto diri Formal (dapat menggunakan foto HP)
-- Foto KTP asli (KTP asli difoto secara keseluruhan/tidak terpotong)
-- Foto Ijazah dilegalisir cap basah atau Foto ijazah asli
-- Mengisi formulir Keabsahan Data (dikirimkan)`;
-}
-
-// WhatsApp Handler
-function handleWhatsAppClick(e) {
-    e.preventDefault();
-    const row = this.closest('tr');
-    const phone = row.querySelector('td:nth-child(3)').textContent.trim();
-    const nama = row.querySelector('td:nth-child(2)').textContent.trim();
-    
-    // Get the ID from the row or button
-    const id = this.dataset.id || row.dataset.id;
-    const pendaftar = findPendaftarById(id);
-    
-    if (pendaftar) {
-        sendWhatsApp(phone, nama, id);
-    } else {
-        debug('Pendaftar not found:', id);
-        sendWhatsApp(phone, nama, id); // Fallback to default amount
-    }
-}
-
-async function sendInitialMessage(phone, nama, id) {
-    const message = generateInitialMessage(nama);
-    window.open(`https://wa.me/${formatPhoneNumber(phone)}?text=${encodeURIComponent(message)}`, '_blank');
-    // Update status after sending message
-    await updateStatus(id, 'sudah_dihubungi');
-}
-
-async function sendWhatsApp(phone, nama, id) {
-    const pendaftar = findPendaftarById(id);
-    const message = generateWhatsAppMessage(nama, pendaftar?.jalur_program);
-    window.open(`https://wa.me/${formatPhoneNumber(phone)}?text=${encodeURIComponent(message)}`, '_blank');
-    // Update status after sending message
-    await updateStatus(id, 'sudah_dihubungi');
-}
-
-async function updateStatus(id, status) {
+// Message status update function ✉️
+async function updateMessageSent(id, messageType) {
     try {
-        const response = await fetch('/uttoraja/pendaftaran/api/update-status.php', {
+        await fetch('pendaftar.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
             },
-            body: JSON.stringify({
+            body: JSON.stringify({ 
+                action: 'update_message',
                 id: id,
-                status: status
+                messageType: messageType 
+            })
+        });
+    } catch (error) {
+        console.error('Error updating message status:', error);
+    }
+}
+
+// Status update function 🔄
+async function updateStatus(id, status) {
+    try {
+        const select = document.querySelector(`select[data-id="${id}"]`);
+        select.disabled = true; // Disable during update
+        
+        const response = await fetch('pendaftar.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ 
+                action: 'update_status',
+                id: id,
+                status: status 
             })
         });
 
-        const result = await response.json();
-        if (!result.success) {
-            throw new Error(result.error || 'Failed to update status');
+        if (!response.ok) throw new Error('Failed to update status');
+        
+        // Update UI
+        if (select) {
+            select.className = `status-select px-2 py-1 rounded border ${getStatusClass(status)}`;
+            select.style.transition = 'all 0.3s ease';
+            select.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                select.style.transform = 'scale(1)';
+                select.disabled = false;
+            }, 200);
         }
 
-        // Update UI to reflect new status
-        const select = document.querySelector(`select[data-id="${id}"]`);
-        if (select) {
-            select.value = status;
-            // Update select background color
-            select.className = `status-select px-2 py-1 rounded border ${getStatusClass(status)}`;
-        }
-        
-        console.log('✅ Status updated successfully:', status);
+        showNotification('✅ Status updated successfully');
     } catch (error) {
-        console.error('❌ Error updating status:', error);
-        alert('Failed to update status. Please try again.');
+        console.error('Error updating status:', error);
+        showNotification('❌ Failed to update status', 'error');
+        if (select) select.disabled = false;
     }
+}
+
+// WhatsApp messaging functions 💬
+function sendInitialMessage(phone, name, id) {
+    const message = `Halo ${name}, terima kasih telah mendaftar di UT Toraja. Kami ingin memastikan ketertarikan Anda untuk bergabung dengan kami. Apakah Anda berminat untuk melanjutkan pendaftaran?`;
+    openWhatsApp(phone, message);
+    updateMessageSent(id, 'initial');
+    updateStatus(id, 'sudah_dihubungi');
+}
+
+function sendWhatsApp(phone, name, id) {
+    const message = `Halo ${name}, untuk melanjutkan pendaftaran di UT Toraja, silakan melakukan pembayaran sesuai dengan ketentuan yang berlaku. Terima kasih.`;
+    openWhatsApp(phone, message);
+    updateMessageSent(id, 'payment');
+}
+
+function openWhatsApp(phone, message) {
+    const formattedPhone = phone.replace(/\D/g, '');
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${formattedPhone}?text=${encodedMessage}`, '_blank');
+}
+
+// Utility functions 🛠️
+function getStatusClass(status) {
+    return {
+        'belum_diproses': 'bg-gray-100',
+        'sudah_dihubungi': 'bg-yellow-100',
+        'berminat': 'bg-green-100',
+        'tidak_berminat': 'bg-red-100',
+        'pendaftaran_selesai': 'bg-blue-100'
+    }[status] || 'bg-gray-100';
+}
+
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300 ${
+        type === 'success' ? 'bg-green-500' : 'bg-red-500'
+    } text-white z-50`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 // Modal Functions
@@ -281,6 +303,51 @@ function debounce(func, wait) {
         timeout = setTimeout(later, wait);
     };
 }
+
+// Initialize table search functionality 🔍
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+
+    let lastTimeout = null;
+    const tableBody = document.getElementById('pendaftarTableBody');
+    const rows = Array.from(tableBody.getElementsByTagName('tr'));
+    const noDataRow = document.getElementById('noDataRow');
+
+    function updateRowNumbers(visibleRows) {
+        visibleRows.forEach((row, index) => {
+            const numberCell = row.querySelector('.row-number');
+            if (numberCell) numberCell.textContent = index + 1;
+        });
+    }
+
+    function performSearch(term) {
+        term = term.toLowerCase().trim();
+        const visibleRows = rows.filter(row => {
+            if (row.id === 'noDataRow') return false;
+            const show = row.textContent.toLowerCase().includes(term);
+            row.style.display = show ? '' : 'none';
+            return show;
+        });
+
+        updateRowNumbers(visibleRows);
+        if (noDataRow) {
+            noDataRow.style.display = visibleRows.length ? 'none' : '';
+        }
+    }
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(lastTimeout);
+        lastTimeout = setTimeout(() => performSearch(e.target.value), 300);
+    });
+
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            performSearch('');
+        }
+    });
+});
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
