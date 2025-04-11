@@ -210,7 +210,9 @@ try {
                         'error' => 'ID tidak boleh kosong', 
                         'message' => 'Gunakan /pendaftar/{id} atau ?id={id}'
                     ], 400);
-                } // Cek apakah data dengan ID tersebut ada
+                } 
+                
+                // Cek apakah data dengan ID tersebut ada
                 $checkQuery = "SELECT * FROM pendaftar WHERE id = ?";
                 $checkStmt = executeQuery($conn, $checkQuery, [$finalId]);
                 $checkResult = $checkStmt->get_result();
@@ -221,8 +223,19 @@ try {
                         'id' => $finalId
                     ], 404);
                 }
+                
+                // Debug log for input data
+                error_log('PUT Input data: ' . json_encode($input));
 
-                // Update data
+                // Pre-process input data to handle NULL values
+                foreach ($input as $key => $value) {
+                    // Special handling for the string "NULL" - convert to actual NULL
+                    if ($value === "NULL") {
+                        $input[$key] = null;
+                    }
+                }
+                
+                // Update data with processed values
                 $query = "UPDATE pendaftar SET 
                     nama_lengkap = ?, nomor_hp = ?, tempat_lahir = ?, 
                     tanggal_lahir = ?, ibu_kandung = ?, nik = ?, 
@@ -247,6 +260,9 @@ try {
                     $input['bekerja'] ?? null,
                     $finalId
                 ];
+                
+                // Debug log for prepared statement params
+                error_log('PUT params: ' . json_encode($params));
 
                 $stmt = executeQuery($conn, $query, $params);
                 sendResponse([

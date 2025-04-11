@@ -178,11 +178,18 @@ if (!$isAjax):
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: flex-start; /* Changed from center to allow scrolling */
+    display: none; /* Changed from flex to none as default state */
+    align-items: flex-start;
     justify-content: center;
     padding: 1rem;
-    overflow-y: auto; /* Enable scrolling on modal */
+    overflow-y: auto;
+}
+
+/* Add a class for visible modals */
+.modal.modal-visible {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
 }
 
 .modal-dialog {
@@ -196,102 +203,548 @@ if (!$isAjax):
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Update form submission handling */
+/* Add transform for visible modal content */
+.modal.modal-visible .modal-dialog {
+    transform: translateY(0) scale(1);
+}
 </style>
 <script>
-// Fix modal opening and closing issues
+/**
+ * 🌟 UTTORAJA Pendaftaran Manager 🌟
+ * Complete JavaScript implementation for pendaftar.php
+ */
+
+// ======== 📂 GLOBAL VARIABLES ========
+let deleteId = null;
+
+// ======== 🎨 UI UTILITIES ========
+
+/**
+ * Notification system for user feedback
+ * @param {string} message - Message to display 
+ * @param {string} type - Type of notification (success, error, info)
+ */
+function showNotification(message, type = 'info') {
+    // Remove any existing notifications
+    document.querySelectorAll('.notification-toast').forEach(note => note.remove());
+    
+    // Create new notification element
+    const notification = document.createElement('div');
+    notification.className = `notification-toast fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+        type === 'success' ? 'bg-green-500' : 
+        type === 'error' ? 'bg-red-500' : 
+        'bg-blue-500'
+    } text-white max-w-md`;
+    notification.textContent = message;
+    
+    // Add to DOM
+    document.body.appendChild(notification);
+    
+    // Auto-remove after delay
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.5s ease-out';
+        setTimeout(() => notification.remove(), 500);
+    }, 3000);
+}
+
+/**
+ * Get CSS class for status styling
+ * @param {string} status - Status value
+ * @returns {string} CSS class
+ */
+function getStatusClass(status) {
+    const classes = {
+        'belum_diproses': 'bg-gray-100',
+        'sudah_dihubungi': 'bg-yellow-100',
+        'berminat': 'bg-green-100',
+        'tidak_berminat': 'bg-red-100',
+        'pendaftaran_selesai': 'bg-blue-100'
+    };
+    return classes[status] || classes['belum_diproses'];
+}
+
+/**
+ * Modal handling system
+ */
 const Modal = {
+    /**
+     * Opens a modal by ID
+     * @param {string} modalId - ID of modal to open
+     */
     open(modalId) {
+        console.log('Opening modal:', modalId); // Debug log
         const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        if (!modal) {
+            console.error('Modal not found:', modalId);
+            return;
         }
+        
+        // Force a reflow to ensure transitions work
+        void modal.offsetWidth;
+        
+        // Add class that handles all the visibility properties
+        modal.classList.add('modal-visible');
+        modal.classList.remove('hidden');
+        
+        // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
     },
+    
+    /**
+     * Closes a modal by ID
+     * @param {string} modalId - ID of modal to close
+     */
     close(modalId) {
+        console.log('Closing modal:', modalId); // Debug log
         const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = ''; // Restore scrolling
+        if (!modal) {
+            console.error('Modal not found:', modalId);
+            return;
         }
+        
+        // Remove visibility class
+        modal.classList.remove('modal-visible');
+        modal.classList.add('hidden');
+        
+        // Restore background scrolling
+        document.body.style.overflow = '';
     }
 };
 
-// Fix edit form not saving data
+// ======== 📊 DATA OPERATIONS ========
+
+/**
+ * Fetch pendaftar data
+ * @param {number} id - Pendaftar ID
+ * @returns {Promise<Object>} Pendaftar data
+ */
+async function fetchPendaftar(id) {
+    try {
+        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        return await response.json();
+    } catch (error) {
+        console.error('Fetch error:', error);
+        showNotification('❌ Error fetching data: ' + error.message, 'error');
+        throw error;
+    }
+}
+
+/**
+ * Update pendaftar status
+ * @param {number} id - Pendaftar ID
+ * @param {string} status - New status value
+ * @returns {Promise<boolean>} Success state
+ */
+async function updateStatus(id, status) {
+    try {
+        const response = await fetch('data/update-status.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, status, update_status: true })
+        });
+        
+        if (!response.ok) throw new Error('Failed to update status');
+        
+        const data = await response.json();
+        if (data.success) {
+            showNotification('✅ Status berhasil diperbarui', 'success');
+            return true;
+        } else {
+            throw new Error(data.message || 'Failed to update status');
+        }
+    } catch (error) {
+        console.error('Status update error:', error);
+        showNotification('❌ Gagal memperbarui status', 'error');
+        return false;
+    }
+}
+
+// ======== 🚀 FEATURE IMPLEMENTATIONS ========
+
+/**
+ * Show detailed pendaftar information
+ * @param {number} id - Pendaftar ID
+ */
+async function showDetail(id) {
+    try {
+        // Fetch data
+        const data = await fetchPendaftar(id);
+        
+        // Format helpers
+        const formatDate = dateString => {
+            if (!dateString) return '-';
+            try {
+                return new Date(dateString).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateString;
+            }
+        };
+        
+        const formatValue = value => value || '-';
+        const formatGender = gender => {
+            if (!gender) return '-';
+            return gender.charAt(0).toUpperCase() + gender.slice(1);
+        };
+        
+        const formatWorkingStatus = status => {
+            if (status === null || status === undefined) return '-';
+            return status ? 'Ya' : 'Tidak';
+        };
+        
+        // Generate content
+        const detailContent = document.getElementById('detailContent');
+        detailContent.innerHTML = `
+            <div class="p-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Personal Information -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded">
+                        <h3 class="font-bold text-blue-800 mb-2">📋 Data Pribadi</h3>
+                    </div>
+                    
+                    <div class="font-bold">Nama Lengkap:</div>
+                    <div>${formatValue(data.nama_lengkap)}</div>
+                    
+                    <div class="font-bold">NIK:</div>
+                    <div>${formatValue(data.nik)}</div>
+                    
+                    <div class="font-bold">Tempat, Tanggal Lahir:</div>
+                    <div>${formatValue(data.tempat_lahir)}, ${formatDate(data.tanggal_lahir)}</div>
+                    
+                    <div class="font-bold">Nama Ibu Kandung:</div>
+                    <div>${formatValue(data.ibu_kandung)}</div>
+                    
+                    <div class="font-bold">Jenis Kelamin:</div>
+                    <div>${formatGender(data.jenis_kelamin)}</div>
+                    
+                    <div class="font-bold">Agama:</div>
+                    <div>${formatValue(data.agama)}</div>
+                    
+                    <!-- Contact Information -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
+                        <h3 class="font-bold text-blue-800 mb-2">📱 Informasi Kontak</h3>
+                    </div>
+                    
+                    <div class="font-bold">Nomor HP:</div>
+                    <div>${formatValue(data.nomor_hp)}</div>
+                    
+                    <div class="font-bold">Alamat:</div>
+                    <div>${formatValue(data.alamat)}</div>
+                    
+                    <!-- Academic Information -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
+                        <h3 class="font-bold text-blue-800 mb-2">🎓 Informasi Akademik</h3>
+                    </div>
+                    
+                    <div class="font-bold">Program Studi:</div>
+                    <div>${formatValue(data.jurusan)}</div>
+                    
+                    <div class="font-bold">Jalur Program:</div>
+                    <div>${formatValue(data.jalur_program)}</div>
+                    
+                    <!-- Additional Information -->
+                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
+                        <h3 class="font-bold text-blue-800 mb-2">ℹ️ Informasi Tambahan</h3>
+                    </div>
+                    
+                    <div class="font-bold">Status Bekerja:</div>
+                    <div>${formatWorkingStatus(data.bekerja)}</div>
+                    
+                    <div class="font-bold">Tempat Kerja:</div>
+                    <div>${formatValue(data.tempat_kerja)}</div>
+                    
+                    <div class="font-bold">Ukuran Baju:</div>
+                    <div>${formatValue(data.ukuran_baju)}</div>
+                    
+                    <div class="font-bold">Status Pendaftaran:</div>
+                    <div class="px-2 py-1 rounded font-semibold inline-block ${getStatusClass(data.status)}">
+                        ${(data.status?.replace(/_/g, ' ') || 'BELUM DIPROSES').toUpperCase()}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Open modal
+        Modal.open('detailModal');
+    } catch (error) {
+        showNotification('❌ Gagal memuat detail pendaftar', 'error');
+        console.error('Detail view error:', error);
+    }
+}
+
+/**
+ * Load edit form with pendaftar data
+ * @param {number} id - Pendaftar ID
+ */
+async function editData(id) {
+    try {
+        // Fetch data
+        const data = await fetchPendaftar(id);
+        
+        // Get form and reset
+        const form = document.getElementById('editForm');
+        if (!form) throw new Error('Edit form not found');
+        form.reset();
+        
+        // Populate fields
+        document.getElementById('editId').value = id;
+        
+        // Populate all form fields
+        const fields = [
+            'nama_lengkap', 'nomor_hp', 'nik', 'tempat_lahir', 'tanggal_lahir',
+            'ibu_kandung', 'jenis_kelamin', 'agama', 'jurusan', 'jalur_program',
+            'bekerja', 'tempat_kerja', 'ukuran_baju', 'alamat'
+        ];
+        
+        fields.forEach(field => {
+            const input = form.elements[field];
+            if (!input) return;
+            
+            // Handle special cases
+            if (field === 'tanggal_lahir' && data[field]) {
+                // Format date for date input
+                input.value = data[field].split('T')[0];
+            } else if (field === 'bekerja') {
+                // Convert boolean/integer to string
+                input.value = data[field] ? "1" : "0";
+            } else {
+                input.value = data[field] || '';
+            }
+        });
+        
+        // Open modal
+        Modal.open('editModal');
+    } catch (error) {
+        showNotification('❌ Gagal memuat data untuk diedit', 'error');
+        console.error('Edit form error:', error);
+    }
+}
+
+/**
+ * Save edited pendaftar data
+ * @param {Event} event - Form submit event
+ */
 async function saveEditData(event) {
     event.preventDefault();
+    
     const form = event.target;
     const id = document.getElementById('editId').value;
     const saveButton = document.getElementById('saveEditButton');
+    const saveText = saveButton.querySelector('.save-text');
+    const loadingText = saveButton.querySelector('.loading-text');
     
     try {
-        saveButton.disabled = true;
-        saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
+        // Show loading state
+        form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+        saveText.classList.add('hidden');
+        loadingText.classList.remove('hidden');
+        
+        // 🆕 STEP 1: Create a new empty update object (don't start with current data)
+        const updateData = { id: id }; // Only include ID initially
+        
+        // 🔍 STEP 2: Directly read ALL form field values and add them to the update data
+        console.log('📝 Form values being collected:');
+        
+        // Get all named form elements
+        const formElements = form.querySelectorAll('[name]');
+        formElements.forEach(element => {
+            const name = element.name;
+            if (name === 'id') return; // Skip ID field
+            
+            let value = '';
+            
+            // Handle different input types
+            if (element.type === 'checkbox') {
+                value = element.checked ? '1' : '0';
+            } else if (element.type === 'select-one' || element.type === 'select-multiple') {
+                value = element.options[element.selectedIndex]?.value || '';
+            } else {
+                value = element.value;
+            }
+            
+            // Special handling for boolean fields
+            if (name === 'bekerja') {
+                updateData[name] = value === '1' ? 1 : 0;
+            } else {
+                updateData[name] = value;
+            }
+            
+            // Log each field value
+            console.log(`💡 Form field ${name}: "${value}"`);
+        });
+        
+        console.log('🚀 Data being sent to API:', updateData);
+        
+        // 📤 STEP 3: Send the update data to API
         const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'X-API-KEY': 'pantanmandiri25'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(updateData)
         });
-
+        
+        // Handle response
+        const responseData = await response.json();
+        console.log('📥 API response:', responseData);
+        
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Failed to update data');
+            throw new Error(responseData.message || 'Failed to update data');
         }
-
-        showNotification('✅ Data updated successfully!', 'success');
+        
+        showNotification('✨ Data berhasil diperbarui!', 'success');
         Modal.close('editModal');
-        location.reload(); // Refresh page to show updated data
+        
+        // 🔄 STEP 4: Force reload to show updated data
+        setTimeout(() => location.reload(), 500);
     } catch (error) {
-        console.error('Save error:', error);
-        showNotification('❌ ' + error.message, 'error');
+        showNotification('❌ Gagal menyimpan: ' + error.message, 'error');
+        console.error('💥 Save error:', error);
     } finally {
-        saveButton.disabled = false;
-        saveButton.innerHTML = 'Save Changes';
+        // Reset form state
+        form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = false);
+        saveText.classList.remove('hidden');
+        loadingText.classList.add('hidden');
     }
 }
 
-// Fix scrolling issues in modals
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                Modal.close(modal.id);
+/**
+ * Confirm pendaftar deletion
+ * @param {number} id - Pendaftar ID
+ */
+function confirmDelete(id) {
+    deleteId = id;
+    Modal.open('deleteConfirmModal');
+}
+
+/**
+ * Delete pendaftar
+ */
+async function deleteData() {
+    if (!deleteId) return;
+    
+    try {
+        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${deleteId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-API-KEY': 'pantanmandiri25'
             }
         });
-    });
+        
+        if (!response.ok) throw new Error('Failed to delete data');
+        
+        showNotification('✅ Data berhasil dihapus!', 'success');
+        Modal.close('deleteConfirmModal');
+        location.reload();
+    } catch (error) {
+        showNotification('❌ Gagal menghapus data', 'error');
+        console.error('Delete error:', error);
+    }
+}
 
-    document.addEventListener('keydown', function(event) {
+// ======== 💬 MESSAGING FUNCTIONS ========
+
+/**
+ * Send initial WhatsApp message to pendaftar
+ * @param {string} phone - Phone number
+ * @param {string} name - Pendaftar name
+ * @param {number} id - Pendaftar ID
+ */
+function sendInitialMessage(phone, name, id) {
+    if (!phone) {
+        showNotification('❌ Nomor telepon tidak tersedia', 'error');
+        return;
+    }
+    
+    // Format phone number for WhatsApp
+    const formattedPhone = phone.startsWith('0') ? '62' + phone.slice(1) : phone;
+    
+    // Create message
+    const message = `Halo ${name},\n\nTerima kasih telah mendaftar di Universitas Terbuka Toraja. Kami akan segera menghubungi Anda untuk informasi lebih lanjut.\n\nSalam,\nTim UT Toraja`;
+    
+    // Open WhatsApp
+    const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    
+    // Update status
+    updateStatus(id, 'sudah_dihubungi');
+}
+
+/**
+ * Send payment instruction WhatsApp message
+ * @param {string} phone - Phone number
+ * @param {string} name - Pendaftar name
+ */
+function sendPaymentMessage(phone, name) {
+    if (!phone) {
+        showNotification('❌ Nomor telepon tidak tersedia', 'error');
+        return;
+    }
+    
+    // Format phone number for WhatsApp
+    const formattedPhone = phone.startsWith('0') ? '62' + phone.slice(1) : phone;
+    
+    // Create message
+    const message = `Halo ${name},\n\nUntuk melanjutkan proses pendaftaran, silakan melakukan pembayaran ke:\n\nBank BRI\nNo. Rekening: 1234567890\nAtas Nama: UT Toraja\n\nSetelah melakukan pembayaran, mohon kirimkan bukti transfer ke nomor ini.\n\nTerima kasih,\nTim UT Toraja`;
+    
+    // Open WhatsApp
+    const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+// ======== 🔄 EVENT LISTENERS ========
+document.addEventListener('DOMContentLoaded', function() {
+    // ⚠️ REMOVED: Modal click outside to close - preventing misclicks
+    // Now modals will only close with explicit close button clicks
+    
+    // ESC key to close modals (keeping this for accessibility)
+    document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
-            document.querySelectorAll('.modal.flex').forEach(modal => {
+            document.querySelectorAll('.modal:not(.hidden)').forEach(modal => {
                 Modal.close(modal.id);
             });
         }
     });
+    
+    // Form submission handlers
+    const editForm = document.getElementById('editForm');
+    if (editForm) {
+        editForm.addEventListener('submit', saveEditData);
+    }
+    
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#pendaftarTableBody tr:not(#noDataRow)');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchValue) ? '' : 'none';
+            });
+        });
+    }
 });
 
-// Fix page becoming unclickable by ensuring proper modal state
-document.querySelectorAll('[data-modal-open]').forEach(button => {
-    button.addEventListener('click', function() {
-        const modalId = button.getAttribute('data-modal-open');
-        Modal.open(modalId);
-    });
-});
-
-document.querySelectorAll('[data-modal-close]').forEach(button => {
-    button.addEventListener('click', function() {
-        const modalId = button.getAttribute('data-modal-close');
-        Modal.close(modalId);
-    });
-});
+// Make all functions available globally
+window.Modal = Modal;
+window.showDetail = showDetail;
+window.editData = editData;
+window.confirmDelete = confirmDelete;
+window.deleteData = deleteData;
+window.sendInitialMessage = sendInitialMessage;
+window.sendPaymentMessage = sendPaymentMessage;
+window.showNotification = showNotification;
+window.getStatusClass = getStatusClass;
+window.updateStatus = updateStatus;
+window.saveEditData = saveEditData;
 </script>
 </head>
 <body class="bg-gray-100">
@@ -682,325 +1135,6 @@ document.querySelectorAll('[data-modal-close]').forEach(button => {
             </div>
         </div>
     </div>
-    <?php endif; ?>
-    <?php if (!$isAjax): // Only include full scripts if not AJAX request ?>
-    <script>
-// Simplified Modal object
-const Modal = {
-    open(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'flex';
-            // Force reflow for transition
-            modal.offsetHeight;
-            modal.classList.remove('hidden');
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-    },
-    
-    close(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('show');
-            modal.addEventListener('transitionend', () => {
-                modal.classList.add('hidden');
-                modal.style.display = 'none';
-            }, { once: true });
-            document.body.style.overflow = '';
-        }
-    }
-};
-
-// API interactions
-const API = {
-    baseUrl: 'http://uttoraja.com/pendaftaran/api/pendaftar',
-    
-    async get(id) {
-        const response = await fetch(`${this.baseUrl}/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch data');
-        return response.json();
-    },
-    
-    async update(id, data) {
-        const response = await fetch(`${this.baseUrl}/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-KEY': 'pantanmandiri25'
-            },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error('Failed to update data');
-        return response.json();
-    }
-};
-
-// Feature handlers
-async function showDetail(id) {
-    try {
-        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch data');
-        const data = await response.json();
-
-        // Format date properly
-        const formatDate = (dateString) => {
-            if (!dateString) return '-';
-            try {
-                return new Date(dateString).toLocaleDateString('id-ID', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            } catch (e) {
-                return dateString;
-            }
-        };
-
-        // Format gender properly
-        const formatGender = (gender) => {
-            if (!gender) return '-';
-            return gender.charAt(0).toUpperCase() + gender.slice(1);
-        };
-
-        // Format working status
-        const formatWorkingStatus = (status) => {
-            if (status === null || status === undefined) return '-';
-            return status ? 'Ya' : 'Tidak';
-        };
-
-        // Format empty values
-        const formatValue = (value) => value || '-';
-
-        const detailContent = document.getElementById('detailContent');
-        detailContent.innerHTML = `
-            <div class="space-y-4 p-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- Personal Information Section -->
-                    <div class="col-span-2 bg-blue-50 p-2 rounded">
-                        <h3 class="font-bold text-blue-800 mb-2">Data Pribadi</h3>
-                    </div>
-
-                    <div class="font-bold">Nama Lengkap:</div>
-                    <div>${formatValue(data.nama_lengkap)}</div>
-                    
-                    <div class="font-bold">Tempat, Tanggal Lahir:</div>
-                    <div>${formatValue(data.tempat_lahir)}, ${formatDate(data.tanggal_lahir)}</div>
-
-                    <div class="font-bold">NIK:</div>
-                    <div>${formatValue(data.nik)}</div>
-
-                    <div class="font-bold">Nama Ibu Kandung:</div>
-                    <div>${formatValue(data.ibu_kandung)}</div>
-
-                    <div class="font-bold">Jenis Kelamin:</div>
-                    <div>${formatGender(data.jenis_kelamin)}</div>
-
-                    <div class="font-bold">Agama:</div>
-                    <div>${formatValue(data.agama)}</div>
-
-                    <!-- Contact Information Section -->
-                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
-                        <h3 class="font-bold text-blue-800 mb-2">Informasi Kontak</h3>
-                    </div>
-
-                    <div class="font-bold">Nomor HP:</div>
-                    <div>${formatValue(data.nomor_hp)}</div>
-
-                    <div class="font-bold">Alamat:</div>
-                    <div>${formatValue(data.alamat)}</div>
-
-                    <!-- Academic Information Section -->
-                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
-                        <h3 class="font-bold text-blue-800 mb-2">Informasi Akademik</h3>
-                    </div>
-
-                    <div class="font-bold">Program Studi:</div>
-                    <div>${formatValue(data.jurusan)}</div>
-                    
-                    <div class="font-bold">Jalur Program:</div>
-                    <div>${formatValue(data.jalur_program)}</div>
-
-                    <!-- Additional Information Section -->
-                    <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
-                        <h3 class="font-bold text-blue-800 mb-2">Informasi Tambahan</h3>
-                    </div>
-
-                    <div class="font-bold">Status Bekerja:</div>
-                    <div>${formatWorkingStatus(data.bekerja)}</div>
-
-                    <div class="font-bold">Tempat Kerja:</div>
-                    <div>${formatValue(data.tempat_kerja)}</div>
-
-                    <div class="font-bold">Ukuran Baju:</div>
-                    <div>${formatValue(data.ukuran_baju)}</div>
-
-                    <div class="font-bold">Status Pendaftaran:</div>
-                    <div class="font-semibold ${getStatusClass(data.status)}">
-                        ${(data.status?.replace(/_/g, ' ') || 'BELUM DIPROSES').toUpperCase()}
-                    </div>
-
-                    ${data.pertanyaan ? `
-                        <div class="font-bold">Pertanyaan:</div>
-                        <div>${data.pertanyaan}</div>
-                    ` : ''}
-                </div>
-            </div>
-        `;
-
-        Modal.open('detailModal');
-    } catch (error) {
-        console.error('Error:', error);
-        showNotification('❌ Gagal memuat detail pendaftar', 'error');
-    }
-}
-
-async function editData(id) {
-    try {
-        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch data');
-        const data = await response.json();
-
-        const form = document.getElementById('editForm');
-        if (!form) return;
-
-        // Reset form first
-        form.reset();
-
-        // Populate all form fields
-        const fields = [
-            'nama_lengkap', 'nomor_hp', 'nik', 'tempat_lahir', 'tanggal_lahir',
-            'ibu_kandung', 'jenis_kelamin', 'agama', 'jurusan', 'jalur_program',
-            'bekerja', 'tempat_kerja', 'ukuran_baju', 'alamat'
-        ];
-
-        fields.forEach(field => {
-            const input = form.elements[field];
-            if (!input) return;
-
-            // Handle special cases
-            if (field === 'tanggal_lahir' && data[field]) {
-                // Ensure date is in YYYY-MM-DD format for input[type="date"]
-                input.value = data[field].split('T')[0];
-            } else if (field === 'bekerja') {
-                // Convert boolean/integer to string for select
-                input.value = data[field] ? "1" : "0";
-            } else {
-                input.value = data[field] || '';
-            }
-        });
-
-        // Set hidden ID field
-        document.getElementById('editId').value = id;
-
-        // Show modal
-        Modal.open('editModal');
-    } catch (error) {
-        console.error('Error loading edit data:', error);
-        showNotification('❌ Gagal memuat data untuk diedit', 'error');
-    }
-}
-
-// Helper functions
-function getStatusClass(status) {
-    return {
-        'belum_diproses': 'bg-gray-100',
-        'sudah_dihubungi': 'bg-yellow-100',
-        'berminat': 'bg-green-100',
-        'tidak_berminat': 'bg-red-100',
-        'pendaftaran_selesai': 'bg-blue-100'
-    }[status] || 'bg-gray-100';
-}
-
-// Add to script section
-async function saveEditData(event) {
-    event.preventDefault();
-    const form = event.target;
-    const id = document.getElementById('editId').value;
-    const saveButton = document.getElementById('saveEditButton');
-    const saveText = saveButton.querySelector('.save-text');
-    const loadingText = saveButton.querySelector('.loading-text');
-
-    try {
-        // Disable form and show loading
-        form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
-        saveText.classList.add('hidden');
-        loadingText.classList.remove('hidden');
-
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-KEY': 'pantanmandiri25'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) throw new Error('Failed to update data');
-        
-        showNotification('✅ Data berhasil diperbarui!', 'success');
-        Modal.close('editModal');
-        location.reload();
-    } catch (error) {
-        console.error('Error saving data:', error);
-        showNotification('❌ Gagal menyimpan perubahan', 'error');
-        
-        // Re-enable form on error
-        form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = false);
-        saveText.classList.remove('hidden');
-        loadingText.classList.add('hidden');
-    }
-}
-
-// Add form submit handler
-document.getElementById('editForm')?.addEventListener('submit', saveEditData);
-
-// Initialize event listeners
-document.addEventListener('DOMContentLoaded', function() {
-    // Close modal when clicking outside
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', e => {
-            if (e.target === modal) Modal.close(modal.id);
-        });
-    });
-
-    // Close modal on escape key
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('.modal:not(.hidden)').forEach(modal => {
-                Modal.close(modal.id);
-            });
-        }
-    });
-
-    // Handle close buttons
-    document.querySelectorAll('[onclick^="closeModal"]').forEach(button => {
-        button.addEventListener('click', e => {
-            e.preventDefault();
-            const modalId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
-            Modal.close(modalId);
-        });
-    });
-
-    // Update onclick attributes to use Modal object
-    document.querySelectorAll('[onclick^="openModal"]').forEach(button => {
-        button.addEventListener('click', e => {
-            e.preventDefault();
-            const modalId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
-            Modal.open(modalId);
-        });
-    });
-});
-
-// Make functions globally available
-window.Modal = Modal;
-window.showDetail = showDetail;
-window.editData = editData;
-window.getStatusClass = getStatusClass;
-</script>
     <?php endif; ?>
 </body>
 </html>
