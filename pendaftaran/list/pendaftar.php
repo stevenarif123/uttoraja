@@ -9,6 +9,9 @@ $items_per_page = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start_index = ($page - 1) * $items_per_page;
 
+// ✨ Get search term from GET request ✨
+$search_term = isset($_GET['search']) ? trim($_GET['search']) : '';
+
 // Add this function to handle status classes
 function getStatusClass($status) {
     $classes = [
@@ -32,14 +35,32 @@ function getStoredStatus($id) {
     return $statusData['pendaftar_status'][$id]['status'] ?? 'belum_diproses';
 }
 
-// Add new function to update message status
+// Update function to manage status in JSON file
 function updatePendaftarStatus($id, $status) {
     try {
-        global $pdo;
-        $stmt = $pdo->prepare("UPDATE pendaftar SET status = ? WHERE id = ?");
-        $stmt->execute([$status, $id]);
+        $statusFile = __DIR__ . '/data/status.json';
+        
+        // Read existing data
+        $statusData = [];
+        if (file_exists($statusFile)) {
+            $statusData = json_decode(file_get_contents($statusFile), true) ?: [];
+        }
+        
+        // Initialize pendaftar_status if not exists
+        if (!isset($statusData['pendaftar_status'])) {
+            $statusData['pendaftar_status'] = [];
+        }
+        
+        // Update status
+        $statusData['pendaftar_status'][$id] = [
+            'status' => $status,
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+        
+        // Write back to file
+        file_put_contents($statusFile, json_encode($statusData, JSON_PRETTY_PRINT));
         return true;
-    } catch(PDOException $e) {
+    } catch(Exception $e) {
         error_log('Error updating status: ' . $e->getMessage());
         return false;
     }
@@ -101,7 +122,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_detail' && isset($_GET['i
 }
 
 // Update API URL to use the deployed server endpoint
-$apiUrl = 'http://uttoraja.com/pendaftaran/api/pendaftar/';
+$apiUrl = 'https://uttoraja.com/pendaftaran/api/pendaftar/';
 
 // Use the existing fetchData function but with updated error handling
 function fetchData($url) {
@@ -128,18 +149,41 @@ function fetchData($url) {
 
 try {
     $response = fetchData($apiUrl);
-    $data = json_decode($response, true);
+    $all_data = json_decode($response, true); // Fetch ALL data first
     if (json_last_error() !== JSON_ERROR_NONE) {
         throw new Exception("Failed to parse JSON response");
     }
-    
-    // Get total records for pagination
-    $total_records = count($data);
+
+    // ✨ Filter data based on search term BEFORE pagination ✨
+    $filtered_data = $all_data; // Start with all data
+    if (!empty($search_term)) {
+        $filtered_data = array_filter($all_data, function($pendaftar) use ($search_term) {
+            // Case-insensitive search in relevant fields
+            $nama = $pendaftar['nama_lengkap'] ?? '';
+            $hp = $pendaftar['nomor_hp'] ?? '';
+            $jurusan = $pendaftar['jurusan'] ?? '';
+            return stripos($nama, $search_term) !== false ||
+                   stripos($hp, $search_term) !== false ||
+                   stripos($jurusan, $search_term) !== false;
+        });
+    }
+
+    // Get total records for pagination *from filtered data*
+    $total_records = count($filtered_data);
     $total_pages = ceil($total_records / $items_per_page);
-    
-    // Slice the data array for the current page
-    $data = array_slice($data, $start_index, $items_per_page);
-    
+
+    // Ensure page number is valid after filtering
+    if ($page > $total_pages && $total_pages > 0) {
+        $page = $total_pages; // Go to last page if current page is out of bounds
+        $start_index = ($page - 1) * $items_per_page;
+    } elseif ($page < 1) {
+        $page = 1; // Go to first page if invalid
+        $start_index = 0;
+    }
+
+    // Slice the *filtered* data array for the current page
+    $data = array_slice($filtered_data, $start_index, $items_per_page);
+
 } catch (Exception $e) {
     $data = [];
     $error_message = $e->getMessage();
@@ -175,37 +219,53 @@ if (!$isAjax):
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1050;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    display: none; /* Changed from flex to none as default state */
-    align-items: flex-start;
-    justify-content: center;
-    padding: 1rem;
-    overflow-y: auto;
+    opacity: 0;                             /* Use opacity for transition */
+    visibility: hidden;                     /* Use visibility for transition & accessibility */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Let's smoothly transition opacity */
+    display: flex;                          /* Keep display as flex (or block) */
+    align-items: flex-start;  /* Updated this from your input for consistency */
+    justify-content: center; /* Updated this from your input for consistency */
+    padding: 1rem;                          /* Updated this from your input for consistency */
+    overflow-y: auto;                       /* Updated this from your input for consistency */
 }
 
-/* Add a class for visible modals */
 .modal.modal-visible {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1;                 /* Make it fully opaque */
+    visibility: visible;        /* Make it visible */
+    display: flex;              /* Ensure it's displayed as flex */
+}
+
+.modal.modal-visible .modal-dialog {
+    transform: translateY(0) scale(1);
+}
+
+.modal .modal-dialog {
+    transform: translateY(-20px) scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+/* Enhanced Sidebar Styles 📌 */
+.layout-container {
+    min-height: 100vh;
     display: flex;
 }
 
-.modal-dialog {
-    width: 100%;
-    max-width: 800px;
-    margin: 2rem auto;
-    background: white;
-    border-radius: 1rem;
-    transform: translateY(-30px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16rem; /* w-64 = 16rem */
+    height: 100vh; /* Ensure full height */
+    overflow-y: hidden; /* ✨ Changed from auto to hidden ✨ */
+    z-index: 40;
 }
 
-/* Add transform for visible modal content */
-.modal.modal-visible .modal-dialog {
-    transform: translateY(0) scale(1);
+.main-content {
+    margin-left: 16rem; /* Same as sidebar width */
+    width: calc(100% - 16rem);
+    min-height: 100vh;
+    flex: 1;
 }
 </style>
 <script>
@@ -215,31 +275,34 @@ if (!$isAjax):
  */
 
 // ======== 📂 GLOBAL VARIABLES ========
+
+// ✨ Use the API URL passed from PHP ✨
+const API_BASE_URL = '<?php echo rtrim($apiUrl, '/'); ?>'; // Ensure no trailing slash initially
 let deleteId = null;
 
 // ======== 🎨 UI UTILITIES ========
 
 /**
  * Notification system for user feedback
- * @param {string} message - Message to display 
+ * @param {string} message - Message to display
  * @param {string} type - Type of notification (success, error, info)
  */
 function showNotification(message, type = 'info') {
     // Remove any existing notifications
     document.querySelectorAll('.notification-toast').forEach(note => note.remove());
-    
+
     // Create new notification element
     const notification = document.createElement('div');
     notification.className = `notification-toast fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
-        type === 'success' ? 'bg-green-500' : 
-        type === 'error' ? 'bg-red-500' : 
+        type === 'success' ? 'bg-green-500' :
+        type === 'error' ? 'bg-red-500' :
         'bg-blue-500'
     } text-white max-w-md`;
     notification.textContent = message;
-    
+
     // Add to DOM
     document.body.appendChild(notification);
-    
+
     // Auto-remove after delay
     setTimeout(() => {
         notification.style.opacity = '0';
@@ -279,18 +342,18 @@ const Modal = {
             console.error('Modal not found:', modalId);
             return;
         }
-        
+
         // Force a reflow to ensure transitions work
         void modal.offsetWidth;
-        
+
         // Add class that handles all the visibility properties
         modal.classList.add('modal-visible');
         modal.classList.remove('hidden');
-        
+
         // Prevent background scrolling
         document.body.style.overflow = 'hidden';
     },
-    
+
     /**
      * Closes a modal by ID
      * @param {string} modalId - ID of modal to close
@@ -302,11 +365,11 @@ const Modal = {
             console.error('Modal not found:', modalId);
             return;
         }
-        
+
         // Remove visibility class
         modal.classList.remove('modal-visible');
-        modal.classList.add('hidden');
-        
+        modal.classList.add('hidden'); // Re-add hidden for Tailwind compatibility if needed
+
         // Restore background scrolling
         document.body.style.overflow = '';
     }
@@ -321,7 +384,8 @@ const Modal = {
  */
 async function fetchPendaftar(id) {
     try {
-        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`);
+        // ✨ Use the dynamic API_BASE_URL ✨
+        const response = await fetch(`${API_BASE_URL}/${id}`);
         if (!response.ok) throw new Error('Failed to fetch data');
         return await response.json();
     } catch (error) {
@@ -344,12 +408,17 @@ async function updateStatus(id, status) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status, update_status: true })
         });
-        
+
         if (!response.ok) throw new Error('Failed to update status');
-        
+
         const data = await response.json();
         if (data.success) {
             showNotification('✅ Status berhasil diperbarui', 'success');
+            // Find the select element and update its background dynamically
+            const selectElement = document.querySelector(`select.status-select[data-id="${id}"]`);
+            if (selectElement) {
+                selectElement.className = `status-select px-2 py-1 rounded border ${getStatusClass(status)}`;
+            }
             return true;
         } else {
             throw new Error(data.message || 'Failed to update status');
@@ -371,7 +440,7 @@ async function showDetail(id) {
     try {
         // Fetch data
         const data = await fetchPendaftar(id);
-        
+
         // Format helpers
         const formatDate = dateString => {
             if (!dateString) return '-';
@@ -385,18 +454,18 @@ async function showDetail(id) {
                 return dateString;
             }
         };
-        
+
         const formatValue = value => value || '-';
         const formatGender = gender => {
             if (!gender) return '-';
             return gender.charAt(0).toUpperCase() + gender.slice(1);
         };
-        
+
         const formatWorkingStatus = status => {
             if (status === null || status === undefined) return '-';
             return status ? 'Ya' : 'Tidak';
         };
-        
+
         // Generate content
         const detailContent = document.getElementById('detailContent');
         detailContent.innerHTML = `
@@ -406,61 +475,61 @@ async function showDetail(id) {
                     <div class="col-span-2 bg-blue-50 p-2 rounded">
                         <h3 class="font-bold text-blue-800 mb-2">📋 Data Pribadi</h3>
                     </div>
-                    
+
                     <div class="font-bold">Nama Lengkap:</div>
                     <div>${formatValue(data.nama_lengkap)}</div>
-                    
+
                     <div class="font-bold">NIK:</div>
                     <div>${formatValue(data.nik)}</div>
-                    
+
                     <div class="font-bold">Tempat, Tanggal Lahir:</div>
                     <div>${formatValue(data.tempat_lahir)}, ${formatDate(data.tanggal_lahir)}</div>
-                    
+
                     <div class="font-bold">Nama Ibu Kandung:</div>
                     <div>${formatValue(data.ibu_kandung)}</div>
-                    
+
                     <div class="font-bold">Jenis Kelamin:</div>
                     <div>${formatGender(data.jenis_kelamin)}</div>
-                    
+
                     <div class="font-bold">Agama:</div>
                     <div>${formatValue(data.agama)}</div>
-                    
+
                     <!-- Contact Information -->
                     <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
                         <h3 class="font-bold text-blue-800 mb-2">📱 Informasi Kontak</h3>
                     </div>
-                    
+
                     <div class="font-bold">Nomor HP:</div>
                     <div>${formatValue(data.nomor_hp)}</div>
-                    
+
                     <div class="font-bold">Alamat:</div>
                     <div>${formatValue(data.alamat)}</div>
-                    
+
                     <!-- Academic Information -->
                     <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
                         <h3 class="font-bold text-blue-800 mb-2">🎓 Informasi Akademik</h3>
                     </div>
-                    
+
                     <div class="font-bold">Program Studi:</div>
                     <div>${formatValue(data.jurusan)}</div>
-                    
+
                     <div class="font-bold">Jalur Program:</div>
                     <div>${formatValue(data.jalur_program)}</div>
-                    
+
                     <!-- Additional Information -->
                     <div class="col-span-2 bg-blue-50 p-2 rounded mt-4">
                         <h3 class="font-bold text-blue-800 mb-2">ℹ️ Informasi Tambahan</h3>
                     </div>
-                    
+
                     <div class="font-bold">Status Bekerja:</div>
                     <div>${formatWorkingStatus(data.bekerja)}</div>
-                    
+
                     <div class="font-bold">Tempat Kerja:</div>
                     <div>${formatValue(data.tempat_kerja)}</div>
-                    
+
                     <div class="font-bold">Ukuran Baju:</div>
                     <div>${formatValue(data.ukuran_baju)}</div>
-                    
+
                     <div class="font-bold">Status Pendaftaran:</div>
                     <div class="px-2 py-1 rounded font-semibold inline-block ${getStatusClass(data.status)}">
                         ${(data.status?.replace(/_/g, ' ') || 'BELUM DIPROSES').toUpperCase()}
@@ -468,7 +537,7 @@ async function showDetail(id) {
                 </div>
             </div>
         `;
-        
+
         // Open modal
         Modal.open('detailModal');
     } catch (error) {
@@ -485,26 +554,26 @@ async function editData(id) {
     try {
         // Fetch data
         const data = await fetchPendaftar(id);
-        
+
         // Get form and reset
         const form = document.getElementById('editForm');
         if (!form) throw new Error('Edit form not found');
         form.reset();
-        
+
         // Populate fields
         document.getElementById('editId').value = id;
-        
+
         // Populate all form fields
         const fields = [
             'nama_lengkap', 'nomor_hp', 'nik', 'tempat_lahir', 'tanggal_lahir',
             'ibu_kandung', 'jenis_kelamin', 'agama', 'jurusan', 'jalur_program',
             'bekerja', 'tempat_kerja', 'ukuran_baju', 'alamat'
         ];
-        
+
         fields.forEach(field => {
             const input = form.elements[field];
             if (!input) return;
-            
+
             // Handle special cases
             if (field === 'tanggal_lahir' && data[field]) {
                 // Format date for date input
@@ -516,7 +585,7 @@ async function editData(id) {
                 input.value = data[field] || '';
             }
         });
-        
+
         // Open modal
         Modal.open('editModal');
     } catch (error) {
@@ -531,33 +600,30 @@ async function editData(id) {
  */
 async function saveEditData(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const id = document.getElementById('editId').value;
     const saveButton = document.getElementById('saveEditButton');
     const saveText = saveButton.querySelector('.save-text');
     const loadingText = saveButton.querySelector('.loading-text');
-    
+
     try {
         // Show loading state
         form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
         saveText.classList.add('hidden');
         loadingText.classList.remove('hidden');
-        
-        // 🆕 STEP 1: Create a new empty update object (don't start with current data)
-        const updateData = { id: id }; // Only include ID initially
-        
-        // 🔍 STEP 2: Directly read ALL form field values and add them to the update data
-        console.log('📝 Form values being collected:');
-        
-        // Get all named form elements
+
+        // Create a new empty update object
+        const updateData = { id: id };
+
+        // Directly read all form field values and add them to the update data
         const formElements = form.querySelectorAll('[name]');
         formElements.forEach(element => {
             const name = element.name;
-            if (name === 'id') return; // Skip ID field
-            
+            if (name === 'id') return;
+
             let value = '';
-            
+
             // Handle different input types
             if (element.type === 'checkbox') {
                 value = element.checked ? '1' : '0';
@@ -566,22 +632,17 @@ async function saveEditData(event) {
             } else {
                 value = element.value;
             }
-            
+
             // Special handling for boolean fields
             if (name === 'bekerja') {
                 updateData[name] = value === '1' ? 1 : 0;
             } else {
                 updateData[name] = value;
             }
-            
-            // Log each field value
-            console.log(`💡 Form field ${name}: "${value}"`);
         });
-        
-        console.log('🚀 Data being sent to API:', updateData);
-        
-        // 📤 STEP 3: Send the update data to API
-        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${id}`, {
+
+        // Send the update data to API
+        const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -589,23 +650,21 @@ async function saveEditData(event) {
             },
             body: JSON.stringify(updateData)
         });
-        
+
         // Handle response
         const responseData = await response.json();
-        console.log('📥 API response:', responseData);
-        
         if (!response.ok) {
             throw new Error(responseData.message || 'Failed to update data');
         }
-        
+
         showNotification('✨ Data berhasil diperbarui!', 'success');
         Modal.close('editModal');
-        
-        // 🔄 STEP 4: Force reload to show updated data
+
+        // Force reload to show updated data
         setTimeout(() => location.reload(), 500);
     } catch (error) {
         showNotification('❌ Gagal menyimpan: ' + error.message, 'error');
-        console.error('💥 Save error:', error);
+        console.error('Save error:', error);
     } finally {
         // Reset form state
         form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = false);
@@ -628,17 +687,17 @@ function confirmDelete(id) {
  */
 async function deleteData() {
     if (!deleteId) return;
-    
+
     try {
-        const response = await fetch(`http://uttoraja.com/pendaftaran/api/pendaftar/${deleteId}`, {
+        const response = await fetch(`${API_BASE_URL}/${deleteId}`, {
             method: 'DELETE',
             headers: {
                 'X-API-KEY': 'pantanmandiri25'
             }
         });
-        
+
         if (!response.ok) throw new Error('Failed to delete data');
-        
+
         showNotification('✅ Data berhasil dihapus!', 'success');
         Modal.close('deleteConfirmModal');
         location.reload();
@@ -647,8 +706,6 @@ async function deleteData() {
         console.error('Delete error:', error);
     }
 }
-
-// ======== 💬 MESSAGING FUNCTIONS ========
 
 /**
  * Send initial WhatsApp message to pendaftar
@@ -661,17 +718,17 @@ function sendInitialMessage(phone, name, id) {
         showNotification('❌ Nomor telepon tidak tersedia', 'error');
         return;
     }
-    
+
     // Format phone number for WhatsApp
     const formattedPhone = phone.startsWith('0') ? '62' + phone.slice(1) : phone;
-    
+
     // Create message
     const message = `Halo ${name},\n\nPendaftaran di Universitas Terbuka Sentra Layanan Tana Toraja - Toraja Utara kembali dibuka. Jika tertarik untuk melanjutkan pendaftaran kami dapat memberikan berkas yang diperlukan untuk diisi. .\n\nSalam,\nTim UT Tana Toraja - Toraja Utara`;
-    
+
     // Open WhatsApp
     const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
-    
+
     // Update status
     updateStatus(id, 'sudah_dihubungi');
 }
@@ -680,134 +737,141 @@ function sendInitialMessage(phone, name, id) {
  * Send payment instruction WhatsApp message
  * @param {string} phone - Phone number
  * @param {string} name - Pendaftar name
- * @param {string} programPath - Program path@param {string} programPath - Jalur Program (Reguler or RPL)
+ * @param {string} programPath - Jalur Program (Reguler or RPL)
  */
-function sendPaymentMessage(phone, name, programPath) {entMessage(phone, name, programPath) {
+function sendPaymentMessage(phone, name, programPath) {
     if (!phone) {
-        showNotification('❌ Nomor telepon tidak tersedia', 'error');ification('❌ Nomor telepon tidak tersedia', 'error');
-        return;   return;
-    }}
-    
+        showNotification('❌ Nomor telepon tidak tersedia', 'error');
+        return;
+    }
+
     // Format phone number for WhatsApp
-    const formattedPhone = phone.startsWith('0') ? '62' + phone.slice(1) : phone;const formattedPhone = phone.startsWith('0') ? '62' + phone.slice(1) : phone;
-    
-    // Get time-based greeting (GMT+8)(GMT+8)
+    const formattedPhone = phone.startsWith('0') ? '62' + phone.slice(1) : phone;
+
+    // Get time-based greeting (GMT+8)
     const getGreeting = () => {
-        // Use GMT+8 timezone (Indonesia Eastern Time)Indonesia Eastern Time)
         const now = new Date();
         const utcHours = now.getUTCHours();
-        const gmt8Hours = (utcHours + 8) % 24; // Convert to GMT+8const gmt8Hours = (utcHours + 8) % 24; // Convert to GMT+8
-        
-        // Determine appropriate greeting based on time on time
-        if (gmt8Hours >= 5 && gmt8Hours < 12) {Hours < 12) {
+        const gmt8Hours = (utcHours + 8) % 24; // Convert to GMT+8
+
+        if (gmt8Hours >= 5 && gmt8Hours < 12) {
             return "Selamat pagi";
-        } else if (gmt8Hours >= 12 && gmt8Hours < 15) {&& gmt8Hours < 15) {
+        } else if (gmt8Hours >= 12 && gmt8Hours < 15) {
             return "Selamat siang";
-        } else if (gmt8Hours >= 15 && gmt8Hours < 18) { && gmt8Hours < 18) {
-            return "Selamat sore";rn "Selamat sore";
+        } else if (gmt8Hours >= 15 && gmt8Hours < 18) {
+            return "Selamat sore";
         } else {
-            return "Selamat malam";   return "Selamat malam";
-        }  }
-    };};
-    
-    // Create message with dynamic greetingsed on program path
-    const message = `${getGreeting()}, ${name}let message;
-    
-terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:    // 🔄 Check if program path is RPL and use the appropriate message content
+            return "Selamat malam";
+        }
+    };
 
-1. Membayar uang pendaftaran sebesar Rp200.000 ke nomor rekening berikut:yment amount
-Nama : Ribka Padang (Kepala SALUT Tana Toraja)e = `${getGreeting()}, ${name}
+    // Create message with dynamic greeting based on program path
+    let message;
+    if (programPath === 'RPL') {
+        message = `${getGreeting()}, ${name}
+
+terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:
+
+1. Membayar uang pendaftaran Transfer Nilai/RPL sebesar Rp600.000 ke nomor rekening berikut:
+Nama : Ribka Padang (Kepala SALUT Tana Toraja)
 Bank : Mandiri
-Nomor Rekening : 1700000588917terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:
+Nomor Rekening : 1700000588917
 
-2. Melengkapi berkas data diri berupa:L sebesar Rp600.000 ke nomor rekening berikut:
+2. Melengkapi berkas data diri berupa:
+- Foto diri Formal (dapat menggunakan foto HP)
+- Foto KTP asli (KTP asli difoto secara keseluruhan/tidak terpotong)
+- Foto Ijazah asli
+- Mengisi formulir kelengkapan data lainnya (berkas kelengkapan data akan dikirimkan)`;
+    } else {
+        message = `${getGreeting()}, ${name}
+
+terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:
+
+1. Membayar uang pendaftaran sebesar Rp200.000 ke nomor rekening berikut:
+Nama : Ribka Padang (Kepala SALUT Tana Toraja)
+Bank : Mandiri
+Nomor Rekening : 1700000588917
+
+2. Melengkapi berkas data diri berupa:
 - Foto diri Formal (dapat menggunakan foto HP)
 - Foto KTP asli (KTP asli difoto secara keseluruhan/tidak terpotong)
 - Foto Ijazah dilegalisir cap basah atau Foto ijazah asli
-- Mengisi formulir Keabsahan Data (dikirimkan)`;    
- data diri berupa:
+- Mengisi formulir Keabsahan Data (dikirimkan)`;
+    }
+
     // Open WhatsApp
-    const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`; keseluruhan/tidak terpotong)
-    window.open(whatsappUrl, '_blank'); Foto Ijazah asli
-}- Mengisi formulir kelengkapan data lainny(berkas kelengkapan data akan dikirimkan)`;
+    const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
 
 // ======== 🔄 EVENT LISTENERS ========
 document.addEventListener('DOMContentLoaded', function() {
-    // ⚠️ REMOVED: Modal click outside to close - preventing misclicks
-    // Now modals will only close with explicit close button clicksma kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:
-    
-    // ESC key to close modals (keeping this for accessibility)omor rekening berikut:
-    document.addEventListener('keydown', event => {a Toraja)
+    // ESC key to close modals (keeping this for accessibility)
+    document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
-            document.querySelectorAll('.modal:not(.hidden)').forEach(modal => {
+            document.querySelectorAll('.modal.modal-visible').forEach(modal => { // Only close visible modals
                 Modal.close(modal.id);
-            });kapi berkas data diri berupa:
-        }diri Formal (dapat menggunakan foto HP)
-    });to KTP asli (KTP asli difoto secara keseluruhan/tidak terpotong)
-    asah atau Foto ijazah asli
+            });
+        }
+    });
+
     // Form submission handlers
     const editForm = document.getElementById('editForm');
     if (editForm) {
-        editForm.addEventListener('submit', saveEditData);/ Open WhatsApp
-    }const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`;
-    , '_blank');
-    // Search functionality
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {{
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#pendaftarTableBody tr:not(#noDataRow)');odals will only close with explicit close button clicks
-            
-            rows.forEach(row => {ity)
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchValue) ? '' : 'none';nt.key === 'Escape') {
-            }); document.querySelectorAll('.modal:not(.hidden)').forEach(modal => {
-        });           Modal.close(modal.id);
-    }         });
-});        }
+        editForm.addEventListener('submit', saveEditData);
+    }
+});
 
 // Make all functions available globally
 window.Modal = Modal;
-window.showDetail = showDetail;nt.getElementById('editForm');
+window.showDetail = showDetail;
 window.editData = editData;
-window.confirmDelete = confirmDelete;er('submit', saveEditData);
+window.confirmDelete = confirmDelete;
 window.deleteData = deleteData;
 window.sendInitialMessage = sendInitialMessage;
 window.sendPaymentMessage = sendPaymentMessage;
-window.showNotification = showNotification;mentById('searchInput');
+window.showNotification = showNotification;
 window.getStatusClass = getStatusClass;
-window.updateStatus = updateStatus;r('input', function() {
-window.saveEditData = saveEditData;   const searchValue = this.value.toLowerCase();
-</script>     const rows = document.querySelectorAll('#pendaftarTableBody tr:not(#noDataRow)');
+window.updateStatus = updateStatus;
+window.saveEditData = saveEditData; // Ensure saveEditData is globally accessible if needed outside the event listener
+</script>
 </head>
-<body class="bg-gray-100">ch(row => {
-    <div class="flex">.textContent.toLowerCase();
-        <!-- Include Sidebar -->searchValue) ? '' : 'none';
-        <?php include 'components/sidebar.php'; ?>    });
+<body class="bg-gray-100">
+    <div class="layout-container">
+        <!-- Include Sidebar -->
+        <?php include 'components/sidebar.php'; ?>
         
         <!-- Main Content -->
-        <div class="flex-1">
+        <div class="main-content">
             <!-- Include Navbar -->
-            <?php include 'components/navbar.php'; ?>functions available globally
+            <?php include 'components/navbar.php'; ?>
             
-            <!-- Main content -->l;
+            <!-- Main content -->
             <div class="p-6">
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="modal-content bg-white shadow-lg rounded-lg">
                     <div class="flex justify-between items-center mb-6">
                         <h1 class="text-2xl font-bold text-gray-800">Daftar Pendaftar</h1>
                         <button onclick="Modal.open('addModal')" 
                                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200">
-                            <i class="fas fa-plus mr-2"></i>Tambah PendaftarClass;
-                        </button>teStatus;
-                    </div>window.saveEditData = saveEditData;
+                            <i class="fas fa-plus mr-2"></i>Tambah Pendaftar
+                        </button>
+                    </div>
 
-                    <!-- Search and Filter Section -->
-                    <div class="mb-6">
-                        <input type="text" 
-                               id="searchInput"
-                               placeholder="Cari pendaftar..." 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>        <!-- Main Content -->
+                    <!-- ✨ Search Form ✨ -->
+                    <form method="GET" action="pendaftar.php" class="mb-6">
+                        <div class="flex">
+                            <input type="text"
+                                   id="searchInput"
+                                   name="search"
+                                   placeholder="Cari nama, HP, atau jurusan..."
+                                   class="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   value="<?php echo htmlspecialchars($search_term); ?>">
+                            <button type="submit"
+                                    class="px-4 py-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
 
                     <!-- Table -->
                     <div class="overflow-x-auto">
@@ -816,19 +880,19 @@ window.saveEditData = saveEditData;   const searchValue = this.value.toLowerCase
                                 <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">No</th>
                                     <th class="py-3 px-6 text-left">Nama</th>
-                                    <th class="py-3 px-6 text-left">Nomor HP</th>aftar</h1>
+                                    <th class="py-3 px-6 text-left">Nomor HP</th>
                                     <th class="py-3 px-6 text-left">Jurusan</th>
-                                    <th class="py-3 px-6 text-left">Status</th> px-4 py-2 rounded-lg transition duration-200">
-                                    <th class="py-3 px-6 text-center">Aksi</th>"fas fa-plus mr-2"></i>Tambah Pendaftar
+                                    <th class="py-3 px-6 text-left">Status</th>
+                                    <th class="py-3 px-6 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="pendaftarTableBody" class="text-gray-600 text-sm">
                                 <?php if (!empty($data)): ?>
                                     <?php foreach ($data as $index => $pendaftar): ?>
                                         <tr class="border-b border-gray-200 hover:bg-gray-50">
-                                            <td class="py-4 px-6 row-number"><?php echo $index + 1; ?></td>
+                                            <td class="py-4 px-6 row-number"><?php echo $start_index + $index + 1; ?></td>
                                             <td class="py-4 px-6"><?php echo htmlspecialchars($pendaftar['nama_lengkap'] ?? '-'); ?></td>
-                                            <td class="py-4 px-6"><?php echo htmlspecialchars($pendaftar['nomor_hp'] ?? '-'); ?></td>blue-500">
+                                            <td class="py-4 px-6"><?php echo htmlspecialchars($pendaftar['nomor_hp'] ?? '-'); ?></td>
                                             <td class="py-4 px-6"><?php echo htmlspecialchars($pendaftar['jurusan'] ?? '-'); ?></td>
                                             <td class="py-4 px-6">
                                                 <select onchange="updateStatus(<?php echo $pendaftar['id']; ?>, this.value)" 
@@ -838,103 +902,128 @@ window.saveEditData = saveEditData;   const searchValue = this.value.toLowerCase
                                                     <option value="sudah_dihubungi" <?php echo getStoredStatus($pendaftar['id']) === 'sudah_dihubungi' ? 'selected' : ''; ?>>Sudah Dihubungi</option>
                                                     <option value="berminat" <?php echo getStoredStatus($pendaftar['id']) === 'berminat' ? 'selected' : ''; ?>>Berminat</option>
                                                     <option value="tidak_berminat" <?php echo getStoredStatus($pendaftar['id']) === 'tidak_berminat' ? 'selected' : ''; ?>>Tidak Berminat</option>
-                                                    <option value="pendaftaran_selesai" <?php echo getStoredStatus($pendaftar['id']) === 'pendaftaran_selesai' ? 'selected' : ''; ?>>Pendaftaran Selesai</option>text-left">Nomor HP</th>
-                                                </select>-3 px-6 text-left">Jurusan</th>
-                                            </td>>
+                                                    <option value="pendaftaran_selesai" <?php echo getStoredStatus($pendaftar['id']) === 'pendaftaran_selesai' ? 'selected' : ''; ?>>Pendaftaran Selesai</option>
+                                                </select>
+                                            </td>
                                             <td class="py-4 px-6 text-center">
                                                 <div class="flex justify-center space-x-2">
                                                     <button onclick="showDetail(<?php echo $pendaftar['id']; ?>)" 
-                                                            class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-200">xt-sm">
+                                                            class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-200">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
                                                     <button onclick="editData(<?php echo $pendaftar['id']; ?>)"
-                                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">px-6 row-number"><?php echo $index + 1; ?></td>
-                                                        Editx-6"><?php echo htmlspecialchars($pendaftar['nama_lengkap'] ?? '-'); ?></td>
-                                                    </button> ?? '-'); ?></td>
+                                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        Edit
+                                                    </button>
                                                     <button onclick="confirmDelete(<?php echo $pendaftar['id']; ?>)"
                                                             class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition duration-200">
-                                                        <i class="fas fa-trash"></i>nge="updateStatus(<?php echo $pendaftar['id']; ?>, this.value)" 
-                                                    </button>daftar['id']; ?>"
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
                                                     <div class="flex space-x-1">
-                                                        <button onclick="sendInitialMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', <?php echo $pendaftar['id']; ?>)" : ''; ?>>Belum Diproses</option>
-                                                                class="bg-purple-500 text-white px-3 py-1 rounded-lg hover:bg-purple-600 transition duration-200" echo getStoredStatus($pendaftar['id']) === 'sudah_dihubungi' ? 'selected' : ''; ?>>Sudah Dihubungi</option>
-                                                                title="Kirim Pesan Awal">oredStatus($pendaftar['id']) === 'berminat' ? 'selected' : ''; ?>>Berminat</option>
-                                                            <i class="fab fa-whatsapp"></i> 1="tidak_berminat" <?php echo getStoredStatus($pendaftar['id']) === 'tidak_berminat' ? 'selected' : ''; ?>>Tidak Berminat</option>
-                                                        </button>esai</option>
+                                                        <button onclick="sendInitialMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', <?php echo $pendaftar['id']; ?>)"
+                                                                class="bg-purple-500 text-white px-3 py-1 rounded-lg hover:bg-purple-600 transition duration-200"
+                                                                title="Kirim Pesan Awal">
+                                                            <i class="fab fa-whatsapp"></i> 1
+                                                        </button>
                                                         <button onclick="sendPaymentMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', '<?php echo $pendaftar['jalur_program'] ?? 'Reguler'; ?>')"
                                                                 class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition duration-200"
                                                                 title="Kirim Pesan Pembayaran">
-                                                            <i class="fab fa-whatsapp"></i> 2justify-center space-x-2">
-                                                        </button>n onclick="showDetail(<?php echo $pendaftar['id']; ?>)" 
-                                                    </div>      class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-200">
-                                                </div>       <i class="fas fa-eye"></i>
-                                            </td>       </button>
-                                        </tr>ton onclick="editData(<?php echo $pendaftar['id']; ?>)"
-                                    <?php endforeach; ?>              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                <?php else: ?> Edit
+                                                            <i class="fab fa-whatsapp"></i> 2
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
                                     <tr id="noDataRow">
-                                        <td colspan="6" class="py-4 px-6 text-center">Tidak ada data pendaftar</td>           <button onclick="confirmDelete(<?php echo $pendaftar['id']; ?>)"
-                                    </tr>             class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition duration-200">
-                                <?php endif; ?>                    <i class="fas fa-trash"></i>
-                            </tbody>                    </button>
-                        </table>                          <div class="flex space-x-1">
-                    </div>                                                        <button onclick="sendInitialMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', <?php echo $pendaftar['id']; ?>)"
-                class="bg-purple-500 text-white px-3 py-1 rounded-lg hover:bg-purple-600 transition duration-200"
-                    <!-- Pagination Controls -->irim Pesan Awal">
-                    <div class="mt-6 flex justify-between items-center"> <i class="fab fa-whatsapp"></i> 1
-                        <div class="text-sm text-gray-600">
-                            Showing <?php echo $start_index + 1; ?>-<?php echo min($start_index + $items_per_page, $total_records); ?> ick="sendPaymentMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', '<?php echo addslashes($pendaftar['jalur_program'] ?? ''); ?>')"
-                            of <?php echo $total_records; ?> entries                                  class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition duration-200"
-                        </div>            title="Kirim Pesan Pembayaran">
-                        <div class="flex space-x-2">        <i class="fab fa-whatsapp"></i> 2
-                            <?php if ($page > 1): ?>
-                                <a href="?page=<?php echo $page - 1; ?>" 
-                                   class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-chevron-left mr-1"></i> Previous        </td>
-                                </a>r>
-                            <?php endif; ?>                                    <?php endforeach; ?>
-?php else: ?>
-                            <?phptaRow">
-                            // Show page numberss="py-4 px-6 text-center">Tidak ada data pendaftar</td>
-                            $start_page = max(1, $page - 2);
-                            $end_page = min($total_pages, $page + 2);                                <?php endif; ?>
+                                        <td colspan="6" class="py-4 px-6 text-center">
+                                            <?php if (!empty($search_term)): ?>
+                                                Tidak ada data pendaftar yang cocok dengan pencarian "<?php echo htmlspecialchars($search_term); ?>"
+                                            <?php else: ?>
+                                                Tidak ada data pendaftar
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
 
-                            for ($i = $start_page; $i <= $end_page; $i++):e>
-                            ?>
-                                <a href="?page=<?php echo $i; ?>" 
-                                   class="px-3 py-1 <?php echo $i === $page ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700'; ?> rounded hover:bg-blue-600 hover:text-white transition-colors">
-                                    <?php echo $i; ?> flex justify-between items-center">
-                                </a>text-gray-600">
-                            <?php endfor; ?>                            Showing <?php echo $start_index + 1; ?>-<?php echo min($start_index + $items_per_page, $total_records); ?> 
-tries
-                            <?php if ($page < $total_pages): ?>
-                                <a href="?page=<?php echo $page + 1; ?>" 
+                    <!-- Pagination Controls -->
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="text-sm text-gray-600">
+                            Showing <?php echo $total_records > 0 ? $start_index + 1 : 0; ?>-<?php echo min($start_index + $items_per_page, $total_records); ?> 
+                            of <?php echo $total_records; ?> entries <?php echo !empty($search_term) ? '(filtered)' : ''; ?>
+                        </div>
+                        <div class="flex space-x-2">
+                            <?php if ($page > 1): ?>
+                                <?php $search_param = !empty($search_term) ? '&search=' . urlencode($search_term) : ''; ?>
+                                <!-- First Page Button -->
+                                <a href="?page=1<?php echo $search_param; ?>" 
+                                   class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                                   title="First Page">
+                                    <i class="fas fa-angles-left"></i>
+                                </a>
+                                
+                                <!-- Previous Button -->
+                                <a href="?page=<?php echo $page - 1; ?><?php echo $search_param; ?>" 
                                    class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
-                                    Next <i class="fas fa-chevron-right ml-1"></i>ref="?page=<?php echo $page - 1; ?>" 
-                                </a>x-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
-                            <?php endif; ?>      <i class="fas fa-chevron-left mr-1"></i> Previous
-                        </div>      </a>
-                    </div>      <?php endif; ?>
+                                    <i class="fas fa-chevron-left mr-1"></i> Previous
+                                </a>
+                            <?php endif; ?>
+
+                            <?php
+                            // Show page numbers
+                            $start_page = max(1, $page - 2);
+                            $end_page = min($total_pages, $page + 2);
+
+                            for ($i = $start_page; $i <= $end_page; $i++):
+                                $search_param = !empty($search_term) ? '&search=' . urlencode($search_term) : '';
+                            ?>
+                                <a href="?page=<?php echo $i; ?><?php echo $search_param; ?>" 
+                                   class="px-3 py-1 <?php echo $i === $page ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700'; ?> rounded hover:bg-blue-600 hover:text-white transition-colors">
+                                    <?php echo $i; ?>
+                                </a>
+                            <?php endfor; ?>
+
+                            <?php if ($page < $total_pages): ?>
+                                <?php $search_param = !empty($search_term) ? '&search=' . urlencode($search_term) : ''; ?>
+                                <!-- Next Button -->
+                                <a href="?page=<?php echo $page + 1; ?><?php echo $search_param; ?>" 
+                                   class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
+                                    Next <i class="fas fa-chevron-right ml-1"></i>
+                                </a>
+                                
+                                <!-- Last Page Button -->
+                                <a href="?page=<?php echo $total_pages; ?><?php echo $search_param; ?>" 
+                                   class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                                   title="Last Page">
+                                    <i class="fas fa-angles-right"></i>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
-            </div>              <?php
-        </div>                  // Show page numbers
-    </div>                            $start_page = max(1, $page - 2);
+            </div>
+        </div>
+    </div>
 
     <!-- Only include modals if not in AJAX mode or specifically requested -->
-    <?php if (!$isAjax || isset($_GET['action'])): ?>:
+    <?php if (!$isAjax || isset($_GET['action'])): ?>
     <!-- Replace existing detailModal div with this optimized version -->
-    <div id="detailModal" class="modal hidden" role="dialog"> href="?page=<?php echo $i; ?>" 
-        <div class="modal-dialog">ho $i === $page ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700'; ?> rounded hover:bg-blue-600 hover:text-white transition-colors">
-            <div class="modal-content shadow-lg rounded-lg">
+    <div id="detailModal" class="modal hidden" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content bg-white shadow-lg rounded-lg">
                 <div class="modal-header flex justify-between items-center border-b p-4">
                     <h2 class="text-2xl font-bold text-gray-800">Detail Pendaftar</h2>
                     <button type="button" onclick="Modal.close('detailModal')" 
-                            class="text-gray-500 hover:text-gray-700 transition-colors">?>
-                        <i class="fas fa-times text-2xl"></i>   <a href="?page=<?php echo $page + 1; ?>" 
-                    </button>             class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
-                </div>1"></i>
+                            class="text-gray-500 hover:text-gray-700 transition-colors">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
                 <div id="detailContent" class="modal-body overflow-y-auto">
-                    <!-- Content will be dynamically inserted here -->      <?php endif; ?>
+                    <!-- Content will be dynamically inserted here -->
                 </div>
                 <div class="modal-footer border-t p-4">
                     <button type="button" onclick="Modal.close('detailModal')" 
@@ -942,26 +1031,26 @@ tries
                         Tutup
                     </button>
                 </div>
-            </div>include modals if not in AJAX mode or specifically requested -->
-        </div>if (!$isAjax || isset($_GET['action'])): ?>
-    </div>    <!-- Replace existing detailModal div with this optimized version -->
-="modal hidden" role="dialog">
+            </div>
+        </div>
+    </div>
+
     <!-- Updated Edit Modal -->
     <div id="editModal" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-        <div class="modal-content relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-2xl">-header flex justify-between items-center border-b p-4">
+        <div class="modal-content relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-2xl">
             <!-- Modal header -->
             <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">-gray-500 hover:text-gray-700 transition-colors">
-                    Edit Data Pendaftar   <i class="fas fa-times text-2xl"></i>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Edit Data Pendaftar
                 </h3>
                 <button type="button" onclick="Modal.close('editModal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  detailContent" class="modal-body overflow-y-auto">
-                </button>  <!-- Content will be dynamically inserted here -->
-            </div>                </div>
-al-footer border-t p-4">
-            <!-- Modal body -->ilModal')" 
-            <form id="editForm" method="post" class="p-6 space-y-6">xt-white rounded hover:bg-gray-600 transition-colors">
-                <input type="hidden" id="editId" name="id">        Tutup
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <form id="editForm" method="post" class="p-6 space-y-6">
+                <input type="hidden" id="editId" name="id">
                 
                 <!-- Personal Information -->
                 <div class="grid grid-cols-2 gap-4">
@@ -969,60 +1058,70 @@ al-footer border-t p-4">
                         <h4 class="text-lg font-semibold mb-3 text-gray-700">Data Pribadi 👤</h4>
                     </div>
                     
-                    <div class="col-span-2 md:col-span-1">center">
+                    <div class="col-span-2 md:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap <span class="text-red-500">*</span></label>
-                        <input type="text" name="nama_lengkap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>der -->
-                    </div>            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
--900 dark:text-white">
+                        <input type="text" name="nama_lengkap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    </div>
+
+                    <!-- ✨ Added Nomor HP field ✨ -->
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Nomor HP <span class="text-red-500">*</span></label>
+                        <input type="tel" name="nomor_hp" pattern="[0-9+]*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    </div>
+
                     <div class="col-span-2 md:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900">NIK</label>
-                        <input type="text" name="nik" pattern="[0-9]*" maxlength="16" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">pe="button" onclick="Modal.close('editModal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                    </div>                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                        <input type="text" name="nik" pattern="[0-9]*" maxlength="16" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
 
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">y -->
-                    </div>            <form id="editForm" method="post" class="p-6 space-y-6">
-pe="hidden" id="editId" name="id">
+                        <input type="text" name="tempat_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Tanggal Lahir</label>
-                        <input type="date" name="tanggal_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">="grid grid-cols-2 gap-4">
-                    </div>                    <div class="col-span-2">
-h4 class="text-lg font-semibold mb-3 text-gray-700">Data Pribadi 👤</h4>
+                        <input type="date" name="tanggal_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Ibu Kandung</label>
-                        <input type="text" name="ibu_kandung" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">lass="col-span-2 md:col-span-1">
-                    </div>                        <label class="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap <span class="text-red-500">*</span></label>
-input type="text" name="nama_lengkap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <input type="text" name="ibu_kandung" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <!-- ✨ Added Jenis Kelamin field ✨ -->
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Jenis Kelamin</label>
                         <select name="jenis_kelamin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option value="">Pilih Jenis Kelamin</option>t-gray-900">NIK</label>
-                            <option value="laki-laki">Laki-laki</option>axlength="16" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Pilih Jenis Kelamin</option>
+                            <option value="laki-laki">Laki-laki</option>
                             <option value="perempuan">Perempuan</option>
                         </select>
-                    </div>                    <div>
- text-sm font-medium text-gray-900">Tempat Lahir</label>
-                    <!-- Contact Information -->ame="tempat_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Agama</label>
+                        <select name="agama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Pilih Agama</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Protestan">Protestan</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+
                     <div class="col-span-2">
-                        <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Kontak 📞</h4>
-                    </div>                    <div>
-label class="block mb-2 text-sm font-medium text-gray-900">Tanggal Lahir</label>
-                    <div>g focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Nomor HP <span class="text-red-500">*</span></label>
-                        <input type="tel" name="nomor_hp" pattern="[0-9]*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                    </div>                    <div>
-mb-2 text-sm font-medium text-gray-900">Ibu Kandung</label>
-                    <div class="col-span-2">-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Alamat</label>
                         <textarea name="alamat" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></textarea>
-                    </div>                    <div>
-text-sm font-medium text-gray-900">Jenis Kelamin</label>
-                    <!-- Academic Information -->kelamin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <!-- Academic Information -->
                     <div class="col-span-2">
-                        <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Akademik 📚</h4>  <option value="laki-laki">Laki-laki</option>
-                    </div>                            <option value="perempuan">Perempuan</option>
-/select>
+                        <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Akademik 📚</h4>
+                    </div>
+                    
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Program Studi <span class="text-red-500">*</span></label>
                         <select name="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
@@ -1031,95 +1130,82 @@ text-sm font-medium text-gray-900">Jenis Kelamin</label>
                                 <option value="<?php echo htmlspecialchars($prodi); ?>"><?php echo htmlspecialchars($prodi); ?></option>
                             <?php endforeach; ?>
                         </select>
-                    </div>                        <label class="block mb-2 text-sm font-medium text-gray-900">Nomor HP <span class="text-red-500">*</span></label>
-input type="tel" name="nomor_hp" pattern="[0-9]*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    </div>
+
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Jalur Program</label>
                         <select name="jalur_program" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option value="">Pilih Jalur Program</option>t-medium text-gray-900">Alamat</label>
-                            <option value="RPL">RPL</option>ray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></textarea>
+                            <option value="">Pilih Jalur Program</option>
+                            <option value="RPL">RPL</option>
                             <option value="Reguler">Reguler</option>
                         </select>
-                    </div>                    <!-- Academic Information -->
+                    </div>
 
-                    <!-- Additional Information -->ont-semibold mb-3 text-gray-700 mt-4">Informasi Akademik 📚</h4>
+                    <!-- Additional Information -->
                     <div class="col-span-2">
                         <h4 class="text-lg font-semibold mb-3 text-gray-700 mt-4">Informasi Tambahan ℹ️</h4>
-                    </div>                    <div>
-label class="block mb-2 text-sm font-medium text-gray-900">Program Studi <span class="text-red-500">*</span></label>
-                    <div>-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    </div>
+                    
+                    <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Status Bekerja</label>
-                        <select name="bekerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">): ?>
-                            <option value="0">Tidak Bekerja</option>specialchars($prodi); ?>"><?php echo htmlspecialchars($prodi); ?></option>
-                            <option value="1">Bekerja</option> endforeach; ?>
-                        </select>select>
-                    </div>                    </div>
+                        <select name="bekerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="0">Tidak Bekerja</option>
+                            <option value="1">Bekerja</option>
+                        </select>
+                    </div>
 
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Tempat Kerja</label>
-                        <input type="text" name="tempat_kerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">elect name="jalur_program" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>                            <option value="">Pilih Jalur Program</option>
-   <option value="RPL">RPL</option>
+                        <input type="text" name="tempat_kerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Ukuran Baju</label>
                         <select name="ukuran_baju" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Pilih Ukuran</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
-                            <option value="L">L</option>b-3 text-gray-700 mt-4">Informasi Tambahan ℹ️</h4>
+                            <option value="L">L</option>
                             <option value="XL">XL</option>
                             <option value="XXL">XXL</option>
                             <option value="XXXL">XXXL</option>
-                        </select>abel class="block mb-2 text-sm font-medium text-gray-900">Status Bekerja</label>
-                    </div>                        <select name="bekerja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-   <option value="0">Tidak Bekerja</option>
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Agama</label>
-                        <select name="agama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option value="">Pilih Agama</option>
-                            <option value="Islam">Islam</option>
-                            <option value="Protestan">Protestan</option> text-gray-900">Tempat Kerja</label>
-                            <option value="Katolik">Katolik</option>lass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option value="Hindu">Hindu</option>
-                            <option value="Buddha">Buddha</option>
-                            <option value="Konghucu">Konghucu</option>
-                        </select>abel class="block mb-2 text-sm font-medium text-gray-900">Ukuran Baju</label>
-                    </div>  <select name="ukuran_baju" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                </div>                            <option value="">Pilih Ukuran</option>
-alue="S">S</option>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- Form Actions -->
                 <div class="flex items-center justify-end space-x-2 border-t pt-4 mt-4">
                     <button type="button" onclick="Modal.close('editModal')" 
-                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200">ption value="XXL">XXL</option>
-                        Canceloption value="XXXL">XXXL</option>
+                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                        Cancel
                     </button>
                     <button type="submit" id="saveEditButton"
                             class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200">
                         <span class="save-text">Save Changes</span>
-                        <span class="loading-text hidden">0">Agama</label>
-                            <i class="fas fa-spinner fa-spin mr-2"></i> Saving... name="agama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        </span>option value="">Pilih Agama</option>
-                    </button>      <option value="Islam">Islam</option>
-                </div>         <option value="Protestan">Protestan</option>
-            </form>              <option value="Katolik">Katolik</option>
-        </div>                  <option value="Hindu">Hindu</option>
-    </div>                            <option value="Buddha">Buddha</option>
-ption value="Konghucu">Konghucu</option>
+                        <span class="loading-text hidden">
+                            <i class="fas fa-spinner fa-spin mr-2"></i> Saving...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Add new Add Modal -->
     <div id="addModal" class="modal hidden">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="text-2xl font-bold text-gray-800">Tambah Pendaftar Baru</h2>
-                    <button type="button" onclick="Modal.close('addModal')" class="text-gray-500 hover:text-gray-700">e('editModal')" 
-                        <i class="fas fa-times text-2xl"></i>lass="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200">
-                    </button>  Cancel
+                    <button type="button" onclick="Modal.close('addModal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
                 </div>
                 <form id="addForm" class="modal-body">
-                    <!-- Form fields will be identical to edit form -->   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                    <!-- Form fields will be identical to edit form -->
                     <div>
                         <label class="block text-gray-700 font-bold mb-2">Jalur Program</label>
-                        <select name="jalur_program" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">aving...
+                        <select name="jalur_program" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Pilih Jalur Program</option>
                             <option value="RPL">RPL</option>
                             <option value="Reguler">Reguler</option>
@@ -1132,47 +1218,24 @@ ption value="Konghucu">Konghucu</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
-                            <option value="XL">XL</option>800">Tambah Pendaftar Baru</h2>
-                            <option value="XXL">XXL</option>('addModal')" class="text-gray-500 hover:text-gray-700">
-                            <option value="XXXL">XXXL</option>"fas fa-times text-2xl"></i>
-                        </select>on>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="XXXL">XXXL</option>
+                        </select>
                     </div>
-                </form>orm id="addForm" class="modal-body">
-            </div>      <!-- Form fields will be identical to edit form -->
-        </div>          <div>
-    </div>                        <label class="block text-gray-700 font-bold mb-2">Jalur Program</label>
-e="jalur_program" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-    <!-- Add confirmation modal -->ur Program</option>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add confirmation modal -->
     <div id="deleteConfirmModal" class="modal hidden">
-        <div class="modal-dialog" style="max-width: 500px;">ue="Reguler">Reguler</option>
+        <div class="modal-dialog" style="max-width: 500px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="text-xl font-bold">Konfirmasi Hapus</h3>
-                    <button type="button" onclick="Modal.close('deleteConfirmModal')" class="text-gray-500 hover:text-gray-700">y-700 font-bold mb-2">Ukuran Baju</label>
-                        <i class="fas fa-times"></i>ct name="ukuran_baju" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </button>      <option value="">Pilih Ukuran Baju</option>
-                </div>e="S">S</option>
-                <div class="modal-body">
-                    <p class="mb-4">Apakah Anda yakin ingin menghapus data ini?</p>      <option value="L">L</option>
-                </div>"XL">XL</option>
-                <div class="modal-footer">
-                    <button onclick="Modal.close('deleteConfirmModal')" 
-                            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">ect>
-                        Batal
-                    </button>
-                    <button onclick="deleteData()" 
-                            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-2">
-                        Hapus
-                    </button>
-                </div>rmation modal -->
-            </div>eleteConfirmModal" class="modal hidden">
-        </div>iv class="modal-dialog" style="max-width: 500px;">
-    </div>ass="modal-content">
-    <?php endif; ?>         <div class="modal-header">
-</body>             <h3 class="text-xl font-bold">Konfirmasi Hapus</h3>
-</html>     <button type="button" onclick="Modal.close('deleteConfirmModal')" class="text-gray-500 hover:text-gray-700">
-
-<?php endif; ?>                        <i class="fas fa-times"></i>
+                    <button type="button" onclick="Modal.close('deleteConfirmModal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <div class="modal-body">

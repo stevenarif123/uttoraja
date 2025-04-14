@@ -1,10 +1,10 @@
-<div class="sidebar bg-blue-800 text-white w-64 py-4 px-6">
+<div class="sidebar bg-blue-800 text-white w-64 py-4 px-6 h-full min-h-screen">
     <div class="mb-8">
         <h1 class="text-2xl font-bold">UT Toraja</h1>
         <p class="text-blue-200 text-sm">Admin Panel</p>
     </div>
     
-    <nav>
+    <nav class="h-full">
         <ul>
             <li class="mb-2">
                 <a href="./" class="flex items-center p-2 rounded-lg <?php echo basename($_SERVER['PHP_SELF']) === 'index.php' ? 'bg-blue-900 text-white' : 'text-blue-200 hover:bg-blue-700 hover:text-white'; ?> transition duration-200">

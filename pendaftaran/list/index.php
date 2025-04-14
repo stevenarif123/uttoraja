@@ -120,7 +120,7 @@ try {
             left: 0;
             bottom: 0;
             width: 16rem; /* w-64 = 16rem */
-            overflow-y: auto;
+            overflow-y: hidden; /* Fixed overflow-y to hidden */
             z-index: 40;
         }
         
