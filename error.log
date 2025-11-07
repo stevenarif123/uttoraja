@@ -621,3 +621,14 @@ Stack trace:
 [09-Apr-2025 08:04:07 Europe/Berlin] Koneksi database berhasil
 [09-Apr-2025 08:04:07 Europe/Berlin] PHP Warning:  Undefined variable $jurusanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1782
 [09-Apr-2025 08:04:07 Europe/Berlin] PHP Warning:  Undefined variable $kelurahanDataJSON in C:\xampp\htdocs\uttoraja\pendaftaran\index.php on line 1783
+[30-May-2025 08:32:28 UTC] Koneksi database berhasil
+[30-May-2025 08:32:28 UTC] Error fetching latest registrants: Table 'datamahasiswa.pendaftar' doesn't exist
+[30-May-2025 08:33:14 UTC] Koneksi database berhasil
+[30-May-2025 08:33:14 UTC] Error fetching latest registrants: Table 'datamahasiswa.pendaftar' doesn't exist
+[30-May-2025 08:33:50 UTC] Koneksi database berhasil
+[30-May-2025 08:33:50 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'data_daerah' in D:\laragon\www\uttoraja\koneksi_datadaerah.php:8
+Stack trace:
+#0 D:\laragon\www\uttoraja\koneksi_datadaerah.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'data_daerah')
+#1 D:\laragon\www\uttoraja\pendaftaran\index.php(4): require_once('D:\\laragon\\www\\...')
+#2 {main}
+  thrown in D:\laragon\www\uttoraja\koneksi_datadaerah.php on line 8

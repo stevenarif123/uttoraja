@@ -737,7 +737,7 @@ function sendInitialMessage(phone, name, id) {
  * Send payment instruction WhatsApp message
  * @param {string} phone - Phone number
  * @param {string} name - Pendaftar name
- * @param {string} programPath - Jalur Program (Reguler or RPL)
+ * @param {string} programPath - Jalur Program (Reguler or Transfer Nilai)
  */
 function sendPaymentMessage(phone, name, programPath) {
     if (!phone) {
@@ -767,7 +767,7 @@ function sendPaymentMessage(phone, name, programPath) {
 
     // Create message with dynamic greeting based on program path
     let message;
-    if (programPath === 'RPL') {
+    if (programPath === 'Transfer Nilai') {
         message = `${getGreeting()}, ${name}
 
 terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:
@@ -906,7 +906,7 @@ window.saveEditData = saveEditData; // Ensure saveEditData is globally accessibl
                                                 </select>
                                             </td>
                                             <td class="py-4 px-6 text-center">
-                                                <div class="flex justify-center space-x-2">
+                                                <div class="flex justify-center items-center space-x-2">
                                                     <button onclick="showDetail(<?php echo $pendaftar['id']; ?>)" 
                                                             class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-200">
                                                         <i class="fas fa-eye"></i>
@@ -920,14 +920,14 @@ window.saveEditData = saveEditData; // Ensure saveEditData is globally accessibl
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                     <div class="flex space-x-1">
-                                                        <button onclick="sendInitialMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', <?php echo $pendaftar['id']; ?>)"
+                                                        <button onclick="sendInitialMessage('<?php echo htmlspecialchars($pendaftar['nomor_hp'] ?? '', ENT_QUOTES); ?>', '<?php echo addslashes(htmlspecialchars($pendaftar['nama_lengkap'] ?? '', ENT_QUOTES)); ?>', <?php echo $pendaftar['id']; ?>)"
                                                                 class="bg-purple-500 text-white px-3 py-1 rounded-lg hover:bg-purple-600 transition duration-200"
-                                                                title="Kirim Pesan Awal">
+                                                                title="Kirim Pesan Awal (WA)">
                                                             <i class="fab fa-whatsapp"></i> 1
                                                         </button>
-                                                        <button onclick="sendPaymentMessage('<?php echo $pendaftar['nomor_hp']; ?>', '<?php echo addslashes($pendaftar['nama_lengkap'] ?? ''); ?>', '<?php echo $pendaftar['jalur_program'] ?? 'Reguler'; ?>')"
+                                                        <button onclick="sendPaymentMessage('<?php echo htmlspecialchars($pendaftar['nomor_hp'] ?? '', ENT_QUOTES); ?>', '<?php echo addslashes(htmlspecialchars($pendaftar['nama_lengkap'] ?? '', ENT_QUOTES)); ?>', '<?php echo htmlspecialchars($pendaftar['jalur_program'] ?? 'Reguler', ENT_QUOTES); ?>')"
                                                                 class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition duration-200"
-                                                                title="Kirim Pesan Pembayaran">
+                                                                title="Kirim Pesan Pembayaran (WA)">
                                                             <i class="fab fa-whatsapp"></i> 2
                                                         </button>
                                                     </div>
@@ -1136,7 +1136,7 @@ window.saveEditData = saveEditData; // Ensure saveEditData is globally accessibl
                         <label class="block mb-2 text-sm font-medium text-gray-900">Jalur Program</label>
                         <select name="jalur_program" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Pilih Jalur Program</option>
-                            <option value="RPL">RPL</option>
+                            <option value="Transfer Nilai">Transfer Nilai</option>
                             <option value="Reguler">Reguler</option>
                         </select>
                     </div>
@@ -1207,7 +1207,7 @@ window.saveEditData = saveEditData; // Ensure saveEditData is globally accessibl
                         <label class="block text-gray-700 font-bold mb-2">Jalur Program</label>
                         <select name="jalur_program" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Pilih Jalur Program</option>
-                            <option value="RPL">RPL</option>
+                            <option value="Transfer Nilai">Transfer Nilai</option>
                             <option value="Reguler">Reguler</option>
                         </select>
                     </div>

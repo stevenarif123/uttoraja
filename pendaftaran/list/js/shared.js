@@ -71,17 +71,19 @@ window.showAddModal = function() {
 };
 
 // WhatsApp functions
-function generateWhatsAppMessage(nama, jalurProgram) {
-    const biaya = jalurProgram?.toLowerCase() === 'rpl' ? '600.000' : '200.000';
-    return `${getGreeting()}, ${nama}
-    
-terima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja...`;
-    // ... existing WhatsApp message content ...
+window.generateWhatsAppMessage = function(templateKey, name, details = {}) { // ✨ Exported to window ✨
+    const greeting = window.getGreeting(); // Use the shared greeting function
+
+    switch (templateKey) {
+        case 'payment_rpl': // Keep the key as 'payment_rpl' for internal logic consistency
+            // ✨ Changed "RPL" to "Transfer Nilai" in the user-facing message ✨
+            return `${greeting}, ${name}\n\nterima kasih sudah mendaftar di Sentra Layanan Universitas Terbuka (SALUT) Tana Toraja, untuk melanjutkan pendaftaran silahkan melakukan langkah berikut:\n\n1. Membayar uang pendaftaran Transfer Nilai sebesar Rp600.000 ke nomor rekening berikut:\nNama : Ribka Padang (Kepala SALUT Tana Toraja)\nBank : Mandiri\nNomor Rekening : 1700000588917\n\n2. Melengkapi berkas data diri berupa:\n- Foto diri Formal (dapat menggunakan foto HP)\n- Foto KTP asli (KTP asli difoto secara keseluruhan/tidak terpotong)\n- Foto Ijazah asli\n- Mengisi formulir kelengkapan data lainnya (berkas kelengkapan data akan dikirimkan)`;
+        case 'payment_reguler':
+    }
 }
 
 // Export functions
 window.debug = debug;
 window.secureUrl = secureUrl;
 window.getGreeting = getGreeting;
-window.generateWhatsAppMessage = generateWhatsAppMessage;
 window.apiHeaders = apiHeaders;

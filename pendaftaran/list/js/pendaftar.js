@@ -135,10 +135,16 @@ function sendInitialMessage(phone, name, id) {
     updateStatus(id, 'sudah_dihubungi');
 }
 
-function sendWhatsApp(phone, name, id) {
-    const message = `Halo ${name}, untuk melanjutkan pendaftaran di UT Toraja, silakan melakukan pembayaran sesuai dengan ketentuan yang berlaku. Terima kasih.`;
-    openWhatsApp(phone, message);
-    updateMessageSent(id, 'payment');
+// ✨ NEW Payment Message Function (replaces generic sendWhatsApp) ✨
+window.sendPaymentMessage = function(phone, name, programPath /*, id */) { // ✨ Exported to window ✨
+    // Determine message template based on program path
+    // ✨ Updated the check to look for "TRANSFER NILAI" (case-insensitive) ✨
+    const templateKey = programPath?.toUpperCase() === 'TRANSFER NILAI' ? 'payment_rpl' : 'payment_reguler';
+    const message = window.generateWhatsAppMessage(templateKey, name); // Use shared generator
+
+    if (openWhatsApp(phone, message)) {
+        // ...existing code...
+    }
 }
 
 function openWhatsApp(phone, message) {
